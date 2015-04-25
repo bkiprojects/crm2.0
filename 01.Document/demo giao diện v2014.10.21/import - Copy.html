@@ -1,0 +1,207 @@
+﻿<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="css/styles.css"/>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	
+</head>
+<body>
+	<div class="main">
+		<div class="menu">
+			<div class="home"><a href="#"><b class="icon-home"> </b> Trang chủ</a></div>
+			<div class="home"><a href="#"><b class="icon-user"> </b> Các khách hàng của tôi</a></div>
+			<div class="home"><a href="#"><b class="icon-list"> </b> Báo cáo</a></div>
+			<div class="home"><a href="#"><b class="icon-book"> </b> Trợ giúp</a></div>
+			<div class="logout">
+				<button class="btn btn-danger" type="button">Log out</button>
+			</div>			
+			<div class="profile">
+				<a href="#">Phạm Hoàng Thái</a>
+			</div>
+		</div>
+		<div class="content-left">
+			<div class="accordion" id="accordion2" style="margin-top:50px;">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+						<b>QUẢN LÝ KHÁCH HÀNG</b>
+					  </a>
+					</div>
+					<div id="collapseThree" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Chuyển trạng thái khách hàng</a>
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Nhập dữ liệu từ excel</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+						<b>TRẠNG THÁI</b>
+					  </a>
+					</div>
+					<div id="collapseOne" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Định nghĩa trạng thái</a>
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Sơ đồ chuyển trạng thái</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+						<b>BÁO CÁO</b>
+					  </a>
+					</div>
+					<div id="collapseTwo" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 01</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 02</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 03</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 04</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+						<b>HỆ THỐNG</b>
+					  </a>
+					</div>
+					<div id="collapseFour" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Quản lý người dùng</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Quản lý nhóm người dùng</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-right">
+			<div class="title">
+				<h3>BÁO CÁO 01</h3>
+			</div>
+			<div class="content">
+				<div class="data">
+					<h5 class="title">THỐNG KÊ SỐ LƯỢNG KHÁCH HÀNG THEO LEVEL</h5>
+					<table class="table table-condensed table-font-size">
+						<tr class="table_header">
+							<td></td>
+							<td>L1</td>
+							<td>L2</td>
+							<td>L3</td>
+							<td>L4</td>
+							<td>L5</td>
+							<td>L6</td>
+							<td>L7</td>
+							<td>L8</td>
+							<td>L9</td>
+							<td>L999</td>
+						</tr>
+						<tr>
+							<td>Lũy kế (từ ngày 1/1/2014)</td>
+							<td id="l1">45</td>
+							<td id="l2">40</td>
+							<td id="l3">27</td>
+							<td id="l4">25</td>
+							<td id="l5">25</td>
+							<td id="l6">16</td>
+							<td id="l7">12</td>
+							<td id="l8">9</td>
+							<td id="l9">7</td>
+							<td id="l999">5</td>
+						</tr>
+						<tr>
+							<td>Phát sinh trong tháng</td>
+							<td id="l1">10</td>
+							<td id="l2">9</td>
+							<td id="l3">8</td>
+							<td id="l4">6</td>
+							<td id="l5">5</td>
+							<td id="l6">4</td>
+							<td id="l7">4</td>
+							<td id="l8">4</td>
+							<td id="l9">2</td>
+							<td id="l999">1</td>
+						</tr>
+					</table>
+					
+					<h5 class="title">MỘT SỐ TỈ LỆ QUAN TRỌNG (%)</h5>
+					
+					<table class="table table-condensed table-font-size">
+						<tr class="table_header">
+							<td>L999/L9</td>
+							<td>L999/L8</td>
+							<td>L9/L8</td>
+							<td>L8/L5</td>
+							<td>L8/L4</td>
+						</tr>
+						<tr>
+							<td id="L999_L9">45</td>
+							<td id="L999_L8">40</td>
+							<td id="L9_L8">27</td>
+							<td id="L8_L5">25</td>
+							<td id="L8_L4">25</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<b>BKINDEX GROUP</b><br/>
+			Địa chỉ: 7b/36 Lương Đình Của
+		</div>
+	</div>
+	<div id="note" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="Close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>ĐỊNH NGHĨA TRẠNG THÁI</h3>
+		</div>
+		<div class="modal-body">
+			<div class="left div240">
+				<div>
+					<div class="left div160">Mã trạng thái</div>
+					<div class="left div50"><input type="text"/></div>
+				</div>
+				<div>
+					<div class="left div160">Mô tả</div>
+					<div class="left div50"><input type="text"/></div>
+				</div>
+				<div>
+					<div class="left div160">Loại trạng thái</div>
+					<div class="left div50">
+						<select>
+							<option><i class="icon-thumbs-up"></i> Tốt</option>
+							<option>Xấu</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button">Lưu lại</button>
+			<a href="#" class="btn" onclick="hideNote()">Đóng</a>
+		</div>
+	</div>
+</body>
+</html>
+
+<script>
+	function showToEdit(){
+		$('#note').modal('show');
+	}
+	
+	function hideNote(){
+		$('#note').modal('hide');
+	}
+</script>

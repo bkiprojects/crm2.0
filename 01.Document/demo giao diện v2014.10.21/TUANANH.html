@@ -1,0 +1,278 @@
+﻿<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="css/styles.css"/>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="datepicker/css/datepicker.css" />
+</head>
+<body>
+	<div class="main">
+		<div class="menu">
+			<div class="home"><a href="#"><b class="icon-home"> </b> Trang chủ</a></div>
+			<div class="home"><a href="#"><b class="icon-user"> </b> Các khách hàng của tôi</a></div>
+			<div class="home"><a href="#"><b class="icon-list"> </b> Báo cáo</a></div>
+			<div class="home"><a href="#"><b class="icon-book"> </b> Trợ giúp</a></div>
+			<div class="logout">
+				<button class="btn btn-danger" type="button">Log out</button>
+			</div>			
+			<div class="profile">
+				<a href="#">Phạm Hoàng Thái</a>
+			</div>
+		</div>
+		<div class="content-left">
+			<div class="accordion" id="accordion2" style="margin-top:50px;">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+						<b>QUẢN LÝ KHÁCH HÀNG</b>
+					  </a>
+					</div>
+					<div id="collapseThree" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Chuyển trạng thái khách hàng</a>
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Nhập dữ liệu từ excel</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+						<b>TRẠNG THÁI</b>
+					  </a>
+					</div>
+					<div id="collapseOne" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Định nghĩa trạng thái</a>
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Sơ đồ chuyển trạng thái</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+						<b>BÁO CÁO</b>
+					  </a>
+					</div>
+					<div id="collapseTwo" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 01</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 02</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 03</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 04</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+						<b>HỆ THỐNG</b>
+					  </a>
+					</div>
+					<div id="collapseFour" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Quản lý người dùng</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Quản lý nhóm người dùng</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-right"></div>
+		<div class="footer">
+			<b>BKINDEX GROUP</b><br/>
+			Địa chỉ: 7b/36 Lương Đình Của
+		</div>
+	</div>
+	<div id="infoCustomer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="Close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>THÔNG TIN KHÁCH HÀNG</h3>
+		</div>
+		<div class="modal-body">
+			<div class="info">
+				<div class="left">
+					<img src="image/customer.jpg" alt="Ảnh khách hàng" class="image-size"/>
+				</div>
+				<div class="left" style="margin-left:20px;">
+					<div class="clear-both">
+						<div class="dimention1 bold">Họ tên</div>
+						<div class="left"><input type="text" placeholder="Type something…" value="Phạm Hoàng Thái"></div>
+					</div>
+					<div class="clear-both">
+						<div class="dimention1 bold">Loại khách hàng</div>
+						<div class="left"><input type="text" placeholder="Type something…" value="Khách hàng cũ"></div>
+					</div>
+					<div class="clear-both">
+						<div class="dimention1 bold">SĐT</div>
+						<div class="left"><input type="text" placeholder="Type something…" value="01699 728 615"></div>
+					</div>
+					<div class="clear-both">
+						<div class="dimention1 bold">Địa chỉ</div>
+						<div class="left"><input type="text" placeholder="Type something…" value="Hà Nội"></div>
+					</div>
+					<div class="clear-both">
+						<div class="dimention1 bold">Công ty</div>
+						<div class="left"> <input type="text" placeholder="Type something…" value="BKIndex"></div>
+					</div>
+					<div class="clear-both">
+						<div class="dimention1 bold">Dịch vụ đang dùng</div>
+						<div class="left"><input type="text" placeholder="Type something…" value="Vận hành website"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-header">
+			<h3>LỊCH SỬ KHÁCH HÀNG</h3>
+		</div>
+		<div class="modal-body">
+			<p>Xây dựng website bkindex.com --- Trạng thái <span class="blue bold">L999</span></p>
+			<p>SEO website bkindex.com --- Trạng thái <span class="red bold">L9B</span></p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn btn-primary" onclick="hideInfoCustomer()">Lưu lại</a>
+			<a href="#" class="btn" onclick="hideInfoCustomer()">Đóng</a>
+		</div>
+	</div>
+	
+	<div id="levelDefine" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="Close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>ĐỊNH NGHĨA TRẠNG THÁI KHÁCH HÀNG</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				<ol>
+					<li>L1 : là có contact
+					<li>L4 : là khách hàng đề xuất dự án
+					<li>L4B : là khách hàng dừng không làm dự án
+					<li>L8 : là khách hàng kí hợp đồng
+					<li>L9 : là khách hàng trả tiền lần 1
+					<li>L9B : là khách hàng dừng dự án
+					<li>L999 : là khách hàng trả hết tiền
+				</ol>
+			</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" onclick="hideLevelDefine()">Đóng</a>
+		</div>
+	</div>
+	
+	<div id="share" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="Close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>CHIA SẺ KHÁCH HÀNG</h3>
+		</div>
+		<div class="modal-body">
+			Khách hàng: <b>Phạm Hoàng Thái</b><br/><br/>
+			Người có quyền quản lý khách hàng
+			<div class="share-item">
+				<div class="left" style="width:250px;">Nguyễn Danh Tú</div>
+				<div class="left role">Chủ nhân</div>
+				<div class="right"><a href="#"><i class="icon-remove"></i></a></div>
+			</div>
+			<div class="share-item">
+				<div class="left" style="width:250px;">Phạm Quốc Thắng</div>
+				<div class="left role">Có quyền quản lý</div>
+				<div class="right"><a href="#"><i class="icon-remove"></i></a></div>
+			</div>
+			<div class="share-item">
+				<div class="left" style="width:250px;">
+					<select>
+						<option>Nguyễn Danh Tú</option>
+						<option>Phạm Quốc Thắng</option>
+						<option selected="selected">Nguyễn Văn Trịnh</option>
+					</select>
+				</div>
+				<div class="left">
+					<select>
+						<option>Chủ nhân</option>
+						<option selected="selected">Có quyền quản lý</option>
+					</select>
+				</div>
+				<div class="right"><a href="#"><i class="icon-plus"></i></a></div>
+			</div>
+			<div class="clear-both">
+				<label class="checkbox">
+					<input type="checkbox" style="margin: -2px 0 0;"> Xóa bỏ khách hàng này trong danh sách của tôi.
+				</label>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button">Lưu lại</button>
+			<a href="#" class="btn" onclick="hideShare()">Đóng</a>
+		</div>
+	</div>
+	
+	<div id="note" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="Close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>GHI CHÚ CHUYỂN TRẠNG THÁI</h3>
+		</div>
+		<div class="modal-body">
+			<h4>Các yêu cầu để chuyển trạng thái khách hàng từ L4 sang L5</h4>
+			<div>
+				<div class="left div240">Yêu cầu 01</div>
+				<div class="left div50"><input type="checkbox"/></div>
+				<div class="left div240"><textarea class="input-large" placeholder="Ghi chú"></textarea></div>
+			</div>
+			<div>
+				<div class="left div240">Yêu cầu 02</div>
+				<div class="left div50"><input type="checkbox"/></div>
+				<div class="left div240"><textarea class="input-large" placeholder="Ghi chú"></textarea></div>
+			</div>
+			<div>
+				<div class="left div240">Yêu cầu 03</div>
+				<div class="left div50"><input type="checkbox"/></div>
+				<div class="left div240"><textarea class="input-large" placeholder="Ghi chú"></textarea></div>
+			</div>	
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button">Lưu lại</button>
+			<a href="#" class="btn" onclick="hideNote()">Đóng</a>
+		</div>
+	</div>
+</body>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>	
+<script type="text/javascript">
+	function showInfoCustomer(){
+		$('#infoCustomer').modal('show');
+	}
+	
+	function hideInfoCustomer(){
+		$('#infoCustomer').modal('hide');
+	}
+	
+	function showLevelDefine(){
+		$('#levelDefine').modal('show');
+	}
+	
+	function hideLevelDefine(){
+		$('#levelDefine').modal('hide');
+	}
+	
+	function showShare(){
+		$('#share').modal('show');
+	}
+	
+	function hideShare(){
+		$('#share').modal('hide');
+	}
+	
+	function showNote(){
+		$('#note').modal('show');
+	}
+	
+	function hideNote(){
+		$('#note').modal('hide');
+	}
+</script>
+</html>

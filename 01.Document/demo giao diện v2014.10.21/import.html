@@ -1,0 +1,192 @@
+﻿<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="css/styles.css"/>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	
+</head>
+<body>
+	<div class="main">
+		<div class="menu">
+			<div class="home"><a href="#"><b class="icon-home"> </b> Trang chủ</a></div>
+			<div class="home"><a href="#"><b class="icon-user"> </b> Các khách hàng của tôi</a></div>
+			<div class="home"><a href="#"><b class="icon-list"> </b> Báo cáo</a></div>
+			<div class="home"><a href="#"><b class="icon-book"> </b> Trợ giúp</a></div>
+			<div class="logout">
+				<button class="btn btn-danger" type="button">Log out</button>
+			</div>			
+			<div class="profile">
+				<a href="#">Phạm Hoàng Thái</a>
+			</div>
+		</div>
+		<div class="content-left">
+			<div class="accordion" id="accordion2" style="margin-top:50px;">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+						<b>QUẢN LÝ KHÁCH HÀNG</b>
+					  </a>
+					</div>
+					<div id="collapseThree" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Chuyển trạng thái khách hàng</a>
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Nhập dữ liệu từ excel</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+						<b>TRẠNG THÁI</b>
+					  </a>
+					</div>
+					<div id="collapseOne" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Định nghĩa trạng thái</a>
+								<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Sơ đồ chuyển trạng thái</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+						<b>BÁO CÁO</b>
+					  </a>
+					</div>
+					<div id="collapseTwo" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 01</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 02</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 03</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Báo cáo 04</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+						<b>HỆ THỐNG</b>
+					  </a>
+					</div>
+					<div id="collapseFour" class="accordion-body collapse out">
+						<div class="accordion-inner">
+							<ul style="list-style-type:none;margin:0px;">
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Quản lý người dùng</a>
+									<li><i class="icon-hand-right"></i> <a href="#" class="right-menu">Quản lý nhóm người dùng</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-right">
+			<div class="title">
+				<h3>NHẬP DỮ LIỆU CŨ TỪ EXCEL</h3>
+			</div>
+			<div class="content">
+				<div class="import">
+					<button class="btn btn-primary" type="button">Import Excel</button>
+				</div>
+				<div class="data">
+					<table class="table table-condensed table-font-size">
+						<tr class="table_header">
+							<td>#</td>
+							<td>Họ tên</td>
+							<td>Email</td>
+							<td>SĐT</td>
+							<td>Địa chỉ</td>
+							<td>Giới tính</td>
+							<td>Tuổi</td>
+							<td><input type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>Phạm Hoàng Thái</td>
+							<td>thaiph@bkindex.com</td>
+							<td>01699 728 615</td>
+							<td>Hà Nội</td>
+							<td>Nam</td>
+							<td>23</td>
+							<td><input type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Nguyễn Danh Tú</td>
+							<td>tund@bkindex.com</td>
+							<td>0904 257 115</td>
+							<td>Hà Nội</td>
+							<td>Nam</td>
+							<td>33</td>
+							<td><input type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>Nguyễn Văn Trịnh</td>
+							<td>trinhnv@bkindex.com</td>
+							<td>0903 021 231</td>
+							<td>Hà Nội</td>
+							<td>Nam</td>
+							<td>26</td>
+							<td><input type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>Phạm Hoàng Thái</td>
+							<td>thaiph@bkindex.com</td>
+							<td>01699 728 615</td>
+							<td>Hà Nội</td>
+							<td>Nam</td>
+							<td>23</td>
+							<td><input type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>Phạm Hoàng Thái</td>
+							<td>thaiph@bkindex.com</td>
+							<td>01699 728 615</td>
+							<td>Hà Nội</td>
+							<td>Nam</td>
+							<td>23</td>
+							<td><input type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>6</td>
+							<td>Phạm Hoàng Thái</td>
+							<td>thaiph@bkindex.com</td>
+							<td>01699 728 615</td>
+							<td>Hà Nội</td>
+							<td>Nam</td>
+							<td>23</td>
+							<td><input type="checkbox"></td>
+						</tr>
+					</table>
+					<div class="right">
+						Chuyển khách hàng này cho:
+						<select>
+							<option>Nguyễn Danh Tú</option>
+							<option>Nguyễn Văn Trịnh</option>
+							<option selected="selected">Phạm Quốc Thắng</option>
+						</select>
+					</div>
+				</div>
+				<div class="action">
+					<button class="btn btn-danger btn_action" type="button">Trở về</button>
+					<button class="btn btn-success btn_action" type="button">Lưu lại</button>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<b>BKINDEX GROUP</b><br/>
+			Địa chỉ: 7b/36 Lương Đình Của
+		</div>
+	</div>
+</body>
+</html>
