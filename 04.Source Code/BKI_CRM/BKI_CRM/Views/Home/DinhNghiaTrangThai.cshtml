@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "DinhNghiaTrangThai";
+    var lst_trang_thai = ViewBag.LstTrangThai as List<BKI_CRM.Models.TrangThaiModel>;
+}
+
+            <div class="title">
+				<h3>DANH MỤC TRẠNG THÁI</h3>
+			</div>
+			<div class="content">
+				<div class="data">
+					<table class="table table-condensed table-font-size">
+						<tr class="table_header">
+							<td>Mã trạng thái</td>
+							<td>Mô tả</td>
+							<td>Loại trạng thái</td>
+							<td>Trạng thái tiếp theo</td>
+							<td width="5%"></td>
+							<td width="5%"></td>
+						</tr>
+                        @foreach (var item in lst_trang_thai)
+                        {
+                            <tr id="@item.ID">
+							    <td>@item.MA_TRANG_THAI</td>
+							    <td>@item.MO_TA</td>
+							    
+                                @if (item.LOAI_TRANG_THAI_YN == true)
+                                {
+                                    <td>
+                                        Tốt
+                                    </td>        
+                                }
+                                else{
+                                    <td>
+                                        Xấu
+                                    </td>        
+                                }							    
+							    <td>
+                                    @if (item.LST_TRANG_THAI_TIEP_THEO != null)
+                                    {
+                                        foreach (var item2 in item.LST_TRANG_THAI_TIEP_THEO)
+                                        {
+                                            if (item2.LOAI_TRANG_THAI_YN == true)
+                                            {
+                                                <button class="btn btn-success btn80">@item2.MA_TRANG_THAI</button>    
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-danger btn80">@item2.MA_TRANG_THAI</button>    
+                                            }
+                                        }
+                                    }
+							    </td>
+							    <td><button class="btn btn-primary btn80" onclick="showToEdit()">Sửa</button></td>
+							    <td><button class="btn btn-danger btn80">Xóa</button></td>
+						    </tr>
+                        }
+					</table>
+				</div>
+			</div>
+
+<div id="note" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<h3>ĐỊNH NGHĨA TRẠNG THÁI</h3>
+		</div>
+		<div class="modal-body">
+			<div class="left div240">
+				<div class="clear-both">
+					<div class="left div160">Mã trạng thái</div>
+					<div><input type="text"/></div>
+				</div>
+				<div class="clear-both">
+					<div class="left div160">Mô tả</div>
+					<div><input type="text"/></div>
+				</div>
+				<div class="clear-both">
+					<div class="left div160">Loại trạng thái</div>
+					<div>
+						<select id="loaitrangthai">
+							<option value="true">Tốt</option>
+							<option value="false">Xấu</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button">Lưu lại</button>
+			<a href="#" class="btn" onclick="hideNote()">Đóng</a>
+		</div>
+	</div>
+
+<script>
+    $(document).ready(function () {
+        $("#loaitrangthai").select2();
+    });
+
+	function showToEdit(){
+		$('#note').modal('show');
+	}
+	
+	function hideNote(){
+		$('#note').modal('hide');
+	}
+</script>

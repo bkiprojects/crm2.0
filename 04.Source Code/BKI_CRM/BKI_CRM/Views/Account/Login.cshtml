@@ -1,0 +1,28 @@
+﻿@model BKI_CRM.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+
+        <link rel="icon" href="~/Content/image/favicon.ico">
+        <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Styles/signin.css" rel="stylesheet" />
+        <script src="~/Scripts/ie-emulation-modes-warning.js"></script>
+
+        <div class="container">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin", @role="form" }))
+            {
+                <label for="inputEmail" class="sr-only">Email address</label>
+                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder="User Name"})
+                <label for="inputPassword" class="sr-only">Password</label>
+                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @id="inputPassword", @type="password", placeholder="Password"})
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(x => x.RememberMe) Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            }
+        </div>
+        <script src="~/Scripts/ie10-viewport-bug-workaround.js"></script>

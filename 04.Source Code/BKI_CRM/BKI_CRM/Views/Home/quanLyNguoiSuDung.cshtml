@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "quanLyNguoiSuDung";
+}
+
+<form id="nhap">
+		
+		<fieldset > 
+			
+			<legend align="left"> Thông tin người dùng </legend>
+			<div class="content_1">
+				<div class="info">
+					
+					<div class="thong_tin"><p>Họ và tên</p></div>
+					
+					<div class="thong_tin"><p>Level</p> </div>
+					
+					<div class="thong_tin"><p>Nhiệm vụ</p></div>
+
+				</div>
+				
+				<div class="khung">
+					
+					<div class="thong_tin_1"><input type="text" id="ten_1" placeholder="Họ và tên"></div>
+					
+					<div class="thong_tin_1"> <select class="span3" id="level_1">
+                                <option value="L1" selected="selected">L1</option>
+                                <option value="L2">L2</option>
+                                <option value="L3">L3</option>
+                                <option value="L4">L4</option>
+                                <option value="L5">L5</option>
+                        </select></div>
+					
+					<div class="thong_tin_1""><input type="text" id="nhiem_vu_1" placeholder="Nhiệm vụ hiện tại"></div>
+					
+				</div>	
+            </div>
+            <div class="content_1">
+                <div class="info">
+                    <div class="thong_tin"><p>Địa chỉ</p></div>
+					
+					<div class="thong_tin"> <p>Ghi chú</p></div> 
+                </div>
+                <div class="khung">
+                    
+                    <div class="thong_tin_1""><input type="text" id="dia_chi_1" placeholder="Địa chỉ"></div>
+
+					<div class="thong_tin_1"><textarea rows="3" id="ghi_chu_1" placeholder="Ghi chú"></textarea> </div>
+                </div>
+            </div>
+            <div >
+                   <button class="btn btn-success nut" onclick="them()">Thêm</button> 
+                   <input type="reset" class="btn btn-danger nut" value="      Xóa      "> 
+                   <button class="btn btn-danger nut" onclick="thoat()">Thoát</button>
+            </div>			 
+		</fieldset>
+	</form>
+                
+    <table class="table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Họ và Tên</th>
+                  <th>Nhiệm vụ</th>
+                  <th>Level</th>
+                  <th>Địa chỉ</th>
+                  <th>Ghi chú</th>
+                  <th>Chia sẻ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><button class="btn btn-success hvn">Phạm Hoàng Thái</button></td>
+                  <td>Quản lý dự án</td>
+                  <td> <a href="#">L5</a> </td>
+                  <td>BKIndex Group</td>
+                  <td></td>
+                  <td> <button class="btn btn-primary"> <i class="icon-share"></i> Share </button> </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><button class="btn btn-success hvn">Tạ Quang Ngọc</button></td>
+                  <td>Thiết kế giao diện</td>
+                  <td> <a href="#">L4</a> </td>
+                  <td>BKIndex Group</td>
+                  <td></td>
+                  <td> <button class="btn btn-primary"> <i class="icon-share"></i> Share </button> </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td id="ten"></td>
+                  <td id="nhiem_vu"></td>
+                  <td id="level"> <a href="#"></a> </td>
+                  <td id="dia_chi"></td>
+                  <td id="ghi_chu"></td>
+                  <td> <button class="btn btn-primary"> <i class="icon-share"></i> Share </button> </td>
+                </tr>
+              </tbody>
+   </table>
+
+<script>
+
+    function thoat() {
+        if (confirm('Bạn có chắc là muốn thoát???'))
+            window.open('http://facebook.com');
+    }
+
+
+    function them() {
+        document.getElementById('ten').innerHTML = "<button class='btn btn-success hvn'>" + ten_1.value + "</button>";
+        document.getElementById('nhiem_vu').innerHTML = nhiem_vu_1.value;
+        document.getElementById('dia_chi').innerHTML = dia_chi_1.value;
+        document.getElementById('ghi_chu').innerHTML = ghi_chu_1.value;
+        var id = document.getElementById("level_1");
+        var selected_value = id.options[id.selectedIndex].text;
+        document.getElementById('level').innerHTML = "<a href='#'>" + selected_value + "</a>"
+    }
+</script>

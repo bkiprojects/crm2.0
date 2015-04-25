@@ -1,0 +1,157 @@
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\BKI_CRM.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\BKI_CRM.pdb
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\Antlr3.Runtime.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.AspNet.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.Core.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.Consumer.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\EntityFramework.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\Framework.Extensions.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\Microsoft.Web.Infrastructure.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\Microsoft.Web.WebPages.OAuth.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\Newtonsoft.Json.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Net.Http.Formatting.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Helpers.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Http.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Http.WebHost.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Mvc.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Optimization.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Razor.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Deployment.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Razor.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\WebGrease.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\WebMatrix.Data.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\WebMatrix.WebData.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\log4net.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\EntityFramework.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\Newtonsoft.Json.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Net.Http.Formatting.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Helpers.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Http.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Http.WebHost.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Mvc.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.Razor.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Deployment.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Razor.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\WebMatrix.Data.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\Microsoft.Web.WebPages.OAuth.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\WebMatrix.WebData.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.AspNet.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.Core.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.Consumer.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\bin\log4net.xml
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\obj\Debug\BKI_CRM.dll
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\obj\Debug\BKI_CRM.pdb
+c:\users\thaiph\documents\visual studio 2012\Projects\BKI_CRM\BKI_CRM\obj\Debug\BKI_CRM.csprojResolveAssemblyReference.cache
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\BKI_CRM.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\BKI_CRM.pdb
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Antlr3.Runtime.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.AspNet.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.Core.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.Consumer.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\EntityFramework.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Microsoft.Web.Infrastructure.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Microsoft.Web.WebPages.OAuth.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Newtonsoft.Json.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Net.Http.Formatting.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Helpers.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Http.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Http.WebHost.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Mvc.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Optimization.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Razor.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Deployment.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Razor.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebGrease.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebMatrix.Data.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebMatrix.WebData.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\EntityFramework.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Newtonsoft.Json.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Net.Http.Formatting.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Helpers.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Http.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Http.WebHost.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Mvc.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Razor.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Deployment.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Razor.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebMatrix.Data.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Microsoft.Web.WebPages.OAuth.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebMatrix.WebData.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.AspNet.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.Core.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.Consumer.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\obj\Debug\BKI_CRM.dll
+F:\BKIndex\PRO\BKI_CRM\04.Source Code\BKI_CRM\BKI_CRM\obj\Debug\BKI_CRM.pdb
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\BKI_CRM.dll.config
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\BKI_CRM.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\BKI_CRM.pdb
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Antlr3.Runtime.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DocumentFormat.OpenXml.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.AspNet.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.Core.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.Consumer.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\EntityFramework.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Microsoft.Web.Infrastructure.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Microsoft.Web.WebPages.OAuth.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Newtonsoft.Json.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\SLExcelUtility.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Net.Http.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Net.Http.Formatting.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Net.Http.WebRequest.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Helpers.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Http.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Http.WebHost.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Mvc.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Optimization.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Razor.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Deployment.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Razor.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebGrease.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebMatrix.Data.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebMatrix.WebData.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\SLExcelUtility.pdb
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\EntityFramework.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Newtonsoft.Json.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Net.Http.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Net.Http.Formatting.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Net.Http.WebRequest.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Helpers.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Http.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Http.WebHost.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Mvc.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.Razor.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Deployment.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\System.Web.WebPages.Razor.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebMatrix.Data.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\Microsoft.Web.WebPages.OAuth.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\WebMatrix.WebData.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.AspNet.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.Core.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.Consumer.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OAuth.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\obj\Debug\BKI_CRM.csprojResolveAssemblyReference.cache
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\obj\Debug\BKI_CRM.dll
+D:\BKI CRM\04.Source Code\BKI_CRM\BKI_CRM\obj\Debug\BKI_CRM.pdb

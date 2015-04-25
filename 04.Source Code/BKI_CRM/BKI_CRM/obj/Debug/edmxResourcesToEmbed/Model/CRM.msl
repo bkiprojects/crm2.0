@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BKI_CRMModelStoreContainer" CdmEntityContainer="BKI_CRMEntities">
+    <EntitySetMapping Name="CM_DM_LOAI_TD">
+      <EntityTypeMapping TypeName="BKI_CRMModel.CM_DM_LOAI_TD">
+        <MappingFragment StoreEntitySet="CM_DM_LOAI_TD">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEN_LOAI_TU_DIEN" ColumnName="TEN_LOAI_TU_DIEN" />
+          <ScalarProperty Name="MA_LOAI_TU_DIEN" ColumnName="MA_LOAI_TU_DIEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CM_DM_TU_DIEN">
+      <EntityTypeMapping TypeName="BKI_CRMModel.CM_DM_TU_DIEN">
+        <MappingFragment StoreEntitySet="CM_DM_TU_DIEN">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEN_TU_DIEN" ColumnName="TEN_TU_DIEN" />
+          <ScalarProperty Name="MA_TU_DIEN" ColumnName="MA_TU_DIEN" />
+          <ScalarProperty Name="ID_LOAI_TU_DIEN" ColumnName="ID_LOAI_TU_DIEN" />
+          <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_CHUYEN_TRANG_THAI">
+      <EntityTypeMapping TypeName="BKI_CRMModel.DM_CHUYEN_TRANG_THAI">
+        <MappingFragment StoreEntitySet="DM_CHUYEN_TRANG_THAI">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_TRANG_THAI_BAN_DAU" ColumnName="ID_TRANG_THAI_BAN_DAU" />
+          <ScalarProperty Name="ID_TRANG_THAI_SAU" ColumnName="ID_TRANG_THAI_SAU" />
+          <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_CONG_TY">
+      <EntityTypeMapping TypeName="BKI_CRMModel.DM_CONG_TY">
+        <MappingFragment StoreEntitySet="DM_CONG_TY">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEN_CONG_TY" ColumnName="TEN_CONG_TY" />
+          <ScalarProperty Name="SO_LUONG_USER" ColumnName="SO_LUONG_USER" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_KHACH_HANG">
+      <EntityTypeMapping TypeName="BKI_CRMModel.DM_KHACH_HANG">
+        <MappingFragment StoreEntitySet="DM_KHACH_HANG">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEN_KHACH_HANG" ColumnName="TEN_KHACH_HANG" />
+          <ScalarProperty Name="ID_LOAI_KHACH_HANG" ColumnName="ID_LOAI_KHACH_HANG" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="GIOI_TINH" ColumnName="GIOI_TINH" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_01" ColumnName="THONG_TIN_BO_SUNG_01" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_02" ColumnName="THONG_TIN_BO_SUNG_02" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_03" ColumnName="THONG_TIN_BO_SUNG_03" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_04" ColumnName="THONG_TIN_BO_SUNG_04" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_05" ColumnName="THONG_TIN_BO_SUNG_05" />
+          <ScalarProperty Name="ID_CONG_TY" ColumnName="ID_CONG_TY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_NHOM_SAN_PHAM">
+      <EntityTypeMapping TypeName="BKI_CRMModel.DM_NHOM_SAN_PHAM">
+        <MappingFragment StoreEntitySet="DM_NHOM_SAN_PHAM">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEN_NHOM_SAN_PHAM" ColumnName="TEN_NHOM_SAN_PHAM" />
+          <ScalarProperty Name="MA_NHOM_SAN_PHAM" ColumnName="MA_NHOM_SAN_PHAM" />
+          <ScalarProperty Name="ID_CONG_TY" ColumnName="ID_CONG_TY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_PHONG_BAN">
+      <EntityTypeMapping TypeName="BKI_CRMModel.DM_PHONG_BAN">
+        <MappingFragment StoreEntitySet="DM_PHONG_BAN">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEN_PHONG_BAN" ColumnName="TEN_PHONG_BAN" />
+          <ScalarProperty Name="MA_PHONG_BAN" ColumnName="MA_PHONG_BAN" />
+          <ScalarProperty Name="ID_CONG_TY" ColumnName="ID_CONG_TY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_SAN_PHAM">
+      <EntityTypeMapping TypeName="BKI_CRMModel.DM_SAN_PHAM">
+        <MappingFragment StoreEntitySet="DM_SAN_PHAM">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_NHOM_SAN_PHAM" ColumnName="ID_NHOM_SAN_PHAM" />
+          <ScalarProperty Name="TEN_SAN_PHAM" ColumnName="TEN_SAN_PHAM" />
+          <ScalarProperty Name="GIA_SAN_PHAM" ColumnName="GIA_SAN_PHAM" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_01" ColumnName="THONG_TIN_BO_SUNG_01" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_02" ColumnName="THONG_TIN_BO_SUNG_02" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_03" ColumnName="THONG_TIN_BO_SUNG_03" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_04" ColumnName="THONG_TIN_BO_SUNG_04" />
+          <ScalarProperty Name="THONG_TIN_BO_SUNG_05" ColumnName="THONG_TIN_BO_SUNG_05" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_TRANG_THAI">
+      <EntityTypeMapping TypeName="BKI_CRMModel.DM_TRANG_THAI">
+        <MappingFragment StoreEntitySet="DM_TRANG_THAI">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MA_TRANG_THAI" ColumnName="MA_TRANG_THAI" />
+          <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+          <ScalarProperty Name="LOAI_TRANG_THAI_YN" ColumnName="LOAI_TRANG_THAI_YN" />
+          <ScalarProperty Name="ID_CONG_TY" ColumnName="ID_CONG_TY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DM_YEU_CAU_TRANG_THAI">
+      <EntityTypeMapping TypeName="BKI_CRMModel.DM_YEU_CAU_TRANG_THAI">
+        <MappingFragment StoreEntitySet="DM_YEU_CAU_TRANG_THAI">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
+          <ScalarProperty Name="YEU_CAU" ColumnName="YEU_CAU" />
+          <ScalarProperty Name="THU_TU" ColumnName="THU_TU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GD_CHUYEN_TRANG_THAI">
+      <EntityTypeMapping TypeName="BKI_CRMModel.GD_CHUYEN_TRANG_THAI">
+        <MappingFragment StoreEntitySet="GD_CHUYEN_TRANG_THAI">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
+          <ScalarProperty Name="ID_NGUOI_CHUYEN_TRANG_THAI" ColumnName="ID_NGUOI_CHUYEN_TRANG_THAI" />
+          <ScalarProperty Name="SO_TIEN_DA_NHAN" ColumnName="SO_TIEN_DA_NHAN" />
+          <ScalarProperty Name="NGAY_CHUYEN_TRANG_THAI" ColumnName="NGAY_CHUYEN_TRANG_THAI" />
+          <ScalarProperty Name="DANG_CHAM_SOC_YN" ColumnName="DANG_CHAM_SOC_YN" />
+          <ScalarProperty Name="TRANG_THAI_HIEN_TAI_YN" ColumnName="TRANG_THAI_HIEN_TAI_YN" />
+          <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+          <ScalarProperty Name="KIEM_TRA_YEU_CAU_CHUYEN_TRANG_THAI" ColumnName="KIEM_TRA_YEU_CAU_CHUYEN_TRANG_THAI" />
+          <ScalarProperty Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" ColumnName="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+      <EntityTypeMapping TypeName="BKI_CRMModel.GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+        <MappingFragment StoreEntitySet="GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_KHACH_HANG" ColumnName="ID_KHACH_HANG" />
+          <ScalarProperty Name="ID_SAN_PHAM" ColumnName="ID_SAN_PHAM" />
+          <ScalarProperty Name="TEN_SAN_PHAM" ColumnName="TEN_SAN_PHAM" />
+          <ScalarProperty Name="NGUOI_GIOI_THIEU" ColumnName="NGUOI_GIOI_THIEU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GD_NGUOI_QUAN_LY_KHACH_HANG">
+      <EntityTypeMapping TypeName="BKI_CRMModel.GD_NGUOI_QUAN_LY_KHACH_HANG">
+        <MappingFragment StoreEntitySet="GD_NGUOI_QUAN_LY_KHACH_HANG">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_NGUOI_SU_DUNG" ColumnName="ID_NGUOI_SU_DUNG" />
+          <ScalarProperty Name="ID_QUYEN_QUAN_LY" ColumnName="ID_QUYEN_QUAN_LY" />
+          <ScalarProperty Name="NGAY_CAP_QUYEN" ColumnName="NGAY_CAP_QUYEN" />
+          <ScalarProperty Name="ACTIVE_YN" ColumnName="ACTIVE_YN" />
+          <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+          <ScalarProperty Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" ColumnName="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_PHAN_QUYEN_CHO_NHOM">
+      <EntityTypeMapping TypeName="BKI_CRMModel.HT_PHAN_QUYEN_CHO_NHOM">
+        <MappingFragment StoreEntitySet="HT_PHAN_QUYEN_CHO_NHOM">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_PHAN_QUYEN_HE_THONG" ColumnName="ID_PHAN_QUYEN_HE_THONG" />
+          <ScalarProperty Name="ID_NHOM_NGUOI_SU_DUNG" ColumnName="ID_NHOM_NGUOI_SU_DUNG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_PHAN_QUYEN_HE_THONG">
+      <EntityTypeMapping TypeName="BKI_CRMModel.HT_PHAN_QUYEN_HE_THONG">
+        <MappingFragment StoreEntitySet="HT_PHAN_QUYEN_HE_THONG">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEN_QUYEN" ColumnName="TEN_QUYEN" />
+          <ScalarProperty Name="MA_QUYEN" ColumnName="MA_QUYEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_USER">
+      <EntityTypeMapping TypeName="BKI_CRMModel.HT_USER">
+        <MappingFragment StoreEntitySet="HT_USER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_USER_GROUP" ColumnName="ID_USER_GROUP" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="ACTIVE_YN" ColumnName="ACTIVE_YN" />
+          <ScalarProperty Name="ID_USER_CAP_TREN" ColumnName="ID_USER_CAP_TREN" />
+          <ScalarProperty Name="HO_TEN_NHAN_VIEN" ColumnName="HO_TEN_NHAN_VIEN" />
+          <ScalarProperty Name="ID_PHONG_BAN" ColumnName="ID_PHONG_BAN" />
+          <ScalarProperty Name="SDT01" ColumnName="SDT01" />
+          <ScalarProperty Name="SDT02" ColumnName="SDT02" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="ANH_CA_NHAN" ColumnName="ANH_CA_NHAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HT_USER_GROUP">
+      <EntityTypeMapping TypeName="BKI_CRMModel.HT_USER_GROUP">
+        <MappingFragment StoreEntitySet="HT_USER_GROUP">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEN_NHOM_NGUOI_SU_DUNG" ColumnName="TEN_NHOM_NGUOI_SU_DUNG" />
+          <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+          <ScalarProperty Name="ID_CONG_TY" ColumnName="ID_CONG_TY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BKI_CRMModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_DM_NHAN_VIEN_CONG_TY">
+      <EntityTypeMapping TypeName="BKI_CRMModel.V_DM_NHAN_VIEN_CONG_TY">
+        <MappingFragment StoreEntitySet="V_DM_NHAN_VIEN_CONG_TY">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HO_TEN_NHAN_VIEN" ColumnName="HO_TEN_NHAN_VIEN" />
+          <ScalarProperty Name="ID_NHAN_VIEN" ColumnName="ID_NHAN_VIEN" />
+          <ScalarProperty Name="TEN_CONG_TY" ColumnName="TEN_CONG_TY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_DM_YEU_CAU_TRANG_THAI">
+      <EntityTypeMapping TypeName="BKI_CRMModel.V_DM_YEU_CAU_TRANG_THAI">
+        <MappingFragment StoreEntitySet="V_DM_YEU_CAU_TRANG_THAI">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
+          <ScalarProperty Name="MA_TRANG_THAI" ColumnName="MA_TRANG_THAI" />
+          <ScalarProperty Name="YEU_CAU" ColumnName="YEU_CAU" />
+          <ScalarProperty Name="THU_TU" ColumnName="THU_TU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_GD_CHUYEN_TRANG_THAI">
+      <EntityTypeMapping TypeName="BKI_CRMModel.V_GD_CHUYEN_TRANG_THAI">
+        <MappingFragment StoreEntitySet="V_GD_CHUYEN_TRANG_THAI">
+          <ScalarProperty Name="ID_TRANG_THAI_BAN_DAU" ColumnName="ID_TRANG_THAI_BAN_DAU" />
+          <ScalarProperty Name="ID_TRANG_THAI_SAU" ColumnName="ID_TRANG_THAI_SAU" />
+          <ScalarProperty Name="MA_TRANG_THAI" ColumnName="MA_TRANG_THAI" />
+          <ScalarProperty Name="TRANG_THAI_DAU" ColumnName="TRANG_THAI_DAU" />
+          <ScalarProperty Name="LOAI_TRANG_THAI_YN" ColumnName="LOAI_TRANG_THAI_YN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_GD_KHACH_HANG_CHUYEN_TRANG_THAI">
+      <EntityTypeMapping TypeName="BKI_CRMModel.V_GD_KHACH_HANG_CHUYEN_TRANG_THAI">
+        <MappingFragment StoreEntitySet="V_GD_KHACH_HANG_CHUYEN_TRANG_THAI">
+          <ScalarProperty Name="TEN_CONG_TY" ColumnName="TEN_CONG_TY" />
+          <ScalarProperty Name="MA_PHONG_BAN" ColumnName="MA_PHONG_BAN" />
+          <ScalarProperty Name="TEN_PHONG_BAN" ColumnName="TEN_PHONG_BAN" />
+          <ScalarProperty Name="ID_PHONG_BAN" ColumnName="ID_PHONG_BAN" />
+          <ScalarProperty Name="HO_TEN_NHAN_VIEN" ColumnName="HO_TEN_NHAN_VIEN" />
+          <ScalarProperty Name="ID_NGUOI_SU_DUNG" ColumnName="ID_NGUOI_SU_DUNG" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TEN_SAN_PHAM" ColumnName="TEN_SAN_PHAM" />
+          <ScalarProperty Name="TEN_SAN_PHAM_CHI_TIET" ColumnName="TEN_SAN_PHAM_CHI_TIET" />
+          <ScalarProperty Name="SO_TIEN_DA_NHAN" ColumnName="SO_TIEN_DA_NHAN" />
+          <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+          <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
+          <ScalarProperty Name="MA_TRANG_THAI" ColumnName="MA_TRANG_THAI" />
+          <ScalarProperty Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" ColumnName="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+          <ScalarProperty Name="TRANG_THAI_HIEN_TAI_YN" ColumnName="TRANG_THAI_HIEN_TAI_YN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_GD_LICH_SU_KHACH_HANG">
+      <EntityTypeMapping TypeName="BKI_CRMModel.V_GD_LICH_SU_KHACH_HANG">
+        <MappingFragment StoreEntitySet="V_GD_LICH_SU_KHACH_HANG">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_KHACH_HANG" ColumnName="ID_KHACH_HANG" />
+          <ScalarProperty Name="TEN_SAN_PHAM" ColumnName="TEN_SAN_PHAM" />
+          <ScalarProperty Name="TEN_SAN_PHAM_CHI_TIET" ColumnName="TEN_SAN_PHAM_CHI_TIET" />
+          <ScalarProperty Name="DANG_CHAM_SOC_YN" ColumnName="DANG_CHAM_SOC_YN" />
+          <ScalarProperty Name="TRANG_THAI_HIEN_TAI_YN" ColumnName="TRANG_THAI_HIEN_TAI_YN" />
+          <ScalarProperty Name="MA_TRANG_THAI" ColumnName="MA_TRANG_THAI" />
+          <ScalarProperty Name="LOAI_TRANG_THAI_YN" ColumnName="LOAI_TRANG_THAI_YN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_GD_NGUOI_QUAN_LY_KHACH_HANG">
+      <EntityTypeMapping TypeName="BKI_CRMModel.V_GD_NGUOI_QUAN_LY_KHACH_HANG">
+        <MappingFragment StoreEntitySet="V_GD_NGUOI_QUAN_LY_KHACH_HANG">
+          <ScalarProperty Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" ColumnName="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+          <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+          <ScalarProperty Name="HO_TEN_NHAN_VIEN" ColumnName="HO_TEN_NHAN_VIEN" />
+          <ScalarProperty Name="ACTIVE_YN" ColumnName="ACTIVE_YN" />
+          <ScalarProperty Name="TEN_TU_DIEN" ColumnName="TEN_TU_DIEN" />
+          <ScalarProperty Name="ID_QUYEN_QUAN_LY" ColumnName="ID_QUYEN_QUAN_LY" />
+          <ScalarProperty Name="ID_NGUOI_SU_DUNG" ColumnName="ID_NGUOI_SU_DUNG" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_RPT_LUY_KE">
+      <EntityTypeMapping TypeName="BKI_CRMModel.V_RPT_LUY_KE">
+        <MappingFragment StoreEntitySet="V_RPT_LUY_KE">
+          <ScalarProperty Name="LUY_KE" ColumnName="LUY_KE" />
+          <ScalarProperty Name="MA_TRANG_THAI" ColumnName="MA_TRANG_THAI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_RPT_PHAT_SINH_TRONG_THANG">
+      <EntityTypeMapping TypeName="BKI_CRMModel.V_RPT_PHAT_SINH_TRONG_THANG">
+        <MappingFragment StoreEntitySet="V_RPT_PHAT_SINH_TRONG_THANG">
+          <ScalarProperty Name="LUY_KE" ColumnName="LUY_KE" />
+          <ScalarProperty Name="MA_TRANG_THAI" ColumnName="MA_TRANG_THAI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

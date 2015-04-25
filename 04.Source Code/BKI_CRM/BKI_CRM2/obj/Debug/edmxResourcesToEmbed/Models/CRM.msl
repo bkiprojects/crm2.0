@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CrmModelStoreContainer" CdmEntityContainer="CrmEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="CrmModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Sdt01" ColumnName="Sdt01" />
+          <ScalarProperty Name="Sdt02" ColumnName="Sdt02" />
+          <ScalarProperty Name="IdAccountType" ColumnName="IdAccountType" />
+          <ScalarProperty Name="IdLoaiAccount" ColumnName="IdLoaiAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountContactRoles">
+      <EntityTypeMapping TypeName="CrmModel.AccountContactRole">
+        <MappingFragment StoreEntitySet="AccountContactRole">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Actions">
+      <EntityTypeMapping TypeName="CrmModel.Action">
+        <MappingFragment StoreEntitySet="Action">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="IdUserGroup" ColumnName="IdUserGroup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="CrmModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+          <ScalarProperty Name="SoLuongUser" ColumnName="SoLuongUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="CrmModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ho" ColumnName="Ho" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+          <ScalarProperty Name="Skype" ColumnName="Skype" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="Sdt01" ColumnName="Sdt01" />
+          <ScalarProperty Name="Sdt02" ColumnName="Sdt02" />
+          <ScalarProperty Name="MaSoThue" ColumnName="MaSoThue" />
+          <ScalarProperty Name="SoTaiKhoan" ColumnName="SoTaiKhoan" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="HanKhachHang" ColumnName="HanKhachHang" />
+          <ScalarProperty Name="IdLoaiKhachHang" ColumnName="IdLoaiKhachHang" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactStates">
+      <EntityTypeMapping TypeName="CrmModel.ContactState">
+        <MappingFragment StoreEntitySet="ContactState">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+          <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
+          <ScalarProperty Name="IdCompany" ColumnName="IdCompany" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactStateChanges">
+      <EntityTypeMapping TypeName="CrmModel.ContactStateChange">
+        <MappingFragment StoreEntitySet="ContactStateChange">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+          <ScalarProperty Name="IdContactSate" ColumnName="IdContactSate" />
+          <ScalarProperty Name="NgayChuyenTrangThai" ColumnName="NgayChuyenTrangThai" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+          <ScalarProperty Name="IsDangChamSoc" ColumnName="IsDangChamSoc" />
+          <ScalarProperty Name="IsTrangThaiHienTai" ColumnName="IsTrangThaiHienTai" />
+          <ScalarProperty Name="IdNguoiChuyenTrangThai" ColumnName="IdNguoiChuyenTrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactStateProcesses">
+      <EntityTypeMapping TypeName="CrmModel.ContactStateProcess">
+        <MappingFragment StoreEntitySet="ContactStateProcess">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdTrangThaiTruoc" ColumnName="IdTrangThaiTruoc" />
+          <ScalarProperty Name="IdTrangThaiSau" ColumnName="IdTrangThaiSau" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contracts">
+      <EntityTypeMapping TypeName="CrmModel.Contract">
+        <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+          <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+          <ScalarProperty Name="SoHopDong" ColumnName="SoHopDong" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+          <ScalarProperty Name="IdLoaiContract" ColumnName="IdLoaiContract" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContractContactRoles">
+      <EntityTypeMapping TypeName="CrmModel.ContractContactRole">
+        <MappingFragment StoreEntitySet="ContractContactRole">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+          <ScalarProperty Name="IdContract" ColumnName="IdContract" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+          <ScalarProperty Name="VaiTroContact" ColumnName="VaiTroContact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoaiTuDiens">
+      <EntityTypeMapping TypeName="CrmModel.LoaiTuDien">
+        <MappingFragment StoreEntitySet="LoaiTuDien">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenLoaiTuDien" ColumnName="TenLoaiTuDien" />
+          <ScalarProperty Name="MaLoaiTuDien" ColumnName="MaLoaiTuDien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="CrmModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdContract" ColumnName="IdContract" />
+          <ScalarProperty Name="IdQuote" ColumnName="IdQuote" />
+          <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+          <ScalarProperty Name="IdLoaiOrder" ColumnName="IdLoaiOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="CrmModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
+          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+          <ScalarProperty Name="IdLoaiProduct" ColumnName="IdLoaiProduct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quotes">
+      <EntityTypeMapping TypeName="CrmModel.Quote">
+        <MappingFragment StoreEntitySet="Quote">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+          <ScalarProperty Name="IdContract" ColumnName="IdContract" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="TenBaoGia" ColumnName="TenBaoGia" />
+          <ScalarProperty Name="IdLoaiQuote" ColumnName="IdLoaiQuote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="CrmModel.Task">
+        <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TaiNgay" ColumnName="TaiNgay" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="LamGi" ColumnName="LamGi" />
+          <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+          <ScalarProperty Name="IdPriority" ColumnName="IdPriority" />
+          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+          <ScalarProperty Name="IdLoaiAction" ColumnName="IdLoaiAction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ToBeConverteds">
+      <EntityTypeMapping TypeName="CrmModel.ToBeConverted">
+        <MappingFragment StoreEntitySet="ToBeConverted">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdContactState" ColumnName="IdContactState" />
+          <ScalarProperty Name="TenYeuCau" ColumnName="TenYeuCau" />
+          <ScalarProperty Name="ThuTuSapXep" ColumnName="ThuTuSapXep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TuDiens">
+      <EntityTypeMapping TypeName="CrmModel.TuDien">
+        <MappingFragment StoreEntitySet="TuDien">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TenTuDien" ColumnName="TenTuDien" />
+          <ScalarProperty Name="MaTuDien" ColumnName="MaTuDien" />
+          <ScalarProperty Name="IdLoaiTuDien" ColumnName="IdLoaiTuDien" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CrmModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdUserGroup" ColumnName="IdUserGroup" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IdParentUser" ColumnName="IdParentUser" />
+          <ScalarProperty Name="IdCompany" ColumnName="IdCompany" />
+          <ScalarProperty Name="HoNhanVien" ColumnName="HoNhanVien" />
+          <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+          <ScalarProperty Name="Sdt01" ColumnName="Sdt01" />
+          <ScalarProperty Name="Sdt02" ColumnName="Sdt02" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IdLoaiUser" ColumnName="IdLoaiUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserContactRoles">
+      <EntityTypeMapping TypeName="CrmModel.UserContactRole">
+        <MappingFragment StoreEntitySet="UserContactRole">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+          <ScalarProperty Name="NgayCapQuyen" ColumnName="NgayCapQuyen" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserGroups">
+      <EntityTypeMapping TypeName="CrmModel.UserGroup">
+        <MappingFragment StoreEntitySet="UserGroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

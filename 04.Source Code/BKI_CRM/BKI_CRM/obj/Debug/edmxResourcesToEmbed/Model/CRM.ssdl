@@ -1,0 +1,823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BKI_CRMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BKI_CRMModelStoreContainer">
+    <EntitySet Name="CM_DM_LOAI_TD" EntityType="BKI_CRMModel.Store.CM_DM_LOAI_TD" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CM_DM_TU_DIEN" EntityType="BKI_CRMModel.Store.CM_DM_TU_DIEN" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DM_CHUYEN_TRANG_THAI" EntityType="BKI_CRMModel.Store.DM_CHUYEN_TRANG_THAI" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DM_CONG_TY" EntityType="BKI_CRMModel.Store.DM_CONG_TY" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DM_KHACH_HANG" EntityType="BKI_CRMModel.Store.DM_KHACH_HANG" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DM_NHOM_SAN_PHAM" EntityType="BKI_CRMModel.Store.DM_NHOM_SAN_PHAM" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DM_PHONG_BAN" EntityType="BKI_CRMModel.Store.DM_PHONG_BAN" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DM_SAN_PHAM" EntityType="BKI_CRMModel.Store.DM_SAN_PHAM" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DM_TRANG_THAI" EntityType="BKI_CRMModel.Store.DM_TRANG_THAI" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DM_YEU_CAU_TRANG_THAI" EntityType="BKI_CRMModel.Store.DM_YEU_CAU_TRANG_THAI" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GD_CHUYEN_TRANG_THAI" EntityType="BKI_CRMModel.Store.GD_CHUYEN_TRANG_THAI" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" EntityType="BKI_CRMModel.Store.GD_KHACH_HANG_SU_DUNG_SAN_PHAM" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GD_NGUOI_QUAN_LY_KHACH_HANG" EntityType="BKI_CRMModel.Store.GD_NGUOI_QUAN_LY_KHACH_HANG" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HT_PHAN_QUYEN_CHO_NHOM" EntityType="BKI_CRMModel.Store.HT_PHAN_QUYEN_CHO_NHOM" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HT_PHAN_QUYEN_HE_THONG" EntityType="BKI_CRMModel.Store.HT_PHAN_QUYEN_HE_THONG" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HT_USER" EntityType="BKI_CRMModel.Store.HT_USER" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HT_USER_GROUP" EntityType="BKI_CRMModel.Store.HT_USER_GROUP" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="BKI_CRMModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="V_DM_NHAN_VIEN_CONG_TY" EntityType="BKI_CRMModel.Store.V_DM_NHAN_VIEN_CONG_TY" store:Type="Views" store:Schema="dbo" store:Name="V_DM_NHAN_VIEN_CONG_TY">
+      <DefiningQuery>SELECT 
+      [V_DM_NHAN_VIEN_CONG_TY].[ID] AS [ID], 
+      [V_DM_NHAN_VIEN_CONG_TY].[HO_TEN_NHAN_VIEN] AS [HO_TEN_NHAN_VIEN], 
+      [V_DM_NHAN_VIEN_CONG_TY].[ID_NHAN_VIEN] AS [ID_NHAN_VIEN], 
+      [V_DM_NHAN_VIEN_CONG_TY].[TEN_CONG_TY] AS [TEN_CONG_TY]
+      FROM [dbo].[V_DM_NHAN_VIEN_CONG_TY] AS [V_DM_NHAN_VIEN_CONG_TY]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_DM_YEU_CAU_TRANG_THAI" EntityType="BKI_CRMModel.Store.V_DM_YEU_CAU_TRANG_THAI" store:Type="Views" store:Schema="dbo" store:Name="V_DM_YEU_CAU_TRANG_THAI">
+      <DefiningQuery>SELECT 
+      [V_DM_YEU_CAU_TRANG_THAI].[ID] AS [ID], 
+      [V_DM_YEU_CAU_TRANG_THAI].[ID_TRANG_THAI] AS [ID_TRANG_THAI], 
+      [V_DM_YEU_CAU_TRANG_THAI].[MA_TRANG_THAI] AS [MA_TRANG_THAI], 
+      [V_DM_YEU_CAU_TRANG_THAI].[YEU_CAU] AS [YEU_CAU], 
+      [V_DM_YEU_CAU_TRANG_THAI].[THU_TU] AS [THU_TU]
+      FROM [dbo].[V_DM_YEU_CAU_TRANG_THAI] AS [V_DM_YEU_CAU_TRANG_THAI]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_GD_CHUYEN_TRANG_THAI" EntityType="BKI_CRMModel.Store.V_GD_CHUYEN_TRANG_THAI" store:Type="Views" store:Schema="dbo" store:Name="V_GD_CHUYEN_TRANG_THAI">
+      <DefiningQuery>SELECT 
+      [V_GD_CHUYEN_TRANG_THAI].[ID_TRANG_THAI_BAN_DAU] AS [ID_TRANG_THAI_BAN_DAU], 
+      [V_GD_CHUYEN_TRANG_THAI].[ID_TRANG_THAI_SAU] AS [ID_TRANG_THAI_SAU], 
+      [V_GD_CHUYEN_TRANG_THAI].[MA_TRANG_THAI] AS [MA_TRANG_THAI], 
+      [V_GD_CHUYEN_TRANG_THAI].[TRANG_THAI_DAU] AS [TRANG_THAI_DAU], 
+      [V_GD_CHUYEN_TRANG_THAI].[LOAI_TRANG_THAI_YN] AS [LOAI_TRANG_THAI_YN]
+      FROM [dbo].[V_GD_CHUYEN_TRANG_THAI] AS [V_GD_CHUYEN_TRANG_THAI]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_GD_KHACH_HANG_CHUYEN_TRANG_THAI" EntityType="BKI_CRMModel.Store.V_GD_KHACH_HANG_CHUYEN_TRANG_THAI" store:Type="Views" store:Schema="dbo" store:Name="V_GD_KHACH_HANG_CHUYEN_TRANG_THAI">
+      <DefiningQuery>SELECT 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[ID] AS [ID], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[TEN_SAN_PHAM] AS [TEN_SAN_PHAM], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[TEN_SAN_PHAM_CHI_TIET] AS [TEN_SAN_PHAM_CHI_TIET], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[SO_TIEN_DA_NHAN] AS [SO_TIEN_DA_NHAN], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[GHI_CHU] AS [GHI_CHU], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[ID_TRANG_THAI] AS [ID_TRANG_THAI], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[MA_TRANG_THAI] AS [MA_TRANG_THAI], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[ID_KHACH_HANG_SU_DUNG_SAN_PHAM] AS [ID_KHACH_HANG_SU_DUNG_SAN_PHAM], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[TRANG_THAI_HIEN_TAI_YN] AS [TRANG_THAI_HIEN_TAI_YN], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[ID_NGUOI_SU_DUNG] AS [ID_NGUOI_SU_DUNG], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[HO_TEN_NHAN_VIEN] AS [HO_TEN_NHAN_VIEN], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[ID_PHONG_BAN] AS [ID_PHONG_BAN], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[TEN_PHONG_BAN] AS [TEN_PHONG_BAN], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[MA_PHONG_BAN] AS [MA_PHONG_BAN], 
+      [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI].[TEN_CONG_TY] AS [TEN_CONG_TY]
+      FROM [dbo].[V_GD_KHACH_HANG_CHUYEN_TRANG_THAI] AS [V_GD_KHACH_HANG_CHUYEN_TRANG_THAI]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_GD_LICH_SU_KHACH_HANG" EntityType="BKI_CRMModel.Store.V_GD_LICH_SU_KHACH_HANG" store:Type="Views" store:Schema="dbo" store:Name="V_GD_LICH_SU_KHACH_HANG">
+      <DefiningQuery>SELECT 
+      [V_GD_LICH_SU_KHACH_HANG].[ID] AS [ID], 
+      [V_GD_LICH_SU_KHACH_HANG].[ID_KHACH_HANG] AS [ID_KHACH_HANG], 
+      [V_GD_LICH_SU_KHACH_HANG].[TEN_SAN_PHAM] AS [TEN_SAN_PHAM], 
+      [V_GD_LICH_SU_KHACH_HANG].[TEN_SAN_PHAM_CHI_TIET] AS [TEN_SAN_PHAM_CHI_TIET], 
+      [V_GD_LICH_SU_KHACH_HANG].[DANG_CHAM_SOC_YN] AS [DANG_CHAM_SOC_YN], 
+      [V_GD_LICH_SU_KHACH_HANG].[TRANG_THAI_HIEN_TAI_YN] AS [TRANG_THAI_HIEN_TAI_YN], 
+      [V_GD_LICH_SU_KHACH_HANG].[MA_TRANG_THAI] AS [MA_TRANG_THAI], 
+      [V_GD_LICH_SU_KHACH_HANG].[LOAI_TRANG_THAI_YN] AS [LOAI_TRANG_THAI_YN]
+      FROM [dbo].[V_GD_LICH_SU_KHACH_HANG] AS [V_GD_LICH_SU_KHACH_HANG]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_GD_NGUOI_QUAN_LY_KHACH_HANG" EntityType="BKI_CRMModel.Store.V_GD_NGUOI_QUAN_LY_KHACH_HANG" store:Type="Views" store:Schema="dbo" store:Name="V_GD_NGUOI_QUAN_LY_KHACH_HANG">
+      <DefiningQuery>SELECT 
+      [V_GD_NGUOI_QUAN_LY_KHACH_HANG].[ID] AS [ID], 
+      [V_GD_NGUOI_QUAN_LY_KHACH_HANG].[ID_NGUOI_SU_DUNG] AS [ID_NGUOI_SU_DUNG], 
+      [V_GD_NGUOI_QUAN_LY_KHACH_HANG].[ID_QUYEN_QUAN_LY] AS [ID_QUYEN_QUAN_LY], 
+      [V_GD_NGUOI_QUAN_LY_KHACH_HANG].[TEN_TU_DIEN] AS [TEN_TU_DIEN], 
+      [V_GD_NGUOI_QUAN_LY_KHACH_HANG].[ACTIVE_YN] AS [ACTIVE_YN], 
+      [V_GD_NGUOI_QUAN_LY_KHACH_HANG].[HO_TEN_NHAN_VIEN] AS [HO_TEN_NHAN_VIEN], 
+      [V_GD_NGUOI_QUAN_LY_KHACH_HANG].[ID_USER] AS [ID_USER], 
+      [V_GD_NGUOI_QUAN_LY_KHACH_HANG].[ID_KHACH_HANG_SU_DUNG_SAN_PHAM] AS [ID_KHACH_HANG_SU_DUNG_SAN_PHAM]
+      FROM [dbo].[V_GD_NGUOI_QUAN_LY_KHACH_HANG] AS [V_GD_NGUOI_QUAN_LY_KHACH_HANG]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_RPT_LUY_KE" EntityType="BKI_CRMModel.Store.V_RPT_LUY_KE" store:Type="Views" store:Schema="dbo" store:Name="V_RPT_LUY_KE">
+      <DefiningQuery>SELECT 
+      [V_RPT_LUY_KE].[MA_TRANG_THAI] AS [MA_TRANG_THAI], 
+      [V_RPT_LUY_KE].[LUY_KE] AS [LUY_KE]
+      FROM [dbo].[V_RPT_LUY_KE] AS [V_RPT_LUY_KE]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_RPT_PHAT_SINH_TRONG_THANG" EntityType="BKI_CRMModel.Store.V_RPT_PHAT_SINH_TRONG_THANG" store:Type="Views" store:Schema="dbo" store:Name="V_RPT_PHAT_SINH_TRONG_THANG">
+      <DefiningQuery>SELECT 
+      [V_RPT_PHAT_SINH_TRONG_THANG].[MA_TRANG_THAI] AS [MA_TRANG_THAI], 
+      [V_RPT_PHAT_SINH_TRONG_THANG].[LUY_KE] AS [LUY_KE]
+      FROM [dbo].[V_RPT_PHAT_SINH_TRONG_THANG] AS [V_RPT_PHAT_SINH_TRONG_THANG]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CM_DM_TU_DIEN_CM_DM_LOAI_TD" Association="BKI_CRMModel.Store.FK_CM_DM_TU_DIEN_CM_DM_LOAI_TD">
+      <End Role="CM_DM_LOAI_TD" EntitySet="CM_DM_LOAI_TD" />
+      <End Role="CM_DM_TU_DIEN" EntitySet="CM_DM_TU_DIEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DM_CHUYEN_TRANG_THAI_DM_TRANG_THAI" Association="BKI_CRMModel.Store.FK_DM_CHUYEN_TRANG_THAI_DM_TRANG_THAI">
+      <End Role="DM_TRANG_THAI" EntitySet="DM_TRANG_THAI" />
+      <End Role="DM_CHUYEN_TRANG_THAI" EntitySet="DM_CHUYEN_TRANG_THAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DM_CHUYEN_TRANG_THAI_DM_TRANG_THAI1" Association="BKI_CRMModel.Store.FK_DM_CHUYEN_TRANG_THAI_DM_TRANG_THAI1">
+      <End Role="DM_TRANG_THAI" EntitySet="DM_TRANG_THAI" />
+      <End Role="DM_CHUYEN_TRANG_THAI" EntitySet="DM_CHUYEN_TRANG_THAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DM_KHACH_HANG_CM_DM_TU_DIEN" Association="BKI_CRMModel.Store.FK_DM_KHACH_HANG_CM_DM_TU_DIEN">
+      <End Role="CM_DM_TU_DIEN" EntitySet="CM_DM_TU_DIEN" />
+      <End Role="DM_KHACH_HANG" EntitySet="DM_KHACH_HANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DM_KHACH_HANG_DM_CONG_TY" Association="BKI_CRMModel.Store.FK_DM_KHACH_HANG_DM_CONG_TY">
+      <End Role="DM_CONG_TY" EntitySet="DM_CONG_TY" />
+      <End Role="DM_KHACH_HANG" EntitySet="DM_KHACH_HANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DM_NHOM_SAN_PHAM_DM_CONG_TY" Association="BKI_CRMModel.Store.FK_DM_NHOM_SAN_PHAM_DM_CONG_TY">
+      <End Role="DM_CONG_TY" EntitySet="DM_CONG_TY" />
+      <End Role="DM_NHOM_SAN_PHAM" EntitySet="DM_NHOM_SAN_PHAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DM_PHONG_BAN_DM_CONG_TY" Association="BKI_CRMModel.Store.FK_DM_PHONG_BAN_DM_CONG_TY">
+      <End Role="DM_CONG_TY" EntitySet="DM_CONG_TY" />
+      <End Role="DM_PHONG_BAN" EntitySet="DM_PHONG_BAN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DM_SAN_PHAM_DM_NHOM_SAN_PHAM" Association="BKI_CRMModel.Store.FK_DM_SAN_PHAM_DM_NHOM_SAN_PHAM">
+      <End Role="DM_NHOM_SAN_PHAM" EntitySet="DM_NHOM_SAN_PHAM" />
+      <End Role="DM_SAN_PHAM" EntitySet="DM_SAN_PHAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DM_TRANG_THAI_DM_CONG_TY" Association="BKI_CRMModel.Store.FK_DM_TRANG_THAI_DM_CONG_TY">
+      <End Role="DM_CONG_TY" EntitySet="DM_CONG_TY" />
+      <End Role="DM_TRANG_THAI" EntitySet="DM_TRANG_THAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DM_YEU_CAU_TRANG_THAI_DM_TRANG_THAI" Association="BKI_CRMModel.Store.FK_DM_YEU_CAU_TRANG_THAI_DM_TRANG_THAI">
+      <End Role="DM_TRANG_THAI" EntitySet="DM_TRANG_THAI" />
+      <End Role="DM_YEU_CAU_TRANG_THAI" EntitySet="DM_YEU_CAU_TRANG_THAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GD_CHUYEN_TRANG_THAI_DM_TRANG_THAI" Association="BKI_CRMModel.Store.FK_GD_CHUYEN_TRANG_THAI_DM_TRANG_THAI">
+      <End Role="DM_TRANG_THAI" EntitySet="DM_TRANG_THAI" />
+      <End Role="GD_CHUYEN_TRANG_THAI" EntitySet="GD_CHUYEN_TRANG_THAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GD_CHUYEN_TRANG_THAI_GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Association="BKI_CRMModel.Store.FK_GD_CHUYEN_TRANG_THAI_GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+      <End Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" EntitySet="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+      <End Role="GD_CHUYEN_TRANG_THAI" EntitySet="GD_CHUYEN_TRANG_THAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GD_CHUYEN_TRANG_THAI_HT_USER" Association="BKI_CRMModel.Store.FK_GD_CHUYEN_TRANG_THAI_HT_USER">
+      <End Role="HT_USER" EntitySet="HT_USER" />
+      <End Role="GD_CHUYEN_TRANG_THAI" EntitySet="GD_CHUYEN_TRANG_THAI" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GD_KHACH_HANG_SU_DUNG_SAN_PHAM_DM_KHACH_HANG" Association="BKI_CRMModel.Store.FK_GD_KHACH_HANG_SU_DUNG_SAN_PHAM_DM_KHACH_HANG">
+      <End Role="DM_KHACH_HANG" EntitySet="DM_KHACH_HANG" />
+      <End Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" EntitySet="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GD_KHACH_HANG_SU_DUNG_SAN_PHAM_DM_SAN_PHAM" Association="BKI_CRMModel.Store.FK_GD_KHACH_HANG_SU_DUNG_SAN_PHAM_DM_SAN_PHAM">
+      <End Role="DM_SAN_PHAM" EntitySet="DM_SAN_PHAM" />
+      <End Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" EntitySet="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GD_NGUOI_QUAN_LY_KHACH_HANG_CM_DM_TU_DIEN" Association="BKI_CRMModel.Store.FK_GD_NGUOI_QUAN_LY_KHACH_HANG_CM_DM_TU_DIEN">
+      <End Role="CM_DM_TU_DIEN" EntitySet="CM_DM_TU_DIEN" />
+      <End Role="GD_NGUOI_QUAN_LY_KHACH_HANG" EntitySet="GD_NGUOI_QUAN_LY_KHACH_HANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GD_NGUOI_QUAN_LY_KHACH_HANG_GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Association="BKI_CRMModel.Store.FK_GD_NGUOI_QUAN_LY_KHACH_HANG_GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+      <End Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" EntitySet="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+      <End Role="GD_NGUOI_QUAN_LY_KHACH_HANG" EntitySet="GD_NGUOI_QUAN_LY_KHACH_HANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GD_NGUOI_QUAN_LY_KHACH_HANG_HT_USER" Association="BKI_CRMModel.Store.FK_GD_NGUOI_QUAN_LY_KHACH_HANG_HT_USER">
+      <End Role="HT_USER" EntitySet="HT_USER" />
+      <End Role="GD_NGUOI_QUAN_LY_KHACH_HANG" EntitySet="GD_NGUOI_QUAN_LY_KHACH_HANG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HT_PHAN_QUYEN_CHO_NHOM_HT_PHAN_QUYEN_HE_THONG" Association="BKI_CRMModel.Store.FK_HT_PHAN_QUYEN_CHO_NHOM_HT_PHAN_QUYEN_HE_THONG">
+      <End Role="HT_PHAN_QUYEN_HE_THONG" EntitySet="HT_PHAN_QUYEN_HE_THONG" />
+      <End Role="HT_PHAN_QUYEN_CHO_NHOM" EntitySet="HT_PHAN_QUYEN_CHO_NHOM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HT_PHAN_QUYEN_CHO_NHOM_HT_USER_GROUP" Association="BKI_CRMModel.Store.FK_HT_PHAN_QUYEN_CHO_NHOM_HT_USER_GROUP">
+      <End Role="HT_USER_GROUP" EntitySet="HT_USER_GROUP" />
+      <End Role="HT_PHAN_QUYEN_CHO_NHOM" EntitySet="HT_PHAN_QUYEN_CHO_NHOM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HT_USER_DM_PHONG_BAN" Association="BKI_CRMModel.Store.FK_HT_USER_DM_PHONG_BAN">
+      <End Role="DM_PHONG_BAN" EntitySet="DM_PHONG_BAN" />
+      <End Role="HT_USER" EntitySet="HT_USER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HT_USER_GROUP_DM_CONG_TY" Association="BKI_CRMModel.Store.FK_HT_USER_GROUP_DM_CONG_TY">
+      <End Role="DM_CONG_TY" EntitySet="DM_CONG_TY" />
+      <End Role="HT_USER_GROUP" EntitySet="HT_USER_GROUP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HT_USER_HT_USER" Association="BKI_CRMModel.Store.FK_HT_USER_HT_USER">
+      <End Role="HT_USER" EntitySet="HT_USER" />
+      <End Role="HT_USER1" EntitySet="HT_USER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HT_USER_HT_USER_GROUP" Association="BKI_CRMModel.Store.FK_HT_USER_HT_USER_GROUP">
+      <End Role="HT_USER_GROUP" EntitySet="HT_USER_GROUP" />
+      <End Role="HT_USER" EntitySet="HT_USER" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CM_DM_LOAI_TD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_LOAI_TU_DIEN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="MA_LOAI_TU_DIEN" Type="nchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="CM_DM_TU_DIEN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_TU_DIEN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="MA_TU_DIEN" Type="nchar" MaxLength="15" />
+    <Property Name="ID_LOAI_TU_DIEN" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GHI_CHU" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DM_CHUYEN_TRANG_THAI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_TRANG_THAI_BAN_DAU" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_TRANG_THAI_SAU" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GHI_CHU" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DM_CONG_TY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_CONG_TY" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="SO_LUONG_USER" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DM_KHACH_HANG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_KHACH_HANG" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ID_LOAI_KHACH_HANG" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SDT" Type="nchar" MaxLength="15" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+    <Property Name="DIA_CHI" Type="nvarchar" MaxLength="500" />
+    <Property Name="GIOI_TINH" Type="bit" />
+    <Property Name="THONG_TIN_BO_SUNG_01" Type="nvarchar" MaxLength="500" />
+    <Property Name="THONG_TIN_BO_SUNG_02" Type="nvarchar" MaxLength="500" />
+    <Property Name="THONG_TIN_BO_SUNG_03" Type="nvarchar" MaxLength="500" />
+    <Property Name="THONG_TIN_BO_SUNG_04" Type="nvarchar" MaxLength="500" />
+    <Property Name="THONG_TIN_BO_SUNG_05" Type="nvarchar" MaxLength="500" />
+    <Property Name="ID_CONG_TY" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DM_NHOM_SAN_PHAM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_NHOM_SAN_PHAM" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="MA_NHOM_SAN_PHAM" Type="nchar" MaxLength="15" />
+    <Property Name="ID_CONG_TY" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DM_PHONG_BAN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_PHONG_BAN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="MA_PHONG_BAN" Type="nchar" MaxLength="15" />
+    <Property Name="ID_CONG_TY" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DM_SAN_PHAM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_NHOM_SAN_PHAM" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_SAN_PHAM" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="GIA_SAN_PHAM" Type="decimal" Scale="4" />
+    <Property Name="THONG_TIN_BO_SUNG_01" Type="nvarchar" MaxLength="500" />
+    <Property Name="THONG_TIN_BO_SUNG_02" Type="nvarchar" MaxLength="500" />
+    <Property Name="THONG_TIN_BO_SUNG_03" Type="nvarchar" MaxLength="500" />
+    <Property Name="THONG_TIN_BO_SUNG_04" Type="nvarchar" MaxLength="500" />
+    <Property Name="THONG_TIN_BO_SUNG_05" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DM_TRANG_THAI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MA_TRANG_THAI" Type="nchar" Nullable="false" MaxLength="15" />
+    <Property Name="MO_TA" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="LOAI_TRANG_THAI_YN" Type="bit" Nullable="false" />
+    <Property Name="ID_CONG_TY" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DM_YEU_CAU_TRANG_THAI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_TRANG_THAI" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="YEU_CAU" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="THU_TU" Type="int" />
+  </EntityType>
+  <EntityType Name="GD_CHUYEN_TRANG_THAI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_TRANG_THAI" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_NGUOI_CHUYEN_TRANG_THAI" Type="uniqueidentifier" />
+    <Property Name="SO_TIEN_DA_NHAN" Type="decimal" Scale="4" />
+    <Property Name="NGAY_CHUYEN_TRANG_THAI" Type="datetime" Nullable="false" />
+    <Property Name="DANG_CHAM_SOC_YN" Type="bit" Nullable="false" />
+    <Property Name="TRANG_THAI_HIEN_TAI_YN" Type="bit" Nullable="false" />
+    <Property Name="GHI_CHU" Type="nvarchar" MaxLength="500" />
+    <Property Name="KIEM_TRA_YEU_CAU_CHUYEN_TRANG_THAI" Type="nchar" MaxLength="15" />
+    <Property Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_KHACH_HANG" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_SAN_PHAM" Type="uniqueidentifier" />
+    <Property Name="TEN_SAN_PHAM" Type="nvarchar" MaxLength="100" />
+    <Property Name="NGUOI_GIOI_THIEU" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="GD_NGUOI_QUAN_LY_KHACH_HANG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_NGUOI_SU_DUNG" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_QUYEN_QUAN_LY" Type="uniqueidentifier" />
+    <Property Name="NGAY_CAP_QUYEN" Type="datetime" />
+    <Property Name="ACTIVE_YN" Type="bit" Nullable="false" />
+    <Property Name="GHI_CHU" Type="nvarchar" MaxLength="500" />
+    <Property Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="HT_PHAN_QUYEN_CHO_NHOM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_PHAN_QUYEN_HE_THONG" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_NHOM_NGUOI_SU_DUNG" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HT_PHAN_QUYEN_HE_THONG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_QUYEN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="MA_QUYEN" Type="nchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="HT_USER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_USER_GROUP" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="USERNAME" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="PASSWORD" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ACTIVE_YN" Type="bit" Nullable="false" />
+    <Property Name="ID_USER_CAP_TREN" Type="uniqueidentifier" />
+    <Property Name="HO_TEN_NHAN_VIEN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ID_PHONG_BAN" Type="uniqueidentifier" />
+    <Property Name="SDT01" Type="nchar" MaxLength="15" />
+    <Property Name="SDT02" Type="nchar" MaxLength="15" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+    <Property Name="ANH_CA_NHAN" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="HT_USER_GROUP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_NHOM_NGUOI_SU_DUNG" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="GHI_CHU" Type="nvarchar" MaxLength="500" />
+    <Property Name="ID_CONG_TY" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'BKI_CRM.dbo.V_DM_NHAN_VIEN_CONG_TY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="V_DM_NHAN_VIEN_CONG_TY">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="HO_TEN_NHAN_VIEN" />
+      <PropertyRef Name="ID_NHAN_VIEN" />
+      <PropertyRef Name="TEN_CONG_TY" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HO_TEN_NHAN_VIEN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ID_NHAN_VIEN" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_CONG_TY" Type="nvarchar" Nullable="false" MaxLength="500" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'BKI_CRM.dbo.V_DM_YEU_CAU_TRANG_THAI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="V_DM_YEU_CAU_TRANG_THAI">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_TRANG_THAI" />
+      <PropertyRef Name="MA_TRANG_THAI" />
+      <PropertyRef Name="YEU_CAU" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_TRANG_THAI" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MA_TRANG_THAI" Type="nchar" Nullable="false" MaxLength="15" />
+    <Property Name="YEU_CAU" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="THU_TU" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'BKI_CRM.dbo.V_GD_CHUYEN_TRANG_THAI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="V_GD_CHUYEN_TRANG_THAI">
+    <Key>
+      <PropertyRef Name="ID_TRANG_THAI_BAN_DAU" />
+      <PropertyRef Name="ID_TRANG_THAI_SAU" />
+      <PropertyRef Name="MA_TRANG_THAI" />
+      <PropertyRef Name="TRANG_THAI_DAU" />
+      <PropertyRef Name="LOAI_TRANG_THAI_YN" />
+    </Key>
+    <Property Name="ID_TRANG_THAI_BAN_DAU" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_TRANG_THAI_SAU" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MA_TRANG_THAI" Type="nchar" Nullable="false" MaxLength="15" />
+    <Property Name="TRANG_THAI_DAU" Type="nchar" Nullable="false" MaxLength="15" />
+    <Property Name="LOAI_TRANG_THAI_YN" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'BKI_CRM.dbo.V_GD_KHACH_HANG_CHUYEN_TRANG_THAI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="V_GD_KHACH_HANG_CHUYEN_TRANG_THAI">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="TEN_SAN_PHAM" />
+      <PropertyRef Name="ID_TRANG_THAI" />
+      <PropertyRef Name="MA_TRANG_THAI" />
+      <PropertyRef Name="TRANG_THAI_HIEN_TAI_YN" />
+      <PropertyRef Name="ID_NGUOI_SU_DUNG" />
+      <PropertyRef Name="HO_TEN_NHAN_VIEN" />
+      <PropertyRef Name="TEN_PHONG_BAN" />
+      <PropertyRef Name="TEN_CONG_TY" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_SAN_PHAM" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="TEN_SAN_PHAM_CHI_TIET" Type="nvarchar" MaxLength="100" />
+    <Property Name="SO_TIEN_DA_NHAN" Type="decimal" Scale="4" />
+    <Property Name="GHI_CHU" Type="nvarchar" MaxLength="500" />
+    <Property Name="ID_TRANG_THAI" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MA_TRANG_THAI" Type="nchar" Nullable="false" MaxLength="15" />
+    <Property Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" Type="uniqueidentifier" />
+    <Property Name="TRANG_THAI_HIEN_TAI_YN" Type="bit" Nullable="false" />
+    <Property Name="ID_NGUOI_SU_DUNG" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HO_TEN_NHAN_VIEN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ID_PHONG_BAN" Type="uniqueidentifier" />
+    <Property Name="TEN_PHONG_BAN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="MA_PHONG_BAN" Type="nchar" MaxLength="15" />
+    <Property Name="TEN_CONG_TY" Type="nvarchar" Nullable="false" MaxLength="500" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'BKI_CRM.dbo.V_GD_LICH_SU_KHACH_HANG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="V_GD_LICH_SU_KHACH_HANG">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_KHACH_HANG" />
+      <PropertyRef Name="TEN_SAN_PHAM" />
+      <PropertyRef Name="DANG_CHAM_SOC_YN" />
+      <PropertyRef Name="TRANG_THAI_HIEN_TAI_YN" />
+      <PropertyRef Name="MA_TRANG_THAI" />
+      <PropertyRef Name="LOAI_TRANG_THAI_YN" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_KHACH_HANG" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TEN_SAN_PHAM" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="TEN_SAN_PHAM_CHI_TIET" Type="nvarchar" MaxLength="100" />
+    <Property Name="DANG_CHAM_SOC_YN" Type="bit" Nullable="false" />
+    <Property Name="TRANG_THAI_HIEN_TAI_YN" Type="bit" Nullable="false" />
+    <Property Name="MA_TRANG_THAI" Type="nchar" Nullable="false" MaxLength="15" />
+    <Property Name="LOAI_TRANG_THAI_YN" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'BKI_CRM.dbo.V_GD_NGUOI_QUAN_LY_KHACH_HANG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="V_GD_NGUOI_QUAN_LY_KHACH_HANG">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_NGUOI_SU_DUNG" />
+      <PropertyRef Name="TEN_TU_DIEN" />
+      <PropertyRef Name="ACTIVE_YN" />
+      <PropertyRef Name="HO_TEN_NHAN_VIEN" />
+      <PropertyRef Name="ID_USER" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_NGUOI_SU_DUNG" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_QUYEN_QUAN_LY" Type="uniqueidentifier" />
+    <Property Name="TEN_TU_DIEN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ACTIVE_YN" Type="bit" Nullable="false" />
+    <Property Name="HO_TEN_NHAN_VIEN" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ID_USER" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" Type="uniqueidentifier" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'BKI_CRM.dbo.V_RPT_LUY_KE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="V_RPT_LUY_KE">
+    <Key>
+      <PropertyRef Name="MA_TRANG_THAI" />
+    </Key>
+    <Property Name="MA_TRANG_THAI" Type="varchar" Nullable="false" MaxLength="4" />
+    <Property Name="LUY_KE" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'BKI_CRM.dbo.V_RPT_PHAT_SINH_TRONG_THANG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="V_RPT_PHAT_SINH_TRONG_THANG">
+    <Key>
+      <PropertyRef Name="MA_TRANG_THAI" />
+    </Key>
+    <Property Name="MA_TRANG_THAI" Type="varchar" Nullable="false" MaxLength="4" />
+    <Property Name="LUY_KE" Type="int" />
+  </EntityType>
+  <Association Name="FK_CM_DM_TU_DIEN_CM_DM_LOAI_TD">
+    <End Role="CM_DM_LOAI_TD" Type="BKI_CRMModel.Store.CM_DM_LOAI_TD" Multiplicity="1" />
+    <End Role="CM_DM_TU_DIEN" Type="BKI_CRMModel.Store.CM_DM_TU_DIEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CM_DM_LOAI_TD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CM_DM_TU_DIEN">
+        <PropertyRef Name="ID_LOAI_TU_DIEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DM_CHUYEN_TRANG_THAI_DM_TRANG_THAI">
+    <End Role="DM_TRANG_THAI" Type="BKI_CRMModel.Store.DM_TRANG_THAI" Multiplicity="1" />
+    <End Role="DM_CHUYEN_TRANG_THAI" Type="BKI_CRMModel.Store.DM_CHUYEN_TRANG_THAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_TRANG_THAI">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DM_CHUYEN_TRANG_THAI">
+        <PropertyRef Name="ID_TRANG_THAI_BAN_DAU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DM_CHUYEN_TRANG_THAI_DM_TRANG_THAI1">
+    <End Role="DM_TRANG_THAI" Type="BKI_CRMModel.Store.DM_TRANG_THAI" Multiplicity="1" />
+    <End Role="DM_CHUYEN_TRANG_THAI" Type="BKI_CRMModel.Store.DM_CHUYEN_TRANG_THAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_TRANG_THAI">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DM_CHUYEN_TRANG_THAI">
+        <PropertyRef Name="ID_TRANG_THAI_SAU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DM_KHACH_HANG_CM_DM_TU_DIEN">
+    <End Role="CM_DM_TU_DIEN" Type="BKI_CRMModel.Store.CM_DM_TU_DIEN" Multiplicity="1" />
+    <End Role="DM_KHACH_HANG" Type="BKI_CRMModel.Store.DM_KHACH_HANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CM_DM_TU_DIEN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DM_KHACH_HANG">
+        <PropertyRef Name="ID_LOAI_KHACH_HANG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DM_KHACH_HANG_DM_CONG_TY">
+    <End Role="DM_CONG_TY" Type="BKI_CRMModel.Store.DM_CONG_TY" Multiplicity="1" />
+    <End Role="DM_KHACH_HANG" Type="BKI_CRMModel.Store.DM_KHACH_HANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_CONG_TY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DM_KHACH_HANG">
+        <PropertyRef Name="ID_CONG_TY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DM_NHOM_SAN_PHAM_DM_CONG_TY">
+    <End Role="DM_CONG_TY" Type="BKI_CRMModel.Store.DM_CONG_TY" Multiplicity="1" />
+    <End Role="DM_NHOM_SAN_PHAM" Type="BKI_CRMModel.Store.DM_NHOM_SAN_PHAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_CONG_TY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DM_NHOM_SAN_PHAM">
+        <PropertyRef Name="ID_CONG_TY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DM_PHONG_BAN_DM_CONG_TY">
+    <End Role="DM_CONG_TY" Type="BKI_CRMModel.Store.DM_CONG_TY" Multiplicity="1" />
+    <End Role="DM_PHONG_BAN" Type="BKI_CRMModel.Store.DM_PHONG_BAN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_CONG_TY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DM_PHONG_BAN">
+        <PropertyRef Name="ID_CONG_TY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DM_SAN_PHAM_DM_NHOM_SAN_PHAM">
+    <End Role="DM_NHOM_SAN_PHAM" Type="BKI_CRMModel.Store.DM_NHOM_SAN_PHAM" Multiplicity="1" />
+    <End Role="DM_SAN_PHAM" Type="BKI_CRMModel.Store.DM_SAN_PHAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_NHOM_SAN_PHAM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DM_SAN_PHAM">
+        <PropertyRef Name="ID_NHOM_SAN_PHAM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DM_TRANG_THAI_DM_CONG_TY">
+    <End Role="DM_CONG_TY" Type="BKI_CRMModel.Store.DM_CONG_TY" Multiplicity="1" />
+    <End Role="DM_TRANG_THAI" Type="BKI_CRMModel.Store.DM_TRANG_THAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_CONG_TY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DM_TRANG_THAI">
+        <PropertyRef Name="ID_CONG_TY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DM_YEU_CAU_TRANG_THAI_DM_TRANG_THAI">
+    <End Role="DM_TRANG_THAI" Type="BKI_CRMModel.Store.DM_TRANG_THAI" Multiplicity="1" />
+    <End Role="DM_YEU_CAU_TRANG_THAI" Type="BKI_CRMModel.Store.DM_YEU_CAU_TRANG_THAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_TRANG_THAI">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DM_YEU_CAU_TRANG_THAI">
+        <PropertyRef Name="ID_TRANG_THAI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GD_CHUYEN_TRANG_THAI_DM_TRANG_THAI">
+    <End Role="DM_TRANG_THAI" Type="BKI_CRMModel.Store.DM_TRANG_THAI" Multiplicity="1" />
+    <End Role="GD_CHUYEN_TRANG_THAI" Type="BKI_CRMModel.Store.GD_CHUYEN_TRANG_THAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_TRANG_THAI">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GD_CHUYEN_TRANG_THAI">
+        <PropertyRef Name="ID_TRANG_THAI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GD_CHUYEN_TRANG_THAI_GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+    <End Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Type="BKI_CRMModel.Store.GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Multiplicity="0..1" />
+    <End Role="GD_CHUYEN_TRANG_THAI" Type="BKI_CRMModel.Store.GD_CHUYEN_TRANG_THAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GD_CHUYEN_TRANG_THAI">
+        <PropertyRef Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GD_CHUYEN_TRANG_THAI_HT_USER">
+    <End Role="HT_USER" Type="BKI_CRMModel.Store.HT_USER" Multiplicity="0..1" />
+    <End Role="GD_CHUYEN_TRANG_THAI" Type="BKI_CRMModel.Store.GD_CHUYEN_TRANG_THAI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HT_USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GD_CHUYEN_TRANG_THAI">
+        <PropertyRef Name="ID_NGUOI_CHUYEN_TRANG_THAI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GD_KHACH_HANG_SU_DUNG_SAN_PHAM_DM_KHACH_HANG">
+    <End Role="DM_KHACH_HANG" Type="BKI_CRMModel.Store.DM_KHACH_HANG" Multiplicity="1" />
+    <End Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Type="BKI_CRMModel.Store.GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_KHACH_HANG">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+        <PropertyRef Name="ID_KHACH_HANG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GD_KHACH_HANG_SU_DUNG_SAN_PHAM_DM_SAN_PHAM">
+    <End Role="DM_SAN_PHAM" Type="BKI_CRMModel.Store.DM_SAN_PHAM" Multiplicity="0..1" />
+    <End Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Type="BKI_CRMModel.Store.GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_SAN_PHAM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+        <PropertyRef Name="ID_SAN_PHAM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GD_NGUOI_QUAN_LY_KHACH_HANG_CM_DM_TU_DIEN">
+    <End Role="CM_DM_TU_DIEN" Type="BKI_CRMModel.Store.CM_DM_TU_DIEN" Multiplicity="0..1" />
+    <End Role="GD_NGUOI_QUAN_LY_KHACH_HANG" Type="BKI_CRMModel.Store.GD_NGUOI_QUAN_LY_KHACH_HANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CM_DM_TU_DIEN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GD_NGUOI_QUAN_LY_KHACH_HANG">
+        <PropertyRef Name="ID_QUYEN_QUAN_LY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GD_NGUOI_QUAN_LY_KHACH_HANG_GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+    <End Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Type="BKI_CRMModel.Store.GD_KHACH_HANG_SU_DUNG_SAN_PHAM" Multiplicity="0..1" />
+    <End Role="GD_NGUOI_QUAN_LY_KHACH_HANG" Type="BKI_CRMModel.Store.GD_NGUOI_QUAN_LY_KHACH_HANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GD_KHACH_HANG_SU_DUNG_SAN_PHAM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GD_NGUOI_QUAN_LY_KHACH_HANG">
+        <PropertyRef Name="ID_KHACH_HANG_SU_DUNG_SAN_PHAM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GD_NGUOI_QUAN_LY_KHACH_HANG_HT_USER">
+    <End Role="HT_USER" Type="BKI_CRMModel.Store.HT_USER" Multiplicity="1" />
+    <End Role="GD_NGUOI_QUAN_LY_KHACH_HANG" Type="BKI_CRMModel.Store.GD_NGUOI_QUAN_LY_KHACH_HANG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HT_USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GD_NGUOI_QUAN_LY_KHACH_HANG">
+        <PropertyRef Name="ID_NGUOI_SU_DUNG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HT_PHAN_QUYEN_CHO_NHOM_HT_PHAN_QUYEN_HE_THONG">
+    <End Role="HT_PHAN_QUYEN_HE_THONG" Type="BKI_CRMModel.Store.HT_PHAN_QUYEN_HE_THONG" Multiplicity="1" />
+    <End Role="HT_PHAN_QUYEN_CHO_NHOM" Type="BKI_CRMModel.Store.HT_PHAN_QUYEN_CHO_NHOM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HT_PHAN_QUYEN_HE_THONG">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HT_PHAN_QUYEN_CHO_NHOM">
+        <PropertyRef Name="ID_PHAN_QUYEN_HE_THONG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HT_PHAN_QUYEN_CHO_NHOM_HT_USER_GROUP">
+    <End Role="HT_USER_GROUP" Type="BKI_CRMModel.Store.HT_USER_GROUP" Multiplicity="1" />
+    <End Role="HT_PHAN_QUYEN_CHO_NHOM" Type="BKI_CRMModel.Store.HT_PHAN_QUYEN_CHO_NHOM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HT_USER_GROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HT_PHAN_QUYEN_CHO_NHOM">
+        <PropertyRef Name="ID_NHOM_NGUOI_SU_DUNG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HT_USER_DM_PHONG_BAN">
+    <End Role="DM_PHONG_BAN" Type="BKI_CRMModel.Store.DM_PHONG_BAN" Multiplicity="0..1" />
+    <End Role="HT_USER" Type="BKI_CRMModel.Store.HT_USER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_PHONG_BAN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HT_USER">
+        <PropertyRef Name="ID_PHONG_BAN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HT_USER_GROUP_DM_CONG_TY">
+    <End Role="DM_CONG_TY" Type="BKI_CRMModel.Store.DM_CONG_TY" Multiplicity="0..1" />
+    <End Role="HT_USER_GROUP" Type="BKI_CRMModel.Store.HT_USER_GROUP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DM_CONG_TY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HT_USER_GROUP">
+        <PropertyRef Name="ID_CONG_TY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HT_USER_HT_USER">
+    <End Role="HT_USER" Type="BKI_CRMModel.Store.HT_USER" Multiplicity="0..1" />
+    <End Role="HT_USER1" Type="BKI_CRMModel.Store.HT_USER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HT_USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HT_USER1">
+        <PropertyRef Name="ID_USER_CAP_TREN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HT_USER_HT_USER_GROUP">
+    <End Role="HT_USER_GROUP" Type="BKI_CRMModel.Store.HT_USER_GROUP" Multiplicity="1" />
+    <End Role="HT_USER" Type="BKI_CRMModel.Store.HT_USER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HT_USER_GROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HT_USER">
+        <PropertyRef Name="ID_USER_GROUP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

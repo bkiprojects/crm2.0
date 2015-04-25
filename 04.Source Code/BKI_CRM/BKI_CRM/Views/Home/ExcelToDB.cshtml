@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "ExcelToDB";
+    Layout = "~/Views/_LayoutCRM.cshtml";
+    var lst_nhan_vien = ViewBag.LstNhanVien as List<BKI_CRM.Models.NhanVienModel>;
+    var lst_column = ViewBag.LstColumn as List<BKI_CRM.Models.ColumnsModel>;
+}
+
+<style>
+    table.dataTable thead th, table.dataTable thead td {
+        padding: 10px 7px;
+        border-bottom: 1px solid #111;
+    }
+
+    table {
+        min-width: 1100px;
+        margin-top: 50px !important;
+    }
+
+    th, td {
+        min-width: 70px;
+    }
+
+    .loai {
+        text-align: center;
+    }
+
+    .selectColumn select {
+        width: 100px;
+    }
+</style>
+
+<table id="myTable" class="dataTable">
+</table>
+<div style="text-align: right; margin: 15px;">
+    <button class="btn btn-primary" id="saveData">Lưu danh sách</button>
+</div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/Home/ExcelToTable',
+            dataType: "json",
+            type: "POST",
+            error: function () {
+                alert("Xay ra loi");
+            },
+            success: function (data) {
+                veHeader(data);
+                veData(data);
+                $('#myTable').dataTable({
+                    "scrollY": "400px",
+                    "ordering": false,
+                    "paging": false,
+                    "info": false,
+                    "bFilter": false
+                });
+                $('#myTable').addClass('table table-bordered');
+
+            }
+        });
+
+        function veHeader(data) {
+            var count_header_cell = data.Headers.length;
+            var htmlheadertable = "<thead><tr>";
+            htmlheadertable += "<th>Loại</th>";
+            for (var i = 0; i < count_header_cell; i++) {
+                htmlheadertable += "<th style='text-align:left'>"+data.Headers[i]+"</th>";
+            }
+            htmlheadertable += "</tr></thead>";
+            $("#myTable").append(htmlheadertable);
+        }
+
+        function veData(data) {
+            var count_header_cell = data.Headers.length;
+            var count_data_row = data.DataRows.length;
+            var htmlbodytable = "<tbody>";
+            for (var i = 0; i < count_data_row; i++) {
+                htmlbodytable += "<tr>";
+                var datarow = data.DataRows[i];
+                htmlbodytable += "<td class='loai'><button class='btn btn-danger' id='"+i+"'>Loại</button></td>";
+                for (var j = 0; j < count_header_cell; j++) {
+                    htmlbodytable += "<td>" + datarow[j] + "</td>";
+                }
+                htmlbodytable += "</tr>";
+            }
+            htmlbodytable += "</tbody>";
+            $("#myTable").append(htmlbodytable);
+        }
+
+        $(document).on("click", ".loai", function (e) {
+            e.preventDefault();
+            $(this).parent("tr").remove();
+        });
+        function guid(){function r(){
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        }
+            return (r() + r() + "-" + r() + "-4" + r().substr(0,3) + "-" + r() + "-" + r() + r() + r()).toLowerCase();
+        }
+        $(document).on("click", "#saveData", function (e) {
+            e.preventDefault();
+
+            var lst_row = $("#myTable tbody tr");
+            var row_count = lst_row.length;
+            if(row_count>0)
+            {
+                var col_count = @lst_column.Count;
+                var query = "insert into DM_KHACH_HANG(ID,";
+                for(var i =1;i<col_count-1;i++)
+                    query+=$('#myTable tr:eq(0) th:eq('+i+') div').html()+',';
+                query+=$('#myTable tr:eq(0) th:eq('+(col_count-1)+') div').html()+') values ';
+                for(var i=0;i<row_count-1;i++){
+                    var t=guid();
+                    query+='('+"'"+t+"'"+',';
+                    for(var j=1;j<col_count-1;j++){
+                        var temp=$('#myTable tr:eq('+(i+1)+') td:eq('+j+')').html();
+                        query+=(temp.length==0||temp=="undefined"?'NULL':"'"+temp+"'")+",";
+                    }
+                    var temp=$('#myTable tr:eq('+(i+1)+') td:eq('+(col_count-1)+')').html();
+                    query+=(temp.length==0||temp=="undefined"?'NULL':"'"+temp+"'")+"),";
+                }
+                var t=guid();
+                query+='('+"'"+t+"'"+',';
+                for(var j=1;j<col_count-1;j++){
+                    var temp=$('#myTable tr:eq('+(row_count-1)+') td:eq('+j+')').html();
+                    query+=(temp.length==0||temp=="undefined"?'NULL':"'"+temp+"'")+",";
+                }
+                var temp=$('#myTable tr:eq('+(row_count-1)+') td:eq('+(col_count-1)+')').html();
+                query+=(temp.length==0||temp=="undefined"?'NULL':"'"+temp+"'")+")";
+                insertKhachHang(query);
+            }
+            else alert("Khong co du lieu");
+        });
+
+        function insertKhachHang(ip_str_query) {
+            $.ajax({
+                url: '/Home/execQueryThemKhachHang',
+                data: {
+                    ip_str_query_insert: ip_str_query
+                },
+                type: "POST",
+                error: function () {
+                    alert("Xay ra loi");
+                },
+                success: function (view) {
+                    alert("Thanh cong");
+                    $('#body').html(view);
+                }
+            });
+        }
+
+    });
+</script>
+
+

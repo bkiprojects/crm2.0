@@ -1,0 +1,182 @@
+﻿@{
+    ViewBag.Title = "thongTinLienHe";
+    var lst_loai_khach_hang = ViewBag.LstLoaiKhachHang as List<BKI_CRM.Model.CM_DM_TU_DIEN>;   
+}
+<style>
+    .width100px {
+        width: 100px;
+    }
+
+    .width220px {
+        width: 220px;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .textali {
+        text-align: center !important;
+    }
+
+    .padding {
+        padding-top: 10px;
+    }
+
+    .btn100 {
+        width: 100px;
+    }
+</style>
+
+<div class="title">
+    <h2> THÔNG TIN LIÊN HỆ</h2>
+</div>
+<div class="container">
+    <table class="table table-condensed table-font-size " style="margin-top:20px;width:100%; ">
+        <tr>
+            <td  rowspan="4">
+                <label class=" padding">Ảnh cá nhân</label>
+            </td>
+            <td rowspan="4">
+                <img src="http://media.ngoisao.vn/resize_580x1100/news/2012/10/6/67/taeheejpg1349493486.jpg" alt="Ảnh" style="width:120px; height:160px;">
+            </td>
+           
+            <td>
+                <label class="width100px ">Nơi ở hiện nay</label>
+            </td>
+            <td>
+                <input type="email" placeholder="Nhập địa chỉ nơi ở hiện nay" class="form-control width220px" />
+            </td>
+        </tr>
+
+        <tr>
+            
+            <td>
+                <label class="width100px left padding">Nơi công tác</label>
+            </td>
+            <td>
+                <input type="email" placeholder="Nhập địa chỉ nơi công tác" class="form-control width220px" />
+            </td>
+
+
+        </tr>
+        <tr>
+            
+            <td >
+                <label class="width100px left padding">Điện thoại</label>
+            </td>
+            <td >
+                <input type="email" placeholder="Nhập số điện thoại" class="form-control width220px" />
+            </td>
+
+
+        </tr>
+
+        <tr>
+           
+            <td>
+                <label class="padding">ĐT nhà riêng</label>
+            </td>
+            <td>
+                <input type="email" placeholder="Nhập số ĐT nhà riêng" class="form-control width220px" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label class="width100px left padding">Họ và tên</label>
+            </td>
+            <td>
+                <input type="email" placeholder="Nhập Họ và tên" class="form-control width220px" />
+            </td>
+            <td></td>
+            <td>
+                <label class="padding">Email</label>
+            </td>
+            <td>
+                <input type="email" placeholder="Nhập địa chỉ Email" class="form-control width220px" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label class="width100px left padding">Mã số thuế</label>
+            </td>
+            <td>
+                <input type="email" placeholder="Nhập Mã số thuế" class="form-control width220px" />
+            </td>
+           
+            <td>
+                <label class="width100px left padding">Facebook</label>
+            </td>
+            <td>
+                <input type="email" placeholder="Nhập địa chỉ Facebook " class="form-control width220px" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label class="width100px left padding">Ngày sinh</label>
+            </td>
+            <td>
+                <input type="date" class="form-control width220px" />
+            </td>
+            
+            <td>
+                <label class="width100px left padding">Skype</label>
+            </td>
+            <td>
+                <input type="email" placeholder="Nhập địa chỉ Skype" class="form-control width220px" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label class="width100px left padding" >Giới tính</label>
+            </td>
+            <td>
+               <select style="width:220px;height:30px;" class="sel">
+                   <option value="1">Nam</option>
+                   <option value="2">Nữ</option>
+               </select>
+            </td>
+
+          
+            <td>
+                <label class="width100px left padding" style="width:103px;">Loại khách hàng</label>
+            </td>
+            <td>
+                <select style="width:220px;height:30px;" class="sel">
+                    @foreach (var item in lst_loai_khach_hang)
+                    {
+                        <option value="@item.ID">@item.TEN_TU_DIEN</option>
+                    }
+                </select>
+
+            </td>
+        </tr>
+
+
+    </table>
+
+    <div style="margin:30px 0px 0px 100px" class="left">
+        <button type="button" class="btn btn-primary btn100" style="margin:-30px 120px 0px 0px;">
+            Thêm mới
+        </button>
+        <button type="button" class="btn btn-success btn100" style="margin: -30px 100px 0px 0px;">
+            Cập nhật
+        </button>
+        <button type="button" class="btn btn-warning btn100" style="margin:-30px 100px 0px 0px;">
+            Xóa trắng
+        </button>
+        <button type="button" class="btn btn-danger btn100" style="margin: -30px 100px 0px 0px;">
+            Trở lại
+        </button>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".sel").select2();
+    });
+</script>

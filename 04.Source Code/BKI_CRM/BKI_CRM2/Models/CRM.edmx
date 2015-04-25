@@ -1,0 +1,1903 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CrmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
+          <Property Name="Sdt01" Type="nchar" MaxLength="15" />
+          <Property Name="Sdt02" Type="nchar" MaxLength="15" />
+          <Property Name="IdAccountType" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdLoaiAccount" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="AccountContactRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAccount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdContact" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Action">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ControllerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ActionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdUserGroup" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenCongTy" Type="nvarchar" MaxLength="200" />
+          <Property Name="SoLuongUser" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ho" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
+          <Property Name="GioiTinh" Type="bit" />
+          <Property Name="Image" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="100" />
+          <Property Name="Skype" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgaySinh" Type="datetime" />
+          <Property Name="Sdt01" Type="nchar" MaxLength="15" />
+          <Property Name="Sdt02" Type="nchar" MaxLength="15" />
+          <Property Name="MaSoThue" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoTaiKhoan" Type="nvarchar" MaxLength="50" />
+          <Property Name="Website" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="HanKhachHang" Type="datetime" />
+          <Property Name="IdLoaiKhachHang" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ContactState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaTrangThai" Type="nchar" MaxLength="15" />
+          <Property Name="TenTrangThai" Type="nvarchar" MaxLength="200" />
+          <Property Name="IdCompany" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ContactStateChange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdContact" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdContactSate" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NgayChuyenTrangThai" Type="datetime" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsValid" Type="bit" />
+          <Property Name="IsDangChamSoc" Type="bit" />
+          <Property Name="IsTrangThaiHienTai" Type="bit" />
+          <Property Name="IdNguoiChuyenTrangThai" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ContactStateProcess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTrangThaiTruoc" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdTrangThaiSau" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayBatDau" Type="datetime" />
+          <Property Name="NgayKetThuc" Type="datetime" />
+          <Property Name="SoHopDong" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+          <Property Name="IdAccount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdLoaiContract" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ContractContactRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdContact" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdContract" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="IsPrimary" Type="bit" />
+          <Property Name="VaiTroContact" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="LoaiTuDien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoaiTuDien" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaLoaiTuDien" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdContract" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdQuote" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdAccount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdLoaiOrder" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="GiaNhap" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="GiaBan" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdLoaiProduct" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAccount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdContract" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="200" />
+          <Property Name="TenBaoGia" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdLoaiQuote" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaiNgay" Type="datetime" />
+          <Property Name="IdUser" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="LamGi" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdAccount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdContact" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdPriority" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdStatus" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdLoaiAction" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ToBeConverted">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdContactState" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TenYeuCau" Type="nvarchar" MaxLength="200" />
+          <Property Name="ThuTuSapXep" Type="int" />
+        </EntityType>
+        <EntityType Name="TuDien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenTuDien" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaTuDien" Type="nchar" MaxLength="15" />
+          <Property Name="IdLoaiTuDien" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUserGroup" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdParentUser" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdCompany" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="HoNhanVien" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenNhanVien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sdt01" Type="nchar" MaxLength="15" />
+          <Property Name="Sdt02" Type="nchar" MaxLength="15" />
+          <Property Name="Image" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IdLoaiUser" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="UserContactRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdContact" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NgayCapQuyen" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Account_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IdLoaiAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountContactRole_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="AccountContactRole" Type="Self.AccountContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountContactRole">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountContactRole_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="AccountContactRole" Type="Self.AccountContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountContactRole">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACTION_UserGroup">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
+          <End Role="Action" Type="Self.Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Action">
+              <PropertyRef Name="IdUserGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactState_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactState">
+              <PropertyRef Name="IdCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateChange_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="ContactStateChange" Type="Self.ContactStateChange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateChange">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateChange_ContactState">
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
+          <End Role="ContactStateChange" Type="Self.ContactStateChange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateChange">
+              <PropertyRef Name="IdContactSate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateChange_ContactStateChange">
+          <End Role="ContactStateChange" Type="Self.ContactStateChange" Multiplicity="1" />
+          <End Role="ContactStateChange1" Type="Self.ContactStateChange" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ContactStateChange">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateChange1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateChange_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ContactStateChange" Type="Self.ContactStateChange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateChange">
+              <PropertyRef Name="IdNguoiChuyenTrangThai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateProcess_ContactState">
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
+          <End Role="ContactStateProcess" Type="Self.ContactStateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateProcess">
+              <PropertyRef Name="IdTrangThaiTruoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateProcess_ContactState1">
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
+          <End Role="ContactStateProcess" Type="Self.ContactStateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateProcess">
+              <PropertyRef Name="IdTrangThaiSau" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IdLoaiContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractContactRole_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="ContractContactRole" Type="Self.ContractContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractContactRole">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractContactRole_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
+          <End Role="ContractContactRole" Type="Self.ContractContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractContactRole">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdLoaiOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IdLoaiProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
+          <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="IdLoaiQuote" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdLoaiAction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_TuDien1">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdPriority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_TuDien2">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToBeConverted_ContactState">
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
+          <End Role="ToBeConverted" Type="Self.ToBeConverted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ToBeConverted">
+              <PropertyRef Name="IdContactState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TuDien_LoaiTuDien">
+          <End Role="LoaiTuDien" Type="Self.LoaiTuDien" Multiplicity="0..1" />
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TuDien">
+              <PropertyRef Name="IdLoaiTuDien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserGroup">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdUserGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContactRole_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="UserContactRole" Type="Self.UserContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserContactRole">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContactRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserContactRole" Type="Self.UserContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserContactRole">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CrmModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountContactRole" EntityType="Self.AccountContactRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactState" EntityType="Self.ContactState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactStateChange" EntityType="Self.ContactStateChange" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactStateProcess" EntityType="Self.ContactStateProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractContactRole" EntityType="Self.ContractContactRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiTuDien" EntityType="Self.LoaiTuDien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quote" EntityType="Self.Quote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ToBeConverted" EntityType="Self.ToBeConverted" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TuDien" EntityType="Self.TuDien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserContactRole" EntityType="Self.UserContactRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_TuDien" Association="Self.FK_Account_TuDien">
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountContactRole_Account" Association="Self.FK_AccountContactRole_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountContactRole" EntitySet="AccountContactRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountContactRole_Contact" Association="Self.FK_AccountContactRole_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="AccountContactRole" EntitySet="AccountContactRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACTION_UserGroup" Association="Self.FK_ACTION_UserGroup">
+            <End Role="UserGroup" EntitySet="UserGroup" />
+            <End Role="Action" EntitySet="Action" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactState_Company" Association="Self.FK_ContactState_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ContactState" EntitySet="ContactState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateChange_Contact" Association="Self.FK_ContactStateChange_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChange" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateChange_ContactState" Association="Self.FK_ContactStateChange_ContactState">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChange" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateChange_ContactStateChange" Association="Self.FK_ContactStateChange_ContactStateChange">
+            <End Role="ContactStateChange" EntitySet="ContactStateChange" />
+            <End Role="ContactStateChange1" EntitySet="ContactStateChange" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateChange_User" Association="Self.FK_ContactStateChange_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChange" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateProcess_ContactState" Association="Self.FK_ContactStateProcess_ContactState">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="ContactStateProcess" EntitySet="ContactStateProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateProcess_ContactState1" Association="Self.FK_ContactStateProcess_ContactState1">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="ContactStateProcess" EntitySet="ContactStateProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Account" Association="Self.FK_Contract_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_TuDien" Association="Self.FK_Contract_TuDien">
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractContactRole_Contact" Association="Self.FK_ContractContactRole_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="ContractContactRole" EntitySet="ContractContactRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractContactRole_Contract" Association="Self.FK_ContractContactRole_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ContractContactRole" EntitySet="ContractContactRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Account" Association="Self.FK_Order_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Contract" Association="Self.FK_Order_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_TuDien" Association="Self.FK_Order_TuDien">
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TuDien" Association="Self.FK_Product_TuDien">
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_Contract" Association="Self.FK_Quote_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Quote" EntitySet="Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_TuDien" Association="Self.FK_Quote_TuDien">
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Quote" EntitySet="Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Account" Association="Self.FK_Task_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Contact" Association="Self.FK_Task_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_TuDien" Association="Self.FK_Task_TuDien">
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_TuDien1" Association="Self.FK_Task_TuDien1">
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_TuDien2" Association="Self.FK_Task_TuDien2">
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User" Association="Self.FK_Task_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToBeConverted_ContactState" Association="Self.FK_ToBeConverted_ContactState">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="ToBeConverted" EntitySet="ToBeConverted" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TuDien_LoaiTuDien" Association="Self.FK_TuDien_LoaiTuDien">
+            <End Role="LoaiTuDien" EntitySet="LoaiTuDien" />
+            <End Role="TuDien" EntitySet="TuDien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserGroup" Association="Self.FK_User_UserGroup">
+            <End Role="UserGroup" EntitySet="UserGroup" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContactRole_Contact" Association="Self.FK_UserContactRole_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="UserContactRole" EntitySet="UserContactRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContactRole_User" Association="Self.FK_UserContactRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContactRole" EntitySet="UserContactRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CrmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sdt01" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Sdt02" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="IdAccountType" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdLoaiAccount" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TuDien" Relationship="Self.FK_Account_TuDien" FromRole="Account" ToRole="TuDien" />
+          <NavigationProperty Name="AccountContactRoles" Relationship="Self.FK_AccountContactRole_Account" FromRole="Account" ToRole="AccountContactRole" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contract_Account" FromRole="Account" ToRole="Contract" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Account" FromRole="Account" ToRole="Order" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Account" FromRole="Account" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="AccountContactRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdContact" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_AccountContactRole_Account" FromRole="AccountContactRole" ToRole="Account" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_AccountContactRole_Contact" FromRole="AccountContactRole" ToRole="Contact" />
+        </EntityType>
+        <EntityType Name="Action">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ControllerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdUserGroup" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="UserGroup" Relationship="Self.FK_ACTION_UserGroup" FromRole="Action" ToRole="UserGroup" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenCongTy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuongUser" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ContactStates" Relationship="Self.FK_ContactState_Company" FromRole="Company" ToRole="ContactState" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <Property Name="Image" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Facebook" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Skype" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+          <Property Name="Sdt01" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Sdt02" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="MaSoThue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoTaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HanKhachHang" Type="DateTime" Precision="3" />
+          <Property Name="IdLoaiKhachHang" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="AccountContactRoles" Relationship="Self.FK_AccountContactRole_Contact" FromRole="Contact" ToRole="AccountContactRole" />
+          <NavigationProperty Name="ContactStateChanges" Relationship="Self.FK_ContactStateChange_Contact" FromRole="Contact" ToRole="ContactStateChange" />
+          <NavigationProperty Name="ContractContactRoles" Relationship="Self.FK_ContractContactRole_Contact" FromRole="Contact" ToRole="ContractContactRole" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Contact" FromRole="Contact" ToRole="Task" />
+          <NavigationProperty Name="UserContactRoles" Relationship="Self.FK_UserContactRole_Contact" FromRole="Contact" ToRole="UserContactRole" />
+        </EntityType>
+        <EntityType Name="ContactState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaTrangThai" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="TenTrangThai" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IdCompany" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MoTa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_ContactState_Company" FromRole="ContactState" ToRole="Company" />
+          <NavigationProperty Name="ContactStateChanges" Relationship="Self.FK_ContactStateChange_ContactState" FromRole="ContactState" ToRole="ContactStateChange" />
+          <NavigationProperty Name="ContactStateProcesses" Relationship="Self.FK_ContactStateProcess_ContactState" FromRole="ContactState" ToRole="ContactStateProcess" />
+          <NavigationProperty Name="ContactStateProcesses1" Relationship="Self.FK_ContactStateProcess_ContactState1" FromRole="ContactState" ToRole="ContactStateProcess" />
+          <NavigationProperty Name="ToBeConverteds" Relationship="Self.FK_ToBeConverted_ContactState" FromRole="ContactState" ToRole="ToBeConverted" />
+        </EntityType>
+        <EntityType Name="ContactStateChange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdContact" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdContactSate" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NgayChuyenTrangThai" Type="DateTime" Precision="3" />
+          <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsValid" Type="Boolean" />
+          <Property Name="IsDangChamSoc" Type="Boolean" />
+          <Property Name="IsTrangThaiHienTai" Type="Boolean" />
+          <Property Name="IdNguoiChuyenTrangThai" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_ContactStateChange_Contact" FromRole="ContactStateChange" ToRole="Contact" />
+          <NavigationProperty Name="ContactState" Relationship="Self.FK_ContactStateChange_ContactState" FromRole="ContactStateChange" ToRole="ContactState" />
+          <NavigationProperty Name="ContactStateChange1" Relationship="Self.FK_ContactStateChange_ContactStateChange" FromRole="ContactStateChange" ToRole="ContactStateChange1" />
+          <NavigationProperty Name="ContactStateChange2" Relationship="Self.FK_ContactStateChange_ContactStateChange" FromRole="ContactStateChange1" ToRole="ContactStateChange" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ContactStateChange_User" FromRole="ContactStateChange" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ContactStateProcess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTrangThaiTruoc" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdTrangThaiSau" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ContactState" Relationship="Self.FK_ContactStateProcess_ContactState" FromRole="ContactStateProcess" ToRole="ContactState" />
+          <NavigationProperty Name="ContactState1" Relationship="Self.FK_ContactStateProcess_ContactState1" FromRole="ContactStateProcess" ToRole="ContactState" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+          <Property Name="SoHopDong" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdLoaiContract" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Contract_Account" FromRole="Contract" ToRole="Account" />
+          <NavigationProperty Name="TuDien" Relationship="Self.FK_Contract_TuDien" FromRole="Contract" ToRole="TuDien" />
+          <NavigationProperty Name="ContractContactRoles" Relationship="Self.FK_ContractContactRole_Contract" FromRole="Contract" ToRole="ContractContactRole" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Contract" FromRole="Contract" ToRole="Order" />
+          <NavigationProperty Name="Quotes" Relationship="Self.FK_Quote_Contract" FromRole="Contract" ToRole="Quote" />
+        </EntityType>
+        <EntityType Name="ContractContactRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdContact" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdContract" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="IsPrimary" Type="Boolean" />
+          <Property Name="VaiTroContact" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_ContractContactRole_Contact" FromRole="ContractContactRole" ToRole="Contact" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_ContractContactRole_Contract" FromRole="ContractContactRole" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="LoaiTuDien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoaiTuDien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaLoaiTuDien" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TuDiens" Relationship="Self.FK_TuDien_LoaiTuDien" FromRole="LoaiTuDien" ToRole="TuDien" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdContract" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdQuote" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdLoaiOrder" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Order_Account" FromRole="Order" ToRole="Account" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Order_Contract" FromRole="Order" ToRole="Contract" />
+          <NavigationProperty Name="TuDien" Relationship="Self.FK_Order_TuDien" FromRole="Order" ToRole="TuDien" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GiaNhap" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GiaBan" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdLoaiProduct" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TuDien" Relationship="Self.FK_Product_TuDien" FromRole="Product" ToRole="TuDien" />
+        </EntityType>
+        <EntityType Name="Quote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdContract" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MoTa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TenBaoGia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdLoaiQuote" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Quote_Contract" FromRole="Quote" ToRole="Contract" />
+          <NavigationProperty Name="TuDien" Relationship="Self.FK_Quote_TuDien" FromRole="Quote" ToRole="TuDien" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaiNgay" Type="DateTime" Precision="3" />
+          <Property Name="IdUser" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="LamGi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdContact" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdPriority" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdStatus" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdLoaiAction" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Task_Account" FromRole="Task" ToRole="Account" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_Task_Contact" FromRole="Task" ToRole="Contact" />
+          <NavigationProperty Name="TuDien" Relationship="Self.FK_Task_TuDien" FromRole="Task" ToRole="TuDien" />
+          <NavigationProperty Name="TuDien1" Relationship="Self.FK_Task_TuDien1" FromRole="Task" ToRole="TuDien" />
+          <NavigationProperty Name="TuDien2" Relationship="Self.FK_Task_TuDien2" FromRole="Task" ToRole="TuDien" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Task_User" FromRole="Task" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ToBeConverted">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdContactState" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TenYeuCau" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ThuTuSapXep" Type="Int32" />
+          <NavigationProperty Name="ContactState" Relationship="Self.FK_ToBeConverted_ContactState" FromRole="ToBeConverted" ToRole="ContactState" />
+        </EntityType>
+        <EntityType Name="TuDien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenTuDien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaTuDien" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="IdLoaiTuDien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_TuDien" FromRole="TuDien" ToRole="Account" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contract_TuDien" FromRole="TuDien" ToRole="Contract" />
+          <NavigationProperty Name="LoaiTuDien" Relationship="Self.FK_TuDien_LoaiTuDien" FromRole="TuDien" ToRole="LoaiTuDien" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_TuDien" FromRole="TuDien" ToRole="Order" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_TuDien" FromRole="TuDien" ToRole="Product" />
+          <NavigationProperty Name="Quotes" Relationship="Self.FK_Quote_TuDien" FromRole="TuDien" ToRole="Quote" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_TuDien" FromRole="TuDien" ToRole="Task" />
+          <NavigationProperty Name="Tasks1" Relationship="Self.FK_Task_TuDien1" FromRole="TuDien" ToRole="Task" />
+          <NavigationProperty Name="Tasks2" Relationship="Self.FK_Task_TuDien2" FromRole="TuDien" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUserGroup" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdParentUser" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdCompany" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="HoNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sdt01" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Sdt02" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IdLoaiUser" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_User_Company" FromRole="User" ToRole="Company" />
+          <NavigationProperty Name="ContactStateChanges" Relationship="Self.FK_ContactStateChange_User" FromRole="User" ToRole="ContactStateChange" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_User" FromRole="User" ToRole="Task" />
+          <NavigationProperty Name="UserGroup" Relationship="Self.FK_User_UserGroup" FromRole="User" ToRole="UserGroup" />
+          <NavigationProperty Name="UserContactRoles" Relationship="Self.FK_UserContactRole_User" FromRole="User" ToRole="UserContactRole" />
+        </EntityType>
+        <EntityType Name="UserContactRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdContact" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NgayCapQuyen" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="GhiChu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_UserContactRole_Contact" FromRole="UserContactRole" ToRole="Contact" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserContactRole_User" FromRole="UserContactRole" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Actions" Relationship="Self.FK_ACTION_UserGroup" FromRole="UserGroup" ToRole="Action" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_UserGroup" FromRole="UserGroup" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Account_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IdLoaiAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountContactRole_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="AccountContactRole" Type="Self.AccountContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountContactRole">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountContactRole_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="AccountContactRole" Type="Self.AccountContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountContactRole">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACTION_UserGroup">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
+          <End Role="Action" Type="Self.Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Action">
+              <PropertyRef Name="IdUserGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactState_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactState">
+              <PropertyRef Name="IdCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateChange_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="ContactStateChange" Type="Self.ContactStateChange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateChange">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractContactRole_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="ContractContactRole" Type="Self.ContractContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractContactRole">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContactRole_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="UserContactRole" Type="Self.UserContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserContactRole">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateChange_ContactState">
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
+          <End Role="ContactStateChange" Type="Self.ContactStateChange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateChange">
+              <PropertyRef Name="IdContactSate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateProcess_ContactState">
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
+          <End Role="ContactStateProcess" Type="Self.ContactStateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateProcess">
+              <PropertyRef Name="IdTrangThaiTruoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateProcess_ContactState1">
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
+          <End Role="ContactStateProcess" Type="Self.ContactStateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateProcess">
+              <PropertyRef Name="IdTrangThaiSau" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToBeConverted_ContactState">
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
+          <End Role="ToBeConverted" Type="Self.ToBeConverted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ToBeConverted">
+              <PropertyRef Name="IdContactState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateChange_ContactStateChange">
+          <End Role="ContactStateChange" Type="Self.ContactStateChange" Multiplicity="1" />
+          <End Role="ContactStateChange1" Type="Self.ContactStateChange" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ContactStateChange">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateChange1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateChange_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ContactStateChange" Type="Self.ContactStateChange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateChange">
+              <PropertyRef Name="IdNguoiChuyenTrangThai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IdLoaiContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractContactRole_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
+          <End Role="ContractContactRole" Type="Self.ContractContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractContactRole">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_Contract">
+          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
+          <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TuDien_LoaiTuDien">
+          <End Role="LoaiTuDien" Type="Self.LoaiTuDien" Multiplicity="0..1" />
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiTuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TuDien">
+              <PropertyRef Name="IdLoaiTuDien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdLoaiOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IdLoaiProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="IdLoaiQuote" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdLoaiAction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_TuDien1">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdPriority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_TuDien2">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserGroup">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdUserGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContactRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserContactRole" Type="Self.UserContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserContactRole">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CrmEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AccountContactRoles" EntityType="Self.AccountContactRole" />
+          <EntitySet Name="Actions" EntityType="Self.Action" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Contacts" EntityType="Self.Contact" />
+          <EntitySet Name="ContactStates" EntityType="Self.ContactState" />
+          <EntitySet Name="ContactStateChanges" EntityType="Self.ContactStateChange" />
+          <EntitySet Name="ContactStateProcesses" EntityType="Self.ContactStateProcess" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="ContractContactRoles" EntityType="Self.ContractContactRole" />
+          <EntitySet Name="LoaiTuDiens" EntityType="Self.LoaiTuDien" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Quotes" EntityType="Self.Quote" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="ToBeConverteds" EntityType="Self.ToBeConverted" />
+          <EntitySet Name="TuDiens" EntityType="Self.TuDien" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserContactRoles" EntityType="Self.UserContactRole" />
+          <EntitySet Name="UserGroups" EntityType="Self.UserGroup" />
+          <AssociationSet Name="FK_Account_TuDien" Association="Self.FK_Account_TuDien">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountContactRole_Account" Association="Self.FK_AccountContactRole_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="AccountContactRole" EntitySet="AccountContactRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Account" Association="Self.FK_Contract_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Account" Association="Self.FK_Order_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Account" Association="Self.FK_Task_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountContactRole_Contact" Association="Self.FK_AccountContactRole_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="AccountContactRole" EntitySet="AccountContactRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACTION_UserGroup" Association="Self.FK_ACTION_UserGroup">
+            <End Role="UserGroup" EntitySet="UserGroups" />
+            <End Role="Action" EntitySet="Actions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactState_Company" Association="Self.FK_ContactState_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ContactState" EntitySet="ContactStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateChange_Contact" Association="Self.FK_ContactStateChange_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractContactRole_Contact" Association="Self.FK_ContractContactRole_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="ContractContactRole" EntitySet="ContractContactRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Contact" Association="Self.FK_Task_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContactRole_Contact" Association="Self.FK_UserContactRole_Contact">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="UserContactRole" EntitySet="UserContactRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateChange_ContactState" Association="Self.FK_ContactStateChange_ContactState">
+            <End Role="ContactState" EntitySet="ContactStates" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateProcess_ContactState" Association="Self.FK_ContactStateProcess_ContactState">
+            <End Role="ContactState" EntitySet="ContactStates" />
+            <End Role="ContactStateProcess" EntitySet="ContactStateProcesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateProcess_ContactState1" Association="Self.FK_ContactStateProcess_ContactState1">
+            <End Role="ContactState" EntitySet="ContactStates" />
+            <End Role="ContactStateProcess" EntitySet="ContactStateProcesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToBeConverted_ContactState" Association="Self.FK_ToBeConverted_ContactState">
+            <End Role="ContactState" EntitySet="ContactStates" />
+            <End Role="ToBeConverted" EntitySet="ToBeConverteds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateChange_ContactStateChange" Association="Self.FK_ContactStateChange_ContactStateChange">
+            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
+            <End Role="ContactStateChange1" EntitySet="ContactStateChanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateChange_User" Association="Self.FK_ContactStateChange_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_TuDien" Association="Self.FK_Contract_TuDien">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractContactRole_Contract" Association="Self.FK_ContractContactRole_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="ContractContactRole" EntitySet="ContractContactRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Contract" Association="Self.FK_Order_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_Contract" Association="Self.FK_Quote_Contract">
+            <End Role="Contract" EntitySet="Contracts" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TuDien_LoaiTuDien" Association="Self.FK_TuDien_LoaiTuDien">
+            <End Role="LoaiTuDien" EntitySet="LoaiTuDiens" />
+            <End Role="TuDien" EntitySet="TuDiens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_TuDien" Association="Self.FK_Order_TuDien">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TuDien" Association="Self.FK_Product_TuDien">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_TuDien" Association="Self.FK_Quote_TuDien">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_TuDien" Association="Self.FK_Task_TuDien">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_TuDien1" Association="Self.FK_Task_TuDien1">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_TuDien2" Association="Self.FK_Task_TuDien2">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User" Association="Self.FK_Task_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserGroup" Association="Self.FK_User_UserGroup">
+            <End Role="UserGroup" EntitySet="UserGroups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContactRole_User" Association="Self.FK_UserContactRole_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserContactRole" EntitySet="UserContactRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CrmModelStoreContainer" CdmEntityContainer="CrmEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="CrmModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Sdt01" ColumnName="Sdt01" />
+                <ScalarProperty Name="Sdt02" ColumnName="Sdt02" />
+                <ScalarProperty Name="IdAccountType" ColumnName="IdAccountType" />
+                <ScalarProperty Name="IdLoaiAccount" ColumnName="IdLoaiAccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountContactRoles">
+            <EntityTypeMapping TypeName="CrmModel.AccountContactRole">
+              <MappingFragment StoreEntitySet="AccountContactRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Actions">
+            <EntityTypeMapping TypeName="CrmModel.Action">
+              <MappingFragment StoreEntitySet="Action">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="IdUserGroup" ColumnName="IdUserGroup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="CrmModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+                <ScalarProperty Name="SoLuongUser" ColumnName="SoLuongUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="CrmModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ho" ColumnName="Ho" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Skype" ColumnName="Skype" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Sdt01" ColumnName="Sdt01" />
+                <ScalarProperty Name="Sdt02" ColumnName="Sdt02" />
+                <ScalarProperty Name="MaSoThue" ColumnName="MaSoThue" />
+                <ScalarProperty Name="SoTaiKhoan" ColumnName="SoTaiKhoan" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HanKhachHang" ColumnName="HanKhachHang" />
+                <ScalarProperty Name="IdLoaiKhachHang" ColumnName="IdLoaiKhachHang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactStates">
+            <EntityTypeMapping TypeName="CrmModel.ContactState">
+              <MappingFragment StoreEntitySet="ContactState">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+                <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
+                <ScalarProperty Name="IdCompany" ColumnName="IdCompany" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactStateChanges">
+            <EntityTypeMapping TypeName="CrmModel.ContactStateChange">
+              <MappingFragment StoreEntitySet="ContactStateChange">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+                <ScalarProperty Name="IdContactSate" ColumnName="IdContactSate" />
+                <ScalarProperty Name="NgayChuyenTrangThai" ColumnName="NgayChuyenTrangThai" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="IsDangChamSoc" ColumnName="IsDangChamSoc" />
+                <ScalarProperty Name="IsTrangThaiHienTai" ColumnName="IsTrangThaiHienTai" />
+                <ScalarProperty Name="IdNguoiChuyenTrangThai" ColumnName="IdNguoiChuyenTrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactStateProcesses">
+            <EntityTypeMapping TypeName="CrmModel.ContactStateProcess">
+              <MappingFragment StoreEntitySet="ContactStateProcess">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdTrangThaiTruoc" ColumnName="IdTrangThaiTruoc" />
+                <ScalarProperty Name="IdTrangThaiSau" ColumnName="IdTrangThaiSau" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="CrmModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="SoHopDong" ColumnName="SoHopDong" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="IdLoaiContract" ColumnName="IdLoaiContract" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractContactRoles">
+            <EntityTypeMapping TypeName="CrmModel.ContractContactRole">
+              <MappingFragment StoreEntitySet="ContractContactRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+                <ScalarProperty Name="IdContract" ColumnName="IdContract" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+                <ScalarProperty Name="VaiTroContact" ColumnName="VaiTroContact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiTuDiens">
+            <EntityTypeMapping TypeName="CrmModel.LoaiTuDien">
+              <MappingFragment StoreEntitySet="LoaiTuDien">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenLoaiTuDien" ColumnName="TenLoaiTuDien" />
+                <ScalarProperty Name="MaLoaiTuDien" ColumnName="MaLoaiTuDien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="CrmModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdContract" ColumnName="IdContract" />
+                <ScalarProperty Name="IdQuote" ColumnName="IdQuote" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="IdLoaiOrder" ColumnName="IdLoaiOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="CrmModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
+                <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+                <ScalarProperty Name="IdLoaiProduct" ColumnName="IdLoaiProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quotes">
+            <EntityTypeMapping TypeName="CrmModel.Quote">
+              <MappingFragment StoreEntitySet="Quote">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="IdContract" ColumnName="IdContract" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="TenBaoGia" ColumnName="TenBaoGia" />
+                <ScalarProperty Name="IdLoaiQuote" ColumnName="IdLoaiQuote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="CrmModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TaiNgay" ColumnName="TaiNgay" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="LamGi" ColumnName="LamGi" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+                <ScalarProperty Name="IdPriority" ColumnName="IdPriority" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdLoaiAction" ColumnName="IdLoaiAction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToBeConverteds">
+            <EntityTypeMapping TypeName="CrmModel.ToBeConverted">
+              <MappingFragment StoreEntitySet="ToBeConverted">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdContactState" ColumnName="IdContactState" />
+                <ScalarProperty Name="TenYeuCau" ColumnName="TenYeuCau" />
+                <ScalarProperty Name="ThuTuSapXep" ColumnName="ThuTuSapXep" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TuDiens">
+            <EntityTypeMapping TypeName="CrmModel.TuDien">
+              <MappingFragment StoreEntitySet="TuDien">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenTuDien" ColumnName="TenTuDien" />
+                <ScalarProperty Name="MaTuDien" ColumnName="MaTuDien" />
+                <ScalarProperty Name="IdLoaiTuDien" ColumnName="IdLoaiTuDien" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CrmModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUserGroup" ColumnName="IdUserGroup" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdParentUser" ColumnName="IdParentUser" />
+                <ScalarProperty Name="IdCompany" ColumnName="IdCompany" />
+                <ScalarProperty Name="HoNhanVien" ColumnName="HoNhanVien" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="Sdt01" ColumnName="Sdt01" />
+                <ScalarProperty Name="Sdt02" ColumnName="Sdt02" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IdLoaiUser" ColumnName="IdLoaiUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserContactRoles">
+            <EntityTypeMapping TypeName="CrmModel.UserContactRole">
+              <MappingFragment StoreEntitySet="UserContactRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+                <ScalarProperty Name="NgayCapQuyen" ColumnName="NgayCapQuyen" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroups">
+            <EntityTypeMapping TypeName="CrmModel.UserGroup">
+              <MappingFragment StoreEntitySet="UserGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

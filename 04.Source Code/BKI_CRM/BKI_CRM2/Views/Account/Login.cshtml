@@ -1,0 +1,44 @@
+﻿@model BKI_CRM2.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<link rel="icon" href="~/Content/image/favicon.ico">
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Styles/signin.css" rel="stylesheet" />
+<script src="~/Scripts/ie-emulation-modes-warning.js"></script>
+<hgroup class="title">
+    
+</hgroup>
+
+<section id="loginForm">
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin", @role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Đăng nhập</legend>
+        <ul>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder="User Name"})
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "inputPassword", @type = "password", placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.CheckBoxFor(m => m.RememberMe)Remember me
+            </li>
+        </ul>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Đăng nhập</button>
+    </fieldset>
+    <p>
+        @Html.ActionLink("Tạo tài khoản mới.", "Register") 
+    </p>
+}
+</section>

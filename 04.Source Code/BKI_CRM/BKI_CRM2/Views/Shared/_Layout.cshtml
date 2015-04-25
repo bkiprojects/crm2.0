@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <link href="~/Styles/styles.css" rel="stylesheet" />
+    <link href="~/Styles/select2.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Styles/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/select2.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#home,#cttkh').click(function () {
+                $.ajax({
+                    url: "/Home/Index2",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
+
+            $('#dmkh').click(function () {
+                $.ajax({
+                    url: "/Home/DMKhachHang",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
+
+            $('#dntt').click(function () {
+                $.ajax({
+                    url: "/Home/DinhNghiaTrangThai",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
+            $('#bc').click(function () {
+                $.ajax({
+                    url: "/Home/importExcel",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
+            $('#khinfo').click(function () {
+                $.ajax({
+                    url: "/Home/thongTinLienHe",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="main">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#" id="home">TRANG CHỦ</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">KHÁCH HÀNG<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" id="cttkh">Chuyển trạng thái khách hàng</a></li>
+                                <li><a href="#" id="dmkh">Danh mục khách hàng</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">TRẠNG THÁI<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" id="dntt">Định nghĩa trạng thái</a></li>
+                                <li><a href="#" id="sdctt">Sơ đồ chuyển trạng thái</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">TIỆN ÍCH<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" id="ge">Gửi Email</a></li>
+                                <li><a href="#" id="tksnkh">Thống kê sinh nhật khách hàng</a></li>
+                                <li><a href="#" id="gs">Gửi SMS</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">BÁO CÁO<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" id="level">Báo cáo trạng thái khách hàng</a></li>
+                                <li><a href="#" id="history">Lịch sử hoạt động của nhân viên</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HỆ THỐNG<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Phân quyền người dùng</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ADMIN<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" id="bc">Import Excel</a></li>
+                                <li><a href="#">Phân contact cho nhân viên</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">@Session["DisplayName"]</a></li>
+                        <li><button type="button" class="btn btn-danger navbar-btn">Đăng xuất</button></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="body" style="min-height:80%">
+            @RenderBody()
+        </div>
+        <div class="footer">
+            <b>BKINDEX GROUP</b><br />
+            Địa chỉ: 7b/36 Lương Đình Của
+        </div>
+    </div>
+</body>
+</html>

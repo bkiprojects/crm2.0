@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "importExcel";
+}
+<script src="~/Scripts/OpenXMLExcelAppScript.js"></script>
+@using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ 
+    <div style="margin: 10px">
+        <p>
+            <button type="submit" id="btnSubmit">Submit</button>
+            <input type="file" name="excelFile"/>
+        </p>
+    </div>
+}
