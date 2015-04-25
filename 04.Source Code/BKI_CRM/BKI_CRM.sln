@@ -1,11 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BKI_CRM", "BKI_CRM\BKI_CRM.csproj", "{5BC205F5-94AD-4131-A30C-D3C0FD872B42}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLExcelUtility", "..\SLExcelUtility\SLExcelUtility.csproj", "{93E7096F-4DA6-45AD-B680-7BC3E26A6B7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BKI_CRM2", "BKI_CRM2\BKI_CRM2.csproj", "{FF7DB214-0D9A-4611-B105-94ED5A7E180D}"
 EndProject
@@ -19,10 +15,6 @@ Global
 		{5BC205F5-94AD-4131-A30C-D3C0FD872B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BC205F5-94AD-4131-A30C-D3C0FD872B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BC205F5-94AD-4131-A30C-D3C0FD872B42}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93E7096F-4DA6-45AD-B680-7BC3E26A6B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93E7096F-4DA6-45AD-B680-7BC3E26A6B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93E7096F-4DA6-45AD-B680-7BC3E26A6B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93E7096F-4DA6-45AD-B680-7BC3E26A6B7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF7DB214-0D9A-4611-B105-94ED5A7E180D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF7DB214-0D9A-4611-B105-94ED5A7E180D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF7DB214-0D9A-4611-B105-94ED5A7E180D}.Release|Any CPU.ActiveCfg = Release|Any CPU
