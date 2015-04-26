@@ -797,10 +797,10 @@
           <Property Name="IdAccountType" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdLoaiAccount" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="TuDien" Relationship="Self.FK_Account_TuDien" FromRole="Account" ToRole="TuDien" />
-          <NavigationProperty Name="AccountContactRoles" Relationship="Self.FK_AccountContactRole_Account" FromRole="Account" ToRole="AccountContactRole" />
-          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contract_Account" FromRole="Account" ToRole="Contract" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Account" FromRole="Account" ToRole="Order" />
-          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Account" FromRole="Account" ToRole="Task" />
+          <NavigationProperty Name="AccountContactRole" Relationship="Self.FK_AccountContactRole_Account" FromRole="Account" ToRole="AccountContactRole" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Account" FromRole="Account" ToRole="Contract" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Account" FromRole="Account" ToRole="Order" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Task_Account" FromRole="Account" ToRole="Task" />
         </EntityType>
         <EntityType Name="AccountContactRole">
           <Key>
@@ -830,8 +830,8 @@
           <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenCongTy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="SoLuongUser" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="ContactStates" Relationship="Self.FK_ContactState_Company" FromRole="Company" ToRole="ContactState" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
+          <NavigationProperty Name="ContactState" Relationship="Self.FK_ContactState_Company" FromRole="Company" ToRole="ContactState" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -854,11 +854,11 @@
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HanKhachHang" Type="DateTime" Precision="3" />
           <Property Name="IdLoaiKhachHang" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="AccountContactRoles" Relationship="Self.FK_AccountContactRole_Contact" FromRole="Contact" ToRole="AccountContactRole" />
-          <NavigationProperty Name="ContactStateChanges" Relationship="Self.FK_ContactStateChange_Contact" FromRole="Contact" ToRole="ContactStateChange" />
-          <NavigationProperty Name="ContractContactRoles" Relationship="Self.FK_ContractContactRole_Contact" FromRole="Contact" ToRole="ContractContactRole" />
-          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Contact" FromRole="Contact" ToRole="Task" />
-          <NavigationProperty Name="UserContactRoles" Relationship="Self.FK_UserContactRole_Contact" FromRole="Contact" ToRole="UserContactRole" />
+          <NavigationProperty Name="AccountContactRole" Relationship="Self.FK_AccountContactRole_Contact" FromRole="Contact" ToRole="AccountContactRole" />
+          <NavigationProperty Name="ContactStateChange" Relationship="Self.FK_ContactStateChange_Contact" FromRole="Contact" ToRole="ContactStateChange" />
+          <NavigationProperty Name="ContractContactRole" Relationship="Self.FK_ContractContactRole_Contact" FromRole="Contact" ToRole="ContractContactRole" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Task_Contact" FromRole="Contact" ToRole="Task" />
+          <NavigationProperty Name="UserContactRole" Relationship="Self.FK_UserContactRole_Contact" FromRole="Contact" ToRole="UserContactRole" />
         </EntityType>
         <EntityType Name="ContactState">
           <Key>
@@ -870,10 +870,10 @@
           <Property Name="IdCompany" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="MoTa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Company" Relationship="Self.FK_ContactState_Company" FromRole="ContactState" ToRole="Company" />
-          <NavigationProperty Name="ContactStateChanges" Relationship="Self.FK_ContactStateChange_ContactState" FromRole="ContactState" ToRole="ContactStateChange" />
-          <NavigationProperty Name="ContactStateProcesses" Relationship="Self.FK_ContactStateProcess_ContactState" FromRole="ContactState" ToRole="ContactStateProcess" />
-          <NavigationProperty Name="ContactStateProcesses1" Relationship="Self.FK_ContactStateProcess_ContactState1" FromRole="ContactState" ToRole="ContactStateProcess" />
-          <NavigationProperty Name="ToBeConverteds" Relationship="Self.FK_ToBeConverted_ContactState" FromRole="ContactState" ToRole="ToBeConverted" />
+          <NavigationProperty Name="ContactStateChange" Relationship="Self.FK_ContactStateChange_ContactState" FromRole="ContactState" ToRole="ContactStateChange" />
+          <NavigationProperty Name="ContactStateProcess" Relationship="Self.FK_ContactStateProcess_ContactState" FromRole="ContactState" ToRole="ContactStateProcess" />
+          <NavigationProperty Name="ContactStateProcess1" Relationship="Self.FK_ContactStateProcess_ContactState1" FromRole="ContactState" ToRole="ContactStateProcess" />
+          <NavigationProperty Name="ToBeConverted" Relationship="Self.FK_ToBeConverted_ContactState" FromRole="ContactState" ToRole="ToBeConverted" />
         </EntityType>
         <EntityType Name="ContactStateChange">
           <Key>
@@ -918,9 +918,9 @@
           <Property Name="IdLoaiContract" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Account" Relationship="Self.FK_Contract_Account" FromRole="Contract" ToRole="Account" />
           <NavigationProperty Name="TuDien" Relationship="Self.FK_Contract_TuDien" FromRole="Contract" ToRole="TuDien" />
-          <NavigationProperty Name="ContractContactRoles" Relationship="Self.FK_ContractContactRole_Contract" FromRole="Contract" ToRole="ContractContactRole" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Contract" FromRole="Contract" ToRole="Order" />
-          <NavigationProperty Name="Quotes" Relationship="Self.FK_Quote_Contract" FromRole="Contract" ToRole="Quote" />
+          <NavigationProperty Name="ContractContactRole" Relationship="Self.FK_ContractContactRole_Contract" FromRole="Contract" ToRole="ContractContactRole" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Contract" FromRole="Contract" ToRole="Order" />
+          <NavigationProperty Name="Quote" Relationship="Self.FK_Quote_Contract" FromRole="Contract" ToRole="Quote" />
         </EntityType>
         <EntityType Name="ContractContactRole">
           <Key>
@@ -942,7 +942,7 @@
           <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenLoaiTuDien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MaLoaiTuDien" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="TuDiens" Relationship="Self.FK_TuDien_LoaiTuDien" FromRole="LoaiTuDien" ToRole="TuDien" />
+          <NavigationProperty Name="TuDien" Relationship="Self.FK_TuDien_LoaiTuDien" FromRole="LoaiTuDien" ToRole="TuDien" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -1020,15 +1020,15 @@
           <Property Name="MaTuDien" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="IdLoaiTuDien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_TuDien" FromRole="TuDien" ToRole="Account" />
-          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contract_TuDien" FromRole="TuDien" ToRole="Contract" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Account_TuDien" FromRole="TuDien" ToRole="Account" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_TuDien" FromRole="TuDien" ToRole="Contract" />
           <NavigationProperty Name="LoaiTuDien" Relationship="Self.FK_TuDien_LoaiTuDien" FromRole="TuDien" ToRole="LoaiTuDien" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_TuDien" FromRole="TuDien" ToRole="Order" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Product_TuDien" FromRole="TuDien" ToRole="Product" />
-          <NavigationProperty Name="Quotes" Relationship="Self.FK_Quote_TuDien" FromRole="TuDien" ToRole="Quote" />
-          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_TuDien" FromRole="TuDien" ToRole="Task" />
-          <NavigationProperty Name="Tasks1" Relationship="Self.FK_Task_TuDien1" FromRole="TuDien" ToRole="Task" />
-          <NavigationProperty Name="Tasks2" Relationship="Self.FK_Task_TuDien2" FromRole="TuDien" ToRole="Task" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_TuDien" FromRole="TuDien" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_TuDien" FromRole="TuDien" ToRole="Product" />
+          <NavigationProperty Name="Quote" Relationship="Self.FK_Quote_TuDien" FromRole="TuDien" ToRole="Quote" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Task_TuDien" FromRole="TuDien" ToRole="Task" />
+          <NavigationProperty Name="Task1" Relationship="Self.FK_Task_TuDien1" FromRole="TuDien" ToRole="Task" />
+          <NavigationProperty Name="Task2" Relationship="Self.FK_Task_TuDien2" FromRole="TuDien" ToRole="Task" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1049,10 +1049,10 @@
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IdLoaiUser" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Company" Relationship="Self.FK_User_Company" FromRole="User" ToRole="Company" />
-          <NavigationProperty Name="ContactStateChanges" Relationship="Self.FK_ContactStateChange_User" FromRole="User" ToRole="ContactStateChange" />
-          <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_User" FromRole="User" ToRole="Task" />
+          <NavigationProperty Name="ContactStateChange" Relationship="Self.FK_ContactStateChange_User" FromRole="User" ToRole="ContactStateChange" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Task_User" FromRole="User" ToRole="Task" />
           <NavigationProperty Name="UserGroup" Relationship="Self.FK_User_UserGroup" FromRole="User" ToRole="UserGroup" />
-          <NavigationProperty Name="UserContactRoles" Relationship="Self.FK_UserContactRole_User" FromRole="User" ToRole="UserContactRole" />
+          <NavigationProperty Name="UserContactRole" Relationship="Self.FK_UserContactRole_User" FromRole="User" ToRole="UserContactRole" />
         </EntityType>
         <EntityType Name="UserContactRole">
           <Key>
@@ -1073,8 +1073,8 @@
           </Key>
           <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Actions" Relationship="Self.FK_ACTION_UserGroup" FromRole="UserGroup" ToRole="Action" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_UserGroup" FromRole="UserGroup" ToRole="User" />
+          <NavigationProperty Name="Action" Relationship="Self.FK_ACTION_UserGroup" FromRole="UserGroup" ToRole="Action" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_UserGroup" FromRole="UserGroup" ToRole="User" />
         </EntityType>
         <Association Name="FK_Account_TuDien">
           <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />

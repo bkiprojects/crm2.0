@@ -1,45 +1,334 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "DMKhachHang";
+    ViewBag.Title = "thongTinLienHe";
+    var dm_khach_hang = ViewBag.v_dm_kh as List<BKI_CRM2.Models.Contact>;
+    var tu_dien = ViewBag.v_tu_dien as List<BKI_CRM2.Models.TuDien>;
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
-        </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
+<style>
+    .mau {
+        width: 100px;
+    }
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
+    .marginleft {
+        margin-left: 200px;
+    }
 
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+    .width220px {
+        width: 220px;
+    }
+
+    .height_input {
+        height: 34px !important;
+    }
+</style>
+<div class="title">
+    <h2>DANH MỤC KHÁCH HÀNG</h2>
+</div>
+<div style="margin: 20px 0px 30px 0px;">
+    <select id="thuc_hien" style="margin-left:100px;">
+        <option></option>
+        <option value="xuat_excel">Xuất Excel</option>
+        <option value="in">In</option>
+    </select>
+    <button type="button" class="btn btn-primary marginleft" aria-hidden="true" onclick="sua(guid());">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm khách hàng
+    </button>
+    <select id="loc_khach_hang" style="float:right;margin-right:100px;">
+        <option></option>
+        @if (tu_dien != null)
+        {
+            foreach (var item in tu_dien)
+            {
+                <option value="@item.Id">@item.TenTuDien</option>
+            }
+        }
+    </select>
+</div>
+<div style="margin-bottom:50px;">
+    <table id="example" class="display">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Họ và đệm</th>
+                <th>Tên</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (dm_khach_hang != null)
+            {
+                foreach (var item in dm_khach_hang)
+                {
+                    <tr id="@item.Id">
+                        <td class="c"><input type="checkbox" /></td>
+                        <td class="ho">@item.Ho</td>
+                        <td class="ten">@item.Ten</td>
+                        <td class="sdt">@item.Sdt01</td>
+                        <td class="email">@item.Email</td>
+                        <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                        <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="thay_doi">
+    <div class="modal-dialog modal-lg" id="thongtinlienhe">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title title">THÔNG TIN LIÊN HỆ</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; ">
+                        <tr>
+                            <td rowspan="4">
+                                <label class=" padding">Ảnh cá nhân</label>
+                            </td>
+                            <td rowspan="4">
+                                <img src="http://media.ngoisao.vn/resize_580x1100/news/2012/10/6/67/taeheejpg1349493486.jpg" alt="Ảnh" style="width:120px; height:160px;" id="anh">
+                            </td>
+                            <td>
+                                <label class="width100px ">Nơi ở hiện nay</label>
+                            </td>
+                            <td>
+                                <input type="email" placeholder="Nhập địa chỉ nơi ở hiện nay" class="form-control width220px height_input " style="height:34px !important;" id="diachi" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="width100px left padding">Nơi công tác</label>
+                            </td>
+                            <td>
+                                <input type="email" placeholder="Nhập địa chỉ nơi công tác" class="form-control width220px height_input " style="height:34px !important;" id="noict" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="width100px left padding">Điện thoại</label>
+                            </td>
+                            <td>
+                                <input type="tel" placeholder="Nhập số điện thoại" class="form-control width220px height_input " style="height:34px !important;" id="sdt" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="padding">ĐT nhà riêng</label>
+                            </td>
+                            <td>
+                                <input type="tel" placeholder="Nhập số ĐT nhà riêng" class="form-control width220px height_input " style="height:34px !important;" id="sdt2" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="width100px left padding">Họ và tên</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Họ và tên" class="form-control width220px height_input " style="height:34px !important;" id="hoten" />
+                            </td>
+                            <td>
+                                <label class="padding">Email</label>
+                            </td>
+                            <td>
+                                <input type="email" placeholder="Nhập địa chỉ Email" class="form-control width220px height_input " style="height:34px !important;" id="email" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="width100px left padding">Mã số thuế</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Mã số thuế" class="form-control width220px height_input " style="height:34px !important;" id="masothue" />
+                            </td>
+                            <td>
+                                <label class="width100px left padding">Facebook</label>
+                            </td>
+                            <td>
+                                <input type="email" placeholder="Nhập địa chỉ Facebook " class="form-control width220px height_input " style="height:34px !important;" id="fb" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="width100px left padding">Ngày sinh</label>
+                            </td>
+                            <td>
+                                <input type="date" class="form-control width220px" style="height:34px !important;" id="ngaysinh" />
+                            </td>
+                            <td>
+                                <label class="width100px left padding ">Skype</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập địa chỉ Skype" class="form-control width220px height_input " id="skype" style="height:34px !important;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="width100px ">Giới tính</label>
+                            </td>
+                            <td>
+                                <select id="gioi_tinh" class="js-example-basic-single ">
+                                    <option></option>
+                                    <option value="nam">Nam</option>
+                                    <option value="nu">Nữ</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label class="width100px left padding" style="width:103px;" id="loaikh">Loại khách hàng</label>
+                            </td>
+                            <td>
+                                <select id="loai_khach_hang" class="js-example-basic-single ">
+                                    <option></option>
+                                    @if (tu_dien != null)
+                                    {
+                                        foreach (var item in tu_dien)
+                                        {
+                                            <option value="@item.Id">@item.TenTuDien</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" id="clear">Xóa trắng</button>
+                <button type="button" class="btn btn-primary" onclick="thuchiensua($('#thay_doi').attr('name'));">Lưu lại</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="xoa">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">THÔNG BÁO</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa dòng dữ liệu này không?</p>
+                <div id="giatri" style="display:none;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="xoa($('#giatri').html())">Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    $(document).ready(function () {
+        $('#clear').click(function () {
+            clear();
+        });
+        $('#thay_doi').on('hidden.bs.modal', function () {
+            clear();
+        });
+        $("#thuc_hien").select2({
+            placeholder: "Thực hiện",
+            allowClear: true
+        });
+        $("#loc_khach_hang").select2({
+            placeholder: "Lọc khách hàng",
+            allowClear: true
+        });
+
+        $("#gioi_tinh").select2({
+            placeholder: "Chọn giới tính",
+            allowClear: true
+        });
+
+        $("#loai_khach_hang").select2({
+            placeholder: "Chọn loại khách hàng",
+            allowClear: true
+        });
+
+        $('#example').dataTable();
+    });
+    function guid() {
+        function r() {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        }
+        return (r() + r() + "-" + r() + "-4" + r().substr(0, 3) + "-" + r() + "-" + r() + r() + r()).toLowerCase();
+    }
+    function thuchiensua(id_kh) {
+        var TEN_KHACH_HANG = hoten.value;
+        var MA_SO_THUE = masothue.value;
+        var ID_LOAI_KHACH_HANG = loai_khach_hang.value;
+        var SDT = sdt.value;
+        var SDT_2 = sdt2;
+        var EMAIL = email.value;
+        var DIA_CHI = diachi;
+        var HAN_KHACH_HANG = Date.now.toString();
+        var GIOI_TINH = gioi_tinh.value;
+    }
+    function clear() {
+        $('#thongtinlienhe').find('input').val('');
+        $('#loai_khach_hang,#gioi_tinh').select2('data', null);
+        $('#thuc_hien').select2({
+            placeholder: 'Thực hiện',
+            allowClear: true
+        });
+        $('#loc_khach_hang').select2({
+            placeholder: 'Lọc khách hàng',
+            allowClear: true
+        });
+    }
+    function sua(id_kh) {
+        $('#thay_doi').attr('name', id_kh);
+        $.ajax({
+            url: "/Home/LayThongTinLienHe",
+            type: "GET",
+            data: { id_kh: id_kh },
+            error: function () {
+                alert('Thấy thông tin người dùng thất bại!');
+            },
+            success: function (get) {
+                var data = get.dat;
+                var date = get.bday;
+                if (data[0] == undefined) { $('#thay_doi').modal('show'); return; }
+                hoten.value = data[0].Ho + ' ' + data[0].Ten;
+                email.value = data[0].Email;
+                sdt.value = data[0].Sdt01;
+                sdt2.value = data[0].Sdt02;
+                diachi.value = data[0].DiaChi;
+                noict.value = data[0].NOI_CONG_TAC;
+                masothue.value = data[0].MaSoThue;
+                fb.value = data[0].Facebook;
+                skype.value = data[0].Skype;
+                gioi_tinh.value = data[0].GioiTinh ? "nam" : "nu";
+                ngaysinh.value = date;
+                anh.src = data[0].Image;
+                $('#thay_doi').modal('show');
+            }
+        });
+    }
+    function xoa(id_kh) {
+        $.ajax({
+            url: "/Home/XoaThongTinLienHe",
+            type: "POST",
+            data: { id_kh: id_kh },
+            dataType: "json",
+            error: function () {
+                alert("Xóa thất bại!");
+                $('#xoa').modal('hide');
+            },
+            success: function (data) {
+                alert('Xóa thành công!');
+                $('#' + id_kh).remove();
+                $('#xoa').modal('hide');
+            }
+        });
+    }
+    function hienxoa(id_kh) {
+        giatri.innerHTML = id_kh;
+        $('#xoa').modal('show');
+    }
+
+</script>
