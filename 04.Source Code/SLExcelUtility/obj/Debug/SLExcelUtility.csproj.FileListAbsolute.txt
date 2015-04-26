@@ -13,3 +13,9 @@ D:\BKI CRM\04.Source Code\SLExcelUtility\bin\Debug\SLExcelUtility.pdb
 D:\BKI CRM\04.Source Code\SLExcelUtility\bin\Debug\DocumentFormat.OpenXml.dll
 D:\BKI CRM\04.Source Code\SLExcelUtility\obj\Debug\SLExcelUtility.dll
 D:\BKI CRM\04.Source Code\SLExcelUtility\obj\Debug\SLExcelUtility.pdb
+D:\CRM\trunk\04.Source Code\SLExcelUtility\bin\Debug\SLExcelUtility.dll
+D:\CRM\trunk\04.Source Code\SLExcelUtility\bin\Debug\SLExcelUtility.pdb
+D:\CRM\trunk\04.Source Code\SLExcelUtility\bin\Debug\DocumentFormat.OpenXml.dll
+D:\CRM\trunk\04.Source Code\SLExcelUtility\obj\Debug\SLExcelUtility.csprojResolveAssemblyReference.cache
+D:\CRM\trunk\04.Source Code\SLExcelUtility\obj\Debug\SLExcelUtility.dll
+D:\CRM\trunk\04.Source Code\SLExcelUtility\obj\Debug\SLExcelUtility.pdb
