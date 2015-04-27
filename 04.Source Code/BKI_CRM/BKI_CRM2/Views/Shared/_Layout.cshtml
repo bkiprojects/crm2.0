@@ -17,19 +17,9 @@
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#home,#cttkh').click(function () {
+            $('#home,#dmkh').click(function () {
                 $.ajax({
-                    url: "/Home/Index2",
-                    type: "Get",
-                    success: function (view) {
-                        $('#body').html(view);
-                    }
-                });
-            });
-
-            $('#dmkh').click(function () {
-                $.ajax({
-                    url: "/Home/DMKhachHang",
+                    url: "/Contact/Index",
                     type: "Get",
                     success: function (view) {
                         $('#body').html(view);
