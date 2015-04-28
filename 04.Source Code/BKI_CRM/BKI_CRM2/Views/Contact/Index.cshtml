@@ -334,7 +334,7 @@
         $.ajax({
             url: "/Contact/Select",
             type: "GET",
-            data: { id_kh: id_kh },
+            data: { IdContact: id_kh },
             error: function () {
                 alert('Thấy thông tin người dùng thất bại!');
             },
@@ -343,7 +343,7 @@
                 if (data != undefined) {
                     var date = get.bday;
                     var hkh = get.hankh;
-                    if (data[0] == undefined) { $('#thay_doi').modal('show'); return; }
+                    if (data == undefined) { $('#thay_doi').modal('show'); return; }
                     hoten.value = data.Ho + ' ' + data.Ten;
                     email.value = data.Email;
                     sdt.value = data.Sdt01;

@@ -37,9 +37,10 @@ namespace BKI_CRM2.Controllers
             ViewBag.state = state;
             return PartialView();
         }
-        public ActionResult Select(string IdContact)
+        [HttpGet]
+        public JsonResult Select(string IdContact)
         {
-            if (IdContact != null)
+            if (IdContact != null && !IdContact.Equals(""))
             {
                 CrmEntities v_model = new CrmEntities();
                 decimal v_id = Convert.ToDecimal(IdContact);
@@ -49,18 +50,34 @@ namespace BKI_CRM2.Controllers
                 {
                     if (v_contact.NgaySinh != null)
                     {
-                        v_bday = v_contact.NgaySinh.ToString();
-                        v_bday = v_bday.Substring(6, 4) + "-" + v_bday.Substring(0, 2) + "-" + v_bday.Substring(3, 2);
+                        v_bday = ((DateTime)v_contact.NgaySinh).ToString("yyyy-MM-dd");
                     }
                     if (v_contact.HanKhachHang != null)
                     {
-                        v_expire = v_contact.HanKhachHang.ToString();
-                        v_expire = v_expire.Substring(6, 4) + "-" + v_expire.Substring(0, 2) + "-" + v_expire.Substring(3, 2);
+                        v_expire = ((DateTime)v_contact.HanKhachHang).ToString("yyyy-MM-dd");
                     }
                 }
-                return Json(new { data = v_contact, bday = v_bday, hankh = v_expire }, JsonRequestBehavior.AllowGet);
+                return Json(new {
+                    ho = v_contact.Ho,
+                    ten = v_contact.Ten,
+                    diachi = v_contact.DiaChi,
+                    gioitinh = v_contact.GioiTinh,
+                    image = v_contact.Image,
+                    facebook = v_contact.Facebook,
+                    skype = v_contact.Skype,
+                    ngaysinh = v_bday,
+                    sdt01 = v_contact.Sdt01,
+                    sdt02 = v_contact.Sdt02,
+                    masothue = v_contact.MaSoThue,
+                    sotaikhoan = v_contact.SoTaiKhoan,
+                    website = v_contact.Website,
+                    email = v_contact.Email,
+                    hankhachhang = v_expire,
+                    idloaikhachhang = v_contact.IdLoaiKhachHang,
+                    idtrangthaihientai = v_contact.IdTrangThaiHienTai
+                }, JsonRequestBehavior.AllowGet);
             }
-            else return Json(new { }, JsonRequestBehavior.AllowGet);
+            else return Json(true,JsonRequestBehavior.AllowGet);
         }
     }
 }

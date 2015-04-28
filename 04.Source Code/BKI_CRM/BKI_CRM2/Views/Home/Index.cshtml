@@ -6,6 +6,7 @@
     var tu_dien = ViewBag.v_tu_dien as List<BKI_CRM2.Models.TuDien>;
     var state = ViewBag.state as List<BKI_CRM2.Models.ContactState>;
 }
+@model BKI_CRM2.Models.Contact
 <style>
     .mau {
         width: 100px;
@@ -335,28 +336,24 @@
         $.ajax({
             url: "/Contact/Select",
             type: "GET",
-            data: { id_kh: id_kh },
+            data: { IdContact: id_kh },
             error: function () {
                 alert('Thấy thông tin người dùng thất bại!');
             },
             success: function (get) {
-                var data = get.dat;
-                if (data != undefined) {
-                    var date = get.bday;
-                    var hkh = get.hankh;
-                    if (data[0] == undefined) { $('#thay_doi').modal('show'); return; }
-                    hoten.value = data.Ho + ' ' + data.Ten;
-                    email.value = data.Email;
-                    sdt.value = data.Sdt01;
-                    sdt2.value = data.Sdt02;
-                    diachi.value = data.DiaChi;
-                    hankh.value = hkh;
-                    masothue.value = data.MaSoThue;
-                    fb.value = data.Facebook;
-                    skype.value = data.Skype;
-                    gioi_tinh.value = data.GioiTinh ? "nam" : "nu";
-                    ngaysinh.value = date;
-                    anh.src = data.Image;
+                if (get != undefined && get!=true) {
+                    hoten.value = get.ho.trim() + ' ' + get.ten.trim();
+                    email.value = get.email.trim();
+                    sdt.value = get.sdt01.trim();
+                    sdt2.value = get.sdt02.trim();
+                    diachi.value = get.diachi.trim();
+                    hankh.value = get.hankhachhang.trim();
+                    masothue.value = get.masothue.trim();
+                    fb.value = get.facebook.trim();
+                    skype.value = get.skype.trim();
+                    gioi_tinh.value = get.gioitinh ? "nam" : "nu";
+                    ngaysinh.value = get.ngaysinh.trim();
+                    anh.src = get.image.trim();
                 }
                 $('#thay_doi').modal('show');
             }
