@@ -61,6 +61,7 @@
         <AssociationConnector Association="CrmModel.FK_ContactStateProcess_ContactState" />
         <AssociationConnector Association="CrmModel.FK_ContactStateProcess_ContactState1" />
         <AssociationConnector Association="CrmModel.FK_ToBeConverted_ContactState" />
+        <AssociationConnector Association="CrmModel.FK_UserGroup_Company" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

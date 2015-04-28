@@ -6,7 +6,6 @@
     var tu_dien = ViewBag.v_tu_dien as List<BKI_CRM2.Models.TuDien>;
     var state = ViewBag.state as List<BKI_CRM2.Models.ContactState>;
 }
-@model BKI_CRM2.Models.Contact
 <style>
     .mau {
         width: 100px;
@@ -211,6 +210,20 @@
                         </tr>
                         <tr>
                             <td>
+                                <label class="width100px left padding">Số tài khoản</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Số tài khoản" class="form-control width220px height_input " style="height:34px !important;" id="stk" />
+                            </td>
+                            <td>
+                                <label class="width100px left padding">Website</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Website" class="form-control width220px height_input " style="height:34px !important;" id="w" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label class="width100px left padding">Ngày sinh</label>
                             </td>
                             <td>
@@ -228,7 +241,7 @@
                                 <label class="width100px ">Giới tính</label>
                             </td>
                             <td>
-                                <select id="gioi_tinh" class="js-example-basic-single ">
+                                <select id="gioitinh" class="js-example-basic-single ">
                                     <option></option>
                                     <option value="nam">Nam</option>
                                     <option value="nu">Nữ</option>
@@ -238,7 +251,7 @@
                                 <label class="width100px left padding" style="width:103px;" id="loaikh">Loại khách hàng</label>
                             </td>
                             <td>
-                                <select id="loai_khach_hang" class="js-example-basic-single ">
+                                <select id="loaikhachhang" class="js-example-basic-single ">
                                     <option></option>
                                     @if (tu_dien != null)
                                     {
@@ -296,12 +309,12 @@
             allowClear: true
         });
 
-        $("#gioi_tinh").select2({
+        $("#gioitinh").select2({
             placeholder: "Chọn giới tính",
             allowClear: true
         });
 
-        $("#loai_khach_hang").select2({
+        $("#loaikhachhang").select2({
             placeholder: "Chọn loại khách hàng",
             allowClear: true
         });
@@ -309,19 +322,55 @@
         $('.mytable').dataTable();
     });
     function thuchiensua(id_kh) {
-        var TEN_KHACH_HANG = hoten.value;
-        var MA_SO_THUE = masothue.value;
-        var ID_LOAI_KHACH_HANG = loai_khach_hang.value;
-        var SDT = sdt.value;
-        var SDT_2 = sdt2;
-        var EMAIL = email.value;
-        var DIA_CHI = diachi;
-        var HAN_KHACH_HANG = Date.now.toString();
-        var GIOI_TINH = gioi_tinh.value;
+        var hoten = $('#hoten').val().trim();
+        var masothue = $('#masothue').val().trim();
+        var idloaikhachhang = $('#loaikhachhang').val().trim();
+        var sdt01 = $('#sdt').val().trim();
+        var sdt02 = $('#sdt2').val().trim();
+        var email = $('#email').val().trim();
+        var diachi = $('#diachi').val().trim();
+        var hankhachhang = $('#hankh').val().trim();
+        var gioitinh = $('#gioitinh').val().trim();
+        var ngaysinh = $('#ngaysinh').val().trim();
+        var sotaikhoan = $('#stk').val().trim();
+        var website = $('#w').val().trim();
+        var facebook = $('#fb').val().trim();
+        var skype = $('#skype').val().trim();
+        var image = $('#anh').attr('src').trim();
+        $.ajax({
+            url: "/Contact/Update",
+            type: "GET",
+            data:{
+                id:id_kh,
+                hoten:hoten,
+                diaChi:diachi,
+                gioiTinh:(gioitinh=="nam"?true:false),
+                image:image,
+                facebook:facebook,
+                skype:skype,
+                ngaySinh:ngaysinh,
+                sdt01:sdt01,
+                sdt02:sdt02,
+                maSoThue:masothue,
+                soTaiKhoan:sotaikhoan,
+                website:website,
+                email:email,
+                hanKhachHang:hankhachhang,
+                idLoaiKhachHang:idloaikhachhang,
+                idTrangThaiHienTai:null
+            },
+            error: function () {
+                alert("Có lỗi");
+            },
+            success: function (data) {
+                alert("Thành công");
+                $('#thay_doi').modal('hide');
+            }
+        });
     }
     function clear() {
         $('#thongtinlienhe').find('input').val('');
-        $('#loai_khach_hang,#gioi_tinh').select2('data', null);
+        $('#loaikhachhang,#gioitinh').select2('data', null);
         $('#thuc_hien').select2({
             placeholder: 'Thực hiện',
             allowClear: true
@@ -338,7 +387,7 @@
             type: "GET",
             data: { IdContact: id_kh },
             error: function () {
-                alert('Thấy thông tin người dùng thất bại!');
+                alert('Lấy thông tin thất bại!');
             },
             success: function (get) {
                 if (get != undefined && get!=true) {
@@ -351,9 +400,20 @@
                     masothue.value = get.masothue.trim();
                     fb.value = get.facebook.trim();
                     skype.value = get.skype.trim();
-                    gioi_tinh.value = get.gioitinh ? "nam" : "nu";
+                    gioitinh.value = get.gioitinh ? "nam" : "nu";
                     ngaysinh.value = get.ngaysinh.trim();
                     anh.src = get.image.trim();
+                    stk.value = get.sotaikhoan.trim();
+                    w.value = get.website.trim();
+                    loaikhachhang.value = get.idloaikhachhang;
+                    $("#gioitinh").select2({
+                        placeholder: "Chọn giới tính",
+                        allowClear: true
+                    });
+                    $("#loaikhachhang").select2({
+                        placeholder: "Chọn loại khách hàng",
+                        allowClear: true
+                    });
                 }
                 $('#thay_doi').modal('show');
             }

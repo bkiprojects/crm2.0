@@ -24,16 +24,17 @@ namespace BKI_CRM2.Controllers
         {
             CrmEntities v_model = new CrmEntities();
             List<List<Contact>> v_dm_kh = new List<List<Contact>>();
-            List<TuDien> TuDien = new List<TuDien>();
+            List<TuDien> v_tu_dien = new List<TuDien>();
             List<ContactState> state = v_model.ContactState.ToList<ContactState>();
             for (int i = 0; i < state.Count; i++)
             {
                 decimal temp = state[i].Id;
                 v_dm_kh.Add(v_model.Contact.Where(x => x.IdTrangThaiHienTai == temp).ToList<Contact>());
             }
-            TuDien = v_model.TuDien.Where(x => x.LoaiTuDien.TenLoaiTuDien == "Loại khách hàng").ToList<TuDien>();
+            decimal loaitd = v_model.LoaiTuDien.Where(x => x.TenLoaiTuDien == "Contact Type").First().Id;
+            v_tu_dien = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd).ToList<TuDien>();
             ViewBag.v_dm_kh = v_dm_kh;
-            ViewBag.TuDien = TuDien;
+            ViewBag.v_tu_dien = v_tu_dien;
             ViewBag.state = state;
             return PartialView();
         }
@@ -78,6 +79,38 @@ namespace BKI_CRM2.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
             else return Json(true,JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Delete(decimal id_kh) {
+            //decimal id = Convert.ToDecimal(id_kh);
+            CrmEntities v_model = new CrmEntities();
+            int affected = v_model.pr_Contact_Delete(id_kh);
+            v_model.SaveChanges();
+            return Json(affected, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Update(Nullable<decimal> id, string hoten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai) {
+            string ho = "", ten = "";
+            if (!string.IsNullOrEmpty(hoten))
+            {
+                string[] temp = hoten.Split(new char[]{' '},System.StringSplitOptions.RemoveEmptyEntries);
+                ten = temp[temp.Length - 1];
+                for (int i = 0; i < temp.Length - 1; i++) ho += temp[i] + " ";
+            }
+            if (id != null)
+            {
+                CrmEntities v_model = new CrmEntities();
+                idTrangThaiHienTai = v_model.Contact.Where(x => x.Id == id).First().IdTrangThaiHienTai;
+                int affected = v_model.pr_Contact_Update(id, ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai);
+                v_model.SaveChanges();
+                return Json(affected, JsonRequestBehavior.AllowGet);
+            }
+            else return Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai);
+        }
+        public ActionResult Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai){
+            var id = new System.Data.Entity.Core.Objects.ObjectParameter("LastInsertedRecordID ", typeof(decimal));
+            CrmEntities v_model = new CrmEntities();
+            v_model.pr_Contact_Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, id);
+            v_model.SaveChanges();
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

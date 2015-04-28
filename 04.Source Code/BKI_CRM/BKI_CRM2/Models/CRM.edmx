@@ -240,6 +240,7 @@
           </Key>
           <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="GroupName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdCompany" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="FK_Account_TuDien">
           <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
@@ -613,18 +614,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="IdCompany" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_UserGroup">
           <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -661,6 +650,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserGroup_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroup">
+              <PropertyRef Name="IdCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="pr_Contact_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="pr_Contact_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ho" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ten" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="GioiTinh" Type="bit" Mode="In" />
+          <Parameter Name="Image" Type="nvarchar" Mode="In" />
+          <Parameter Name="Facebook" Type="nvarchar" Mode="In" />
+          <Parameter Name="Skype" Type="nvarchar" Mode="In" />
+          <Parameter Name="NgaySinh" Type="datetime" Mode="In" />
+          <Parameter Name="Sdt01" Type="nchar" Mode="In" />
+          <Parameter Name="Sdt02" Type="nchar" Mode="In" />
+          <Parameter Name="MaSoThue" Type="nvarchar" Mode="In" />
+          <Parameter Name="SoTaiKhoan" Type="nvarchar" Mode="In" />
+          <Parameter Name="Website" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="HanKhachHang" Type="datetime" Mode="In" />
+          <Parameter Name="IdLoaiKhachHang" Type="numeric" Mode="In" />
+          <Parameter Name="IdTrangThaiHienTai" Type="numeric" Mode="In" />
+          <Parameter Name="Id" Type="numeric" Mode="InOut" />
+        </Function>
+        <Function Name="pr_Contact_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+          <Parameter Name="Ho" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ten" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="GioiTinh" Type="bit" Mode="In" />
+          <Parameter Name="Image" Type="nvarchar" Mode="In" />
+          <Parameter Name="Facebook" Type="nvarchar" Mode="In" />
+          <Parameter Name="Skype" Type="nvarchar" Mode="In" />
+          <Parameter Name="NgaySinh" Type="datetime" Mode="In" />
+          <Parameter Name="Sdt01" Type="nchar" Mode="In" />
+          <Parameter Name="Sdt02" Type="nchar" Mode="In" />
+          <Parameter Name="MaSoThue" Type="nvarchar" Mode="In" />
+          <Parameter Name="SoTaiKhoan" Type="nvarchar" Mode="In" />
+          <Parameter Name="Website" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="HanKhachHang" Type="datetime" Mode="In" />
+          <Parameter Name="IdLoaiKhachHang" Type="numeric" Mode="In" />
+          <Parameter Name="IdTrangThaiHienTai" Type="numeric" Mode="In" />
+        </Function>
         <EntityContainer Name="CrmModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountContactRole" EntityType="Self.AccountContactRole" Schema="dbo" store:Type="Tables" />
@@ -807,10 +851,6 @@
             <End Role="LoaiTuDien" EntitySet="LoaiTuDien" />
             <End Role="TuDien" EntitySet="TuDien" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
-            <End Role="Company" EntitySet="Company" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_UserGroup" Association="Self.FK_User_UserGroup">
             <End Role="UserGroup" EntitySet="UserGroup" />
             <End Role="User" EntitySet="User" />
@@ -822,6 +862,10 @@
           <AssociationSet Name="FK_UserContactRole_User" Association="Self.FK_UserContactRole_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserContactRole" EntitySet="UserContactRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroup_Company" Association="Self.FK_UserGroup_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="UserGroup" EntitySet="UserGroup" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -858,6 +902,7 @@
           <Property Name="SoLuongUser" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
           <NavigationProperty Name="ContactState" Relationship="CrmModel.FK_ContactState_Company" FromRole="Company" ToRole="ContactState" />
+          <NavigationProperty Name="UserGroup" Relationship="CrmModel.FK_UserGroup_Company" FromRole="Company" ToRole="UserGroup" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -1091,6 +1136,8 @@
           <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Action" Relationship="Self.FK_ACTION_UserGroup" FromRole="UserGroup" ToRole="Action" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_UserGroup" FromRole="UserGroup" ToRole="User" />
+          <Property Name="IdCompany" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Company" Relationship="CrmModel.FK_UserGroup_Company" FromRole="UserGroup" ToRole="Company" />
         </EntityType>
         <Association Name="FK_AccountContactRole_Contact">
           <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
@@ -1530,6 +1577,53 @@
             <End Role="ContactState" EntitySet="ContactState" />
             <End Role="ToBeConverted" EntitySet="ToBeConverteds" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserGroup_Company" Association="CrmModel.FK_UserGroup_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="UserGroup" EntitySet="UserGroups" />
+          </AssociationSet>
+          <FunctionImport Name="pr_Contact_Delete">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pr_Contact_Insert">
+            <Parameter Name="Ho" Mode="In" Type="String" />
+            <Parameter Name="Ten" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="GioiTinh" Mode="In" Type="Boolean" />
+            <Parameter Name="Image" Mode="In" Type="String" />
+            <Parameter Name="Facebook" Mode="In" Type="String" />
+            <Parameter Name="Skype" Mode="In" Type="String" />
+            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="Sdt01" Mode="In" Type="String" />
+            <Parameter Name="Sdt02" Mode="In" Type="String" />
+            <Parameter Name="MaSoThue" Mode="In" Type="String" />
+            <Parameter Name="SoTaiKhoan" Mode="In" Type="String" />
+            <Parameter Name="Website" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="HanKhachHang" Mode="In" Type="DateTime" />
+            <Parameter Name="IdLoaiKhachHang" Mode="In" Type="Decimal" />
+            <Parameter Name="IdTrangThaiHienTai" Mode="In" Type="Decimal" />
+            <Parameter Name="Id" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pr_Contact_Update">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+            <Parameter Name="Ho" Mode="In" Type="String" />
+            <Parameter Name="Ten" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="GioiTinh" Mode="In" Type="Boolean" />
+            <Parameter Name="Image" Mode="In" Type="String" />
+            <Parameter Name="Facebook" Mode="In" Type="String" />
+            <Parameter Name="Skype" Mode="In" Type="String" />
+            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="Sdt01" Mode="In" Type="String" />
+            <Parameter Name="Sdt02" Mode="In" Type="String" />
+            <Parameter Name="MaSoThue" Mode="In" Type="String" />
+            <Parameter Name="SoTaiKhoan" Mode="In" Type="String" />
+            <Parameter Name="Website" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="HanKhachHang" Mode="In" Type="DateTime" />
+            <Parameter Name="IdLoaiKhachHang" Mode="In" Type="Decimal" />
+            <Parameter Name="IdTrangThaiHienTai" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1714,6 +1808,18 @@
             </Principal>
             <Dependent Role="ToBeConverted">
               <PropertyRef Name="IdContactState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroup_Company">
+          <End Type="CrmModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="CrmModel.UserGroup" Role="UserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroup">
+              <PropertyRef Name="IdCompany" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1941,6 +2047,7 @@
           <EntitySetMapping Name="UserGroups">
             <EntityTypeMapping TypeName="CrmModel.UserGroup">
               <MappingFragment StoreEntitySet="UserGroup">
+                <ScalarProperty Name="IdCompany" ColumnName="IdCompany" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
               </MappingFragment>
@@ -1980,6 +2087,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pr_Contact_Delete" FunctionName="CrmModel.Store.pr_Contact_Delete" />
+          <FunctionImportMapping FunctionImportName="pr_Contact_Insert" FunctionName="CrmModel.Store.pr_Contact_Insert" />
+          <FunctionImportMapping FunctionImportName="pr_Contact_Update" FunctionName="CrmModel.Store.pr_Contact_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

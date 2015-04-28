@@ -32,11 +32,15 @@ public partial class UserGroup
 
     public string GroupName { get; set; }
 
+    public Nullable<decimal> IdCompany { get; set; }
+
 
 
     public virtual ICollection<Action> Action { get; set; }
 
     public virtual ICollection<User> User { get; set; }
+
+    public virtual Company Company { get; set; }
 
 }
 
