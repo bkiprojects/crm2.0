@@ -1,0 +1,71 @@
+﻿<style>
+    .mau {
+        width: 100px;
+    }
+
+    .marginleft {
+        margin-left: 300px;
+    }
+
+    .width220px {
+        width: 220px;
+    }
+
+    .height_input {
+        height: 34px !important;
+    }
+</style>
+<div class="title">
+    <h2>DANH MỤC HỢP ĐỒNG</h2>
+</div>
+<div style="margin: 20px 0px 30px 30px;">
+    <button type="button" class="btn btn-primary marginleft" aria-hidden="true" onclick="sua(null);">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm khách hàng
+    </button>
+
+     <select id="thuc_hien" style="margin-left:200px;">
+        <option></option>
+        <option value="xuat_excel">Xuất Excel</option>
+        <option value="in">In</option>
+    </select>
+</div>
+<div>
+    <table class=" mytable">
+                    <thead>
+                        <tr>
+                           
+                            <th>Ngày bắt đầu</th>
+                            <th>Ngày kết thúc</th>
+                            <th>Số hợp đồng</th>
+                            <th>Nội dung</th>
+                            <th>Tổ chức</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2015-04-28</td>
+                            <td>2016-04-28</td>
+                            <td>1</td>
+                            <td>Mua phần mềm iPost</td>
+                            <td>BKIndex</td>
+                        </tr>
+                          <tr>
+                            <td>2014-05-07</td>
+                            <td>2015-06-22</td>
+                            <td>2</td>
+                            <td>Tham gia khóa học Excel</td>
+                            <td>BKIndex</td>
+                        </tr>
+                   </tbody>
+                </table>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $("#thuc_hien").select2({
+            placeholder: "Thực hiện",
+            allowClear: true
+        });
+        $('.mytable').dataTable();
+    });
+</script>

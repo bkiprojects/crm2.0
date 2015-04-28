@@ -27,6 +27,16 @@
                 });
             });
 
+            $('#hd').click(function () {
+                $.ajax({
+                    url: "/Contract/Index",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
+
             $('#dntt').click(function () {
                 $.ajax({
                     url: "/Home/DinhNghiaTrangThai",
@@ -76,8 +86,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">KHÁCH HÀNG<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#" id="cttkh">Chuyển trạng thái khách hàng</a></li>
                                 <li><a href="#" id="dmkh">Danh mục khách hàng</a></li>
+                                <li><a href="#" id="hd">Hợp đồng</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
