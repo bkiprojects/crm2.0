@@ -58,6 +58,8 @@
         <AssociationConnector Association="CrmModel.FK_Task_User" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_User_UserGroup" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_UserContactRole_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CrmModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="CrmModel.FK_Contact_ContactState" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

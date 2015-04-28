@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CrmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CrmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -64,6 +64,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="HanKhachHang" Type="datetime" />
           <Property Name="IdLoaiKhachHang" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdTrangThaiHienTai" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="ContactState">
           <Key>
@@ -74,6 +75,7 @@
           <Property Name="TenTrangThai" Type="nvarchar" MaxLength="200" />
           <Property Name="IdCompany" Type="numeric" Precision="18" Scale="0" />
           <Property Name="MoTa" Type="nvarchar" MaxLength="200" />
+          <Property Name="IdTrangThai" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="ContactStateChange">
           <Key>
@@ -160,6 +162,16 @@
           <Property Name="TenBaoGia" Type="nvarchar" MaxLength="100" />
           <Property Name="IdLoaiQuote" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Task">
           <Key>
             <PropertyRef Name="Id" />
@@ -173,6 +185,7 @@
           <Property Name="IdPriority" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdStatus" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdLoaiAction" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DuKienHoanThanh" Type="datetime" />
         </EntityType>
         <EntityType Name="ToBeConverted">
           <Key>
@@ -275,6 +288,18 @@
             </Principal>
             <Dependent Role="Action">
               <PropertyRef Name="IdUserGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_ContactState">
+          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="IdTrangThaiHienTai" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -641,6 +666,7 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quote" EntityType="Self.Quote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ToBeConverted" EntityType="Self.ToBeConverted" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TuDien" EntityType="Self.TuDien" Schema="dbo" store:Type="Tables" />
@@ -662,6 +688,10 @@
           <AssociationSet Name="FK_ACTION_UserGroup" Association="Self.FK_ACTION_UserGroup">
             <End Role="UserGroup" EntitySet="UserGroup" />
             <End Role="Action" EntitySet="Action" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_ContactState" Association="Self.FK_Contact_ContactState">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="Contact" EntitySet="Contact" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactState_Company" Association="Self.FK_ContactState_Company">
             <End Role="Company" EntitySet="Company" />
@@ -780,8 +810,7 @@
             <End Role="UserContactRole" EntitySet="UserContactRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CrmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -859,6 +888,8 @@
           <NavigationProperty Name="ContractContactRole" Relationship="Self.FK_ContractContactRole_Contact" FromRole="Contact" ToRole="ContractContactRole" />
           <NavigationProperty Name="Task" Relationship="Self.FK_Task_Contact" FromRole="Contact" ToRole="Task" />
           <NavigationProperty Name="UserContactRole" Relationship="Self.FK_UserContactRole_Contact" FromRole="Contact" ToRole="UserContactRole" />
+          <Property Name="IdTrangThaiHienTai" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ContactState" Relationship="CrmModel.FK_Contact_ContactState" FromRole="Contact" ToRole="ContactState" />
         </EntityType>
         <EntityType Name="ContactState">
           <Key>
@@ -874,6 +905,8 @@
           <NavigationProperty Name="ContactStateProcess" Relationship="Self.FK_ContactStateProcess_ContactState" FromRole="ContactState" ToRole="ContactStateProcess" />
           <NavigationProperty Name="ContactStateProcess1" Relationship="Self.FK_ContactStateProcess_ContactState1" FromRole="ContactState" ToRole="ContactStateProcess" />
           <NavigationProperty Name="ToBeConverted" Relationship="Self.FK_ToBeConverted_ContactState" FromRole="ContactState" ToRole="ToBeConverted" />
+          <Property Name="IdTrangThai" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Contact" Relationship="CrmModel.FK_Contact_ContactState" FromRole="ContactState" ToRole="Contact" />
         </EntityType>
         <EntityType Name="ContactStateChange">
           <Key>
@@ -1000,6 +1033,7 @@
           <NavigationProperty Name="TuDien1" Relationship="Self.FK_Task_TuDien1" FromRole="Task" ToRole="TuDien" />
           <NavigationProperty Name="TuDien2" Relationship="Self.FK_Task_TuDien2" FromRole="Task" ToRole="TuDien" />
           <NavigationProperty Name="User" Relationship="Self.FK_Task_User" FromRole="Task" ToRole="User" />
+          <Property Name="DuKienHoanThanh" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ToBeConverted">
           <Key>
@@ -1625,7 +1659,34 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserContactRole" EntitySet="UserContactRoles" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="CrmModel.sysdiagram" />
+          <AssociationSet Name="FK_Contact_ContactState" Association="CrmModel.FK_Contact_ContactState">
+            <End Role="ContactState" EntitySet="ContactStates" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Contact_ContactState">
+          <End Type="CrmModel.ContactState" Role="ContactState" Multiplicity="0..1" />
+          <End Type="CrmModel.Contact" Role="Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="IdTrangThaiHienTai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1677,6 +1738,7 @@
           <EntitySetMapping Name="Contacts">
             <EntityTypeMapping TypeName="CrmModel.Contact">
               <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="IdTrangThaiHienTai" ColumnName="IdTrangThaiHienTai" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ho" ColumnName="Ho" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
@@ -1700,6 +1762,7 @@
           <EntitySetMapping Name="ContactStates">
             <EntityTypeMapping TypeName="CrmModel.ContactState">
               <MappingFragment StoreEntitySet="ContactState">
+                <ScalarProperty Name="IdTrangThai" ColumnName="IdTrangThai" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
                 <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
@@ -1804,6 +1867,7 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="CrmModel.Task">
               <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="DuKienHoanThanh" ColumnName="DuKienHoanThanh" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TaiNgay" ColumnName="TaiNgay" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
@@ -1874,6 +1938,17 @@
               <MappingFragment StoreEntitySet="UserGroup">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CrmModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

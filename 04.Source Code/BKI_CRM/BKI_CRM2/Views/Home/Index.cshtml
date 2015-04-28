@@ -2,8 +2,9 @@
     ViewBag.Title = "DMKhachHang";
     ViewBag.Title = "thongTinLienHe";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var dm_khach_hang = ViewBag.v_dm_kh as List<BKI_CRM2.Models.Contact>;
+    var dm_khach_hang = ViewBag.v_dm_kh as List<List<BKI_CRM2.Models.Contact>>;
     var tu_dien = ViewBag.v_tu_dien as List<BKI_CRM2.Models.TuDien>;
+    var state = ViewBag.state as List<BKI_CRM2.Models.ContactState>;
 }
 <style>
     .mau {
@@ -36,7 +37,7 @@
     </button>
     <select id="loc_khach_hang" style="float:right;margin-right:100px;">
         <option></option>
-        @if (tu_dien != null)
+        @if (tu_dien != null && tu_dien.Count>0)
         {
             foreach (var item in tu_dien)
             {
@@ -46,36 +47,90 @@
     </select>
 </div>
 <div style="margin-bottom:50px;">
-    <table id="example" class="display">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Họ và đệm</th>
-                <th>Tên</th>
-                <th>Số điện thoại</th>
-                <th>Email</th>
-                <th>Sửa</th>
-                <th>Xóa</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (dm_khach_hang != null)
+    <ul class="nav nav-tabs">
+        @if (state != null && state.Count > 0)
+        {
+            <li class="active"><a data-toggle="tab" href="#@state[0].Id">@state[0].TenTrangThai</a></li>
+            foreach (var item in state.Skip(1))
             {
-                foreach (var item in dm_khach_hang)
-                {
-                    <tr id="@item.Id">
-                        <td class="c"><input type="checkbox" /></td>
-                        <td class="ho">@item.Ho</td>
-                        <td class="ten">@item.Ten</td>
-                        <td class="sdt">@item.Sdt01</td>
-                        <td class="email">@item.Email</td>
-                        <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
-                        <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
-                    </tr>
-                }
+                <li><a data-toggle="tab" href="#@item.Id">@item.TenTrangThai</a></li>
             }
-        </tbody>
-    </table>
+        }
+    </ul>
+    <div class="tab-content">
+
+
+        @if (dm_khach_hang != null && dm_khach_hang.Count>0)
+        {
+            <div class="tab-pane fade in active" id="@state[0].Id">
+                <table class="display mytable">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Họ và đệm</th>
+                            <th>Tên</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (dm_khach_hang[0].Count > 0)
+                        {
+                            foreach (var item in dm_khach_hang[0])
+                            {
+                                <tr id="@item.Id">
+                                    <td class="c"><input type="checkbox" /></td>
+                                    <td class="ho">@item.Ho</td>
+                                    <td class="ten">@item.Ten</td>
+                                    <td class="sdt">@item.Sdt01</td>
+                                    <td class="email">@item.Email</td>
+                                    <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                                    <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            for (int i=1;i<dm_khach_hang.Count;i++)
+            {
+                <div class="tab-pane fade" id="@state[i].Id">
+                    <table class="display mytable">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Họ và đệm</th>
+                                <th>Tên</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (dm_khach_hang[i].Count > 0)
+                            {
+                                foreach (var item in dm_khach_hang[i])
+                                {
+                                    <tr id="@item.Id">
+                                        <td class="c"><input type="checkbox" /></td>
+                                        <td class="ho">@item.Ho</td>
+                                        <td class="ten">@item.Ten</td>
+                                        <td class="sdt">@item.Sdt01</td>
+                                        <td class="email">@item.Email</td>
+                                        <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                                        <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+    </div>
 </div>
 <div class="modal fade" id="thay_doi">
     <div class="modal-dialog modal-lg" id="thongtinlienhe">
@@ -250,7 +305,7 @@
             allowClear: true
         });
 
-        $('#example').dataTable();
+        $('.mytable').dataTable();
     });
     function thuchiensua(id_kh) {
         var TEN_KHACH_HANG = hoten.value;

@@ -29,6 +29,8 @@ public partial class ContactState
 
         this.ToBeConverted = new HashSet<ToBeConverted>();
 
+        this.Contact = new HashSet<Contact>();
+
     }
 
 
@@ -42,6 +44,8 @@ public partial class ContactState
 
     public string MoTa { get; set; }
 
+    public Nullable<decimal> IdTrangThai { get; set; }
+
 
 
     public virtual Company Company { get; set; }
@@ -53,6 +57,8 @@ public partial class ContactState
     public virtual ICollection<ContactStateProcess> ContactStateProcess1 { get; set; }
 
     public virtual ICollection<ToBeConverted> ToBeConverted { get; set; }
+
+    public virtual ICollection<Contact> Contact { get; set; }
 
 }
 

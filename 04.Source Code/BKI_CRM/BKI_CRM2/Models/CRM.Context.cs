@@ -38,7 +38,7 @@ public partial class CrmEntities : DbContext
 
     public virtual DbSet<Action> Action { get; set; }
 
-    public virtual DbSet<Company> Company { get; set; }
+    public virtual DbSet<Company> Companie { get; set; }
 
     public virtual DbSet<Contact> Contact { get; set; }
 
@@ -71,6 +71,8 @@ public partial class CrmEntities : DbContext
     public virtual DbSet<UserContactRole> UserContactRole { get; set; }
 
     public virtual DbSet<UserGroup> UserGroup { get; set; }
+
+    public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 
 }
 

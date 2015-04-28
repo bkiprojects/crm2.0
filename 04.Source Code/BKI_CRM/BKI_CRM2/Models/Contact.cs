@@ -68,6 +68,8 @@ public partial class Contact
 
     public Nullable<decimal> IdLoaiKhachHang { get; set; }
 
+    public Nullable<decimal> IdTrangThaiHienTai { get; set; }
+
 
 
     public virtual ICollection<AccountContactRole> AccountContactRole { get; set; }
@@ -79,6 +81,8 @@ public partial class Contact
     public virtual ICollection<Task> Task { get; set; }
 
     public virtual ICollection<UserContactRole> UserContactRole { get; set; }
+
+    public virtual ContactState ContactState { get; set; }
 
 }
 

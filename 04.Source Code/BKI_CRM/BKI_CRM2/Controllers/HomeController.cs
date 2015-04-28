@@ -20,12 +20,17 @@ namespace BKI_CRM2.Controllers
         public ActionResult Index()
         {
             CrmEntities v_model = new CrmEntities();
-            List<Contact> v_dm_kh = new List<Contact>();
+            List<List<Contact>> v_dm_kh = new List<List<Contact>>();
             List<TuDien> TuDien = new List<TuDien>();
-            v_dm_kh = v_model.Contact.ToList<Contact>();
+            List<ContactState> state = v_model.ContactState.ToList<ContactState>();
+            for (int i = 0; i < state.Count; i++) {
+                decimal temp = state[i].Id;
+                v_dm_kh.Add(v_model.Contact.Where(x => x.IdTrangThaiHienTai == temp).ToList<Contact>());
+            }
             TuDien = v_model.TuDien.Where(x => x.LoaiTuDien.TenLoaiTuDien == "Loại khách hàng").ToList<TuDien>();
             ViewBag.v_dm_kh = v_dm_kh;
             ViewBag.TuDien = TuDien;
+            ViewBag.state = state;
             return View();
         }
     }

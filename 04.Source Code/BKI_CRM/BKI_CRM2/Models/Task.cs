@@ -36,6 +36,8 @@ public partial class Task
 
     public Nullable<decimal> IdLoaiAction { get; set; }
 
+    public Nullable<System.DateTime> DuKienHoanThanh { get; set; }
+
 
 
     public virtual Account Account { get; set; }

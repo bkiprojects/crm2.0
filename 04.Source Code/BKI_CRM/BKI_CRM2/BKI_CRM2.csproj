@@ -258,6 +258,9 @@
     <Compile Include="Models\Quote.cs">
       <DependentUpon>CRM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Task.cs">
       <DependentUpon>CRM.tt</DependentUpon>
     </Compile>

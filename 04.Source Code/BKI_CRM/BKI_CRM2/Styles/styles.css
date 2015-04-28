@@ -409,3 +409,7 @@ fieldset
 .node {
     margin: 30px 0px 0px 450px;
 }
+
+.tab-pane {
+    margin-top:20px;
+}
