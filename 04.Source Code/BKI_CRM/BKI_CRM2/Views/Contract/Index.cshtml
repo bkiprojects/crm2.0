@@ -1,4 +1,8 @@
-﻿<style>
+﻿@{
+    var hop_dong = ViewBag.v_hd as List<BKI_CRM2.Models.Contract>;    
+}
+@model BKI_CRM2.Models.Contract
+<style>
     .mau {
         width: 100px;
     }
@@ -30,6 +34,7 @@
     </select>
 </div>
 <div>
+     
     <table class=" mytable">
                     <thead>
                         <tr>
@@ -42,23 +47,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2015-04-28</td>
-                            <td>2016-04-28</td>
-                            <td>1</td>
-                            <td>Mua phần mềm iPost</td>
-                            <td>BKIndex</td>
+                        @foreach (var item in hop_dong)
+	                    {
+		                 <tr>
+                            <td>@item.NgayBatDau</td>
+                            <td>@item.NgayKetThuc</td>
+                            <td>@item.SoHopDong</td>
+                            <td>@item.NoiDung</td>
+                            <td>@item.IdAccount</td>
                         </tr>
-                          <tr>
-                            <td>2014-05-07</td>
-                            <td>2015-06-22</td>
-                            <td>2</td>
-                            <td>Tham gia khóa học Excel</td>
-                            <td>BKIndex</td>
-                        </tr>
+	                    }
+                      
+                        
                    </tbody>
                 </table>
-
+      
 </div>
 <script>
     $(document).ready(function () {
