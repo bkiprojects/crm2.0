@@ -82,6 +82,8 @@ public partial class Contact
 
     public virtual ICollection<UserContactRole> UserContactRole { get; set; }
 
+    public virtual TuDien TuDien { get; set; }
+
     public virtual ContactState ContactState { get; set; }
 
 }

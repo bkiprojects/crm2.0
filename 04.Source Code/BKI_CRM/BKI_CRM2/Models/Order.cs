@@ -30,11 +30,11 @@ public partial class Order
 
 
 
-    public virtual Account Account { get; set; }
-
     public virtual Contract Contract { get; set; }
 
     public virtual TuDien TuDien { get; set; }
+
+    public virtual Account Account { get; set; }
 
 }
 

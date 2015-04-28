@@ -21,9 +21,9 @@ public partial class Company
     public Company()
     {
 
-        this.ContactState = new HashSet<ContactState>();
-
         this.User = new HashSet<User>();
+
+        this.ContactState = new HashSet<ContactState>();
 
     }
 
@@ -36,9 +36,9 @@ public partial class Company
 
 
 
-    public virtual ICollection<ContactState> ContactState { get; set; }
-
     public virtual ICollection<User> User { get; set; }
+
+    public virtual ICollection<ContactState> ContactState { get; set; }
 
 }
 

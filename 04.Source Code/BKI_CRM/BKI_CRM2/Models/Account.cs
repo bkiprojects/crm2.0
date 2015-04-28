@@ -44,8 +44,6 @@ public partial class Account
 
     public Nullable<decimal> IdAccountType { get; set; }
 
-    public Nullable<decimal> IdLoaiAccount { get; set; }
-
 
 
     public virtual TuDien TuDien { get; set; }

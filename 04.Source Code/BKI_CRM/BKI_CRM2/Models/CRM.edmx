@@ -15,7 +15,6 @@
           <Property Name="Sdt01" Type="nchar" MaxLength="15" />
           <Property Name="Sdt02" Type="nchar" MaxLength="15" />
           <Property Name="IdAccountType" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="IdLoaiAccount" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="AccountContactRole">
           <Key>
@@ -75,7 +74,6 @@
           <Property Name="TenTrangThai" Type="nvarchar" MaxLength="200" />
           <Property Name="IdCompany" Type="numeric" Precision="18" Scale="0" />
           <Property Name="MoTa" Type="nvarchar" MaxLength="200" />
-          <Property Name="IdTrangThai" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="ContactStateChange">
           <Key>
@@ -128,8 +126,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TenLoaiTuDien" Type="nvarchar" MaxLength="100" />
           <Property Name="MaLoaiTuDien" Type="nchar" MaxLength="15" />
+          <Property Name="TenLoaiTuDien" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -251,7 +249,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Account">
-              <PropertyRef Name="IdLoaiAccount" />
+              <PropertyRef Name="IdAccountType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -300,6 +298,18 @@
             </Principal>
             <Dependent Role="Contact">
               <PropertyRef Name="IdTrangThaiHienTai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_TuDien">
+          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="IdLoaiKhachHang" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -693,6 +703,10 @@
             <End Role="ContactState" EntitySet="ContactState" />
             <End Role="Contact" EntitySet="Contact" />
           </AssociationSet>
+          <AssociationSet Name="FK_Contact_TuDien" Association="Self.FK_Contact_TuDien">
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
           <AssociationSet Name="FK_ContactState_Company" Association="Self.FK_ContactState_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="ContactState" EntitySet="ContactState" />
@@ -814,23 +828,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CrmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Account">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Sdt01" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="Sdt02" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="IdAccountType" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdLoaiAccount" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="TuDien" Relationship="Self.FK_Account_TuDien" FromRole="Account" ToRole="TuDien" />
-          <NavigationProperty Name="AccountContactRole" Relationship="Self.FK_AccountContactRole_Account" FromRole="Account" ToRole="AccountContactRole" />
-          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_Account" FromRole="Account" ToRole="Contract" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Account" FromRole="Account" ToRole="Order" />
-          <NavigationProperty Name="Task" Relationship="Self.FK_Task_Account" FromRole="Account" ToRole="Task" />
-        </EntityType>
         <EntityType Name="AccountContactRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -839,8 +836,8 @@
           <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdContact" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_AccountContactRole_Account" FromRole="AccountContactRole" ToRole="Account" />
           <NavigationProperty Name="Contact" Relationship="Self.FK_AccountContactRole_Contact" FromRole="AccountContactRole" ToRole="Contact" />
+          <NavigationProperty Name="Account" Relationship="CrmModel.FK_AccountContactRole_Account" FromRole="AccountContactRole" ToRole="Account" />
         </EntityType>
         <EntityType Name="Action">
           <Key>
@@ -859,8 +856,8 @@
           <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenCongTy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="SoLuongUser" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="ContactState" Relationship="Self.FK_ContactState_Company" FromRole="Company" ToRole="ContactState" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
+          <NavigationProperty Name="ContactState" Relationship="CrmModel.FK_ContactState_Company" FromRole="Company" ToRole="ContactState" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -889,24 +886,8 @@
           <NavigationProperty Name="Task" Relationship="Self.FK_Task_Contact" FromRole="Contact" ToRole="Task" />
           <NavigationProperty Name="UserContactRole" Relationship="Self.FK_UserContactRole_Contact" FromRole="Contact" ToRole="UserContactRole" />
           <Property Name="IdTrangThaiHienTai" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TuDien" Relationship="CrmModel.FK_Contact_TuDien" FromRole="Contact" ToRole="TuDien" />
           <NavigationProperty Name="ContactState" Relationship="CrmModel.FK_Contact_ContactState" FromRole="Contact" ToRole="ContactState" />
-        </EntityType>
-        <EntityType Name="ContactState">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaTrangThai" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="TenTrangThai" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="IdCompany" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="MoTa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_ContactState_Company" FromRole="ContactState" ToRole="Company" />
-          <NavigationProperty Name="ContactStateChange" Relationship="Self.FK_ContactStateChange_ContactState" FromRole="ContactState" ToRole="ContactStateChange" />
-          <NavigationProperty Name="ContactStateProcess" Relationship="Self.FK_ContactStateProcess_ContactState" FromRole="ContactState" ToRole="ContactStateProcess" />
-          <NavigationProperty Name="ContactStateProcess1" Relationship="Self.FK_ContactStateProcess_ContactState1" FromRole="ContactState" ToRole="ContactStateProcess" />
-          <NavigationProperty Name="ToBeConverted" Relationship="Self.FK_ToBeConverted_ContactState" FromRole="ContactState" ToRole="ToBeConverted" />
-          <Property Name="IdTrangThai" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Contact" Relationship="CrmModel.FK_Contact_ContactState" FromRole="ContactState" ToRole="Contact" />
         </EntityType>
         <EntityType Name="ContactStateChange">
           <Key>
@@ -922,10 +903,10 @@
           <Property Name="IsTrangThaiHienTai" Type="Boolean" />
           <Property Name="IdNguoiChuyenTrangThai" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Contact" Relationship="Self.FK_ContactStateChange_Contact" FromRole="ContactStateChange" ToRole="Contact" />
-          <NavigationProperty Name="ContactState" Relationship="Self.FK_ContactStateChange_ContactState" FromRole="ContactStateChange" ToRole="ContactState" />
           <NavigationProperty Name="ContactStateChange1" Relationship="Self.FK_ContactStateChange_ContactStateChange" FromRole="ContactStateChange" ToRole="ContactStateChange1" />
           <NavigationProperty Name="ContactStateChange2" Relationship="Self.FK_ContactStateChange_ContactStateChange" FromRole="ContactStateChange1" ToRole="ContactStateChange" />
           <NavigationProperty Name="User" Relationship="Self.FK_ContactStateChange_User" FromRole="ContactStateChange" ToRole="User" />
+          <NavigationProperty Name="ContactState" Relationship="CrmModel.FK_ContactStateChange_ContactState" FromRole="ContactStateChange" ToRole="ContactState" />
         </EntityType>
         <EntityType Name="ContactStateProcess">
           <Key>
@@ -935,9 +916,9 @@
           <Property Name="IdTrangThaiTruoc" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdTrangThaiSau" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ContactState" Relationship="Self.FK_ContactStateProcess_ContactState" FromRole="ContactStateProcess" ToRole="ContactState" />
-          <NavigationProperty Name="ContactState1" Relationship="Self.FK_ContactStateProcess_ContactState1" FromRole="ContactStateProcess" ToRole="ContactState" />
-        </EntityType>
+          <NavigationProperty Name="ContactState" Relationship="CrmModel.FK_ContactStateProcess_ContactState" FromRole="ContactStateProcess" ToRole="ContactState" />
+          <NavigationProperty Name="ContactState1" Relationship="CrmModel.FK_ContactStateProcess_ContactState1" FromRole="ContactStateProcess" ToRole="ContactState" />
+          </EntityType>
         <EntityType Name="Contract">
           <Key>
             <PropertyRef Name="Id" />
@@ -949,11 +930,11 @@
           <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdLoaiContract" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Contract_Account" FromRole="Contract" ToRole="Account" />
           <NavigationProperty Name="TuDien" Relationship="Self.FK_Contract_TuDien" FromRole="Contract" ToRole="TuDien" />
           <NavigationProperty Name="ContractContactRole" Relationship="Self.FK_ContractContactRole_Contract" FromRole="Contract" ToRole="ContractContactRole" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Contract" FromRole="Contract" ToRole="Order" />
           <NavigationProperty Name="Quote" Relationship="Self.FK_Quote_Contract" FromRole="Contract" ToRole="Quote" />
+          <NavigationProperty Name="Account" Relationship="CrmModel.FK_Contract_Account" FromRole="Contract" ToRole="Account" />
         </EntityType>
         <EntityType Name="ContractContactRole">
           <Key>
@@ -986,9 +967,9 @@
           <Property Name="IdQuote" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdLoaiOrder" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Order_Account" FromRole="Order" ToRole="Account" />
           <NavigationProperty Name="Contract" Relationship="Self.FK_Order_Contract" FromRole="Order" ToRole="Contract" />
           <NavigationProperty Name="TuDien" Relationship="Self.FK_Order_TuDien" FromRole="Order" ToRole="TuDien" />
+          <NavigationProperty Name="Account" Relationship="CrmModel.FK_Order_Account" FromRole="Order" ToRole="Account" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -1027,13 +1008,13 @@
           <Property Name="IdPriority" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdStatus" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdLoaiAction" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Task_Account" FromRole="Task" ToRole="Account" />
           <NavigationProperty Name="Contact" Relationship="Self.FK_Task_Contact" FromRole="Task" ToRole="Contact" />
           <NavigationProperty Name="TuDien" Relationship="Self.FK_Task_TuDien" FromRole="Task" ToRole="TuDien" />
           <NavigationProperty Name="TuDien1" Relationship="Self.FK_Task_TuDien1" FromRole="Task" ToRole="TuDien" />
           <NavigationProperty Name="TuDien2" Relationship="Self.FK_Task_TuDien2" FromRole="Task" ToRole="TuDien" />
           <NavigationProperty Name="User" Relationship="Self.FK_Task_User" FromRole="Task" ToRole="User" />
           <Property Name="DuKienHoanThanh" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="CrmModel.FK_Task_Account" FromRole="Task" ToRole="Account" />
         </EntityType>
         <EntityType Name="ToBeConverted">
           <Key>
@@ -1043,7 +1024,7 @@
           <Property Name="IdContactState" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="TenYeuCau" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ThuTuSapXep" Type="Int32" />
-          <NavigationProperty Name="ContactState" Relationship="Self.FK_ToBeConverted_ContactState" FromRole="ToBeConverted" ToRole="ContactState" />
+          <NavigationProperty Name="ContactState" Relationship="CrmModel.FK_ToBeConverted_ContactState" FromRole="ToBeConverted" ToRole="ContactState" />
         </EntityType>
         <EntityType Name="TuDien">
           <Key>
@@ -1054,7 +1035,6 @@
           <Property Name="MaTuDien" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="IdLoaiTuDien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Account_TuDien" FromRole="TuDien" ToRole="Account" />
           <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_TuDien" FromRole="TuDien" ToRole="Contract" />
           <NavigationProperty Name="LoaiTuDien" Relationship="Self.FK_TuDien_LoaiTuDien" FromRole="TuDien" ToRole="LoaiTuDien" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_TuDien" FromRole="TuDien" ToRole="Order" />
@@ -1063,6 +1043,8 @@
           <NavigationProperty Name="Task" Relationship="Self.FK_Task_TuDien" FromRole="TuDien" ToRole="Task" />
           <NavigationProperty Name="Task1" Relationship="Self.FK_Task_TuDien1" FromRole="TuDien" ToRole="Task" />
           <NavigationProperty Name="Task2" Relationship="Self.FK_Task_TuDien2" FromRole="TuDien" ToRole="Task" />
+          <NavigationProperty Name="Contact" Relationship="CrmModel.FK_Contact_TuDien" FromRole="TuDien" ToRole="Contact" />
+          <NavigationProperty Name="Account" Relationship="CrmModel.FK_Account_TuDien" FromRole="TuDien" ToRole="Account" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1110,66 +1092,6 @@
           <NavigationProperty Name="Action" Relationship="Self.FK_ACTION_UserGroup" FromRole="UserGroup" ToRole="Action" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_UserGroup" FromRole="UserGroup" ToRole="User" />
         </EntityType>
-        <Association Name="FK_Account_TuDien">
-          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
-          <End Role="Account" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TuDien">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Account">
-              <PropertyRef Name="IdLoaiAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccountContactRole_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="AccountContactRole" Type="Self.AccountContactRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AccountContactRole">
-              <PropertyRef Name="IdAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contract_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="IdAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="IdAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Task_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
-          <End Role="Task" Type="Self.Task" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Task">
-              <PropertyRef Name="IdAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AccountContactRole_Contact">
           <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
           <End Role="AccountContactRole" Type="Self.AccountContactRole" Multiplicity="*" />
@@ -1191,18 +1113,6 @@
             </Principal>
             <Dependent Role="Action">
               <PropertyRef Name="IdUserGroup" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ContactState_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
-          <End Role="ContactState" Type="Self.ContactState" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ContactState">
-              <PropertyRef Name="IdCompany" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1263,54 +1173,6 @@
             </Principal>
             <Dependent Role="UserContactRole">
               <PropertyRef Name="IdContact" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ContactStateChange_ContactState">
-          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
-          <End Role="ContactStateChange" Type="Self.ContactStateChange" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContactState">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ContactStateChange">
-              <PropertyRef Name="IdContactSate" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ContactStateProcess_ContactState">
-          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
-          <End Role="ContactStateProcess" Type="Self.ContactStateProcess" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContactState">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ContactStateProcess">
-              <PropertyRef Name="IdTrangThaiTruoc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ContactStateProcess_ContactState1">
-          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
-          <End Role="ContactStateProcess" Type="Self.ContactStateProcess" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContactState">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ContactStateProcess">
-              <PropertyRef Name="IdTrangThaiSau" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ToBeConverted_ContactState">
-          <End Role="ContactState" Type="Self.ContactState" Multiplicity="0..1" />
-          <End Role="ToBeConverted" Type="Self.ToBeConverted" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ContactState">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ToBeConverted">
-              <PropertyRef Name="IdContactState" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1507,12 +1369,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CrmEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="AccountContactRoles" EntityType="Self.AccountContactRole" />
           <EntitySet Name="Actions" EntityType="Self.Action" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="Contacts" EntityType="Self.Contact" />
-          <EntitySet Name="ContactStates" EntityType="Self.ContactState" />
           <EntitySet Name="ContactStateChanges" EntityType="Self.ContactStateChange" />
           <EntitySet Name="ContactStateProcesses" EntityType="Self.ContactStateProcess" />
           <EntitySet Name="Contracts" EntityType="Self.Contract" />
@@ -1527,26 +1387,6 @@
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserContactRoles" EntityType="Self.UserContactRole" />
           <EntitySet Name="UserGroups" EntityType="Self.UserGroup" />
-          <AssociationSet Name="FK_Account_TuDien" Association="Self.FK_Account_TuDien">
-            <End Role="TuDien" EntitySet="TuDiens" />
-            <End Role="Account" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AccountContactRole_Account" Association="Self.FK_AccountContactRole_Account">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="AccountContactRole" EntitySet="AccountContactRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contract_Account" Association="Self.FK_Contract_Account">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Account" Association="Self.FK_Order_Account">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Task_Account" Association="Self.FK_Task_Account">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="Task" EntitySet="Tasks" />
-          </AssociationSet>
           <AssociationSet Name="FK_AccountContactRole_Contact" Association="Self.FK_AccountContactRole_Contact">
             <End Role="Contact" EntitySet="Contacts" />
             <End Role="AccountContactRole" EntitySet="AccountContactRoles" />
@@ -1554,10 +1394,6 @@
           <AssociationSet Name="FK_ACTION_UserGroup" Association="Self.FK_ACTION_UserGroup">
             <End Role="UserGroup" EntitySet="UserGroups" />
             <End Role="Action" EntitySet="Actions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContactState_Company" Association="Self.FK_ContactState_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="ContactState" EntitySet="ContactStates" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
             <End Role="Company" EntitySet="Companies" />
@@ -1578,22 +1414,6 @@
           <AssociationSet Name="FK_UserContactRole_Contact" Association="Self.FK_UserContactRole_Contact">
             <End Role="Contact" EntitySet="Contacts" />
             <End Role="UserContactRole" EntitySet="UserContactRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContactStateChange_ContactState" Association="Self.FK_ContactStateChange_ContactState">
-            <End Role="ContactState" EntitySet="ContactStates" />
-            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContactStateProcess_ContactState" Association="Self.FK_ContactStateProcess_ContactState">
-            <End Role="ContactState" EntitySet="ContactStates" />
-            <End Role="ContactStateProcess" EntitySet="ContactStateProcesses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContactStateProcess_ContactState1" Association="Self.FK_ContactStateProcess_ContactState1">
-            <End Role="ContactState" EntitySet="ContactStates" />
-            <End Role="ContactStateProcess" EntitySet="ContactStateProcesses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ToBeConverted_ContactState" Association="Self.FK_ToBeConverted_ContactState">
-            <End Role="ContactState" EntitySet="ContactStates" />
-            <End Role="ToBeConverted" EntitySet="ToBeConverteds" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactStateChange_ContactStateChange" Association="Self.FK_ContactStateChange_ContactStateChange">
             <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
@@ -1660,9 +1480,55 @@
             <End Role="UserContactRole" EntitySet="UserContactRoles" />
           </AssociationSet>
           <EntitySet Name="sysdiagrams" EntityType="CrmModel.sysdiagram" />
-          <AssociationSet Name="FK_Contact_ContactState" Association="CrmModel.FK_Contact_ContactState">
-            <End Role="ContactState" EntitySet="ContactStates" />
+          <AssociationSet Name="FK_Contact_TuDien" Association="CrmModel.FK_Contact_TuDien">
+            <End Role="TuDien" EntitySet="TuDiens" />
             <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <EntitySet Name="Account" EntityType="CrmModel.Account" />
+          <AssociationSet Name="FK_Account_TuDien" Association="CrmModel.FK_Account_TuDien">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountContactRole_Account" Association="CrmModel.FK_AccountContactRole_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="AccountContactRole" EntitySet="AccountContactRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_Account" Association="CrmModel.FK_Contract_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Contract" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Account" Association="CrmModel.FK_Order_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Account" Association="CrmModel.FK_Task_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <EntitySet Name="ContactState" EntityType="CrmModel.ContactState" />
+          <AssociationSet Name="FK_ContactState_Company" Association="CrmModel.FK_ContactState_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ContactState" EntitySet="ContactState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_ContactState" Association="CrmModel.FK_Contact_ContactState">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateChange_ContactState" Association="CrmModel.FK_ContactStateChange_ContactState">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateProcess_ContactState" Association="CrmModel.FK_ContactStateProcess_ContactState">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="ContactStateProcess" EntitySet="ContactStateProcesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactStateProcess_ContactState1" Association="CrmModel.FK_ContactStateProcess_ContactState1">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="ContactStateProcess" EntitySet="ContactStateProcesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToBeConverted_ContactState" Association="CrmModel.FK_ToBeConverted_ContactState">
+            <End Role="ContactState" EntitySet="ContactState" />
+            <End Role="ToBeConverted" EntitySet="ToBeConverteds" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
@@ -1675,6 +1541,122 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <Association Name="FK_Contact_TuDien">
+          <End Type="CrmModel.TuDien" Role="TuDien" Multiplicity="0..1" />
+          <End Type="CrmModel.Contact" Role="Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="IdLoaiKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Sdt01" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Sdt02" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="IdAccountType" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TuDien" Relationship="CrmModel.FK_Account_TuDien" FromRole="Account" ToRole="TuDien" />
+          <NavigationProperty Name="AccountContactRole" Relationship="CrmModel.FK_AccountContactRole_Account" FromRole="Account" ToRole="AccountContactRole" />
+          <NavigationProperty Name="Contract" Relationship="CrmModel.FK_Contract_Account" FromRole="Account" ToRole="Contract" />
+          <NavigationProperty Name="Order" Relationship="CrmModel.FK_Order_Account" FromRole="Account" ToRole="Order" />
+          <NavigationProperty Name="Task" Relationship="CrmModel.FK_Task_Account" FromRole="Account" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_Account_TuDien">
+          <End Type="CrmModel.TuDien" Role="TuDien" Multiplicity="0..1" />
+          <End Type="CrmModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IdAccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountContactRole_Account">
+          <End Type="CrmModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="CrmModel.AccountContactRole" Role="AccountContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountContactRole">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_Account">
+          <End Type="CrmModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="CrmModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Account">
+          <End Type="CrmModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="CrmModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Account">
+          <End Type="CrmModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="CrmModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ContactState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaTrangThai" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="TenTrangThai" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IdCompany" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MoTa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="CrmModel.FK_ContactState_Company" FromRole="ContactState" ToRole="Company" />
+          <NavigationProperty Name="Contact" Relationship="CrmModel.FK_Contact_ContactState" FromRole="ContactState" ToRole="Contact" />
+          <NavigationProperty Name="ContactStateChange" Relationship="CrmModel.FK_ContactStateChange_ContactState" FromRole="ContactState" ToRole="ContactStateChange" />
+          <NavigationProperty Name="ContactStateProcess" Relationship="CrmModel.FK_ContactStateProcess_ContactState" FromRole="ContactState" ToRole="ContactStateProcess" />
+          <NavigationProperty Name="ContactStateProcess1" Relationship="CrmModel.FK_ContactStateProcess_ContactState1" FromRole="ContactState" ToRole="ContactStateProcess" />
+          <NavigationProperty Name="ToBeConverted" Relationship="CrmModel.FK_ToBeConverted_ContactState" FromRole="ContactState" ToRole="ToBeConverted" />
+        </EntityType>
+        <Association Name="FK_ContactState_Company">
+          <End Type="CrmModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="CrmModel.ContactState" Role="ContactState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactState">
+              <PropertyRef Name="IdCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contact_ContactState">
           <End Type="CrmModel.ContactState" Role="ContactState" Multiplicity="0..1" />
           <End Type="CrmModel.Contact" Role="Contact" Multiplicity="*" />
@@ -1687,25 +1669,60 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ContactStateChange_ContactState">
+          <End Type="CrmModel.ContactState" Role="ContactState" Multiplicity="0..1" />
+          <End Type="CrmModel.ContactStateChange" Role="ContactStateChange" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateChange">
+              <PropertyRef Name="IdContactSate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateProcess_ContactState">
+          <End Type="CrmModel.ContactState" Role="ContactState" Multiplicity="0..1" />
+          <End Type="CrmModel.ContactStateProcess" Role="ContactStateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateProcess">
+              <PropertyRef Name="IdTrangThaiTruoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactStateProcess_ContactState1">
+          <End Type="CrmModel.ContactState" Role="ContactState" Multiplicity="0..1" />
+          <End Type="CrmModel.ContactStateProcess" Role="ContactStateProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactStateProcess">
+              <PropertyRef Name="IdTrangThaiSau" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToBeConverted_ContactState">
+          <End Type="CrmModel.ContactState" Role="ContactState" Multiplicity="0..1" />
+          <End Type="CrmModel.ToBeConverted" Role="ToBeConverted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ToBeConverted">
+              <PropertyRef Name="IdContactState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CrmModelStoreContainer" CdmEntityContainer="CrmEntities">
-          <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="CrmModel.Account">
-              <MappingFragment StoreEntitySet="Account">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="Sdt01" ColumnName="Sdt01" />
-                <ScalarProperty Name="Sdt02" ColumnName="Sdt02" />
-                <ScalarProperty Name="IdAccountType" ColumnName="IdAccountType" />
-                <ScalarProperty Name="IdLoaiAccount" ColumnName="IdLoaiAccount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AccountContactRoles">
             <EntityTypeMapping TypeName="CrmModel.AccountContactRole">
               <MappingFragment StoreEntitySet="AccountContactRole">
@@ -1756,18 +1773,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="HanKhachHang" ColumnName="HanKhachHang" />
                 <ScalarProperty Name="IdLoaiKhachHang" ColumnName="IdLoaiKhachHang" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ContactStates">
-            <EntityTypeMapping TypeName="CrmModel.ContactState">
-              <MappingFragment StoreEntitySet="ContactState">
-                <ScalarProperty Name="IdTrangThai" ColumnName="IdTrangThai" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
-                <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
-                <ScalarProperty Name="IdCompany" ColumnName="IdCompany" />
-                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1952,6 +1957,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="CrmModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="IdAccountType" ColumnName="IdAccountType" />
+                <ScalarProperty Name="Sdt02" ColumnName="Sdt02" />
+                <ScalarProperty Name="Sdt01" ColumnName="Sdt01" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactState">
+            <EntityTypeMapping TypeName="CrmModel.ContactState">
+              <MappingFragment StoreEntitySet="ContactState">
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IdCompany" ColumnName="IdCompany" />
+                <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
+                <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1966,7 +1994,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

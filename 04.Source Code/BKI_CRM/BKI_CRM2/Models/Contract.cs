@@ -46,8 +46,6 @@ public partial class Contract
 
 
 
-    public virtual Account Account { get; set; }
-
     public virtual TuDien TuDien { get; set; }
 
     public virtual ICollection<ContractContactRole> ContractContactRole { get; set; }
@@ -55,6 +53,8 @@ public partial class Contract
     public virtual ICollection<Order> Order { get; set; }
 
     public virtual ICollection<Quote> Quote { get; set; }
+
+    public virtual Account Account { get; set; }
 
 }
 

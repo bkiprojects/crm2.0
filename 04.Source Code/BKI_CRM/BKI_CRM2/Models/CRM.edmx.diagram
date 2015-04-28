@@ -5,12 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9066973dcb204c579fdcd60db30f1b3b" Name="Diagram1">
-        <EntityTypeShape EntityType="CrmModel.Account" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CrmModel.AccountContactRole" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CrmModel.Action" Width="1.5" PointX="8.25" PointY="23.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CrmModel.Company" Width="1.5" PointX="6" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CrmModel.Contact" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CrmModel.ContactState" Width="1.5" PointX="11.25" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CrmModel.ContactStateChange" Width="1.5" PointX="13.5" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CrmModel.ContactStateProcess" Width="1.5" PointX="13.5" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CrmModel.Contract" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
@@ -25,23 +23,13 @@
         <EntityTypeShape EntityType="CrmModel.User" Width="1.5" PointX="8.25" PointY="17.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CrmModel.UserContactRole" Width="1.5" PointX="10.5" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CrmModel.UserGroup" Width="1.5" PointX="6" PointY="20.5" IsExpanded="true" />
-        <AssociationConnector Association="CrmModel.FK_Account_TuDien" ManuallyRouted="false" />
-        <AssociationConnector Association="CrmModel.FK_AccountContactRole_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="CrmModel.FK_Contract_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="CrmModel.FK_Order_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="CrmModel.FK_Task_Account" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_AccountContactRole_Contact" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_ACTION_UserGroup" ManuallyRouted="false" />
-        <AssociationConnector Association="CrmModel.FK_ContactState_Company" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_User_Company" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_ContactStateChange_Contact" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_ContractContactRole_Contact" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_Task_Contact" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_UserContactRole_Contact" ManuallyRouted="false" />
-        <AssociationConnector Association="CrmModel.FK_ContactStateChange_ContactState" ManuallyRouted="false" />
-        <AssociationConnector Association="CrmModel.FK_ContactStateProcess_ContactState" ManuallyRouted="false" />
-        <AssociationConnector Association="CrmModel.FK_ContactStateProcess_ContactState1" ManuallyRouted="false" />
-        <AssociationConnector Association="CrmModel.FK_ToBeConverted_ContactState" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_ContactStateChange_ContactStateChange" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_ContactStateChange_User" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_Contract_TuDien" ManuallyRouted="false" />
@@ -59,7 +47,20 @@
         <AssociationConnector Association="CrmModel.FK_User_UserGroup" ManuallyRouted="false" />
         <AssociationConnector Association="CrmModel.FK_UserContactRole_User" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CrmModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="CrmModel.FK_Contact_TuDien" />
+        <EntityTypeShape EntityType="CrmModel.Account" Width="1.5" PointX="5.25" PointY="8.125" />
+        <AssociationConnector Association="CrmModel.FK_Account_TuDien" />
+        <AssociationConnector Association="CrmModel.FK_AccountContactRole_Account" />
+        <AssociationConnector Association="CrmModel.FK_Contract_Account" />
+        <AssociationConnector Association="CrmModel.FK_Order_Account" />
+        <AssociationConnector Association="CrmModel.FK_Task_Account" />
+        <EntityTypeShape EntityType="CrmModel.ContactState" Width="1.5" PointX="8.25" PointY="26.125" />
+        <AssociationConnector Association="CrmModel.FK_ContactState_Company" />
         <AssociationConnector Association="CrmModel.FK_Contact_ContactState" />
+        <AssociationConnector Association="CrmModel.FK_ContactStateChange_ContactState" />
+        <AssociationConnector Association="CrmModel.FK_ContactStateProcess_ContactState" />
+        <AssociationConnector Association="CrmModel.FK_ContactStateProcess_ContactState1" />
+        <AssociationConnector Association="CrmModel.FK_ToBeConverted_ContactState" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

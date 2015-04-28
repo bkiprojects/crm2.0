@@ -40,13 +40,13 @@ public partial class ContactStateChange
 
     public virtual Contact Contact { get; set; }
 
-    public virtual ContactState ContactState { get; set; }
-
     public virtual ContactStateChange ContactStateChange1 { get; set; }
 
     public virtual ContactStateChange ContactStateChange2 { get; set; }
 
     public virtual User User { get; set; }
+
+    public virtual ContactState ContactState { get; set; }
 
 }
 

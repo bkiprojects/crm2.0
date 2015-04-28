@@ -32,17 +32,13 @@ public partial class CrmEntities : DbContext
     }
 
 
-    public virtual DbSet<Account> Account { get; set; }
-
     public virtual DbSet<AccountContactRole> AccountContactRole { get; set; }
 
     public virtual DbSet<Action> Action { get; set; }
 
-    public virtual DbSet<Company> Companie { get; set; }
+    public virtual DbSet<Company> Company { get; set; }
 
     public virtual DbSet<Contact> Contact { get; set; }
-
-    public virtual DbSet<ContactState> ContactState { get; set; }
 
     public virtual DbSet<ContactStateChange> ContactStateChange { get; set; }
 
@@ -73,6 +69,10 @@ public partial class CrmEntities : DbContext
     public virtual DbSet<UserGroup> UserGroup { get; set; }
 
     public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+
+    public virtual DbSet<Account> Account { get; set; }
+
+    public virtual DbSet<ContactState> ContactState { get; set; }
 
 }
 

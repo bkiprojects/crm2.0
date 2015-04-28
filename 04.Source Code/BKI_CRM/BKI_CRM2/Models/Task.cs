@@ -40,8 +40,6 @@ public partial class Task
 
 
 
-    public virtual Account Account { get; set; }
-
     public virtual Contact Contact { get; set; }
 
     public virtual TuDien TuDien { get; set; }
@@ -51,6 +49,8 @@ public partial class Task
     public virtual TuDien TuDien2 { get; set; }
 
     public virtual User User { get; set; }
+
+    public virtual Account Account { get; set; }
 
 }
 

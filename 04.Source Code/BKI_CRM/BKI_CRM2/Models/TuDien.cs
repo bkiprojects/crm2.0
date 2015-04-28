@@ -21,8 +21,6 @@ public partial class TuDien
     public TuDien()
     {
 
-        this.Account = new HashSet<Account>();
-
         this.Contract = new HashSet<Contract>();
 
         this.Order = new HashSet<Order>();
@@ -36,6 +34,10 @@ public partial class TuDien
         this.Task1 = new HashSet<Task>();
 
         this.Task2 = new HashSet<Task>();
+
+        this.Contact = new HashSet<Contact>();
+
+        this.Account = new HashSet<Account>();
 
     }
 
@@ -52,8 +54,6 @@ public partial class TuDien
 
 
 
-    public virtual ICollection<Account> Account { get; set; }
-
     public virtual ICollection<Contract> Contract { get; set; }
 
     public virtual LoaiTuDien LoaiTuDien { get; set; }
@@ -69,6 +69,10 @@ public partial class TuDien
     public virtual ICollection<Task> Task1 { get; set; }
 
     public virtual ICollection<Task> Task2 { get; set; }
+
+    public virtual ICollection<Contact> Contact { get; set; }
+
+    public virtual ICollection<Account> Account { get; set; }
 
 }
 
