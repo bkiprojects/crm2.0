@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="title">
+    <h2>DANH MỤC CÔNG VIỆC</h2>
+</div>
+
+<div style="margin: 20px 0px 30px 30px;">
+    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm công việc
+    </button>
+
+     <select id="thuc_hien" style="margin-left:200px;">
+        <option></option>
+        <option value="xuat_excel">Xuất Excel</option>
+        <option value="in">In</option>
+    </select>
+</div>
+<div>
+     
+    <table class=" mytable">
+                    <thead>
+                        <tr>
+                           
+                            <th><span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> &nbsp;Độ quan trọng</th>
+                            <th>Tên công việc</th>
+                            <th>Làm việc với</th>
+                            <th>Nội dung</th>
+                            <th>Bắt đầu tại ngày</th>
+                            <th>Dự kiến hoàn thành</th>
+                            <th>Trạng thái hiện tại</th>
+                            <th>Loại công việc</th>
+                            <th>Liên hệ với</th>
+                            <th>Nhân viên thực hiện</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Bình thường
+                            @*   <select class="form-control">
+                                   <option></option>
+                                    <option value="">Quan trọng</option>
+                                    <option value="">Bình thường</option>
+                                </select>*@
+                            </td>
+                            <td>Gọi điện cho anh Công</td>
+                            <td>Côngnd</td>
+                            <td>bán iPost</td>
+                            <td>2015-04-29</td>
+                            <td>2015-04-30</td>
+                            <td>Giao việc</td>
+                            <td></td>
+                            <td>A.Tuấn</td>
+                            <td>Tuyềnnt</td>
+                      </tr>  
+                   </tbody>
+                </table>
+      
+</div>
+<script>
+    $(document).ready(function () {
+        $("#thuc_hien").select2({
+            placeholder: "Thực hiện",
+            allowClear: true
+        });
+        $('.mytable').dataTable();
+    });
+</script>

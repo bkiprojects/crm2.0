@@ -37,6 +37,16 @@
                 });
             });
 
+            $('#cv').click(function () {
+                $.ajax({
+                    url: "/Task/Index",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
+
             $('#dntt').click(function () {
                 $.ajax({
                     url: "/Home/DinhNghiaTrangThai",
@@ -89,6 +99,9 @@
                                 <li><a href="#" id="dmkh">Danh mục khách hàng</a></li>
                                 <li><a href="#" id="hd">Hợp đồng</a></li>
                             </ul>
+                        </li>
+                        <li>
+                          <a href="#" id="cv">CÔNG VIỆC</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">TRẠNG THÁI<span class="caret"></span></a>
