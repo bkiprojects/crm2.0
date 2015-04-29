@@ -57,7 +57,7 @@ public partial class CrmEntities : DbContext
 
     public virtual DbSet<Quote> Quote { get; set; }
 
-    public virtual DbSet<Task> Tasks { get; set; }
+    public virtual DbSet<Task> Task { get; set; }
 
     public virtual DbSet<ToBeConverted> ToBeConverted { get; set; }
 

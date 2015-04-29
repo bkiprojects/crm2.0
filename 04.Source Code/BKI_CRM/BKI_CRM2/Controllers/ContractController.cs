@@ -30,10 +30,8 @@ namespace BKI_CRM2.Controllers
 
         public ActionResult Delete(decimal id_kh)
         {
-            //decimal id = Convert.ToDecimal(id_kh);
             CrmEntities v_model = new CrmEntities();
-            int affected = v_model.pr_Contact_Delete(id_kh);
-            v_model.SaveChanges();
+            int affected = v_model.pr_Contract_Delete(id_kh);
             return Json(affected, JsonRequestBehavior.AllowGet);
         }
 
@@ -45,32 +43,26 @@ namespace BKI_CRM2.Controllers
                 CrmEntities v_model = new CrmEntities();
                 decimal v_id = Convert.ToDecimal(IdContract);
                 var v_contract = v_model.Contract.Where(x => x.Id == v_id).First();
-                //string v_ngay_bat_dau = "", v_ngay_ket_thuc = "";
-                //if (v_contract != null)
-                //{
-                //    if (v_contract.NgayBatDau != null)
-                //    {
-                //        v_ngay_bat_dau = ((DateTime)v_contract.NgayBatDau).ToString("yyyy-MM-dd");
-                //    }
-                //    if (v_contract.NgayKetThuc != null)
-                //    {
-                //        v_ngay_ket_thuc = ((DateTime)v_contract.NgayKetThuc).ToString("yyyy-MM-dd");
-                //    }
-                //}
-                return Json(new { 
-                    ngay_bat_dau= v_contract.NgayBatDau,
-                    ngay_ket_thuc=v_contract.NgayKetThuc,
+                string v_ngay_bat_dau = "", v_ngay_ket_thuc = "";
+                if (v_contract != null)
+                {
+                    if (v_contract.NgayBatDau != null)
+                    {
+                        v_ngay_bat_dau = ((DateTime)v_contract.NgayBatDau).ToString("yyyy-MM-dd");
+                    }
+                    if (v_contract.NgayKetThuc != null)
+                    {
+                        v_ngay_ket_thuc = ((DateTime)v_contract.NgayKetThuc).ToString("yyyy-MM-dd");
+                    }
+                }
+                return Json(new {
+                    ngay_bat_dau = v_ngay_bat_dau,
+                    ngay_ket_thuc = v_ngay_ket_thuc,
                     so_hop_dong= v_contract.SoHopDong,
                     noi_dung= v_contract.NoiDung  
                 }, JsonRequestBehavior.AllowGet);
             }
             else return Json(true, JsonRequestBehavior.AllowGet);
         }
-        //public ActionResult Delete(decimal id_kh)
-        //{
-        //    CrmEntities v_model = new CrmEntities();
-        //    int affected = v_model.pr_Contact_Delete(id_kh);
-        //    return Json(affected, JsonRequestBehavior.AllowGet);
-        //}
     }
 }

@@ -1586,7 +1586,7 @@
             <End Role="Quote" EntitySet="Quotes" />
           </AssociationSet>
           <FunctionImport Name="pr_Contract_Delete">
-            <Parameter Name="Id" Mode="In" Type="Decimal" />
+          <Parameter Name="Id" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagram">
