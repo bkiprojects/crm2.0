@@ -44,24 +44,68 @@
                             <th>Số hợp đồng</th>
                             <th>Nội dung</th>
                             <th>Tổ chức</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in hop_dong)
 	                    {
-		                 <tr>
+		                 <tr id="@item.Id">
                             <td>@item.NgayBatDau</td>
                             <td>@item.NgayKetThuc</td>
                             <td>@item.SoHopDong</td>
                             <td>@item.NoiDung</td>
                             <td>@item.IdAccount</td>
+                            <td><button type="button" class="btn btn-defaul"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                            <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                         </tr>
 	                    }
                       
                         
                    </tbody>
                 </table>
-      
+    
+ <div class="modal fade" id="thay_doi">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title title">THÔNG TIN LIÊN HỆ</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" id="clear">Xóa trắng</button>
+                <button type="button" class="btn btn-primary" onclick="thuchiensua($('#thay_doi').attr('name'));">Lưu lại</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->   
+  
+    <div class="modal fade" id="xoa">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">THÔNG BÁO</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa dòng dữ liệu này không?</p>
+                <div id="giatri" style="display:none;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="xoa($('#giatri').html())">Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+        
 </div>
 <script>
     $(document).ready(function () {
@@ -71,4 +115,27 @@
         });
         $('.mytable').dataTable();
     });
+
+    function xoa(id_kh) {
+        $.ajax({
+            url: "/Contract/Delete",
+            type: "POST",
+            data: { id_kh: id_kh },
+            dataType: "json",
+            error: function () {
+                alert("Xóa thất bại!");
+                $('#xoa').modal('hide');
+            },
+            success: function (data) {
+                alert('Xóa thành công!');
+                $('#' + id_kh).remove();
+                $('#xoa').modal('hide');
+            }
+        });
+    }
+
+    function hienxoa(id_kh) {
+        giatri.innerHTML = id_kh;
+        $('#xoa').modal('show');
+    }
 </script>

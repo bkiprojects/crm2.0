@@ -28,5 +28,13 @@ namespace BKI_CRM2.Controllers
             return PartialView();
         }
 
+        public ActionResult Delete(decimal id_kh)
+        {
+            //decimal id = Convert.ToDecimal(id_kh);
+            CrmEntities v_model = new CrmEntities();
+            int affected = v_model.pr_Contact_Delete(id_kh);
+            v_model.SaveChanges();
+            return Json(affected, JsonRequestBehavior.AllowGet);
+        }
     }
 }
