@@ -334,6 +334,9 @@
         $('#thay_doi').on('hidden.bs.modal', function () {
             clear();
         });
+        $('#switch').on('hidden.bs.modal', function () {
+            clearflag();
+        });
         $("#thuc_hien").select2({
             placeholder: "Thực hiện",
             allowClear: true
@@ -421,6 +424,10 @@
             allowClear: true
         });
     }
+    function clearflag() {
+        $('#par').html("<select id='trangthaichuyen'></select>");
+        $('#switch').modal('hide');
+    }
     function sua(id_kh) {
         $('#thay_doi').attr('name', id_kh);
         $.ajax({
@@ -507,7 +514,7 @@
         });
     }
     function thuchienchuyen(id_kh) {
-        if ($('#trangthaichuyen') == undefined) {
+        if ($('#par').find('strong').html()!=undefined) {
             alert('Trạng thái không đổi');
             $('#switch').modal('hide');
         }

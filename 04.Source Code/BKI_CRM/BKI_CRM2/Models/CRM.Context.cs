@@ -57,7 +57,7 @@ public partial class CrmEntities : DbContext
 
     public virtual DbSet<Quote> Quote { get; set; }
 
-    public virtual DbSet<Task> Task { get; set; }
+    public virtual DbSet<Task> Tasks { get; set; }
 
     public virtual DbSet<ToBeConverted> ToBeConverted { get; set; }
 
@@ -276,6 +276,18 @@ public partial class CrmEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contact_Update", idParameter, hoParameter, tenParameter, diaChiParameter, gioiTinhParameter, imageParameter, facebookParameter, skypeParameter, ngaySinhParameter, sdt01Parameter, sdt02Parameter, maSoThueParameter, soTaiKhoanParameter, websiteParameter, emailParameter, hanKhachHangParameter, idLoaiKhachHangParameter, idTrangThaiHienTaiParameter);
+    }
+
+
+    public virtual int pr_Contract_Delete(Nullable<decimal> id)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contract_Delete", idParameter);
     }
 
 }

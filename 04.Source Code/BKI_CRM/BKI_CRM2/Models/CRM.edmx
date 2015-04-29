@@ -719,6 +719,9 @@
           <Parameter Name="IdLoaiKhachHang" Type="numeric" Mode="In" />
           <Parameter Name="IdTrangThaiHienTai" Type="numeric" Mode="In" />
         </Function>
+        <Function Name="pr_Contract_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+        </Function>
         <EntityContainer Name="CrmModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountContactRole" EntityType="Self.AccountContactRole" Schema="dbo" store:Type="Tables" />
@@ -1582,6 +1585,9 @@
             <End Role="Contract" EntitySet="Contract" />
             <End Role="Quote" EntitySet="Quotes" />
           </AssociationSet>
+          <FunctionImport Name="pr_Contract_Delete">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2130,6 +2136,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pr_Contract_Delete" FunctionName="CrmModel.Store.pr_Contract_Delete" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
