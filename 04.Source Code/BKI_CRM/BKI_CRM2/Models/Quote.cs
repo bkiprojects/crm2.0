@@ -32,9 +32,9 @@ public partial class Quote
 
 
 
-    public virtual Contract Contract { get; set; }
-
     public virtual TuDien TuDien { get; set; }
+
+    public virtual Contract Contract { get; set; }
 
 }
 

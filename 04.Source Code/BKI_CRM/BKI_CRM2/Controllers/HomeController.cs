@@ -22,7 +22,7 @@ namespace BKI_CRM2.Controllers
             CrmEntities v_model = new CrmEntities();
             List<List<Contact>> v_dm_kh = new List<List<Contact>>();
             List<TuDien> v_tu_dien = new List<TuDien>();
-            List<ContactState> state = v_model.ContactState.ToList<ContactState>();
+            List<ContactState> state = v_model.ContactState.OrderBy(x => x.Order).ToList<ContactState>();
             for (int i = 0; i < state.Count; i++) {
                 decimal temp = state[i].Id;
                 v_dm_kh.Add(v_model.Contact.Where(x => x.IdTrangThaiHienTai == temp).ToList<Contact>());

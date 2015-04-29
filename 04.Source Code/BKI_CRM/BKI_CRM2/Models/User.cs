@@ -27,6 +27,8 @@ public partial class User
 
         this.UserContactRole = new HashSet<UserContactRole>();
 
+        this.Contract = new HashSet<Contract>();
+
     }
 
 
@@ -69,6 +71,8 @@ public partial class User
     public virtual UserGroup UserGroup { get; set; }
 
     public virtual ICollection<UserContactRole> UserContactRole { get; set; }
+
+    public virtual ICollection<Contract> Contract { get; set; }
 
 }
 

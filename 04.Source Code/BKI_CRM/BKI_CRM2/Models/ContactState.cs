@@ -44,6 +44,8 @@ public partial class ContactState
 
     public string MoTa { get; set; }
 
+    public decimal Order { get; set; }
+
 
 
     public virtual Company Company { get; set; }

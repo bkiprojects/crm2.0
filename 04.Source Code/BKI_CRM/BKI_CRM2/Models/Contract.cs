@@ -36,7 +36,7 @@ public partial class Contract
 
     public Nullable<System.DateTime> NgayKetThuc { get; set; }
 
-    public Nullable<decimal> SoHopDong { get; set; }
+    public string SoHopDong { get; set; }
 
     public string NoiDung { get; set; }
 
@@ -44,17 +44,21 @@ public partial class Contract
 
     public Nullable<decimal> IdLoaiContract { get; set; }
 
+    public Nullable<decimal> IdUser { get; set; }
 
+
+
+    public virtual Account Account { get; set; }
 
     public virtual TuDien TuDien { get; set; }
+
+    public virtual User User { get; set; }
 
     public virtual ICollection<ContractContactRole> ContractContactRole { get; set; }
 
     public virtual ICollection<Order> Order { get; set; }
 
     public virtual ICollection<Quote> Quote { get; set; }
-
-    public virtual Account Account { get; set; }
 
 }
 

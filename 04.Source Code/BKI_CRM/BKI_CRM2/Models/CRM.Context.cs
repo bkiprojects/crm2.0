@@ -47,8 +47,6 @@ public partial class CrmEntities : DbContext
 
     public virtual DbSet<ContactStateProcess> ContactStateProcess { get; set; }
 
-    public virtual DbSet<Contract> Contract { get; set; }
-
     public virtual DbSet<ContractContactRole> ContractContactRole { get; set; }
 
     public virtual DbSet<LoaiTuDien> LoaiTuDien { get; set; }
@@ -76,6 +74,8 @@ public partial class CrmEntities : DbContext
     public virtual DbSet<Account> Account { get; set; }
 
     public virtual DbSet<ContactState> ContactState { get; set; }
+
+    public virtual DbSet<Contract> Contract { get; set; }
 
 
     public virtual int pr_Contact_Delete(Nullable<decimal> id)

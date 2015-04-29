@@ -74,6 +74,7 @@
           <Property Name="TenTrangThai" Type="nvarchar" MaxLength="200" />
           <Property Name="IdCompany" Type="numeric" Precision="18" Scale="0" />
           <Property Name="MoTa" Type="nvarchar" MaxLength="200" />
+          <Property Name="Order" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="ContactStateChange">
           <Key>
@@ -105,10 +106,11 @@
           <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NgayBatDau" Type="datetime" />
           <Property Name="NgayKetThuc" Type="datetime" />
-          <Property Name="SoHopDong" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SoHopDong" Type="nvarchar" MaxLength="50" />
           <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
           <Property Name="IdAccount" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdLoaiContract" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdUser" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="ContractContactRole">
           <Key>
@@ -419,6 +421,18 @@
             </Principal>
             <Dependent Role="Contract">
               <PropertyRef Name="IdLoaiContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IdUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -787,6 +801,10 @@
             <End Role="TuDien" EntitySet="TuDien" />
             <End Role="Contract" EntitySet="Contract" />
           </AssociationSet>
+          <AssociationSet Name="FK_Contract_User" Association="Self.FK_Contract_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
           <AssociationSet Name="FK_ContractContactRole_Contact" Association="Self.FK_ContractContactRole_Contact">
             <End Role="Contact" EntitySet="Contact" />
             <End Role="ContractContactRole" EntitySet="ContractContactRole" />
@@ -964,23 +982,6 @@
           <NavigationProperty Name="ContactState" Relationship="CrmModel.FK_ContactStateProcess_ContactState" FromRole="ContactStateProcess" ToRole="ContactState" />
           <NavigationProperty Name="ContactState1" Relationship="CrmModel.FK_ContactStateProcess_ContactState1" FromRole="ContactStateProcess" ToRole="ContactState" />
           </EntityType>
-        <EntityType Name="Contract">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
-          <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
-          <Property Name="SoHopDong" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdLoaiContract" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="TuDien" Relationship="Self.FK_Contract_TuDien" FromRole="Contract" ToRole="TuDien" />
-          <NavigationProperty Name="ContractContactRole" Relationship="Self.FK_ContractContactRole_Contract" FromRole="Contract" ToRole="ContractContactRole" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Contract" FromRole="Contract" ToRole="Order" />
-          <NavigationProperty Name="Quote" Relationship="Self.FK_Quote_Contract" FromRole="Contract" ToRole="Quote" />
-          <NavigationProperty Name="Account" Relationship="CrmModel.FK_Contract_Account" FromRole="Contract" ToRole="Account" />
-        </EntityType>
         <EntityType Name="ContractContactRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -992,7 +993,7 @@
           <Property Name="IsPrimary" Type="Boolean" />
           <Property Name="VaiTroContact" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Contact" Relationship="Self.FK_ContractContactRole_Contact" FromRole="ContractContactRole" ToRole="Contact" />
-          <NavigationProperty Name="Contract" Relationship="Self.FK_ContractContactRole_Contract" FromRole="ContractContactRole" ToRole="Contract" />
+          <NavigationProperty Name="Contract" Relationship="CrmModel.FK_ContractContactRole_Contract" FromRole="ContractContactRole" ToRole="Contract" />
         </EntityType>
         <EntityType Name="LoaiTuDien">
           <Key>
@@ -1012,9 +1013,9 @@
           <Property Name="IdQuote" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdLoaiOrder" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Contract" Relationship="Self.FK_Order_Contract" FromRole="Order" ToRole="Contract" />
           <NavigationProperty Name="TuDien" Relationship="Self.FK_Order_TuDien" FromRole="Order" ToRole="TuDien" />
           <NavigationProperty Name="Account" Relationship="CrmModel.FK_Order_Account" FromRole="Order" ToRole="Account" />
+          <NavigationProperty Name="Contract" Relationship="CrmModel.FK_Order_Contract" FromRole="Order" ToRole="Contract" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -1037,8 +1038,8 @@
           <Property Name="MoTa" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="TenBaoGia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IdLoaiQuote" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Contract" Relationship="Self.FK_Quote_Contract" FromRole="Quote" ToRole="Contract" />
           <NavigationProperty Name="TuDien" Relationship="Self.FK_Quote_TuDien" FromRole="Quote" ToRole="TuDien" />
+          <NavigationProperty Name="Contract" Relationship="CrmModel.FK_Quote_Contract" FromRole="Quote" ToRole="Contract" />
         </EntityType>
         <EntityType Name="Task">
           <Key>
@@ -1080,7 +1081,6 @@
           <Property Name="MaTuDien" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="IdLoaiTuDien" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Contract" Relationship="Self.FK_Contract_TuDien" FromRole="TuDien" ToRole="Contract" />
           <NavigationProperty Name="LoaiTuDien" Relationship="Self.FK_TuDien_LoaiTuDien" FromRole="TuDien" ToRole="LoaiTuDien" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_TuDien" FromRole="TuDien" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_TuDien" FromRole="TuDien" ToRole="Product" />
@@ -1090,6 +1090,7 @@
           <NavigationProperty Name="Task2" Relationship="Self.FK_Task_TuDien2" FromRole="TuDien" ToRole="Task" />
           <NavigationProperty Name="Contact" Relationship="CrmModel.FK_Contact_TuDien" FromRole="TuDien" ToRole="Contact" />
           <NavigationProperty Name="Account" Relationship="CrmModel.FK_Account_TuDien" FromRole="TuDien" ToRole="Account" />
+          <NavigationProperty Name="Contract" Relationship="CrmModel.FK_Contract_TuDien" FromRole="TuDien" ToRole="Contract" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1114,6 +1115,7 @@
           <NavigationProperty Name="Task" Relationship="Self.FK_Task_User" FromRole="User" ToRole="Task" />
           <NavigationProperty Name="UserGroup" Relationship="Self.FK_User_UserGroup" FromRole="User" ToRole="UserGroup" />
           <NavigationProperty Name="UserContactRole" Relationship="Self.FK_UserContactRole_User" FromRole="User" ToRole="UserContactRole" />
+          <NavigationProperty Name="Contract" Relationship="CrmModel.FK_Contract_User" FromRole="User" ToRole="Contract" />
         </EntityType>
         <EntityType Name="UserContactRole">
           <Key>
@@ -1247,54 +1249,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contract_TuDien">
-          <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
-          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TuDien">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contract">
-              <PropertyRef Name="IdLoaiContract" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ContractContactRole_Contract">
-          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
-          <End Role="ContractContactRole" Type="Self.ContractContactRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contract">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ContractContactRole">
-              <PropertyRef Name="IdContract" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Contract">
-          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contract">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="IdContract" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Quote_Contract">
-          <End Role="Contract" Type="Self.Contract" Multiplicity="0..1" />
-          <End Role="Quote" Type="Self.Quote" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Contract">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Quote">
-              <PropertyRef Name="IdContract" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TuDien_LoaiTuDien">
           <End Role="LoaiTuDien" Type="Self.LoaiTuDien" Multiplicity="0..1" />
           <End Role="TuDien" Type="Self.TuDien" Multiplicity="*" />
@@ -1422,7 +1376,6 @@
           <EntitySet Name="Contacts" EntityType="Self.Contact" />
           <EntitySet Name="ContactStateChanges" EntityType="Self.ContactStateChange" />
           <EntitySet Name="ContactStateProcesses" EntityType="Self.ContactStateProcess" />
-          <EntitySet Name="Contracts" EntityType="Self.Contract" />
           <EntitySet Name="ContractContactRoles" EntityType="Self.ContractContactRole" />
           <EntitySet Name="LoaiTuDiens" EntityType="Self.LoaiTuDien" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
@@ -1469,22 +1422,6 @@
           <AssociationSet Name="FK_ContactStateChange_User" Association="Self.FK_ContactStateChange_User">
             <End Role="User" EntitySet="Users" />
             <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contract_TuDien" Association="Self.FK_Contract_TuDien">
-            <End Role="TuDien" EntitySet="TuDiens" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContractContactRole_Contract" Association="Self.FK_ContractContactRole_Contract">
-            <End Role="Contract" EntitySet="Contracts" />
-            <End Role="ContractContactRole" EntitySet="ContractContactRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Contract" Association="Self.FK_Order_Contract">
-            <End Role="Contract" EntitySet="Contracts" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Quote_Contract" Association="Self.FK_Quote_Contract">
-            <End Role="Contract" EntitySet="Contracts" />
-            <End Role="Quote" EntitySet="Quotes" />
           </AssociationSet>
           <AssociationSet Name="FK_TuDien_LoaiTuDien" Association="Self.FK_TuDien_LoaiTuDien">
             <End Role="LoaiTuDien" EntitySet="LoaiTuDiens" />
@@ -1540,10 +1477,6 @@
             <End Role="Account" EntitySet="Account" />
             <End Role="AccountContactRole" EntitySet="AccountContactRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contract_Account" Association="CrmModel.FK_Contract_Account">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Contract" EntitySet="Contracts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Account" Association="CrmModel.FK_Order_Account">
             <End Role="Account" EntitySet="Account" />
             <End Role="Order" EntitySet="Orders" />
@@ -1582,7 +1515,7 @@
             <End Role="UserGroup" EntitySet="UserGroups" />
           </AssociationSet>
           <FunctionImport Name="pr_Contact_Delete">
-            <Parameter Name="Id" Mode="In" Type="Decimal" />
+          <Parameter Name="Id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="pr_Contact_Insert">
             <Parameter Name="Ho" Mode="In" Type="String" />
@@ -1624,6 +1557,31 @@
             <Parameter Name="IdLoaiKhachHang" Mode="In" Type="Decimal" />
             <Parameter Name="IdTrangThaiHienTai" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="Contract" EntityType="CrmModel.Contract" />
+          <AssociationSet Name="FK_Contract_Account" Association="CrmModel.FK_Contract_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_TuDien" Association="CrmModel.FK_Contract_TuDien">
+            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contract_User" Association="CrmModel.FK_Contract_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractContactRole_Contract" Association="CrmModel.FK_ContractContactRole_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="ContractContactRole" EntitySet="ContractContactRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Contract" Association="CrmModel.FK_Order_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quote_Contract" Association="CrmModel.FK_Quote_Contract">
+            <End Role="Contract" EntitySet="Contract" />
+            <End Role="Quote" EntitySet="Quotes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1659,9 +1617,9 @@
           <Property Name="IdAccountType" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="TuDien" Relationship="CrmModel.FK_Account_TuDien" FromRole="Account" ToRole="TuDien" />
           <NavigationProperty Name="AccountContactRole" Relationship="CrmModel.FK_AccountContactRole_Account" FromRole="Account" ToRole="AccountContactRole" />
-          <NavigationProperty Name="Contract" Relationship="CrmModel.FK_Contract_Account" FromRole="Account" ToRole="Contract" />
           <NavigationProperty Name="Order" Relationship="CrmModel.FK_Order_Account" FromRole="Account" ToRole="Order" />
           <NavigationProperty Name="Task" Relationship="CrmModel.FK_Task_Account" FromRole="Account" ToRole="Task" />
+          <NavigationProperty Name="Contract" Relationship="CrmModel.FK_Contract_Account" FromRole="Account" ToRole="Contract" />
         </EntityType>
         <Association Name="FK_Account_TuDien">
           <End Type="CrmModel.TuDien" Role="TuDien" Multiplicity="0..1" />
@@ -1683,18 +1641,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AccountContactRole">
-              <PropertyRef Name="IdAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contract_Account">
-          <End Type="CrmModel.Account" Role="Account" Multiplicity="0..1" />
-          <End Type="CrmModel.Contract" Role="Contract" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contract">
               <PropertyRef Name="IdAccount" />
             </Dependent>
           </ReferentialConstraint>
@@ -1738,6 +1684,7 @@
           <NavigationProperty Name="ContactStateProcess" Relationship="CrmModel.FK_ContactStateProcess_ContactState" FromRole="ContactState" ToRole="ContactStateProcess" />
           <NavigationProperty Name="ContactStateProcess1" Relationship="CrmModel.FK_ContactStateProcess_ContactState1" FromRole="ContactState" ToRole="ContactStateProcess" />
           <NavigationProperty Name="ToBeConverted" Relationship="CrmModel.FK_ToBeConverted_ContactState" FromRole="ContactState" ToRole="ToBeConverted" />
+          <Property Name="Order" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="FK_ContactState_Company">
           <End Type="CrmModel.Company" Role="Company" Multiplicity="0..1" />
@@ -1823,6 +1770,97 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+          <Property Name="SoHopDong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdLoaiContract" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdUser" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Account" Relationship="CrmModel.FK_Contract_Account" FromRole="Contract" ToRole="Account" />
+          <NavigationProperty Name="TuDien" Relationship="CrmModel.FK_Contract_TuDien" FromRole="Contract" ToRole="TuDien" />
+          <NavigationProperty Name="User" Relationship="CrmModel.FK_Contract_User" FromRole="Contract" ToRole="User" />
+          <NavigationProperty Name="ContractContactRole" Relationship="CrmModel.FK_ContractContactRole_Contract" FromRole="Contract" ToRole="ContractContactRole" />
+          <NavigationProperty Name="Order" Relationship="CrmModel.FK_Order_Contract" FromRole="Contract" ToRole="Order" />
+          <NavigationProperty Name="Quote" Relationship="CrmModel.FK_Quote_Contract" FromRole="Contract" ToRole="Quote" />
+        </EntityType>
+        <Association Name="FK_Contract_Account">
+          <End Type="CrmModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="CrmModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_TuDien">
+          <End Type="CrmModel.TuDien" Role="TuDien" Multiplicity="0..1" />
+          <End Type="CrmModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuDien">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IdLoaiContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contract_User">
+          <End Type="CrmModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="CrmModel.Contract" Role="Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractContactRole_Contract">
+          <End Type="CrmModel.Contract" Role="Contract" Multiplicity="0..1" />
+          <End Type="CrmModel.ContractContactRole" Role="ContractContactRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractContactRole">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Contract">
+          <End Type="CrmModel.Contract" Role="Contract" Multiplicity="0..1" />
+          <End Type="CrmModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quote_Contract">
+          <End Type="CrmModel.Contract" Role="Contract" Multiplicity="0..1" />
+          <End Type="CrmModel.Quote" Role="Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contract">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quote">
+              <PropertyRef Name="IdContract" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1904,19 +1942,6 @@
                 <ScalarProperty Name="IdTrangThaiTruoc" ColumnName="IdTrangThaiTruoc" />
                 <ScalarProperty Name="IdTrangThaiSau" ColumnName="IdTrangThaiSau" />
                 <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contracts">
-            <EntityTypeMapping TypeName="CrmModel.Contract">
-              <MappingFragment StoreEntitySet="Contract">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
-                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
-                <ScalarProperty Name="SoHopDong" ColumnName="SoHopDong" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
-                <ScalarProperty Name="IdLoaiContract" ColumnName="IdLoaiContract" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2079,6 +2104,7 @@
           <EntitySetMapping Name="ContactState">
             <EntityTypeMapping TypeName="CrmModel.ContactState">
               <MappingFragment StoreEntitySet="ContactState">
+                <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="MoTa" ColumnName="MoTa" />
                 <ScalarProperty Name="IdCompany" ColumnName="IdCompany" />
                 <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
@@ -2090,6 +2116,20 @@
           <FunctionImportMapping FunctionImportName="pr_Contact_Delete" FunctionName="CrmModel.Store.pr_Contact_Delete" />
           <FunctionImportMapping FunctionImportName="pr_Contact_Insert" FunctionName="CrmModel.Store.pr_Contact_Insert" />
           <FunctionImportMapping FunctionImportName="pr_Contact_Update" FunctionName="CrmModel.Store.pr_Contact_Update" />
+          <EntitySetMapping Name="Contract">
+            <EntityTypeMapping TypeName="CrmModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdLoaiContract" ColumnName="IdLoaiContract" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="SoHopDong" ColumnName="SoHopDong" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

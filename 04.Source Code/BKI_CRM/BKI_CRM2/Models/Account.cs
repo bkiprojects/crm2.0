@@ -23,11 +23,11 @@ public partial class Account
 
         this.AccountContactRole = new HashSet<AccountContactRole>();
 
-        this.Contract = new HashSet<Contract>();
-
         this.Order = new HashSet<Order>();
 
         this.Task = new HashSet<Task>();
+
+        this.Contract = new HashSet<Contract>();
 
     }
 
@@ -50,11 +50,11 @@ public partial class Account
 
     public virtual ICollection<AccountContactRole> AccountContactRole { get; set; }
 
-    public virtual ICollection<Contract> Contract { get; set; }
-
     public virtual ICollection<Order> Order { get; set; }
 
     public virtual ICollection<Task> Task { get; set; }
+
+    public virtual ICollection<Contract> Contract { get; set; }
 
 }
 
