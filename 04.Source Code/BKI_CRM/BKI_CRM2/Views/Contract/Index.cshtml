@@ -70,7 +70,7 @@
                 </table>
     
  <div class="modal fade" id="thay_doi">
-    <div class="modal-dialog " >
+    <div class="modal-dialog " id="HopDong">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -78,19 +78,40 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                   <label class="width100px">Ngày bắt đầu</label>
-                    <input type="date" id="ngaybatdau" class="width220px;"/>
-                    <hr />
-                    <label class="width100px">Ngày kết thúc</label>
-                    <input type="date" id="ngayketthuc" class="width220px;"/>
-                    <hr />
-                    <label>Số hợp đồng</label>
-                    <hr />
-                    <input type="text" id="sohopdong" />
-                    <label>Nội dung</label>
-                    <input type="text" id="noidung" />
-                    <hr />
-                    <label>Tổ chức</label>
+                     <table class="table table-condensed table-font-size " style="margin-top:20px;width:47%; ">
+                         <tr>
+                             <td>
+                               <label style="line-height: 33px;">Ngày bắt đầu</label>   
+                             </td>
+                             <td>
+                                 <input type="date" id="ngaybatdau" class="width220px"  style="height:34px !important;"/>
+                             </td>
+                         </tr>
+                          <tr>
+                             <td>
+                                  <label style="line-height: 33px;">Ngày kết thúc</label>
+                             </td>
+                             <td>
+                                 <input type="date" id="ngayketthuc" class="width220px"  style="height:34px !important;"/>
+                             </td>
+                         </tr>
+                          <tr>
+                             <td>
+                                  <label style="line-height: 33px;">Số hợp đồng</label>
+                             </td>
+                             <td>
+                                <input type="email" placeholder="Nhập số hợp đồng" class="form-control width220px  " style="height:34px !important;" id="diachi" />
+                             </td>
+                         </tr>
+                          <tr>
+                             <td>
+                                  <label style="line-height: 33px;">Nội dung</label>
+                             </td>
+                             <td>
+                                <textarea rows="3" id="noidung" style="width:320px;font-size:14px;" placeholder="Nhập nội dung hợp đồng"></textarea>
+                             </td>
+                         </tr>
+                     </table>                
                 </div>
             </div>
             <div class="modal-footer">
@@ -128,6 +149,11 @@
             placeholder: "Thực hiện",
             allowClear: true
         });
+
+        $('#thay_doi').on('hidden.bs.modal', function () {
+            clear();
+        });
+
         $('.mytable').dataTable();
     });
 
@@ -154,6 +180,11 @@
         $('#xoa').modal('show');
     }
 
+    function clear() {
+        $('#HopDong').find('input').val('');
+        $('#noidung').val('');
+    }
+
     function sua(id_hd) {
         $('#thay_doi').attr('name', id_hd);
         $.ajax({
@@ -163,16 +194,19 @@
             error: function () {
                 alert('Lấy thông tin thất bại!');
             },
-            success: function (get) {
-                if (get != undefined && get != true) {
-                    ngaybatdau.value = get.NgayBatDau.trim();
-                    ngayketthuc.value = get.NgayKetThuc.trim();
-                    sohopdong.value = get.SoHopDong.trim();
-                    noidung.value = get.NoiDung.trim();
-
+            success: function (get)
+            {
+                if (get != undefined && get != true)
+                {
+                    ngaybatdau.value = get.ngay_bat_dau.trim();
+                    ngayketthuc.value = get.ngay_ket_thuc.trim();
+                    sohopdong.value = get.so_hop_dong.trim();
+                    noidung.value = get.noi_dung.trim();
+                }
                     $('#thay_doi').modal('show');
-                    }
-                  }
-                });
-            }
+                    
+             }
+        });
+        $('#thay_doi').modal('show');
+   }
 </script>

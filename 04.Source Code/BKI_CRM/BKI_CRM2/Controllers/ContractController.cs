@@ -45,23 +45,23 @@ namespace BKI_CRM2.Controllers
                 CrmEntities v_model = new CrmEntities();
                 decimal v_id = Convert.ToDecimal(IdContract);
                 var v_contract = v_model.Contract.Where(x => x.Id == v_id).First();
-                string v_ngay_bat_dau = "", v_ngay_ket_thuc = "";
-                if (v_contract != null)
-                {
-                    if (v_contract.NgayBatDau != null)
-                    {
-                        v_ngay_bat_dau = ((DateTime)v_contract.NgayBatDau).ToString("yyyy-MM-dd");
-                    }
-                    if (v_contract.NgayKetThuc != null)
-                    {
-                        v_ngay_ket_thuc = ((DateTime)v_contract.NgayKetThuc).ToString("yyyy-MM-dd");
-                    }
-                }
+                //string v_ngay_bat_dau = "", v_ngay_ket_thuc = "";
+                //if (v_contract != null)
+                //{
+                //    if (v_contract.NgayBatDau != null)
+                //    {
+                //        v_ngay_bat_dau = ((DateTime)v_contract.NgayBatDau).ToString("yyyy-MM-dd");
+                //    }
+                //    if (v_contract.NgayKetThuc != null)
+                //    {
+                //        v_ngay_ket_thuc = ((DateTime)v_contract.NgayKetThuc).ToString("yyyy-MM-dd");
+                //    }
+                //}
                 return Json(new { 
-                    ngaybatdau= v_contract.NgayBatDau,
-                    ngayketthuc=v_contract.NgayKetThuc,
-                    sohopdong= v_contract.SoHopDong,
-                    noidung= v_contract.NoiDung,  
+                    ngay_bat_dau= v_contract.NgayBatDau,
+                    ngay_ket_thuc=v_contract.NgayKetThuc,
+                    so_hop_dong= v_contract.SoHopDong,
+                    noi_dung= v_contract.NoiDung  
                 }, JsonRequestBehavior.AllowGet);
             }
             else return Json(true, JsonRequestBehavior.AllowGet);
