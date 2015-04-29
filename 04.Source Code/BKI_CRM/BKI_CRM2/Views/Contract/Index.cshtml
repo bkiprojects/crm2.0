@@ -18,6 +18,9 @@
     .height_input {
         height: 34px !important;
     }
+    .width100px {
+    width:100px;
+    }
 </style>
 <div class="title">
     <h2>DANH MỤC HỢP ĐỒNG</h2>
@@ -57,7 +60,7 @@
                             <td>@item.SoHopDong</td>
                             <td>@item.NoiDung</td>
                             <td>@item.IdAccount</td>
-                            <td><button type="button" class="btn btn-defaul"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                            <td><button type="button" class="btn btn-defaul"  onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                             <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                         </tr>
 	                    }
@@ -67,15 +70,27 @@
                 </table>
     
  <div class="modal fade" id="thay_doi">
-    <div class="modal-dialog modal-lg" >
+    <div class="modal-dialog " >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title title">THÔNG TIN LIÊN HỆ</h3>
+                <h3 class="modal-title title">Nội dung chi tiết hợp đồng</h3>
             </div>
             <div class="modal-body">
                 <div class="container">
-                   
+                   <label class="width100px">Ngày bắt đầu</label>
+                    <input type="date" id="ngaybatdau" class="width220px;"/>
+                    <hr />
+                    <label class="width100px">Ngày kết thúc</label>
+                    <input type="date" id="ngayketthuc" class="width220px;"/>
+                    <hr />
+                    <label>Số hợp đồng</label>
+                    <hr />
+                    <input type="text" id="sohopdong" />
+                    <label>Nội dung</label>
+                    <input type="text" id="noidung" />
+                    <hr />
+                    <label>Tổ chức</label>
                 </div>
             </div>
             <div class="modal-footer">
@@ -134,8 +149,30 @@
         });
     }
 
-    function hienxoa(id_kh) {
-        giatri.innerHTML = id_kh;
+    function hienxoa(id_hd) {
+        giatri.innerHTML = id_hd;
         $('#xoa').modal('show');
     }
+
+    function sua(id_hd) {
+        $('#thay_doi').attr('name', id_hd);
+        $.ajax({
+            url: "/Contract/Select",
+            type: "GET",
+            data: { IdContract: id_hd },
+            error: function () {
+                alert('Lấy thông tin thất bại!');
+            },
+            success: function (get) {
+                if (get != undefined && get != true) {
+                    ngaybatdau.value = get.NgayBatDau.trim();
+                    ngayketthuc.value = get.NgayKetThuc.trim();
+                    sohopdong.value = get.SoHopDong.trim();
+                    noidung.value = get.NoiDung.trim();
+
+                    $('#thay_doi').modal('show');
+                    }
+                  }
+                });
+            }
 </script>

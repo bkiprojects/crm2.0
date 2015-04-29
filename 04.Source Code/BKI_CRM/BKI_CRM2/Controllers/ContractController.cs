@@ -36,5 +36,41 @@ namespace BKI_CRM2.Controllers
             v_model.SaveChanges();
             return Json(affected, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult Select(string IdContract)
+        {
+            if (IdContract != null && !IdContract.Equals(""))
+            {
+                CrmEntities v_model = new CrmEntities();
+                decimal v_id = Convert.ToDecimal(IdContract);
+                var v_contract = v_model.Contract.Where(x => x.Id == v_id).First();
+                string v_ngay_bat_dau = "", v_ngay_ket_thuc = "";
+                if (v_contract != null)
+                {
+                    if (v_contract.NgayBatDau != null)
+                    {
+                        v_ngay_bat_dau = ((DateTime)v_contract.NgayBatDau).ToString("yyyy-MM-dd");
+                    }
+                    if (v_contract.NgayKetThuc != null)
+                    {
+                        v_ngay_ket_thuc = ((DateTime)v_contract.NgayKetThuc).ToString("yyyy-MM-dd");
+                    }
+                }
+                return Json(new { 
+                    ngaybatdau= v_contract.NgayBatDau,
+                    ngayketthuc=v_contract.NgayKetThuc,
+                    sohopdong= v_contract.SoHopDong,
+                    noidung= v_contract.NoiDung,  
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        //public ActionResult Delete(decimal id_kh)
+        //{
+        //    CrmEntities v_model = new CrmEntities();
+        //    int affected = v_model.pr_Contact_Delete(id_kh);
+        //    return Json(affected, JsonRequestBehavior.AllowGet);
+        //}
     }
 }
