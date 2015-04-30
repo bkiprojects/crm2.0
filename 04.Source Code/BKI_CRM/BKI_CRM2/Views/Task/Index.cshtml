@@ -1,13 +1,36 @@
 ﻿@{
     ViewBag.Title = "Index";
+    var cong_viec = ViewBag.v_cv as List<BKI_CRM2.Models.V_TASK>;
+    var tu_dien = ViewBag.v_tu_dien as List<BKI_CRM2.Models.TuDien>;
+    var tu_dien_status = ViewBag.v_tu_dien_status as List<BKI_CRM2.Models.TuDien>;  
+    
 }
+<style>
+    .mau {
+        width: 100px;
+    }
 
+    .marginleft {
+        margin-left: 300px;
+    }
+
+    .width220px {
+        width: 220px;
+    }
+
+    .height_input {
+        height: 34px !important;
+    }
+    .width100px {
+    width:100px;
+    }
+</style>
 <div class="title">
     <h2>DANH MỤC CÔNG VIỆC</h2>
 </div>
 
 <div style="margin: 20px 0px 30px 30px;">
-    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;">
+    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;" data-toggle="modal" data-target="#thay_doi">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm công việc
     </button>
 
@@ -22,7 +45,6 @@
     <table class=" mytable">
                     <thead>
                         <tr>
-                           
                             <th><span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> &nbsp;Độ quan trọng</th>
                             <th>Tên công việc</th>
                             <th>Làm việc với</th>
@@ -31,34 +53,178 @@
                             <th>Dự kiến hoàn thành</th>
                             <th>Trạng thái hiện tại</th>
                             <th>Loại công việc</th>
-                            <th>Liên hệ với</th>
                             <th>Nhân viên thực hiện</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        @foreach (var item in cong_viec)
+                        {
+                            <tr>
                             <td>
-                                Bình thường
-                            @*   <select class="form-control">
-                                   <option></option>
-                                    <option value="">Quan trọng</option>
-                                    <option value="">Bình thường</option>
-                                </select>*@
+                              @item.MucUuTien
                             </td>
-                            <td>Gọi điện cho anh Công</td>
-                            <td>Côngnd</td>
-                            <td>bán iPost</td>
-                            <td>2015-04-29</td>
-                            <td>2015-04-30</td>
-                            <td>Giao việc</td>
+                            <td>@item.TenCongViec</td>
+                            <td>@item.Ho+" "+ @item.Ten</td>
+                            <td>@item.LamGi</td>
+                            <td>@item.TaiNgay</td>
+                            <td>@item.DuKienHoanThanh</td>
+                            <td>@item.TrangThai</td>
                             <td></td>
-                            <td>A.Tuấn</td>
-                            <td>Tuyềnnt</td>
-                      </tr>  
+                            <td>@item.UserName</td>
+                            <td><button type="button" class="btn btn-default" ><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                            <td><button type="button" class="btn btn-default" ><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                      </tr>
+                        }
+
                    </tbody>
                 </table>
       
 </div>
+<!-- Modal sửa -->
+<div class="modal fade" id="thay_doi">
+    <div class="modal-dialog modal-lg" id="HopDong">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title title">Nội dung công việc</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                     <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; ">
+                         <tr>
+                             <td>
+                               <label style="line-height: 33px;"> Độ quan trọng</label>   
+                             </td>
+
+                             <td>
+                                   <select id="muc_do_quan_trong" >
+                                    <option></option>
+                                    @if (tu_dien != null && tu_dien.Count > 0)
+                                    {
+                                        foreach (var item in tu_dien)
+                                        {
+                                            <option value="@item.Id">@item.TenTuDien</option>
+                                        }
+                                    }
+                                </select>
+                             </td>
+                              <td>
+                               <label style="line-height: 33px;"> Bắt đầu tại ngày</label>   
+                             </td>
+                             <td>
+                                 <input type="date" class="form-control width220px" style="height:34px !important;"  />
+                             </td>
+                         </tr>
+                          <tr>
+                             <td>
+                                  <label style="line-height: 33px;">Tên công việc</label>
+                             </td>
+                             <td>
+                                 <input type="text" placeholder="Nhập Tên công việc" class="form-control width220px height_input " style="height:34px !important;">
+                             </td>
+                               <td>
+                               <label style="line-height: 33px;"> Bắt đầu tại ngày</label>   
+                             </td>
+                             <td>
+                                 <input type="date" class="form-control width220px" style="height:34px !important;" />
+                             </td>
+                         </tr>
+                          <tr>
+                             <td>
+                                  <label style="line-height: 33px;">Làm việc với</label>
+                             </td>
+                             <td>
+                                  <select id="lam_viec_voi" >
+                                    <option></option>
+                                    @if (tu_dien != null && tu_dien.Count > 0)
+                                    {
+                                        foreach (var item in tu_dien)
+                                        {
+                                            <option value="@item.Id">@item.TenTuDien</option>
+                                        }
+                                    }
+                                </select>
+                             </td>
+                               <td>
+                                  <label style="line-height: 33px;">Trạng thái hiện tại</label>
+                             </td>
+                             <td>
+                                  <select id="trang_thai_hien_tai" >
+                                    <option></option>
+                                    @if (tu_dien_status != null && tu_dien_status.Count > 0)
+                                    {
+                                        foreach (var item in tu_dien_status)
+                                        {
+                                            <option value="@item.Id">@item.TenTuDien</option>
+                                        }
+                                    }
+                                </select>
+                             </td>
+                         </tr>
+                          <tr>
+                             <td rowspan="2">
+                                  <label style="line-height: 33px;">Nội dung</label>
+                             </td>
+                             <td rowspan="2">
+                                 <textarea rows="3" id="noidung" style="width:220px;font-size:14px;" placeholder="Nhập nội dung hợp đồng" class="form-control"></textarea>
+                             </td>
+                                <td>
+                                  <label style="line-height: 33px;">Loại công việc</label>
+                             </td>
+                             <td>
+                                 <input type="text" placeholder="Nhập Loại công việc" class="form-control width220px height_input " style="height:34px !important;">
+                             </td>
+                         </tr>
+                         <tr>
+                                <td>
+                                  <label style="line-height: 33px;">Nhân viên thực hiện</label>
+                             </td>
+                             <td>
+                                  <select id="nhan_vien_thuc_hien" >
+                                    <option></option>
+                                    @if (tu_dien_status != null && tu_dien_status.Count > 0)
+                                    {
+                                        foreach (var item in tu_dien_status)
+                                        {
+                                            <option value="@item.Id">@item.TenTuDien</option>
+                                        }
+                                    }
+                                </select>
+                             </td>
+                         </tr>
+                     </table>                
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" id="clear">Xóa trắng</button>
+                <button type="button" class="btn btn-primary" onclick="thuchiensua($('#thay_doi').attr('name'));">Lưu lại</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->   
+  
+<!--Modal xóa-->
+<div class="modal fade" id="xoa">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">THÔNG BÁO</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa dòng dữ liệu này không?</p>
+                <div id="giatri" style="display:none;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="xoa($('#giatri').html())">Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
     $(document).ready(function () {
         $("#thuc_hien").select2({
@@ -66,5 +232,25 @@
             allowClear: true
         });
         $('.mytable').dataTable();
+    });
+
+    $("#muc_do_quan_trong").select2({
+        placeholder: "Mức độ quan trọng",
+        allowClear: true
+    });
+
+    $("#lam_viec_voi").select2({
+        placeholder: "Tên Khách hàng",
+        allowClear: true
+    });
+
+    $("#trang_thai_hien_tai").select2({
+        placeholder: "Tên Khách hàng",
+        allowClear: true
+    });
+
+    $("#nhan_vien_thuc_hien").select2({
+        placeholder: "Tên Khách hàng",
+        allowClear: true
     });
 </script>

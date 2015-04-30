@@ -1,7 +1,6 @@
 ﻿@{
     var hop_dong = ViewBag.v_hd as List<BKI_CRM2.Models.Contract>;    
 }
-@model BKI_CRM2.Models.Contract
 <style>
     .mau {
         width: 100px;
@@ -212,6 +211,8 @@
         });
         $('#thay_doi').modal('show');
     }
+
+
     function thuchiensua(id_hd) {
         var ngaybatdau = $('#ngaybatdau').val().trim();
         var ngayketthuc = $('#ngayketthuc').val().trim();
@@ -239,7 +240,7 @@
                     url: "/Contract/Index",
                     type: "Get",
                     success: function (view) {
-                        $('#thay_doi').one('hidden.bs.modal', function () {
+                        $('#thay_doi').on('hidden.bs.modal', function () {
                             $('#body').html(view);
                         }).modal('hide');
                     }
