@@ -15,7 +15,7 @@ namespace BKI_CRM2.Models
 using System;
     using System.Collections.Generic;
     
-public partial class Task
+public partial class V_TASK
 {
 
     public decimal Id { get; set; }
@@ -30,8 +30,6 @@ public partial class Task
 
     public Nullable<decimal> IdContact { get; set; }
 
-    public Nullable<decimal> IdPriority { get; set; }
-
     public Nullable<decimal> IdStatus { get; set; }
 
     public Nullable<decimal> IdLoaiAction { get; set; }
@@ -40,19 +38,19 @@ public partial class Task
 
     public string TenCongViec { get; set; }
 
+    public string AccountName { get; set; }
 
+    public string TenTuDien { get; set; }
 
-    public virtual Contact Contact { get; set; }
+    public string Ho { get; set; }
 
-    public virtual TuDien TuDien { get; set; }
+    public string Ten { get; set; }
 
-    public virtual TuDien TuDien1 { get; set; }
+    public string UserName { get; set; }
 
-    public virtual TuDien TuDien2 { get; set; }
+    public string TrangThai { get; set; }
 
-    public virtual User User { get; set; }
-
-    public virtual Account Account { get; set; }
+    public string MucUuTien { get; set; }
 
 }
 

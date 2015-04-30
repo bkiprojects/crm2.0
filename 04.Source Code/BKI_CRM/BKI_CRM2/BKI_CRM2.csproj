@@ -281,6 +281,9 @@
     <Compile Include="Models\UserGroup.cs">
       <DependentUpon>CRM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_TASK.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -186,6 +186,7 @@
           <Property Name="IdStatus" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdLoaiAction" Type="numeric" Precision="18" Scale="0" />
           <Property Name="DuKienHoanThanh" Type="datetime" />
+          <Property Name="TenCongViec" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ToBeConverted">
           <Key>
@@ -243,6 +244,30 @@
           <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="GroupName" Type="nvarchar" MaxLength="100" />
           <Property Name="IdCompany" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_TASK">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TaiNgay" Type="datetime" />
+          <Property Name="IdUser" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="LamGi" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdAccount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdContact" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdStatus" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdLoaiAction" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DuKienHoanThanh" Type="datetime" />
+          <Property Name="TenCongViec" Type="nvarchar" MaxLength="500" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="100" />
+          <Property Name="TenTuDien" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ho" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="100" />
+          <Property Name="MucUuTien" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_Account_TuDien">
           <End Role="TuDien" Type="Self.TuDien" Multiplicity="0..1" />
@@ -791,6 +816,27 @@
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserContactRole" EntityType="Self.UserContactRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="V_TASK" EntityType="Self.V_TASK" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_TASK].[Id] AS [Id], 
+    [V_TASK].[TaiNgay] AS [TaiNgay], 
+    [V_TASK].[IdUser] AS [IdUser], 
+    [V_TASK].[LamGi] AS [LamGi], 
+    [V_TASK].[IdAccount] AS [IdAccount], 
+    [V_TASK].[IdContact] AS [IdContact], 
+    [V_TASK].[IdStatus] AS [IdStatus], 
+    [V_TASK].[IdLoaiAction] AS [IdLoaiAction], 
+    [V_TASK].[DuKienHoanThanh] AS [DuKienHoanThanh], 
+    [V_TASK].[TenCongViec] AS [TenCongViec], 
+    [V_TASK].[AccountName] AS [AccountName], 
+    [V_TASK].[TenTuDien] AS [TenTuDien], 
+    [V_TASK].[Ho] AS [Ho], 
+    [V_TASK].[Ten] AS [Ten], 
+    [V_TASK].[UserName] AS [UserName], 
+    [V_TASK].[TrangThai] AS [TrangThai], 
+    [V_TASK].[MucUuTien] AS [MucUuTien]
+    FROM [dbo].[V_TASK] AS [V_TASK]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Account_TuDien" Association="Self.FK_Account_TuDien">
             <End Role="TuDien" EntitySet="TuDien" />
             <End Role="Account" EntitySet="Account" />
@@ -1111,6 +1157,7 @@
           <NavigationProperty Name="User" Relationship="Self.FK_Task_User" FromRole="Task" ToRole="User" />
           <Property Name="DuKienHoanThanh" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Account" Relationship="CrmModel.FK_Task_Account" FromRole="Task" ToRole="Account" />
+          <Property Name="TenCongViec" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ToBeConverted">
           <Key>
@@ -1656,7 +1703,7 @@
             <Parameter Name="IdUser" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="pr_Task_Delete">
-            <Parameter Name="Id" Mode="In" Type="Decimal" />
+          <Parameter Name="Id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="pr_Task_Insert">
             <Parameter Name="TaiNgay" Mode="In" Type="DateTime" />
@@ -1682,6 +1729,7 @@
             <Parameter Name="IdLoaiAction" Mode="In" Type="Decimal" />
             <Parameter Name="DuKienHoanThanh" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="V_TASK" EntityType="CrmModel.V_TASK" />
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -1961,6 +2009,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_TASK">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TaiNgay" Type="DateTime" Precision="3" />
+          <Property Name="IdUser" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="LamGi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdContact" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdStatus" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdLoaiAction" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DuKienHoanThanh" Type="DateTime" Precision="3" />
+          <Property Name="TenCongViec" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TenTuDien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MucUuTien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2103,6 +2173,7 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="CrmModel.Task">
               <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="TenCongViec" ColumnName="TenCongViec" />
                 <ScalarProperty Name="DuKienHoanThanh" ColumnName="DuKienHoanThanh" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TaiNgay" ColumnName="TaiNgay" />
@@ -2236,6 +2307,29 @@
           <FunctionImportMapping FunctionImportName="pr_Task_Delete" FunctionName="CrmModel.Store.pr_Task_Delete" />
           <FunctionImportMapping FunctionImportName="pr_Task_Insert" FunctionName="CrmModel.Store.pr_Task_Insert" />
           <FunctionImportMapping FunctionImportName="pr_Task_Update" FunctionName="CrmModel.Store.pr_Task_Update" />
+          <EntitySetMapping Name="V_TASK">
+            <EntityTypeMapping TypeName="CrmModel.V_TASK">
+              <MappingFragment StoreEntitySet="V_TASK">
+                <ScalarProperty Name="MucUuTien" ColumnName="MucUuTien" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Ho" ColumnName="Ho" />
+                <ScalarProperty Name="TenTuDien" ColumnName="TenTuDien" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="TenCongViec" ColumnName="TenCongViec" />
+                <ScalarProperty Name="DuKienHoanThanh" ColumnName="DuKienHoanThanh" />
+                <ScalarProperty Name="IdLoaiAction" ColumnName="IdLoaiAction" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="LamGi" ColumnName="LamGi" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="TaiNgay" ColumnName="TaiNgay" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
