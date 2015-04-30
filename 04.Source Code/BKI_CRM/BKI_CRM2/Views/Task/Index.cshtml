@@ -63,20 +63,20 @@
                     <tbody>
                         @foreach (var item in cong_viec)
                         {
-                            <tr>
+                            <tr id="@item.Id">
                             <td>
                               @item.MucUuTien
                             </td>
                             <td>@item.TenCongViec</td>
-                            <td>@item.Ho+" "+ @item.Ten</td>
+                            <td>@(item.Ho+" "+ item.Ten)</td>
                             <td>@item.LamGi</td>
                             <td>@item.TaiNgay</td>
                             <td>@item.DuKienHoanThanh</td>
                             <td>@item.TrangThai</td>
                             <td></td>
                             <td>@item.UserName</td>
-                            <td><button type="button" class="btn btn-default" ><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
-                            <td><button type="button" class="btn btn-default" ><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                            <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')" ><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                            <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')" ><span class="glyphicon glyphicon-trash delete" aria-hidden="true" ></span></button></td>
                       </tr>
                         }
 
@@ -234,7 +234,7 @@
             allowClear: true
         });
         $('.mytable').dataTable();
-    });
+
 
     $("#doquantrong").select2({
         placeholder: " Độ quan trọng",
@@ -255,4 +255,74 @@
         placeholder: "Tên Nhân viên",
         allowClear: true
     });
+
+    $('#clear').click(function () {
+        clear();
+    });
+
+    $('#thay_doi').on('hidden.bs.modal', function () {
+        clear();
+    });
+
+ });
+
+    function clear() {
+        $('#CongViec').find('input').val('');
+        $('#doquantrong').val('');
+        $('#lamviecvoi').val('');
+        $('#trangthaihientai').val('');
+        $('#nhanvienthuchien').val('');
+        $('#noidung').val('');
+
+    }
+
+    function hienxoa(id_cv) {
+        giatri.innerHTML = id_cv;
+        $('#xoa').modal('show');
+    }
+
+    function xoa(id_cv) {
+        $.ajax({
+            url: "/Task/Delete",
+            type: "POST",
+            data: { id_cv: id_cv },
+            dataType: "json",
+            error: function () {
+                alert("Xóa thất bại!");
+                $('#xoa').modal('hide');
+            },
+            success: function (data) {
+                alert('Xóa thành công!');
+                $('#' + id_cv).remove();
+                $('#xoa').modal('hide');
+            }
+        });
+    }
+
+    function sua(id_cv) {
+        $('#thay_doi').attr('name', id_cv);
+        $.ajax({
+            url: "/Task/Select",
+            type: "GET",
+            data: { IdTask: id_cv },
+            error: function () {
+                alert('Lấy thông tin thất bại!');
+            },
+            success: function (get) {
+                if (get != undefined && get != true) {
+                    batdautaingay.value = get.tai_ngay.trim();
+                    tencongviec.value = get.ten_cv.trim();
+                    doquantrong.value = get.do_quan_trong;
+                    lamviecvoi.value = get.khach_hang;
+                    nhanvienthuchien.value = get.nhan_vien;
+                    trangthaihientai.value = get.trang_thai;
+                    dukienhoanthanh.value = get.du_kien_hoan_thanh;
+                    noidung.value = get.noi_dung;
+                }
+                $('#thay_doi').modal('show');
+
+            }
+        });
+        $('#thay_doi').modal('show');
+    }
 </script>

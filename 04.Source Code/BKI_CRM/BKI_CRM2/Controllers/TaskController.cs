@@ -42,5 +42,48 @@ namespace BKI_CRM2.Controllers
             return PartialView();
         }
 
+        public ActionResult Delete(decimal id_cv)
+        {
+            CrmEntities v_model = new CrmEntities();
+            int affected = v_model.pr_Task_Delete(id_cv);
+            return Json(affected, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult Select(string IdTask)
+        {
+            if (IdTask != null && !IdTask.Equals(""))
+            {
+                CrmEntities v_model = new CrmEntities();
+                decimal v_id = Convert.ToDecimal(IdTask);
+                var v_task = v_model.V_TASK.Where(x => x.Id == v_id).First();
+                string v_ngay_bat_dau = "", v_ngay_ket_thuc = "";
+                if (v_task != null)
+                {
+                    if (v_task.TaiNgay != null)
+                    {
+                        v_ngay_bat_dau = ((DateTime)v_task.TaiNgay).ToString("yyyy-MM-dd");
+                    }
+                    if (v_task.DuKienHoanThanh != null)
+                    {
+                        v_ngay_ket_thuc = ((DateTime)v_task.DuKienHoanThanh).ToString("yyyy-MM-dd");
+                    }
+                }
+               
+                return Json(new
+                {
+                    tai_ngay = v_ngay_bat_dau,
+                    du_kien_hoan_thanh = v_ngay_ket_thuc,
+                   // do_quan_trong= v_task.IdPriority,
+                    noi_dung = v_task.LamGi,
+                    khach_hang= v_task.IdContact,
+                    trang_thai= v_task.IdStatus,
+                    nhan_vien= v_task.IdUser,
+                    ten_cv= v_task.TenCongViec,
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
