@@ -2,7 +2,9 @@
     ViewBag.Title = "Index";
     var cong_viec = ViewBag.v_cv as List<BKI_CRM2.Models.V_TASK>;
     var tu_dien = ViewBag.v_tu_dien as List<BKI_CRM2.Models.TuDien>;
-    var tu_dien_status = ViewBag.v_tu_dien_status as List<BKI_CRM2.Models.TuDien>;  
+    var tu_dien_status = ViewBag.v_tu_dien_status as List<BKI_CRM2.Models.TuDien>;
+    var contact = ViewBag.v_contact as List<BKI_CRM2.Models.Contact>;
+    var user = ViewBag.v_user as List<BKI_CRM2.Models.User>;
     
 }
 <style>
@@ -84,7 +86,7 @@
 </div>
 <!-- Modal sửa -->
 <div class="modal fade" id="thay_doi">
-    <div class="modal-dialog modal-lg" id="HopDong">
+    <div class="modal-dialog modal-lg" id="CongViec">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -99,7 +101,7 @@
                              </td>
 
                              <td>
-                                   <select id="muc_do_quan_trong" >
+                                   <select id="doquantrong" >
                                     <option></option>
                                     @if (tu_dien != null && tu_dien.Count > 0)
                                     {
@@ -114,7 +116,7 @@
                                <label style="line-height: 33px;"> Bắt đầu tại ngày</label>   
                              </td>
                              <td>
-                                 <input type="date" class="form-control width220px" style="height:34px !important;"  />
+                                 <input type="date" class="form-control width220px" style="height:34px !important;" id="batdautaingay" />
                              </td>
                          </tr>
                           <tr>
@@ -122,13 +124,13 @@
                                   <label style="line-height: 33px;">Tên công việc</label>
                              </td>
                              <td>
-                                 <input type="text" placeholder="Nhập Tên công việc" class="form-control width220px height_input " style="height:34px !important;">
+                                 <input type="text" placeholder="Nhập Tên công việc" class="form-control width220px height_input " style="height:34px !important;" id="tencongviec">
                              </td>
                                <td>
-                               <label style="line-height: 33px;"> Bắt đầu tại ngày</label>   
+                               <label style="line-height: 33px;"> Dự kiến hoàn thành</label>   
                              </td>
                              <td>
-                                 <input type="date" class="form-control width220px" style="height:34px !important;" />
+                                 <input type="date" class="form-control width220px" style="height:34px !important;" id="dukienhoanthanh"/>
                              </td>
                          </tr>
                           <tr>
@@ -136,13 +138,13 @@
                                   <label style="line-height: 33px;">Làm việc với</label>
                              </td>
                              <td>
-                                  <select id="lam_viec_voi" >
+                                  <select id="lamviecvoi" >
                                     <option></option>
-                                    @if (tu_dien != null && tu_dien.Count > 0)
+                                    @if (contact != null && contact.Count > 0)
                                     {
-                                        foreach (var item in tu_dien)
+                                        foreach (var item in contact)
                                         {
-                                            <option value="@item.Id">@item.TenTuDien</option>
+                                            <option value="@item.Id">@(item.Ho+ " "+ item.Ten)</option>
                                         }
                                     }
                                 </select>
@@ -151,7 +153,7 @@
                                   <label style="line-height: 33px;">Trạng thái hiện tại</label>
                              </td>
                              <td>
-                                  <select id="trang_thai_hien_tai" >
+                                  <select id="trangthaihientai" >
                                     <option></option>
                                     @if (tu_dien_status != null && tu_dien_status.Count > 0)
                                     {
@@ -174,7 +176,7 @@
                                   <label style="line-height: 33px;">Loại công việc</label>
                              </td>
                              <td>
-                                 <input type="text" placeholder="Nhập Loại công việc" class="form-control width220px height_input " style="height:34px !important;">
+                                 <input type="text" placeholder="Nhập Loại công việc" class="form-control width220px height_input " style="height:34px !important;" id="loaicongviec">
                              </td>
                          </tr>
                          <tr>
@@ -182,13 +184,13 @@
                                   <label style="line-height: 33px;">Nhân viên thực hiện</label>
                              </td>
                              <td>
-                                  <select id="nhan_vien_thuc_hien" >
+                                  <select id="nhanvienthuchien" >
                                     <option></option>
-                                    @if (tu_dien_status != null && tu_dien_status.Count > 0)
+                                    @if (user != null && user.Count > 0)
                                     {
-                                        foreach (var item in tu_dien_status)
+                                        foreach (var item in user)
                                         {
-                                            <option value="@item.Id">@item.TenTuDien</option>
+                                            <option value="@item.Id">@item.TenNhanVien</option>
                                         }
                                     }
                                 </select>
@@ -234,23 +236,23 @@
         $('.mytable').dataTable();
     });
 
-    $("#muc_do_quan_trong").select2({
-        placeholder: "Mức độ quan trọng",
+    $("#doquantrong").select2({
+        placeholder: " Độ quan trọng",
         allowClear: true
     });
 
-    $("#lam_viec_voi").select2({
+    $("#lamviecvoi").select2({
         placeholder: "Tên Khách hàng",
         allowClear: true
     });
 
-    $("#trang_thai_hien_tai").select2({
-        placeholder: "Tên Khách hàng",
+    $("#trangthaihientai").select2({
+        placeholder: "Trạng thái hiện tại",
         allowClear: true
     });
 
-    $("#nhan_vien_thuc_hien").select2({
-        placeholder: "Tên Khách hàng",
+    $("#nhanvienthuchien").select2({
+        placeholder: "Tên Nhân viên",
         allowClear: true
     });
 </script>
