@@ -401,12 +401,13 @@
             },
             success: function (data) {
                 alert("Thành công!");
-                $('#thay_doi').modal('hide');
                 $.ajax({
                     url: "/Contact/Index",
                     type: "Get",
                     success: function (view) {
-                        $('#body').html(view);
+                        $('#thay_doi').one('hidden.bs.modal', function () {
+                            $('#body').html(view);
+                        }).modal('hide');
                     }
                 });
             }
@@ -514,7 +515,7 @@
         });
     }
     function thuchienchuyen(id_kh) {
-        if ($('#par').find('strong').html()!=undefined) {
+        if ($('#par').find('strong').html() != undefined) {
             alert('Trạng thái không đổi');
             $('#switch').modal('hide');
         }
@@ -535,7 +536,9 @@
                             url: "/Contact/Index",
                             type: "Get",
                             success: function (view) {
-                                $('#body').html(view);
+                                $('#thay_doi').one('hidden.bs.modal', function () {
+                                    $('#body').html(view);
+                                }).modal('hide');
                             }
                         });
                     }

@@ -290,6 +290,216 @@ public partial class CrmEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contract_Delete", idParameter);
     }
 
+
+    public virtual int pr_Contract_Insert(Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser, ObjectParameter id)
+    {
+
+        var ngayBatDauParameter = ngayBatDau.HasValue ?
+            new ObjectParameter("NgayBatDau", ngayBatDau) :
+            new ObjectParameter("NgayBatDau", typeof(System.DateTime));
+
+
+        var ngayKetThucParameter = ngayKetThuc.HasValue ?
+            new ObjectParameter("NgayKetThuc", ngayKetThuc) :
+            new ObjectParameter("NgayKetThuc", typeof(System.DateTime));
+
+
+        var soHopDongParameter = soHopDong != null ?
+            new ObjectParameter("SoHopDong", soHopDong) :
+            new ObjectParameter("SoHopDong", typeof(string));
+
+
+        var noiDungParameter = noiDung != null ?
+            new ObjectParameter("NoiDung", noiDung) :
+            new ObjectParameter("NoiDung", typeof(string));
+
+
+        var idAccountParameter = idAccount.HasValue ?
+            new ObjectParameter("IdAccount", idAccount) :
+            new ObjectParameter("IdAccount", typeof(decimal));
+
+
+        var idLoaiContractParameter = idLoaiContract.HasValue ?
+            new ObjectParameter("IdLoaiContract", idLoaiContract) :
+            new ObjectParameter("IdLoaiContract", typeof(decimal));
+
+
+        var idUserParameter = idUser.HasValue ?
+            new ObjectParameter("IdUser", idUser) :
+            new ObjectParameter("IdUser", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contract_Insert", ngayBatDauParameter, ngayKetThucParameter, soHopDongParameter, noiDungParameter, idAccountParameter, idLoaiContractParameter, idUserParameter, id);
+    }
+
+
+    public virtual int pr_Contract_Update(Nullable<decimal> id, Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        var ngayBatDauParameter = ngayBatDau.HasValue ?
+            new ObjectParameter("NgayBatDau", ngayBatDau) :
+            new ObjectParameter("NgayBatDau", typeof(System.DateTime));
+
+
+        var ngayKetThucParameter = ngayKetThuc.HasValue ?
+            new ObjectParameter("NgayKetThuc", ngayKetThuc) :
+            new ObjectParameter("NgayKetThuc", typeof(System.DateTime));
+
+
+        var soHopDongParameter = soHopDong != null ?
+            new ObjectParameter("SoHopDong", soHopDong) :
+            new ObjectParameter("SoHopDong", typeof(string));
+
+
+        var noiDungParameter = noiDung != null ?
+            new ObjectParameter("NoiDung", noiDung) :
+            new ObjectParameter("NoiDung", typeof(string));
+
+
+        var idAccountParameter = idAccount.HasValue ?
+            new ObjectParameter("IdAccount", idAccount) :
+            new ObjectParameter("IdAccount", typeof(decimal));
+
+
+        var idLoaiContractParameter = idLoaiContract.HasValue ?
+            new ObjectParameter("IdLoaiContract", idLoaiContract) :
+            new ObjectParameter("IdLoaiContract", typeof(decimal));
+
+
+        var idUserParameter = idUser.HasValue ?
+            new ObjectParameter("IdUser", idUser) :
+            new ObjectParameter("IdUser", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contract_Update", idParameter, ngayBatDauParameter, ngayKetThucParameter, soHopDongParameter, noiDungParameter, idAccountParameter, idLoaiContractParameter, idUserParameter);
+    }
+
+
+    public virtual int pr_Task_Delete(Nullable<decimal> id)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Task_Delete", idParameter);
+    }
+
+
+    public virtual int pr_Task_Insert(Nullable<System.DateTime> taiNgay, Nullable<decimal> idUser, string lamGi, Nullable<decimal> idAccount, Nullable<decimal> idContact, Nullable<decimal> idPriority, Nullable<decimal> idStatus, Nullable<decimal> idLoaiAction, Nullable<System.DateTime> duKienHoanThanh, ObjectParameter id)
+    {
+
+        var taiNgayParameter = taiNgay.HasValue ?
+            new ObjectParameter("TaiNgay", taiNgay) :
+            new ObjectParameter("TaiNgay", typeof(System.DateTime));
+
+
+        var idUserParameter = idUser.HasValue ?
+            new ObjectParameter("IdUser", idUser) :
+            new ObjectParameter("IdUser", typeof(decimal));
+
+
+        var lamGiParameter = lamGi != null ?
+            new ObjectParameter("LamGi", lamGi) :
+            new ObjectParameter("LamGi", typeof(string));
+
+
+        var idAccountParameter = idAccount.HasValue ?
+            new ObjectParameter("IdAccount", idAccount) :
+            new ObjectParameter("IdAccount", typeof(decimal));
+
+
+        var idContactParameter = idContact.HasValue ?
+            new ObjectParameter("IdContact", idContact) :
+            new ObjectParameter("IdContact", typeof(decimal));
+
+
+        var idPriorityParameter = idPriority.HasValue ?
+            new ObjectParameter("IdPriority", idPriority) :
+            new ObjectParameter("IdPriority", typeof(decimal));
+
+
+        var idStatusParameter = idStatus.HasValue ?
+            new ObjectParameter("IdStatus", idStatus) :
+            new ObjectParameter("IdStatus", typeof(decimal));
+
+
+        var idLoaiActionParameter = idLoaiAction.HasValue ?
+            new ObjectParameter("IdLoaiAction", idLoaiAction) :
+            new ObjectParameter("IdLoaiAction", typeof(decimal));
+
+
+        var duKienHoanThanhParameter = duKienHoanThanh.HasValue ?
+            new ObjectParameter("DuKienHoanThanh", duKienHoanThanh) :
+            new ObjectParameter("DuKienHoanThanh", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Task_Insert", taiNgayParameter, idUserParameter, lamGiParameter, idAccountParameter, idContactParameter, idPriorityParameter, idStatusParameter, idLoaiActionParameter, duKienHoanThanhParameter, id);
+    }
+
+
+    public virtual int pr_Task_Update(Nullable<decimal> id, Nullable<System.DateTime> taiNgay, Nullable<decimal> idUser, string lamGi, Nullable<decimal> idAccount, Nullable<decimal> idContact, Nullable<decimal> idPriority, Nullable<decimal> idStatus, Nullable<decimal> idLoaiAction, Nullable<decimal> duKienHoanThanh)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        var taiNgayParameter = taiNgay.HasValue ?
+            new ObjectParameter("TaiNgay", taiNgay) :
+            new ObjectParameter("TaiNgay", typeof(System.DateTime));
+
+
+        var idUserParameter = idUser.HasValue ?
+            new ObjectParameter("IdUser", idUser) :
+            new ObjectParameter("IdUser", typeof(decimal));
+
+
+        var lamGiParameter = lamGi != null ?
+            new ObjectParameter("LamGi", lamGi) :
+            new ObjectParameter("LamGi", typeof(string));
+
+
+        var idAccountParameter = idAccount.HasValue ?
+            new ObjectParameter("IdAccount", idAccount) :
+            new ObjectParameter("IdAccount", typeof(decimal));
+
+
+        var idContactParameter = idContact.HasValue ?
+            new ObjectParameter("IdContact", idContact) :
+            new ObjectParameter("IdContact", typeof(decimal));
+
+
+        var idPriorityParameter = idPriority.HasValue ?
+            new ObjectParameter("IdPriority", idPriority) :
+            new ObjectParameter("IdPriority", typeof(decimal));
+
+
+        var idStatusParameter = idStatus.HasValue ?
+            new ObjectParameter("IdStatus", idStatus) :
+            new ObjectParameter("IdStatus", typeof(decimal));
+
+
+        var idLoaiActionParameter = idLoaiAction.HasValue ?
+            new ObjectParameter("IdLoaiAction", idLoaiAction) :
+            new ObjectParameter("IdLoaiAction", typeof(decimal));
+
+
+        var duKienHoanThanhParameter = duKienHoanThanh.HasValue ?
+            new ObjectParameter("DuKienHoanThanh", duKienHoanThanh) :
+            new ObjectParameter("DuKienHoanThanh", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Task_Update", idParameter, taiNgayParameter, idUserParameter, lamGiParameter, idAccountParameter, idContactParameter, idPriorityParameter, idStatusParameter, idLoaiActionParameter, duKienHoanThanhParameter);
+    }
+
 }
 
 }

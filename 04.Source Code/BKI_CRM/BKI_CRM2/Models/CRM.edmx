@@ -722,6 +722,53 @@
         <Function Name="pr_Contract_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="numeric" Mode="In" />
         </Function>
+        <Function Name="pr_Contract_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NgayBatDau" Type="datetime" Mode="In" />
+          <Parameter Name="NgayKetThuc" Type="datetime" Mode="In" />
+          <Parameter Name="SoHopDong" Type="nvarchar" Mode="In" />
+          <Parameter Name="NoiDung" Type="nvarchar" Mode="In" />
+          <Parameter Name="IdAccount" Type="numeric" Mode="In" />
+          <Parameter Name="IdLoaiContract" Type="numeric" Mode="In" />
+          <Parameter Name="IdUser" Type="numeric" Mode="In" />
+          <Parameter Name="Id" Type="numeric" Mode="InOut" />
+        </Function>
+        <Function Name="pr_Contract_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+          <Parameter Name="NgayBatDau" Type="datetime" Mode="In" />
+          <Parameter Name="NgayKetThuc" Type="datetime" Mode="In" />
+          <Parameter Name="SoHopDong" Type="nvarchar" Mode="In" />
+          <Parameter Name="NoiDung" Type="nvarchar" Mode="In" />
+          <Parameter Name="IdAccount" Type="numeric" Mode="In" />
+          <Parameter Name="IdLoaiContract" Type="numeric" Mode="In" />
+          <Parameter Name="IdUser" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="pr_Task_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="pr_Task_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TaiNgay" Type="datetime" Mode="In" />
+          <Parameter Name="IdUser" Type="numeric" Mode="In" />
+          <Parameter Name="LamGi" Type="nvarchar" Mode="In" />
+          <Parameter Name="IdAccount" Type="numeric" Mode="In" />
+          <Parameter Name="IdContact" Type="numeric" Mode="In" />
+          <Parameter Name="IdPriority" Type="numeric" Mode="In" />
+          <Parameter Name="IdStatus" Type="numeric" Mode="In" />
+          <Parameter Name="IdLoaiAction" Type="numeric" Mode="In" />
+          <Parameter Name="DuKienHoanThanh" Type="datetime" Mode="In" />
+          <Parameter Name="Id" Type="numeric" Mode="InOut" />
+        </Function>
+        <Function Name="pr_Task_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+          <Parameter Name="TaiNgay" Type="datetime" Mode="In" />
+          <Parameter Name="IdUser" Type="numeric" Mode="In" />
+          <Parameter Name="LamGi" Type="nvarchar" Mode="In" />
+          <Parameter Name="IdAccount" Type="numeric" Mode="In" />
+          <Parameter Name="IdContact" Type="numeric" Mode="In" />
+          <Parameter Name="IdPriority" Type="numeric" Mode="In" />
+          <Parameter Name="IdStatus" Type="numeric" Mode="In" />
+          <Parameter Name="IdLoaiAction" Type="numeric" Mode="In" />
+          <Parameter Name="DuKienHoanThanh" Type="numeric" Mode="In" />
+        </Function>
         <EntityContainer Name="CrmModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountContactRole" EntityType="Self.AccountContactRole" Schema="dbo" store:Type="Tables" />
@@ -1588,6 +1635,53 @@
           <FunctionImport Name="pr_Contract_Delete">
           <Parameter Name="Id" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="pr_Contract_Insert">
+            <Parameter Name="NgayBatDau" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayKetThuc" Mode="In" Type="DateTime" />
+            <Parameter Name="SoHopDong" Mode="In" Type="String" />
+            <Parameter Name="NoiDung" Mode="In" Type="String" />
+            <Parameter Name="IdAccount" Mode="In" Type="Decimal" />
+            <Parameter Name="IdLoaiContract" Mode="In" Type="Decimal" />
+            <Parameter Name="IdUser" Mode="In" Type="Decimal" />
+            <Parameter Name="Id" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pr_Contract_Update">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+            <Parameter Name="NgayBatDau" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayKetThuc" Mode="In" Type="DateTime" />
+            <Parameter Name="SoHopDong" Mode="In" Type="String" />
+            <Parameter Name="NoiDung" Mode="In" Type="String" />
+            <Parameter Name="IdAccount" Mode="In" Type="Decimal" />
+            <Parameter Name="IdLoaiContract" Mode="In" Type="Decimal" />
+            <Parameter Name="IdUser" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pr_Task_Delete">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pr_Task_Insert">
+            <Parameter Name="TaiNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="IdUser" Mode="In" Type="Decimal" />
+            <Parameter Name="LamGi" Mode="In" Type="String" />
+            <Parameter Name="IdAccount" Mode="In" Type="Decimal" />
+            <Parameter Name="IdContact" Mode="In" Type="Decimal" />
+            <Parameter Name="IdPriority" Mode="In" Type="Decimal" />
+            <Parameter Name="IdStatus" Mode="In" Type="Decimal" />
+            <Parameter Name="IdLoaiAction" Mode="In" Type="Decimal" />
+            <Parameter Name="DuKienHoanThanh" Mode="In" Type="DateTime" />
+            <Parameter Name="Id" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pr_Task_Update">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+            <Parameter Name="TaiNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="IdUser" Mode="In" Type="Decimal" />
+            <Parameter Name="LamGi" Mode="In" Type="String" />
+            <Parameter Name="IdAccount" Mode="In" Type="Decimal" />
+            <Parameter Name="IdContact" Mode="In" Type="Decimal" />
+            <Parameter Name="IdPriority" Mode="In" Type="Decimal" />
+            <Parameter Name="IdStatus" Mode="In" Type="Decimal" />
+            <Parameter Name="IdLoaiAction" Mode="In" Type="Decimal" />
+            <Parameter Name="DuKienHoanThanh" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2137,6 +2231,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="pr_Contract_Delete" FunctionName="CrmModel.Store.pr_Contract_Delete" />
+          <FunctionImportMapping FunctionImportName="pr_Contract_Insert" FunctionName="CrmModel.Store.pr_Contract_Insert" />
+          <FunctionImportMapping FunctionImportName="pr_Contract_Update" FunctionName="CrmModel.Store.pr_Contract_Update" />
+          <FunctionImportMapping FunctionImportName="pr_Task_Delete" FunctionName="CrmModel.Store.pr_Task_Delete" />
+          <FunctionImportMapping FunctionImportName="pr_Task_Insert" FunctionName="CrmModel.Store.pr_Task_Insert" />
+          <FunctionImportMapping FunctionImportName="pr_Task_Update" FunctionName="CrmModel.Store.pr_Task_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

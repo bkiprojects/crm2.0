@@ -64,5 +64,22 @@ namespace BKI_CRM2.Controllers
             }
             else return Json(true, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult Update(Nullable<decimal> id, Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser)
+        {
+            if (id != null)
+            {
+                CrmEntities v_model = new CrmEntities();
+                int affected = v_model.pr_Contract_Update(id, ngayBatDau, ngayKetThuc, soHopDong, noiDung, idAccount, idLoaiContract, idUser);
+                return Json(affected, JsonRequestBehavior.AllowGet);
+            }
+            else return Insert(ngayBatDau, ngayKetThuc, soHopDong, noiDung, idAccount, idLoaiContract, idUser);
+        }
+        public JsonResult Insert(Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser)
+        {
+            var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
+            CrmEntities v_model = new CrmEntities();
+            v_model.pr_Contract_Insert(ngayBatDau, ngayKetThuc, soHopDong, noiDung, idAccount, idLoaiContract, idUser, id);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }

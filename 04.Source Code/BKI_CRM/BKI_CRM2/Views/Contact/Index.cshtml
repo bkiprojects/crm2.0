@@ -400,12 +400,13 @@
             },
             success: function (data) {
                 alert("Thành công!");
-                $('#thay_doi').modal('hide');
                 $.ajax({
                     url: "/Contact/Index",
                     type: "Get",
                     success: function (view) {
-                        $('#body').html(view);
+                        $('#thay_doi').one('hidden.bs.modal', function () {
+                            $('#body').html(view);
+                        }).modal('hide');
                     }
                 });
             }
@@ -534,7 +535,9 @@
                             url: "/Contact/Index",
                             type: "Get",
                             success: function (view) {
-                                $('#body').html(view);
+                                $('#thay_doi').one('hidden.bs.modal', function () {
+                                    $('#body').html(view);
+                                }).modal('hide');
                             }
                         });
                     }

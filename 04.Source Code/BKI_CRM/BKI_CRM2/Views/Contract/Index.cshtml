@@ -211,5 +211,40 @@
              }
         });
         $('#thay_doi').modal('show');
-   }
+    }
+    function thuchiensua(id_hd) {
+        var ngaybatdau = $('#ngaybatdau').val().trim();
+        var ngayketthuc = $('#ngayketthuc').val().trim();
+        var sohopdong = $('#sohopdong').val().trim();
+        var noidung = $('#noidung').val().trim();
+        $.ajax({
+            url: "/Contract/Update",
+            type: "POST",
+            data: {
+                id: id_hd,
+                ngayBatDau: ngaybatdau,
+                ngayKetThuc: ngayketthuc,
+                soHopDong: sohopdong,
+                noiDung: noidung,
+                idAccount: null,
+                idLoaiContract: null,
+                idUser:null
+            },
+            error: function () {
+                alert("Có lỗi");
+            },
+            success: function (data) {
+                alert("Thành công!");
+                $.ajax({
+                    url: "/Contract/Index",
+                    type: "Get",
+                    success: function (view) {
+                        $('#thay_doi').one('hidden.bs.modal', function () {
+                            $('#body').html(view);
+                        }).modal('hide');
+                    }
+                });
+            }
+        });
+    }
 </script>
