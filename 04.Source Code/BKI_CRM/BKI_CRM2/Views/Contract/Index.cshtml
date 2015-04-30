@@ -1,5 +1,5 @@
 ﻿@{
-    var hop_dong = ViewBag.v_hd as List<BKI_CRM2.Models.Contract>;    
+    var hop_dong = ViewBag.v_hd as List<BKI_CRM2.Models.Contract>;
 }
 <style>
     .mau {
@@ -17,8 +17,9 @@
     .height_input {
         height: 34px !important;
     }
+
     .width100px {
-    width:100px;
+        width: 100px;
     }
 </style>
 <div class="title">
@@ -29,118 +30,126 @@
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm hợp đồng
     </button>
 
-     <select id="thuc_hien" style="margin-left:200px;">
+    <select id="thuc_hien" style="margin-left:200px;">
         <option></option>
         <option value="xuat_excel">Xuất Excel</option>
         <option value="in">In</option>
     </select>
 </div>
 <div>
-     
+
     <table class=" mytable">
-                    <thead>
-                        <tr>
-                           
-                            <th>Ngày bắt đầu</th>
-                            <th>Ngày kết thúc</th>
-                            <th>Số hợp đồng</th>
-                            <th>Nội dung</th>
-                            <th>Tổ chức</th>
-                            <th>Sửa</th>
-                            <th>Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in hop_dong)
-	                    {
-		                 <tr id="@item.Id">
-                            <td>@item.NgayBatDau</td>
-                            <td>@item.NgayKetThuc</td>
-                            <td>@item.SoHopDong</td>
-                            <td>@item.NoiDung</td>
-                            <td>@item.IdAccount</td>
-                            <td><button type="button" class="btn btn-default"  onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
-                            <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
-                        </tr>
-	                    }
-                      
-                        
-                   </tbody>
-                </table>
-    
- <div class="modal fade" id="thay_doi">
-    <div class="modal-dialog " id="HopDong">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title title">Nội dung chi tiết hợp đồng</h3>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                     <table class="table table-condensed table-font-size " style="margin-top:20px;width:47%; ">
-                         <tr>
-                             <td>
-                               <label style="line-height: 33px;">Ngày bắt đầu</label>   
-                             </td>
-                             <td>
-                                 <input type="date" id="ngaybatdau" class="form-control width220px" style="height:34px !important;" />
-                             </td>
-                         </tr>
-                          <tr>
-                             <td>
-                                  <label style="line-height: 33px;">Ngày kết thúc</label>
-                             </td>
-                             <td>
-                                 <input type="date" id="ngayketthuc" class="form-control width220px" style="height:34px !important;" />
-                             </td>
-                         </tr>
-                          <tr>
-                             <td>
-                                  <label style="line-height: 33px;">Số hợp đồng</label>
-                             </td>
-                             <td>
-                                 <input type="email" placeholder="Nhập số hợp đồng" class="form-control width220px  " style="height:34px !important;" id="sohopdong" />
-                             </td>
-                         </tr>
-                          <tr>
-                             <td>
-                                  <label style="line-height: 33px;">Nội dung</label>
-                             </td>
-                             <td>
-                                 <textarea rows="3" id="noidung" style="width:320px;font-size:14px;" placeholder="Nhập nội dung hợp đồng" class="form-control"></textarea>
-                             </td>
-                         </tr>
-                     </table>                
+        <thead>
+            <tr>
+
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Số hợp đồng</th>
+                <th>Nội dung</th>
+                <th>Tổ chức</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in hop_dong)
+            {
+                <tr id="@item.Id">
+                    <td>@item.NgayBatDau</td>
+                    <td>@item.NgayKetThuc</td>
+                    <td>@item.SoHopDong</td>
+                    <td>@item.NoiDung</td>
+                    <td>@item.IdAccount</td>
+                    <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                    <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="thay_doi">
+        <div class="modal-dialog " id="HopDong">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title title">NỘI DUNG CHI TIẾT HỢP ĐỒNG</h3>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" id="clear">Xóa trắng</button>
-                <button type="button" class="btn btn-primary" onclick="thuchiensua($('#thay_doi').attr('name'));">Lưu lại</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->   
-  
+                <div class="modal-body">
+                    <div class="container">
+                        <table class="table table-condensed table-font-size " style="margin-top:20px;width:47%; ">
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Ngày bắt đầu</label>
+                                </td>
+                                <td>
+                                    <input type="date" id="ngaybatdau" class="form-control width220px" style="height:34px !important;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Ngày kết thúc</label>
+                                </td>
+                                <td>
+                                    <input type="date" id="ngayketthuc" class="form-control width220px" style="height:34px !important;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Số hợp đồng</label>
+                                </td>
+                                <td>
+                                    <input type="email" placeholder="Nhập số hợp đồng" class="form-control width220px  " style="height:34px !important;" id="sohopdong" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Nội dung</label>
+                                </td>
+                                <td>
+                                    <textarea rows="3" id="noidung" style="width:320px;font-size:14px;" placeholder="Nhập nội dung hợp đồng" class="form-control"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Tổ chức</label>
+                                </td>
+                                <td>
+                                    <select id="account"></select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" id="clear">Xóa trắng</button>
+                    <button type="button" class="btn btn-primary" onclick="thuchiensua($('#thay_doi').attr('name'));">Lưu lại</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class="modal fade" id="xoa">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">THÔNG BÁO</h4>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xóa dòng dữ liệu này không?</p>
-                <div id="giatri" style="display:none;"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="xoa($('#giatri').html())">Đồng ý</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-        
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">XÁC NHẬN</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa dòng dữ liệu này không?</p>
+                    <div id="giatri" style="display:none;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="xoa($('#giatri').html())">Đồng ý</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 </div>
 <script>
     $(document).ready(function () {
@@ -183,6 +192,8 @@
     function clear() {
         $('#HopDong').find('input').val('');
         $('#noidung').val('');
+        $('#account').val(null);
+        $('#account').select2();
     }
 
     function sua(id_hd) {
@@ -194,18 +205,22 @@
             error: function () {
                 alert('Lấy thông tin thất bại!');
             },
-            success: function (get)
-            {
-                if (get != undefined && get != true)
-                {
+            success: function (get) {
+                var str = "";
+                for (i = 0; i < get.ids.length; i++)
+                    str += "<option value='" + get.ids[i] + "'>" + get.names[i] + "</option>";
+                $('#account').html(str);
+                if (get.ngay_bat_dau != undefined) {
                     ngaybatdau.value = get.ngay_bat_dau.trim();
                     ngayketthuc.value = get.ngay_ket_thuc.trim();
                     sohopdong.value = get.so_hop_dong.trim();
                     noidung.value = get.noi_dung.trim();
+                    account.value = get.account;
                 }
-                    $('#thay_doi').modal('show');
-                    
-             }
+                $('#account').select2();
+                $('#thay_doi').modal('show');
+
+            }
         });
         $('#thay_doi').modal('show');
     }
@@ -216,6 +231,7 @@
         var ngayketthuc = $('#ngayketthuc').val().trim();
         var sohopdong = $('#sohopdong').val().trim();
         var noidung = $('#noidung').val().trim();
+        var account = $('#account').val();
         $.ajax({
             url: "/Contract/Update",
             type: "POST",
@@ -225,9 +241,9 @@
                 ngayKetThuc: ngayketthuc,
                 soHopDong: sohopdong,
                 noiDung: noidung,
-                idAccount: null,
+                idAccount: account,
                 idLoaiContract: null,
-                idUser:null
+                idUser: null
             },
             error: function () {
                 alert("Có lỗi");

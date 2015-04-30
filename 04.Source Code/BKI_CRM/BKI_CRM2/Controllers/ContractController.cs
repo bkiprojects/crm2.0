@@ -23,7 +23,7 @@ namespace BKI_CRM2.Controllers
         {
             CrmEntities v_model = new CrmEntities();
             List<Contract> v_hd = new List<Contract>();
-            v_hd = v_model.Contract.Where(x=>x.Id>0).ToList<Contract>();
+            v_hd = v_model.Contract.Where(x => x.Id > 0).ToList<Contract>();
             ViewBag.v_hd = v_hd;
             return PartialView();
         }
@@ -38,9 +38,16 @@ namespace BKI_CRM2.Controllers
         [HttpGet]
         public JsonResult Select(string IdContract)
         {
+            CrmEntities v_model = new CrmEntities();
+            List<Account> v_ac = new List<Account>();
+            v_ac = v_model.Account.ToList<Account>();
+            List<decimal> ids = new List<decimal>(); List<string> names = new List<string>();
+            for (int i = 0; i < v_ac.Count; i++)
+            {
+                ids.Add(v_ac[i].Id); names.Add(v_ac[i].AccountName);
+            }
             if (IdContract != null && !IdContract.Equals(""))
             {
-                CrmEntities v_model = new CrmEntities();
                 decimal v_id = Convert.ToDecimal(IdContract);
                 var v_contract = v_model.Contract.Where(x => x.Id == v_id).First();
                 string v_ngay_bat_dau = "", v_ngay_ket_thuc = "";
@@ -55,14 +62,18 @@ namespace BKI_CRM2.Controllers
                         v_ngay_ket_thuc = ((DateTime)v_contract.NgayKetThuc).ToString("yyyy-MM-dd");
                     }
                 }
-                return Json(new {
+                return Json(new
+                {
                     ngay_bat_dau = v_ngay_bat_dau,
                     ngay_ket_thuc = v_ngay_ket_thuc,
-                    so_hop_dong= v_contract.SoHopDong,
-                    noi_dung= v_contract.NoiDung  
+                    so_hop_dong = v_contract.SoHopDong,
+                    noi_dung = v_contract.NoiDung,
+                    account = v_contract.IdAccount,
+                    ids = ids,
+                    names = names
                 }, JsonRequestBehavior.AllowGet);
             }
-            else return Json(true, JsonRequestBehavior.AllowGet);
+            else return Json(new { ids = ids, names = names }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Update(Nullable<decimal> id, Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser)
         {
