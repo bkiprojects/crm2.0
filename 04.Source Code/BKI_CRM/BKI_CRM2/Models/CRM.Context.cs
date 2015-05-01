@@ -67,7 +67,7 @@ public partial class CrmEntities : DbContext
 
     public virtual DbSet<UserContactRole> UserContactRole { get; set; }
 
-    public virtual DbSet<UserGroup> UserGroup { get; set; }
+    public virtual DbSet<UserGroup> UserGroups { get; set; }
 
     public virtual DbSet<sysdiagram> sysdiagram { get; set; }
 
@@ -446,7 +446,7 @@ public partial class CrmEntities : DbContext
     }
 
 
-    public virtual int pr_Task_Update(Nullable<decimal> id, Nullable<System.DateTime> taiNgay, Nullable<decimal> idUser, string lamGi, Nullable<decimal> idAccount, Nullable<decimal> idContact, Nullable<decimal> idPriority, Nullable<decimal> idStatus, Nullable<decimal> idLoaiAction, Nullable<decimal> duKienHoanThanh)
+    public virtual int pr_Task_Update(Nullable<decimal> id, Nullable<System.DateTime> taiNgay, Nullable<decimal> idUser, string lamGi, Nullable<decimal> idAccount, Nullable<decimal> idContact, Nullable<decimal> idPriority, Nullable<decimal> idStatus, Nullable<decimal> idLoaiAction, Nullable<System.DateTime> duKienHoanThanh)
     {
 
         var idParameter = id.HasValue ?
@@ -496,7 +496,7 @@ public partial class CrmEntities : DbContext
 
         var duKienHoanThanhParameter = duKienHoanThanh.HasValue ?
             new ObjectParameter("DuKienHoanThanh", duKienHoanThanh) :
-            new ObjectParameter("DuKienHoanThanh", typeof(decimal));
+            new ObjectParameter("DuKienHoanThanh", typeof(System.DateTime));
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Task_Update", idParameter, taiNgayParameter, idUserParameter, lamGiParameter, idAccountParameter, idContactParameter, idPriorityParameter, idStatusParameter, idLoaiActionParameter, duKienHoanThanhParameter);

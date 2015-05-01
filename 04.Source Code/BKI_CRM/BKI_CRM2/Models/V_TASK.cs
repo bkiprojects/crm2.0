@@ -52,6 +52,8 @@ public partial class V_TASK
 
     public string MucUuTien { get; set; }
 
+    public Nullable<decimal> IdPriority { get; set; }
+
 }
 
 }

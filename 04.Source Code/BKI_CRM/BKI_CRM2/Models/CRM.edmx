@@ -259,6 +259,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Property Name="IdContact" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdStatus" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdLoaiAction" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdPriority" Type="numeric" Precision="18" Scale="0" />
           <Property Name="DuKienHoanThanh" Type="datetime" />
           <Property Name="TenCongViec" Type="nvarchar" MaxLength="500" />
           <Property Name="AccountName" Type="nvarchar" MaxLength="100" />
@@ -792,7 +793,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="IdPriority" Type="numeric" Mode="In" />
           <Parameter Name="IdStatus" Type="numeric" Mode="In" />
           <Parameter Name="IdLoaiAction" Type="numeric" Mode="In" />
-          <Parameter Name="DuKienHoanThanh" Type="numeric" Mode="In" />
+          <Parameter Name="DuKienHoanThanh" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="CrmModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
@@ -826,6 +827,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
     [V_TASK].[IdContact] AS [IdContact], 
     [V_TASK].[IdStatus] AS [IdStatus], 
     [V_TASK].[IdLoaiAction] AS [IdLoaiAction], 
+    [V_TASK].[IdPriority] AS [IdPriority], 
     [V_TASK].[DuKienHoanThanh] AS [DuKienHoanThanh], 
     [V_TASK].[TenCongViec] AS [TenCongViec], 
     [V_TASK].[AccountName] AS [AccountName], 
@@ -1467,148 +1469,148 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CrmEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AccountContactRoles" EntityType="Self.AccountContactRole" />
-          <EntitySet Name="Actions" EntityType="Self.Action" />
-          <EntitySet Name="Companies" EntityType="Self.Company" />
-          <EntitySet Name="Contacts" EntityType="Self.Contact" />
-          <EntitySet Name="ContactStateChanges" EntityType="Self.ContactStateChange" />
-          <EntitySet Name="ContactStateProcesses" EntityType="Self.ContactStateProcess" />
-          <EntitySet Name="ContractContactRoles" EntityType="Self.ContractContactRole" />
-          <EntitySet Name="LoaiTuDiens" EntityType="Self.LoaiTuDien" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="Quotes" EntityType="Self.Quote" />
-          <EntitySet Name="Tasks" EntityType="Self.Task" />
-          <EntitySet Name="ToBeConverteds" EntityType="Self.ToBeConverted" />
-          <EntitySet Name="TuDiens" EntityType="Self.TuDien" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UserContactRoles" EntityType="Self.UserContactRole" />
+          <EntitySet Name="AccountContactRole" EntityType="Self.AccountContactRole" />
+          <EntitySet Name="Action" EntityType="Self.Action" />
+          <EntitySet Name="Company" EntityType="Self.Company" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" />
+          <EntitySet Name="ContactStateChange" EntityType="Self.ContactStateChange" />
+          <EntitySet Name="ContactStateProcess" EntityType="Self.ContactStateProcess" />
+          <EntitySet Name="ContractContactRole" EntityType="Self.ContractContactRole" />
+          <EntitySet Name="LoaiTuDien" EntityType="Self.LoaiTuDien" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Quote" EntityType="Self.Quote" />
+          <EntitySet Name="Task" EntityType="Self.Task" />
+          <EntitySet Name="ToBeConverted" EntityType="Self.ToBeConverted" />
+          <EntitySet Name="TuDien" EntityType="Self.TuDien" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserContactRole" EntityType="Self.UserContactRole" />
           <EntitySet Name="UserGroups" EntityType="Self.UserGroup" />
           <AssociationSet Name="FK_AccountContactRole_Contact" Association="Self.FK_AccountContactRole_Contact">
-            <End Role="Contact" EntitySet="Contacts" />
-            <End Role="AccountContactRole" EntitySet="AccountContactRoles" />
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="AccountContactRole" EntitySet="AccountContactRole" />
           </AssociationSet>
           <AssociationSet Name="FK_ACTION_UserGroup" Association="Self.FK_ACTION_UserGroup">
             <End Role="UserGroup" EntitySet="UserGroups" />
-            <End Role="Action" EntitySet="Actions" />
+            <End Role="Action" EntitySet="Action" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="User" EntitySet="Users" />
+            <End Role="Company" EntitySet="Company" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactStateChange_Contact" Association="Self.FK_ContactStateChange_Contact">
-            <End Role="Contact" EntitySet="Contacts" />
-            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChange" />
           </AssociationSet>
           <AssociationSet Name="FK_ContractContactRole_Contact" Association="Self.FK_ContractContactRole_Contact">
-            <End Role="Contact" EntitySet="Contacts" />
-            <End Role="ContractContactRole" EntitySet="ContractContactRoles" />
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="ContractContactRole" EntitySet="ContractContactRole" />
           </AssociationSet>
           <AssociationSet Name="FK_Task_Contact" Association="Self.FK_Task_Contact">
-            <End Role="Contact" EntitySet="Contacts" />
-            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="FK_UserContactRole_Contact" Association="Self.FK_UserContactRole_Contact">
-            <End Role="Contact" EntitySet="Contacts" />
-            <End Role="UserContactRole" EntitySet="UserContactRoles" />
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="UserContactRole" EntitySet="UserContactRole" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactStateChange_ContactStateChange" Association="Self.FK_ContactStateChange_ContactStateChange">
-            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
-            <End Role="ContactStateChange1" EntitySet="ContactStateChanges" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChange" />
+            <End Role="ContactStateChange1" EntitySet="ContactStateChange" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactStateChange_User" Association="Self.FK_ContactStateChange_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
+            <End Role="User" EntitySet="User" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChange" />
           </AssociationSet>
           <AssociationSet Name="FK_TuDien_LoaiTuDien" Association="Self.FK_TuDien_LoaiTuDien">
-            <End Role="LoaiTuDien" EntitySet="LoaiTuDiens" />
-            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="LoaiTuDien" EntitySet="LoaiTuDien" />
+            <End Role="TuDien" EntitySet="TuDien" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_TuDien" Association="Self.FK_Order_TuDien">
-            <End Role="TuDien" EntitySet="TuDiens" />
-            <End Role="Order" EntitySet="Orders" />
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_TuDien" Association="Self.FK_Product_TuDien">
-            <End Role="TuDien" EntitySet="TuDiens" />
-            <End Role="Product" EntitySet="Products" />
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Quote_TuDien" Association="Self.FK_Quote_TuDien">
-            <End Role="TuDien" EntitySet="TuDiens" />
-            <End Role="Quote" EntitySet="Quotes" />
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Quote" EntitySet="Quote" />
           </AssociationSet>
           <AssociationSet Name="FK_Task_TuDien" Association="Self.FK_Task_TuDien">
-            <End Role="TuDien" EntitySet="TuDiens" />
-            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="FK_Task_TuDien1" Association="Self.FK_Task_TuDien1">
-            <End Role="TuDien" EntitySet="TuDiens" />
-            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="FK_Task_TuDien2" Association="Self.FK_Task_TuDien2">
-            <End Role="TuDien" EntitySet="TuDiens" />
-            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="FK_Task_User" Association="Self.FK_Task_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Task" EntitySet="Tasks" />
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <AssociationSet Name="FK_User_UserGroup" Association="Self.FK_User_UserGroup">
             <End Role="UserGroup" EntitySet="UserGroups" />
-            <End Role="User" EntitySet="Users" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_UserContactRole_User" Association="Self.FK_UserContactRole_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserContactRole" EntitySet="UserContactRoles" />
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContactRole" EntitySet="UserContactRole" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="CrmModel.sysdiagram" />
+          <EntitySet Name="sysdiagram" EntityType="CrmModel.sysdiagram" />
           <AssociationSet Name="FK_Contact_TuDien" Association="CrmModel.FK_Contact_TuDien">
-            <End Role="TuDien" EntitySet="TuDiens" />
-            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="TuDien" EntitySet="TuDien" />
+            <End Role="Contact" EntitySet="Contact" />
           </AssociationSet>
           <EntitySet Name="Account" EntityType="CrmModel.Account" />
           <AssociationSet Name="FK_Account_TuDien" Association="CrmModel.FK_Account_TuDien">
-            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="TuDien" EntitySet="TuDien" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
           <AssociationSet Name="FK_AccountContactRole_Account" Association="CrmModel.FK_AccountContactRole_Account">
             <End Role="Account" EntitySet="Account" />
-            <End Role="AccountContactRole" EntitySet="AccountContactRoles" />
+            <End Role="AccountContactRole" EntitySet="AccountContactRole" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Account" Association="CrmModel.FK_Order_Account">
             <End Role="Account" EntitySet="Account" />
-            <End Role="Order" EntitySet="Orders" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Task_Account" Association="CrmModel.FK_Task_Account">
             <End Role="Account" EntitySet="Account" />
-            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Task" EntitySet="Task" />
           </AssociationSet>
           <EntitySet Name="ContactState" EntityType="CrmModel.ContactState" />
           <AssociationSet Name="FK_ContactState_Company" Association="CrmModel.FK_ContactState_Company">
-            <End Role="Company" EntitySet="Companies" />
+            <End Role="Company" EntitySet="Company" />
             <End Role="ContactState" EntitySet="ContactState" />
           </AssociationSet>
           <AssociationSet Name="FK_Contact_ContactState" Association="CrmModel.FK_Contact_ContactState">
             <End Role="ContactState" EntitySet="ContactState" />
-            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Contact" EntitySet="Contact" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactStateChange_ContactState" Association="CrmModel.FK_ContactStateChange_ContactState">
             <End Role="ContactState" EntitySet="ContactState" />
-            <End Role="ContactStateChange" EntitySet="ContactStateChanges" />
+            <End Role="ContactStateChange" EntitySet="ContactStateChange" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactStateProcess_ContactState" Association="CrmModel.FK_ContactStateProcess_ContactState">
             <End Role="ContactState" EntitySet="ContactState" />
-            <End Role="ContactStateProcess" EntitySet="ContactStateProcesses" />
+            <End Role="ContactStateProcess" EntitySet="ContactStateProcess" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactStateProcess_ContactState1" Association="CrmModel.FK_ContactStateProcess_ContactState1">
             <End Role="ContactState" EntitySet="ContactState" />
-            <End Role="ContactStateProcess" EntitySet="ContactStateProcesses" />
+            <End Role="ContactStateProcess" EntitySet="ContactStateProcess" />
           </AssociationSet>
           <AssociationSet Name="FK_ToBeConverted_ContactState" Association="CrmModel.FK_ToBeConverted_ContactState">
             <End Role="ContactState" EntitySet="ContactState" />
-            <End Role="ToBeConverted" EntitySet="ToBeConverteds" />
+            <End Role="ToBeConverted" EntitySet="ToBeConverted" />
           </AssociationSet>
           <AssociationSet Name="FK_UserGroup_Company" Association="CrmModel.FK_UserGroup_Company">
-            <End Role="Company" EntitySet="Companies" />
+            <End Role="Company" EntitySet="Company" />
             <End Role="UserGroup" EntitySet="UserGroups" />
           </AssociationSet>
           <FunctionImport Name="pr_Contact_Delete">
@@ -1660,24 +1662,24 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <End Role="Contract" EntitySet="Contract" />
           </AssociationSet>
           <AssociationSet Name="FK_Contract_TuDien" Association="CrmModel.FK_Contract_TuDien">
-            <End Role="TuDien" EntitySet="TuDiens" />
+            <End Role="TuDien" EntitySet="TuDien" />
             <End Role="Contract" EntitySet="Contract" />
           </AssociationSet>
           <AssociationSet Name="FK_Contract_User" Association="CrmModel.FK_Contract_User">
-            <End Role="User" EntitySet="Users" />
+            <End Role="User" EntitySet="User" />
             <End Role="Contract" EntitySet="Contract" />
           </AssociationSet>
           <AssociationSet Name="FK_ContractContactRole_Contract" Association="CrmModel.FK_ContractContactRole_Contract">
             <End Role="Contract" EntitySet="Contract" />
-            <End Role="ContractContactRole" EntitySet="ContractContactRoles" />
+            <End Role="ContractContactRole" EntitySet="ContractContactRole" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Contract" Association="CrmModel.FK_Order_Contract">
             <End Role="Contract" EntitySet="Contract" />
-            <End Role="Order" EntitySet="Orders" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Quote_Contract" Association="CrmModel.FK_Quote_Contract">
             <End Role="Contract" EntitySet="Contract" />
-            <End Role="Quote" EntitySet="Quotes" />
+            <End Role="Quote" EntitySet="Quote" />
           </AssociationSet>
           <FunctionImport Name="pr_Contract_Delete">
           <Parameter Name="Id" Mode="In" Type="Decimal" />
@@ -1727,7 +1729,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="IdPriority" Mode="In" Type="Decimal" />
             <Parameter Name="IdStatus" Mode="In" Type="Decimal" />
             <Parameter Name="IdLoaiAction" Mode="In" Type="Decimal" />
-            <Parameter Name="DuKienHoanThanh" Mode="In" Type="Decimal" />
+            <Parameter Name="DuKienHoanThanh" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="V_TASK" EntityType="CrmModel.V_TASK" />
         </EntityContainer>
@@ -2030,6 +2032,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TrangThai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MucUuTien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdPriority" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2037,7 +2040,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CrmModelStoreContainer" CdmEntityContainer="CrmEntities">
-          <EntitySetMapping Name="AccountContactRoles">
+          <EntitySetMapping Name="AccountContactRole">
             <EntityTypeMapping TypeName="CrmModel.AccountContactRole">
               <MappingFragment StoreEntitySet="AccountContactRole">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2047,7 +2050,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Actions">
+          <EntitySetMapping Name="Action">
             <EntityTypeMapping TypeName="CrmModel.Action">
               <MappingFragment StoreEntitySet="Action">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2057,7 +2060,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Companies">
+          <EntitySetMapping Name="Company">
             <EntityTypeMapping TypeName="CrmModel.Company">
               <MappingFragment StoreEntitySet="Company">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2066,7 +2069,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Contacts">
+          <EntitySetMapping Name="Contact">
             <EntityTypeMapping TypeName="CrmModel.Contact">
               <MappingFragment StoreEntitySet="Contact">
                 <ScalarProperty Name="IdTrangThaiHienTai" ColumnName="IdTrangThaiHienTai" />
@@ -2090,7 +2093,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ContactStateChanges">
+          <EntitySetMapping Name="ContactStateChange">
             <EntityTypeMapping TypeName="CrmModel.ContactStateChange">
               <MappingFragment StoreEntitySet="ContactStateChange">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2105,7 +2108,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ContactStateProcesses">
+          <EntitySetMapping Name="ContactStateProcess">
             <EntityTypeMapping TypeName="CrmModel.ContactStateProcess">
               <MappingFragment StoreEntitySet="ContactStateProcess">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2115,7 +2118,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ContractContactRoles">
+          <EntitySetMapping Name="ContractContactRole">
             <EntityTypeMapping TypeName="CrmModel.ContractContactRole">
               <MappingFragment StoreEntitySet="ContractContactRole">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2127,7 +2130,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LoaiTuDiens">
+          <EntitySetMapping Name="LoaiTuDien">
             <EntityTypeMapping TypeName="CrmModel.LoaiTuDien">
               <MappingFragment StoreEntitySet="LoaiTuDien">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2136,7 +2139,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
+          <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="CrmModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2147,7 +2150,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
+          <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="CrmModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2158,7 +2161,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Quotes">
+          <EntitySetMapping Name="Quote">
             <EntityTypeMapping TypeName="CrmModel.Quote">
               <MappingFragment StoreEntitySet="Quote">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2170,7 +2173,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tasks">
+          <EntitySetMapping Name="Task">
             <EntityTypeMapping TypeName="CrmModel.Task">
               <MappingFragment StoreEntitySet="Task">
                 <ScalarProperty Name="TenCongViec" ColumnName="TenCongViec" />
@@ -2187,7 +2190,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ToBeConverteds">
+          <EntitySetMapping Name="ToBeConverted">
             <EntityTypeMapping TypeName="CrmModel.ToBeConverted">
               <MappingFragment StoreEntitySet="ToBeConverted">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2197,7 +2200,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TuDiens">
+          <EntitySetMapping Name="TuDien">
             <EntityTypeMapping TypeName="CrmModel.TuDien">
               <MappingFragment StoreEntitySet="TuDien">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2208,7 +2211,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
+          <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="CrmModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2228,7 +2231,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserContactRoles">
+          <EntitySetMapping Name="UserContactRole">
             <EntityTypeMapping TypeName="CrmModel.UserContactRole">
               <MappingFragment StoreEntitySet="UserContactRole">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2249,7 +2252,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
+          <EntitySetMapping Name="sysdiagram">
             <EntityTypeMapping TypeName="CrmModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="definition" ColumnName="definition" />
@@ -2310,6 +2313,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <EntitySetMapping Name="V_TASK">
             <EntityTypeMapping TypeName="CrmModel.V_TASK">
               <MappingFragment StoreEntitySet="V_TASK">
+                <ScalarProperty Name="IdPriority" ColumnName="IdPriority" />
                 <ScalarProperty Name="MucUuTien" ColumnName="MucUuTien" />
                 <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
