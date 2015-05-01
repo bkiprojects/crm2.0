@@ -102,14 +102,6 @@
 
                              <td>
                                    <select id="doquantrong" >
-                                    <option></option>
-                                    @if (tu_dien != null && tu_dien.Count > 0)
-                                    {
-                                        foreach (var item in tu_dien)
-                                        {
-                                            <option value="@item.Id">@item.TenTuDien</option>
-                                        }
-                                    }
                                 </select>
                              </td>
                               <td>
@@ -185,14 +177,6 @@
                              </td>
                              <td>
                                   <select id="nhanvienthuchien" >
-                                    <option></option>
-                                    @if (user != null && user.Count > 0)
-                                    {
-                                        foreach (var item in user)
-                                        {
-                                            <option value="@item.Id">@item.TenNhanVien</option>
-                                        }
-                                    }
                                 </select>
                              </td>
                          </tr>
@@ -309,20 +293,89 @@
                 alert('Lấy thông tin thất bại!');
             },
             success: function (get) {
+                var str = "";
+                for (i = 0; i < get.iduser.length; i++)
+                    str += "<option value='" + get.iduser[i] + "'>" + get.names[i] + "</option>";
+                $('#nhanvienthuchien').html(str);
+
+                var str1 = "";
+                for (i = 0; i < get.idpriority.length; i++)
+                    str1 += "<option value='" + get.idpriority[i] + "'>" + get.namepriority[i] + "</option>";
+                $('#doquantrong').html(str1);
+
+                var str2 = "";
+                for (i = 0; i < get.idstatus.length; i++)
+                    str2 += "<option value='" + get.idstatus[i] + "'>" + get.namestatus[i] + "</option>";
+                $('#trangthaihientai').html(str2);
+
+                var str3 = "";
+                for (i = 0; i < get.idcontact.length; i++)
+                    str3 += "<option value='" + get.idcontact[i] + "'>" + get.namecontact[i] + "</option>";
+                $('#lamviecvoi').html(str3);
+
+
                 if (get != undefined && get != true) {
+
                     batdautaingay.value = get.tai_ngay.trim();
                     tencongviec.value = get.ten_cv.trim();
                     doquantrong.value = get.do_quan_trong;
-                    lamviecvoi.value = get.khach_hang;
-                    nhanvienthuchien.value = get.nhan_vien;
+                    lamviecvoi.value =get.khach_hang;
+                    nhanvienthuchien.value =get.nhan_vien;
                     trangthaihientai.value = get.trang_thai;
                     dukienhoanthanh.value = get.du_kien_hoan_thanh;
                     noidung.value = get.noi_dung;
                 }
+                $('#nhanvienthuchien').select2();
+                $('#doquantrong').select2();
+                $('#trangthaihientai').select2();
+                $('#lamviecvoi').select2();
                 $('#thay_doi').modal('show');
 
             }
         });
         $('#thay_doi').modal('show');
+    }
+
+    function thuchiensua(id_cv) {
+        var taiNgay = $('#batdautaingay').val().trim();
+        var duKienHoanThanh = $('#dukienhoanthanh').val().trim();
+        var tenCongViec = $('#tencongviec').val().trim();
+        var noiDung = $('#noidung').val().trim();
+        var lamViecVoi = $('#lamviecvoi').val().trim();
+        var nhanVienThucHien = $('#nhanvienthuchien').val().trim();
+        var trangThaiHienTai = $('#trangthaihientai').val().trim();
+        var doQuanTrong = $('#doquantrong').val().trim();
+        $.ajax({
+            url: "/Task/Update",
+            type: "POST",
+            data: {
+                id: id_cv,
+                taiNgay: taiNgay,
+                duKienHoanThanh: duKienHoanThanh,
+                tenCongViec: tenCongViec,
+                noiDung: noiDung,
+                lamViecVoi: lamViecVoi,
+                nhanVienThucHien: nhanVienThucHien,
+                trangThaiHienTai: trangThaiHienTai,
+                doQuanTrong: doQuanTrong,
+                idAccount: null,
+                idAction:null
+            },
+            error: function () {
+                alert("Có lỗi");
+            },
+            success: function (data) {
+                alert("Thành công!");
+                $.ajax({
+                    url: "/Task/Index",
+                    type: "Get",
+                    success: function (view) {
+                        $('#thay_doi').on('hidden.bs.modal', function () {
+                            $('#body').html(view);
+                        }).modal('hide');
+                    }
+                });
+            }
+        });
     }
 </script>
