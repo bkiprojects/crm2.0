@@ -135,7 +135,7 @@ namespace BKI_CRM2.Controllers
                 namecontact
             }, JsonRequestBehavior.AllowGet);
         }
-
+        //quên Tên công việc trong pro
         public JsonResult Update(Nullable<decimal> id, Nullable<System.DateTime> taiNgay, Nullable<System.DateTime> duKienHoanThanh, string tenCongViec, string noiDung, Nullable<decimal> lamViecVoi, Nullable<decimal> nhanVienThucHien, Nullable<decimal> trangThaiHienTai, Nullable<decimal> doQuanTrong, Nullable<decimal> idAccount, Nullable<decimal> idLoaiAction)
         {
             if (id != null)

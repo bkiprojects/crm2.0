@@ -147,7 +147,7 @@
                                   <label style="line-height: 33px;">Nội dung</label>
                              </td>
                              <td rowspan="2">
-                                 <textarea rows="3" id="noidung" style="width:220px;font-size:14px;" placeholder="Nhập nội dung hợp đồng" class="form-control"></textarea>
+                                 <textarea rows="3" id="noidung" style="width:220px;font-size:14px;" placeholder="Nhập nội dung công việc" class="form-control"></textarea>
                              </td>
                                 <td>
                                   <label style="line-height: 33px;">Loại công việc</label>
@@ -237,11 +237,15 @@
 
     function clear() {
         $('#CongViec').find('input').val('');
-        $('#doquantrong').val('');
-        $('#lamviecvoi').val('');
-        $('#trangthaihientai').val('');
-        $('#nhanvienthuchien').val('');
+        $('#doquantrong').val(null);
+        $('#lamviecvoi').val(null);
+        $('#trangthaihientai').val(null);
+        $('#nhanvienthuchien').val(null);
         $('#noidung').val('');
+        $('#doquantrong').select2();
+        $('#lamviecvoi').select2();
+        $('#trangthaihientai').select2();
+        $('#nhanvienthuchien').select2();
 
     }
 
@@ -302,7 +306,7 @@
                 if (get != undefined && get != true) {
 
                     batdautaingay.value = get.tai_ngay.trim();
-                    tencongviec.value = get.ten_cv.trim();
+                    tencongviec.value = get.ten_cv;
                     doquantrong.value = get.do_quan_trong;
                     lamviecvoi.value =get.khach_hang;
                     nhanvienthuchien.value =get.nhan_vien;
