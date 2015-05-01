@@ -394,7 +394,7 @@ public partial class CrmEntities : DbContext
     }
 
 
-    public virtual int pr_Task_Insert(Nullable<System.DateTime> taiNgay, Nullable<decimal> idUser, string lamGi, Nullable<decimal> idAccount, Nullable<decimal> idContact, Nullable<decimal> idPriority, Nullable<decimal> idStatus, Nullable<decimal> idLoaiAction, Nullable<System.DateTime> duKienHoanThanh, ObjectParameter id)
+    public virtual int pr_Task_Insert(Nullable<System.DateTime> taiNgay, Nullable<decimal> idUser, string lamGi, Nullable<decimal> idAccount, Nullable<decimal> idContact, Nullable<decimal> idPriority, Nullable<decimal> idStatus, Nullable<decimal> idLoaiAction, Nullable<System.DateTime> duKienHoanThanh, string tenCongViec, ObjectParameter id)
     {
 
         var taiNgayParameter = taiNgay.HasValue ?
@@ -442,11 +442,16 @@ public partial class CrmEntities : DbContext
             new ObjectParameter("DuKienHoanThanh", typeof(System.DateTime));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Task_Insert", taiNgayParameter, idUserParameter, lamGiParameter, idAccountParameter, idContactParameter, idPriorityParameter, idStatusParameter, idLoaiActionParameter, duKienHoanThanhParameter, id);
+        var tenCongViecParameter = tenCongViec != null ?
+            new ObjectParameter("TenCongViec", tenCongViec) :
+            new ObjectParameter("TenCongViec", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Task_Insert", taiNgayParameter, idUserParameter, lamGiParameter, idAccountParameter, idContactParameter, idPriorityParameter, idStatusParameter, idLoaiActionParameter, duKienHoanThanhParameter, tenCongViecParameter, id);
     }
 
 
-    public virtual int pr_Task_Update(Nullable<decimal> id, Nullable<System.DateTime> taiNgay, Nullable<decimal> idUser, string lamGi, Nullable<decimal> idAccount, Nullable<decimal> idContact, Nullable<decimal> idPriority, Nullable<decimal> idStatus, Nullable<decimal> idLoaiAction, Nullable<System.DateTime> duKienHoanThanh)
+    public virtual int pr_Task_Update(Nullable<decimal> id, Nullable<System.DateTime> taiNgay, Nullable<decimal> idUser, string lamGi, Nullable<decimal> idAccount, Nullable<decimal> idContact, Nullable<decimal> idPriority, Nullable<decimal> idStatus, Nullable<decimal> idLoaiAction, Nullable<System.DateTime> duKienHoanThanh, string tenCongViec)
     {
 
         var idParameter = id.HasValue ?
@@ -499,7 +504,12 @@ public partial class CrmEntities : DbContext
             new ObjectParameter("DuKienHoanThanh", typeof(System.DateTime));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Task_Update", idParameter, taiNgayParameter, idUserParameter, lamGiParameter, idAccountParameter, idContactParameter, idPriorityParameter, idStatusParameter, idLoaiActionParameter, duKienHoanThanhParameter);
+        var tenCongViecParameter = tenCongViec != null ?
+            new ObjectParameter("TenCongViec", tenCongViec) :
+            new ObjectParameter("TenCongViec", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Task_Update", idParameter, taiNgayParameter, idUserParameter, lamGiParameter, idAccountParameter, idContactParameter, idPriorityParameter, idStatusParameter, idLoaiActionParameter, duKienHoanThanhParameter, tenCongViecParameter);
     }
 
 }

@@ -781,6 +781,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="IdStatus" Type="numeric" Mode="In" />
           <Parameter Name="IdLoaiAction" Type="numeric" Mode="In" />
           <Parameter Name="DuKienHoanThanh" Type="datetime" Mode="In" />
+          <Parameter Name="TenCongViec" Type="nvarchar" Mode="In" />
           <Parameter Name="Id" Type="numeric" Mode="InOut" />
         </Function>
         <Function Name="pr_Task_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -794,6 +795,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="IdStatus" Type="numeric" Mode="In" />
           <Parameter Name="IdLoaiAction" Type="numeric" Mode="In" />
           <Parameter Name="DuKienHoanThanh" Type="datetime" Mode="In" />
+          <Parameter Name="TenCongViec" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="CrmModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
@@ -1717,6 +1719,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="IdStatus" Mode="In" Type="Decimal" />
             <Parameter Name="IdLoaiAction" Mode="In" Type="Decimal" />
             <Parameter Name="DuKienHoanThanh" Mode="In" Type="DateTime" />
+            <Parameter Name="TenCongViec" Mode="In" Type="String" />
             <Parameter Name="Id" Mode="InOut" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="pr_Task_Update">
@@ -1730,6 +1733,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="IdStatus" Mode="In" Type="Decimal" />
             <Parameter Name="IdLoaiAction" Mode="In" Type="Decimal" />
             <Parameter Name="DuKienHoanThanh" Mode="In" Type="DateTime" />
+            <Parameter Name="TenCongViec" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="V_TASK" EntityType="CrmModel.V_TASK" />
         </EntityContainer>
