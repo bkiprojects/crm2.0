@@ -32,7 +32,7 @@
 </div>
 
 <div style="margin: 20px 0px 30px 30px;">
-    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;" data-toggle="modal" data-target="#thay_doi">
+    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;" onclick="sua(null);">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm công việc
     </button>
 
@@ -131,14 +131,6 @@
                              </td>
                              <td>
                                   <select id="lamviecvoi" >
-                                    <option></option>
-                                    @if (contact != null && contact.Count > 0)
-                                    {
-                                        foreach (var item in contact)
-                                        {
-                                            <option value="@item.Id">@(item.Ho+ " "+ item.Ten)</option>
-                                        }
-                                    }
                                 </select>
                              </td>
                                <td>
@@ -147,13 +139,6 @@
                              <td>
                                   <select id="trangthaihientai" >
                                     <option></option>
-                                    @if (tu_dien_status != null && tu_dien_status.Count > 0)
-                                    {
-                                        foreach (var item in tu_dien_status)
-                                        {
-                                            <option value="@item.Id">@item.TenTuDien</option>
-                                        }
-                                    }
                                 </select>
                              </td>
                          </tr>
