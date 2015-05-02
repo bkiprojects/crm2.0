@@ -5,7 +5,7 @@
     var tu_dien_status = ViewBag.v_tu_dien_status as List<BKI_CRM2.Models.TuDien>;
     var contact = ViewBag.v_contact as List<BKI_CRM2.Models.Contact>;
     var user = ViewBag.v_user as List<BKI_CRM2.Models.User>;
-    
+
 }
 <style>
     .mau {
@@ -23,8 +23,9 @@
     .height_input {
         height: 34px !important;
     }
+
     .width100px {
-    width:100px;
+        width: 100px;
     }
 </style>
 <div class="title">
@@ -36,53 +37,53 @@
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm công việc
     </button>
 
-     <select id="thuc_hien" style="margin-left:200px;">
+    <select id="thuc_hien" style="margin-left:200px;">
         <option></option>
         <option value="xuat_excel">Xuất Excel</option>
         <option value="in">In</option>
     </select>
 </div>
 <div>
-     
-    <table class=" mytable">
-                    <thead>
-                        <tr>
-                            <th><span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> &nbsp;Độ quan trọng</th>
-                            <th>Tên công việc</th>
-                            <th>Làm việc với</th>
-                            <th>Nội dung</th>
-                            <th>Bắt đầu tại ngày</th>
-                            <th>Dự kiến hoàn thành</th>
-                            <th>Trạng thái hiện tại</th>
-                            <th>Loại công việc</th>
-                            <th>Nhân viên thực hiện</th>
-                            <th>Sửa</th>
-                            <th>Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in cong_viec)
-                        {
-                            <tr id="@item.Id">
-                            <td>
-                              @item.MucUuTien
-                            </td>
-                            <td>@item.TenCongViec</td>
-                            <td>@(item.Ho+" "+ item.Ten)</td>
-                            <td>@item.LamGi</td>
-                            <td>@item.TaiNgay</td>
-                            <td>@item.DuKienHoanThanh</td>
-                            <td>@item.TrangThai</td>
-                            <td></td>
-                            <td>@item.UserName</td>
-                            <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')" ><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
-                            <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')" ><span class="glyphicon glyphicon-trash delete" aria-hidden="true" ></span></button></td>
-                      </tr>
-                        }
 
-                   </tbody>
-                </table>
-      
+    <table class=" mytable">
+        <thead>
+            <tr>
+                <th><span class="glyphicon glyphicon-envelope " aria-hidden="true"></span> &nbsp;Độ quan trọng</th>
+                <th>Tên công việc</th>
+                <th>Làm việc với</th>
+                <th>Nội dung</th>
+                <th>Bắt đầu tại ngày</th>
+                <th>Dự kiến hoàn thành</th>
+                <th>Trạng thái hiện tại</th>
+                <th>Loại công việc</th>
+                <th>Nhân viên thực hiện</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in cong_viec)
+            {
+                <tr id="@item.Id">
+                    <td>
+                        @item.MucUuTien
+                    </td>
+                    <td>@item.TenCongViec</td>
+                    <td>@(item.Ho + " " + item.Ten)</td>
+                    <td>@item.LamGi</td>
+                    <td>@item.TaiNgay</td>
+                    <td>@item.DuKienHoanThanh</td>
+                    <td>@item.TrangThai</td>
+                    <td></td>
+                    <td>@item.UserName</td>
+                    <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                    <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
 </div>
 <!-- Modal sửa -->
 <div class="modal fade" id="thay_doi">
@@ -94,78 +95,75 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                     <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; ">
-                         <tr>
-                             <td>
-                               <label style="line-height: 33px;"> Độ quan trọng</label>   
-                             </td>
+                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; ">
+                        <tr>
+                            <td>
+                                <label style="line-height: 33px;"> Độ quan trọng</label>
+                            </td>
 
-                             <td>
-                                   <select id="doquantrong" >
-                                </select>
-                             </td>
-                              <td>
-                               <label style="line-height: 33px;"> Bắt đầu tại ngày</label>   
-                             </td>
-                             <td>
-                                 <input type="date" class="form-control width220px" style="height:34px !important;" id="batdautaingay" />
-                             </td>
-                         </tr>
-                          <tr>
-                             <td>
-                                  <label style="line-height: 33px;">Tên công việc</label>
-                             </td>
-                             <td>
-                                 <input type="text" placeholder="Nhập Tên công việc" class="form-control width220px height_input " style="height:34px !important;" id="tencongviec">
-                             </td>
-                               <td>
-                               <label style="line-height: 33px;"> Dự kiến hoàn thành</label>   
-                             </td>
-                             <td>
-                                 <input type="date" class="form-control width220px" style="height:34px !important;" id="dukienhoanthanh"/>
-                             </td>
-                         </tr>
-                          <tr>
-                             <td>
-                                  <label style="line-height: 33px;">Làm việc với</label>
-                             </td>
-                             <td>
-                                  <select id="lamviecvoi" >
-                                </select>
-                             </td>
-                               <td>
-                                  <label style="line-height: 33px;">Trạng thái hiện tại</label>
-                             </td>
-                             <td>
-                                  <select id="trangthaihientai" >
+                            <td>
+                                <select id="doquantrong"></select>
+                            </td>
+                            <td>
+                                <label style="line-height: 33px;"> Bắt đầu tại ngày</label>
+                            </td>
+                            <td>
+                                <input type="date" class="form-control width220px" style="height:34px !important;" id="batdautaingay" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="line-height: 33px;">Tên công việc</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Tên công việc" class="form-control width220px height_input " style="height:34px !important;" id="tencongviec">
+                            </td>
+                            <td>
+                                <label style="line-height: 33px;"> Dự kiến hoàn thành</label>
+                            </td>
+                            <td>
+                                <input type="date" class="form-control width220px" style="height:34px !important;" id="dukienhoanthanh" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="line-height: 33px;">Làm việc với</label>
+                            </td>
+                            <td>
+                                <select id="lamviecvoi"></select>
+                            </td>
+                            <td>
+                                <label style="line-height: 33px;">Trạng thái hiện tại</label>
+                            </td>
+                            <td>
+                                <select id="trangthaihientai">
                                     <option></option>
                                 </select>
-                             </td>
-                         </tr>
-                          <tr>
-                             <td rowspan="2">
-                                  <label style="line-height: 33px;">Nội dung</label>
-                             </td>
-                             <td rowspan="2">
-                                 <textarea rows="3" id="noidung" style="width:220px;font-size:14px;" placeholder="Nhập nội dung công việc" class="form-control"></textarea>
-                             </td>
-                                <td>
-                                  <label style="line-height: 33px;">Loại công việc</label>
-                             </td>
-                             <td>
-                                 <input type="text" placeholder="Nhập Loại công việc" class="form-control width220px height_input " style="height:34px !important;" id="loaicongviec">
-                             </td>
-                         </tr>
-                         <tr>
-                                <td>
-                                  <label style="line-height: 33px;">Nhân viên thực hiện</label>
-                             </td>
-                             <td>
-                                  <select id="nhanvienthuchien" >
-                                </select>
-                             </td>
-                         </tr>
-                     </table>                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">
+                                <label style="line-height: 33px;">Nội dung</label>
+                            </td>
+                            <td rowspan="2">
+                                <textarea rows="3" id="noidung" style="width:220px;font-size:14px;" placeholder="Nhập nội dung công việc" class="form-control"></textarea>
+                            </td>
+                            <td>
+                                <label style="line-height: 33px;">Loại công việc</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Loại công việc" class="form-control width220px height_input " style="height:34px !important;" id="loaicongviec">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="line-height: 33px;">Nhân viên thực hiện</label>
+                            </td>
+                            <td>
+                                <select id="nhanvienthuchien"></select>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="modal-footer">
@@ -175,8 +173,7 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->   
-  
+</div><!-- /.modal -->
 <!--Modal xóa-->
 <div class="modal fade" id="xoa">
     <div class="modal-dialog">
@@ -205,35 +202,35 @@
         $('.mytable').dataTable();
 
 
-    $("#doquantrong").select2({
-        placeholder: " Độ quan trọng",
-        allowClear: true
-    });
+        $("#doquantrong").select2({
+            placeholder: " Độ quan trọng",
+            allowClear: true
+        });
 
-    $("#lamviecvoi").select2({
-        placeholder: "Tên Khách hàng",
-        allowClear: true
-    });
+        $("#lamviecvoi").select2({
+            placeholder: "Tên Khách hàng",
+            allowClear: true
+        });
 
-    $("#trangthaihientai").select2({
-        placeholder: "Trạng thái hiện tại",
-        allowClear: true
-    });
+        $("#trangthaihientai").select2({
+            placeholder: "Trạng thái hiện tại",
+            allowClear: true
+        });
 
-    $("#nhanvienthuchien").select2({
-        placeholder: "Tên Nhân viên",
-        allowClear: true
-    });
+        $("#nhanvienthuchien").select2({
+            placeholder: "Tên Nhân viên",
+            allowClear: true
+        });
 
-    $('#clear').click(function () {
-        clear();
-    });
+        $('#clear').click(function () {
+            clear();
+        });
 
-    $('#thay_doi').on('hidden.bs.modal', function () {
-        clear();
-    });
+        $('#thay_doi').on('hidden.bs.modal', function () {
+            clear();
+        });
 
- });
+    });
 
     function clear() {
         $('#CongViec').find('input').val('');
@@ -303,13 +300,12 @@
                 $('#lamviecvoi').html(str3);
 
 
-                if (get != undefined && get != true) {
-
+                if (get.tai_ngay != undefined) {
                     batdautaingay.value = get.tai_ngay.trim();
                     tencongviec.value = get.ten_cv;
                     doquantrong.value = get.do_quan_trong;
-                    lamviecvoi.value =get.khach_hang;
-                    nhanvienthuchien.value =get.nhan_vien;
+                    lamviecvoi.value = get.khach_hang;
+                    nhanvienthuchien.value = get.nhan_vien;
                     trangthaihientai.value = get.trang_thai;
                     dukienhoanthanh.value = get.du_kien_hoan_thanh;
                     noidung.value = get.noi_dung;
@@ -348,7 +344,7 @@
                 trangThaiHienTai: trangThaiHienTai,
                 doQuanTrong: doQuanTrong,
                 idAccount: null,
-                idAction:null
+                idAction: null
             },
             error: function () {
                 alert("Có lỗi");
@@ -359,7 +355,7 @@
                     url: "/Task/Index",
                     type: "Get",
                     success: function (view) {
-                        $('#thay_doi').on('hidden.bs.modal', function () {
+                        $('#thay_doi').one('hidden.bs.modal', function () {
                             $('#body').html(view);
                         }).modal('hide');
                     }

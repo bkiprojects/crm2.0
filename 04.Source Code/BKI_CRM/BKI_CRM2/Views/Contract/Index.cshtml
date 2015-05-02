@@ -1,5 +1,6 @@
 ﻿@{
     var hop_dong = ViewBag.v_hd as List<BKI_CRM2.Models.Contract>;
+    var account = ViewBag.v_ac as List<BKI_CRM2.Models.Account>;
 }
 <style>
     .mau {
@@ -59,7 +60,12 @@
                     <td>@item.NgayKetThuc</td>
                     <td>@item.SoHopDong</td>
                     <td>@item.NoiDung</td>
-                    <td>@item.IdAccount</td>
+                    <td>
+                        @if (account.Count(x => x.Id == item.IdAccount) > 0)
+                        { 
+                            @account.Where(x => x.Id == item.IdAccount).First().AccountName;
+                        }
+                    </td>
                     <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                     <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                 </tr>
@@ -186,7 +192,7 @@
         });
     }
 
-   
+
 
 
     function clear() {

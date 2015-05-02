@@ -23,8 +23,11 @@ namespace BKI_CRM2.Controllers
         {
             CrmEntities v_model = new CrmEntities();
             List<Contract> v_hd = new List<Contract>();
+            List<Account> v_ac = new List<Account>();
             v_hd = v_model.Contract.Where(x => x.Id > 0).ToList<Contract>();
+            v_ac = v_model.Account.ToList<Account>();
             ViewBag.v_hd = v_hd;
+            ViewBag.v_ac = v_ac;
             return PartialView();
         }
 

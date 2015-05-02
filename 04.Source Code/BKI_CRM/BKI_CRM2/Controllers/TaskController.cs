@@ -141,16 +141,16 @@ namespace BKI_CRM2.Controllers
             if (id != null)
             {
                 CrmEntities v_model = new CrmEntities();
-                int affected = v_model.pr_Task_Update(id, taiNgay, nhanVienThucHien, noiDung, idAccount, lamViecVoi, doQuanTrong, trangThaiHienTai, idLoaiAction, duKienHoanThanh);
+                int affected = v_model.pr_Task_Update(id, taiNgay, nhanVienThucHien, noiDung, idAccount, lamViecVoi, doQuanTrong, trangThaiHienTai, idLoaiAction, duKienHoanThanh, tenCongViec);
                 return Json(affected, JsonRequestBehavior.AllowGet);
             }
-            else return Insert(taiNgay, nhanVienThucHien, noiDung, idAccount, lamViecVoi, doQuanTrong, trangThaiHienTai, idLoaiAction, duKienHoanThanh);
+            else return Insert(taiNgay, nhanVienThucHien, noiDung, idAccount, lamViecVoi, doQuanTrong, trangThaiHienTai, idLoaiAction, duKienHoanThanh, tenCongViec);
         }
-        public JsonResult Insert(Nullable<System.DateTime> taiNgay, Nullable<decimal> nhanVienThucHien, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> lamViecVoi, Nullable<decimal> doQuanTrong, Nullable<decimal> trangThaiHienTai, Nullable<decimal> idLoaiAction, Nullable<System.DateTime> duKienHoanThanh)
+        public JsonResult Insert(Nullable<System.DateTime> taiNgay, Nullable<decimal> nhanVienThucHien, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> lamViecVoi, Nullable<decimal> doQuanTrong, Nullable<decimal> trangThaiHienTai, Nullable<decimal> idLoaiAction, Nullable<System.DateTime> duKienHoanThanh, string tenCongViec)
         {
             var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
             CrmEntities v_model = new CrmEntities();
-            v_model.pr_Task_Insert(taiNgay, nhanVienThucHien, noiDung, idAccount, lamViecVoi, doQuanTrong, trangThaiHienTai, idLoaiAction, duKienHoanThanh, id);
+            v_model.pr_Task_Insert(taiNgay, nhanVienThucHien, noiDung, idAccount, lamViecVoi, doQuanTrong, trangThaiHienTai, idLoaiAction, duKienHoanThanh, tenCongViec, id);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 

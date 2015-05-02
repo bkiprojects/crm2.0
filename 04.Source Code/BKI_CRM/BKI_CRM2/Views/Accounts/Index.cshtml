@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var account = ViewBag.v_ac as List<BKI_CRM2.Models.Account>;
+    var tudien = ViewBag.v_td as List<BKI_CRM2.Models.TuDien>;
+}
+<style>
+    .mau {
+        width: 100px;
+    }
+
+    .marginleft {
+        margin-left: 300px;
+    }
+
+    .width220px {
+        width: 220px;
+    }
+
+    .height_input {
+        height: 34px !important;
+    }
+
+    .width100px {
+        width: 100px;
+    }
+</style>
+<div class="title">
+    <h2>DANH MỤC CÔNG TY</h2>
+</div>
+<div style="margin: 20px 0px 30px 30px;">
+    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;" onclick="sua(null);">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm công ty
+    </button>
+
+    <select id="thuc_hien" style="margin-left:200px;">
+        <option></option>
+        <option value="xuat_excel">Xuất Excel</option>
+        <option value="in">In</option>
+    </select>
+</div>
+<div>
+
+    <table class=" mytable">
+        <thead>
+            <tr>
+                <th>Tên công ty</th>
+                <th>Địa chỉ</th>
+                <th>Phone 1</th>
+                <th>Phone 2</th>
+                <th>Phân loại công ty</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in account)
+            {
+                <tr id="@item.Id">
+                    <td>@item.AccountName</td>
+                    <td>@item.DiaChi</td>
+                    <td>@item.Sdt01</td>
+                    <td>@item.Sdt02</td>
+                    <td>
+                        @if (tudien.Count(x => x.Id == item.IdAccountType) > 0)
+                        {
+                            @tudien.Where(x => x.Id == item.IdAccountType).First().TenTuDien
+                        }
+                    </td>
+                    <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                    <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>
