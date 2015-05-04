@@ -52,7 +52,7 @@ namespace BKI_CRM2.Controllers
             if (IdContract != null && !IdContract.Equals(""))
             {
                 decimal v_id = Convert.ToDecimal(IdContract);
-                var v_contract = v_model.Contract.Where(x => x.Id == v_id).First();
+                var v_contract = v_model.Contract.FirstOrDefault(x => x.Id == v_id);
                 string v_ngay_bat_dau = "", v_ngay_ket_thuc = "";
                 if (v_contract != null)
                 {

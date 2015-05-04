@@ -31,7 +31,8 @@ namespace BKI_CRM2.Controllers
                 decimal temp = state[i].Id;
                 v_dm_kh.Add(v_model.Contact.Where(x => x.IdTrangThaiHienTai == temp).ToList<Contact>());
             }
-            decimal loaitd = v_model.LoaiTuDien.Where(x => x.TenLoaiTuDien == "Contact Type").First().Id;
+            decimal loaitd = -1; var temp2 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "ContactType");
+            if (temp2 != null) loaitd = temp2.Id;
             v_tu_dien = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd).ToList<TuDien>();
             ViewBag.v_dm_kh = v_dm_kh;
             ViewBag.v_tu_dien = v_tu_dien;
@@ -45,7 +46,7 @@ namespace BKI_CRM2.Controllers
             {
                 CrmEntities v_model = new CrmEntities();
                 decimal v_id = Convert.ToDecimal(IdContact);
-                var v_contact = v_model.Contact.Where(x => x.Id == v_id).First();
+                var v_contact = v_model.Contact.FirstOrDefault(x => x.Id == v_id);
                 string v_bday = "", v_expire = "";
                 if (v_contact != null)
                 {
@@ -97,7 +98,7 @@ namespace BKI_CRM2.Controllers
             if (id != null)
             {
                 CrmEntities v_model = new CrmEntities();
-                idTrangThaiHienTai = v_model.Contact.Where(x => x.Id == id).First().IdTrangThaiHienTai;
+                idTrangThaiHienTai = v_model.Contact.FirstOrDefault(x => x.Id == id).IdTrangThaiHienTai;
                 int affected = v_model.pr_Contact_Update(id, ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai);
                 return Json(affected, JsonRequestBehavior.AllowGet);
             }
@@ -114,16 +115,16 @@ namespace BKI_CRM2.Controllers
         public JsonResult GetState(decimal IdContact)
         {
             CrmEntities v_model = new CrmEntities();
-            decimal cstate = (decimal)v_model.Contact.Where(x => x.Id == IdContact).First().IdTrangThaiHienTai;
+            decimal cstate = (decimal)v_model.Contact.FirstOrDefault(x => x.Id == IdContact).IdTrangThaiHienTai;
             var astate = v_model.ContactStateProcess.Where(x => x.IdTrangThaiTruoc == cstate && x.IdTrangThaiSau != null).ToList<ContactStateProcess>();
-            string state = v_model.ContactState.Where(x => x.Id == cstate).First().TenTrangThai;
+            string state = v_model.ContactState.FirstOrDefault(x => x.Id == cstate).TenTrangThai;
             List<decimal> states = new List<decimal>();
             List<string> states_name = new List<string>();
             for (int i = 0; i < astate.Count; i++)
             {
                 decimal temp = (decimal)astate[i].IdTrangThaiSau;
                 states.Add(temp);
-                states_name.Add(v_model.ContactState.Where(x => x.Id == temp).First().TenTrangThai);
+                states_name.Add(v_model.ContactState.FirstOrDefault(x => x.Id == temp).TenTrangThai);
             }
             return Json(new { state = state, states = states, states_name = states_name }, JsonRequestBehavior.AllowGet);
         }

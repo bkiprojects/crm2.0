@@ -37,13 +37,14 @@ namespace BKI_CRM2.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            TempData["Error"] = "Tài khoản không hợp lệ";
             return View(model);
         }
 
         private bool kiemTraTaiKhoan(LoginModel model)
         {
             CrmEntities v_model = new CrmEntities();
-            var v_ht_user = v_model.User.Where(x => x.UserName.Trim() == model.UserName.Trim()).First();
+            var v_ht_user = v_model.User.FirstOrDefault(x => x.UserName.Trim() == model.UserName.Trim());
             if (v_ht_user == null)
             {
                 return false;
@@ -65,6 +66,11 @@ namespace BKI_CRM2.Controllers
                     return false;
                 }
             }
+        }
+        public ActionResult Logout() {
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
         }
     }
 }

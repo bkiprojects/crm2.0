@@ -7,22 +7,26 @@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Styles/signin.css" rel="stylesheet" />
 <script src="~/Scripts/ie-emulation-modes-warning.js"></script>
+<script src="~/Scripts/jquery-1.11.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Scripts/ie10-viewport-bug-workaround.js"></script>
 <hgroup class="title"></hgroup>
+
 <section id="loginForm">
     @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin", @role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-
         <fieldset>
-            <legend>Đăng nhập</legend>
-            @Html.LabelFor(m => m.UserName)
+            <div id="unauthorized">@TempData["Error"]</div>
+            <legend>Đăng nhập</legend> 
+            @Html.LabelFor(m => m.UserName) @Html.ValidationMessageFor(m => m.UserName, null, new { @style = "color:red;font-weight:bold" })
             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "User Name" })
-            @Html.ValidationMessageFor(m => m.UserName)
-            @Html.LabelFor(m => m.Password)
+            
+            @Html.LabelFor(m => m.Password) @Html.ValidationMessageFor(m => m.Password, null, new { @style = "color:red;font-weight:bold" })
             @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "inputPassword", @type = "password", placeholder = "Password" })
-            @Html.ValidationMessageFor(m => m.Password)
+            
             @Html.CheckBoxFor(m => m.RememberMe)Remember me
             <button class="btn btn-lg btn-primary btn-block" type="submit">Đăng nhập</button>
         </fieldset>

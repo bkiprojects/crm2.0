@@ -27,8 +27,10 @@ namespace BKI_CRM2.Controllers
             List<TuDien> v_tu_dien_status = new List<TuDien>();
             List<Contact> v_contact = new List<Contact>();
             List<User> v_user = new List<User>();
-            decimal loaitd = v_model.LoaiTuDien.Where(x => x.MaLoaiTuDien == "PriorityType").First().Id;
-            decimal loaitdStatus = v_model.LoaiTuDien.Where(x => x.MaLoaiTuDien == "StatusType").First().Id;
+            var temp1 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "PriorityType");
+            var temp2 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "StatusType");
+            decimal loaitd = -1, loaitdStatus = -1;
+            if (temp1 != null) loaitd = temp1.Id; if (temp2 != null) loaitdStatus = temp2.Id;
             v_tu_dien = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd).ToList<TuDien>();
             v_tu_dien_status = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitdStatus).ToList<TuDien>();
             v_cv = v_model.V_TASK.Where(x => x.Id > 0).ToList<V_TASK>();
@@ -62,7 +64,8 @@ namespace BKI_CRM2.Controllers
             }
 
             List<TuDien> v_priority = new List<TuDien>();
-            decimal loaitd = v_model.LoaiTuDien.Where(x => x.MaLoaiTuDien == "PriorityType").First().Id;
+            var temp1 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "PriorityType");
+            decimal loaitd = -1; if (temp1 != null) loaitd = temp1.Id;
             v_priority = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd).ToList<TuDien>();
             List<decimal> idpriority = new List<decimal>(); List<string> namepriority = new List<string>();
             for (int i = 0; i < v_priority.Count; i++)
@@ -71,7 +74,8 @@ namespace BKI_CRM2.Controllers
             }
 
             List<TuDien> v_status = new List<TuDien>();
-            decimal loaitd1 = v_model.LoaiTuDien.Where(x => x.MaLoaiTuDien == "StatusType").First().Id;
+            var temp2 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "StatusType");
+            decimal loaitd1 = -1; if (temp2 != null) loaitd1 = temp2.Id;
             v_status = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd1).ToList<TuDien>();
             List<decimal> idstatus = new List<decimal>(); List<string> namestatus = new List<string>();
             for (int i = 0; i < v_status.Count; i++)

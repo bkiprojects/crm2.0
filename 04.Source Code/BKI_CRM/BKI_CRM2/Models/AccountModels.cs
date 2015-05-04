@@ -57,11 +57,11 @@ namespace BKI_CRM2.Models
 
     public class LoginModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Nhập tên đăng nhập")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Nhập mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
