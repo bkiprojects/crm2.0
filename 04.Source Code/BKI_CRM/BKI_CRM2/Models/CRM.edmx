@@ -716,6 +716,25 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="pr_Account_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="pr_Account_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccountName" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sdt01" Type="nchar" Mode="In" />
+          <Parameter Name="Sdt02" Type="nchar" Mode="In" />
+          <Parameter Name="IdAccountType" Type="numeric" Mode="In" />
+          <Parameter Name="Id" Type="numeric" Mode="InOut" />
+        </Function>
+        <Function Name="pr_Account_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+          <Parameter Name="AccountName" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sdt01" Type="nchar" Mode="In" />
+          <Parameter Name="Sdt02" Type="nchar" Mode="In" />
+          <Parameter Name="IdAccountType" Type="numeric" Mode="In" />
+        </Function>
         <Function Name="pr_Contact_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="numeric" Mode="In" />
         </Function>
@@ -1762,6 +1781,25 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           </FunctionImport>
           <EntitySet Name="V_TASK" EntityType="CrmModel.V_TASK" />
           <EntitySet Name="V_ACCOUNT" EntityType="CrmModel.V_ACCOUNT" />
+          <FunctionImport Name="pr_Account_Delete">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pr_Account_Insert">
+            <Parameter Name="AccountName" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="Sdt01" Mode="In" Type="String" />
+            <Parameter Name="Sdt02" Mode="In" Type="String" />
+            <Parameter Name="IdAccountType" Mode="In" Type="Decimal" />
+            <Parameter Name="Id" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="pr_Account_Update">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+            <Parameter Name="AccountName" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="Sdt01" Mode="In" Type="String" />
+            <Parameter Name="Sdt02" Mode="In" Type="String" />
+            <Parameter Name="IdAccountType" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2389,6 +2427,9 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pr_Account_Delete" FunctionName="CrmModel.Store.pr_Account_Delete" />
+          <FunctionImportMapping FunctionImportName="pr_Account_Insert" FunctionName="CrmModel.Store.pr_Account_Insert" />
+          <FunctionImportMapping FunctionImportName="pr_Account_Update" FunctionName="CrmModel.Store.pr_Account_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

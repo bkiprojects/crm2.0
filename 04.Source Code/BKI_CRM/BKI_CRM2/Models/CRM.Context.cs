@@ -514,6 +514,87 @@ public partial class CrmEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Task_Update", idParameter, taiNgayParameter, idUserParameter, lamGiParameter, idAccountParameter, idContactParameter, idPriorityParameter, idStatusParameter, idLoaiActionParameter, duKienHoanThanhParameter, tenCongViecParameter);
     }
 
+
+    public virtual int pr_Account_Delete(Nullable<decimal> id)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Account_Delete", idParameter);
+    }
+
+
+    public virtual int pr_Account_Insert(string accountName, string diaChi, string sdt01, string sdt02, Nullable<decimal> idAccountType, ObjectParameter id)
+    {
+
+        var accountNameParameter = accountName != null ?
+            new ObjectParameter("AccountName", accountName) :
+            new ObjectParameter("AccountName", typeof(string));
+
+
+        var diaChiParameter = diaChi != null ?
+            new ObjectParameter("DiaChi", diaChi) :
+            new ObjectParameter("DiaChi", typeof(string));
+
+
+        var sdt01Parameter = sdt01 != null ?
+            new ObjectParameter("Sdt01", sdt01) :
+            new ObjectParameter("Sdt01", typeof(string));
+
+
+        var sdt02Parameter = sdt02 != null ?
+            new ObjectParameter("Sdt02", sdt02) :
+            new ObjectParameter("Sdt02", typeof(string));
+
+
+        var idAccountTypeParameter = idAccountType.HasValue ?
+            new ObjectParameter("IdAccountType", idAccountType) :
+            new ObjectParameter("IdAccountType", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Account_Insert", accountNameParameter, diaChiParameter, sdt01Parameter, sdt02Parameter, idAccountTypeParameter, id);
+    }
+
+
+    public virtual int pr_Account_Update(Nullable<decimal> id, string accountName, string diaChi, string sdt01, string sdt02, Nullable<decimal> idAccountType)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        var accountNameParameter = accountName != null ?
+            new ObjectParameter("AccountName", accountName) :
+            new ObjectParameter("AccountName", typeof(string));
+
+
+        var diaChiParameter = diaChi != null ?
+            new ObjectParameter("DiaChi", diaChi) :
+            new ObjectParameter("DiaChi", typeof(string));
+
+
+        var sdt01Parameter = sdt01 != null ?
+            new ObjectParameter("Sdt01", sdt01) :
+            new ObjectParameter("Sdt01", typeof(string));
+
+
+        var sdt02Parameter = sdt02 != null ?
+            new ObjectParameter("Sdt02", sdt02) :
+            new ObjectParameter("Sdt02", typeof(string));
+
+
+        var idAccountTypeParameter = idAccountType.HasValue ?
+            new ObjectParameter("IdAccountType", idAccountType) :
+            new ObjectParameter("IdAccountType", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Account_Update", idParameter, accountNameParameter, diaChiParameter, sdt01Parameter, sdt02Parameter, idAccountTypeParameter);
+    }
+
 }
 
 }
