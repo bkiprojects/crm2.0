@@ -79,6 +79,8 @@ public partial class CrmEntities : DbContext
 
     public virtual DbSet<V_TASK> V_TASK { get; set; }
 
+    public virtual DbSet<V_ACCOUNT> V_ACCOUNT { get; set; }
+
 
     public virtual int pr_Contact_Delete(Nullable<decimal> id)
     {
