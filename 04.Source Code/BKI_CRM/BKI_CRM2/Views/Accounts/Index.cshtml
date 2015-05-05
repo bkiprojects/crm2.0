@@ -2,6 +2,7 @@
     ViewBag.Title = "Index";
     var account = ViewBag.v_ac as List<BKI_CRM2.Models.Account>;
     var tudien = ViewBag.v_td as List<BKI_CRM2.Models.TuDien>;
+    var tochuc = ViewBag.v_tc as List<BKI_CRM2.Models.V_ACCOUNT>;
 }
 <style>
     .mau {
@@ -53,7 +54,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in account)
+            @foreach (var item in tochuc)
             {
                 <tr id="@item.Id">
                     <td>@item.AccountName</td>
@@ -61,10 +62,7 @@
                     <td>@item.Sdt01</td>
                     <td>@item.Sdt02</td>
                     <td>
-                        @if (tudien.Count(x => x.Id == item.IdAccountType) > 0)
-                        {
-                            @tudien.Where(x => x.Id == item.IdAccountType).First().TenTuDien
-                        }
+                      @item.TenTuDien
                     </td>
                     <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                     <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
@@ -75,6 +73,89 @@
     </table>
 
 </div>
+
+ <div class="modal fade" id="thay_doi">
+        <div class="modal-dialog " id="ToChuc">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title title">NỘI DUNG CHI TIẾT TỔ CHỨC</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <table class="table table-condensed table-font-size " style="margin-top:20px;width:47%; ">
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Tên công ty</label>
+                                </td>
+                                <td>
+                                    <input type="email" placeholder="Nhập tên công ty" class="form-control width220px  " style="height:34px !important;" id="tencongty" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Địa chỉ</label>
+                                </td>
+                                <td>
+                                    <input type="email" placeholder="Nhập địa chỉ" class="form-control width220px  " style="height:34px !important;" id="diachi" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Phone 1</label>
+                                </td>
+                                <td>
+                                    <input type="email" placeholder="Nhập số điện thoại liên hệ" class="form-control width220px  " style="height:34px !important;" id="phone1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Phone 2</label>
+                                </td>
+                                <td>
+                                    <input type="email" placeholder="Nhập số điện thoại dự phòng(nếu có)" class="form-control width220px  " style="height:34px !important;" id="phone2" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Phân loại công ty</label>
+                                </td>
+                                <td>
+                                    <select id="phanloaicongty"></select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" id="clear">Xóa trắng</button>
+                    <button type="button" class="btn btn-primary" onclick="thuchiensua($('#thay_doi').attr('name'));">Lưu lại</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="xoa">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">XÁC NHẬN</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa dòng dữ liệu này không?</p>
+                    <div id="giatri" style="display:none;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="xoa($('#giatri').html())">Đồng ý</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
 <script>
     $(document).ready(function () {
         $('.mytable').dataTable();
@@ -82,5 +163,109 @@
             placeholder: "Thực hiện",
             allowClear: true
         });
+
+        $('#thay_doi').on('hidden.bs.modal', function () {
+            clear();
+        });
+
+        $('#clear').click(function () {
+            clear();
+        });
     });
+
+    function hienxoa(id_ac) {
+        giatri.innerHTML = id_ac;
+        $('#xoa').modal('show');
+    }
+
+    function xoa(id_ac) {
+        $.ajax({
+            url: "/Accounts/Delete",
+            type: "POST",
+            data: { id_ac: id_ac },
+            dataType: "json",
+            error: function () {
+                alert("Xóa thất bại!");
+                $('#xoa').modal('hide');
+            },
+            success: function (data) {
+                alert('Xóa thành công!');
+                $('#' + id_ac).remove();
+                $('#xoa').modal('hide');
+            }
+        });
+    }
+
+    function clear() {
+        $('#ToChuc').find('input').val('');
+        $('#phanloaicongty').val(null);
+        $('#phanloaicongty').select2();
+    }
+
+    function sua(id_ac) {
+        $('#thay_doi').attr('name', id_ac);
+        $.ajax({
+            url: "/Accounts/Select",
+            type: "GET",
+            data: { IdAccount: id_ac },
+            error: function () {
+                alert('Lấy thông tin thất bại!');
+            },
+            success: function (get) {
+                var str = "";
+                for (i = 0; i < get.ids.length; i++)
+                    str += "<option value='" + get.ids[i] + "'>" + get.names[i] + "</option>";
+                $('#phanloaicongty').html(str);
+                if (get.ten_cong_ty != undefined) {
+                    tencongty.value = get.ten_cong_ty.trim();
+                    diachi.value = get.dia_chi.trim();
+                    phone1.value = get.phone_1.trim();
+                    phone2.value = get.phone_2.trim();
+                    phanloaicongty.value = get.phan_loai_cong_ty;
+                }
+                $('#phanloaicongty').select2();
+                $('#thay_doi').modal('show');
+
+            }
+        });
+        $('#thay_doi').modal('show');
+    }
+
+    function thuchiensua(id_ac) {
+        var ten_cong_ty = $('#tencongty').val().trim();
+        var dia_chi = $('#diachi').val().trim();
+        var phone_1 = $('#phone1').val().trim();
+        var phone_2 = $('#phone2').val().trim();
+        var phan_loai_cong_ty = $('#phanloaicongty').val();
+        $.ajax({
+            url: "/Accounts/Update",
+            type: "POST",
+            data: {
+                id: id_ac,
+                ten_cong_ty: ten_cong_ty,
+                dia_chi: dia_chi,
+                phone_1: phone_1,
+                phone_2: phone_2,
+                phan_loai_cong_ty: phan_loai_cong_ty
+               
+            },
+            error: function () {
+                alert("Có lỗi");
+            },
+            success: function (data) {
+                alert("Thành công!");
+                $.ajax({
+                    url: "/Accounts/Index",
+                    type: "Get",
+                    success: function (view) {
+                        $('#thay_doi').on('hidden.bs.modal', function () {
+                            $('#body').html(view);
+                        }).modal('hide');
+                    }
+                });
+            }
+        });
+    }
+
+
 </script>
