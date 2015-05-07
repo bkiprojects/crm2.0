@@ -118,7 +118,10 @@ namespace BKI_CRM2.Controllers
             var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
             CrmEntities v_model = new CrmEntities();
             idTrangThaiHienTai = v_model.ContactState.OrderBy(x => x.Order).First().Id;
-            v_model.pr_Contact_Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, id);
+            decimal idcur = v_model.pr_Contact_Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, id);
+            FileInfo file = new FileInfo(image);
+            file.MoveTo(file.Directory.FullName + "\\" + idcur + file.Extension);
+            v_model.pr_Contact_Update_Image(idcur, "../Images/profile/" + idcur + file.Extension);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetState(decimal IdContact)
@@ -149,6 +152,23 @@ namespace BKI_CRM2.Controllers
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
+        }
+        public string GetFileRequest()
+        {
+            HttpPostedFile pic = null; decimal IdContact = -1;
+            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                pic = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
+                IdContact= Convert.ToDecimal(System.Web.HttpContext.Current.Request.Form.AllKeys[0]);
+            }
+            return UploadImg(pic, IdContact);
+        }
+        public string UploadImg(HttpPostedFile file,decimal IdContact){
+            string[] name = System.IO.Path.GetFileName(file.FileName).Split('.');
+            string pic = IdContact + "." + name[name.Length - 1];
+            string path = System.IO.Path.Combine(Server.MapPath("~/Images/profile"), pic);
+            file.SaveAs(path);
+            return "../Images/profile/" + pic;
         }
     }
 }

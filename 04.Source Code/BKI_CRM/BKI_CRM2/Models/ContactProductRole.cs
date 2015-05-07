@@ -15,32 +15,24 @@ namespace BKI_CRM2.Models
 using System;
     using System.Collections.Generic;
     
-public partial class Product
+public partial class ContactProductRole
 {
-
-    public Product()
-    {
-
-        this.ContactProductRole = new HashSet<ContactProductRole>();
-
-    }
-
 
     public decimal Id { get; set; }
 
-    public string ProductName { get; set; }
+    public Nullable<decimal> IdContact { get; set; }
 
-    public Nullable<decimal> GiaNhap { get; set; }
+    public Nullable<decimal> IdProduct { get; set; }
 
-    public Nullable<decimal> GiaBan { get; set; }
+    public Nullable<bool> IsPrimary { get; set; }
 
-    public Nullable<decimal> IdLoaiProduct { get; set; }
+    public Nullable<bool> IsDeleted { get; set; }
 
 
 
-    public virtual TuDien TuDien { get; set; }
+    public virtual Contact Contact { get; set; }
 
-    public virtual ICollection<ContactProductRole> ContactProductRole { get; set; }
+    public virtual Product Product { get; set; }
 
 }
 

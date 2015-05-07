@@ -81,6 +81,8 @@ public partial class CrmEntities : DbContext
 
     public virtual DbSet<V_ACCOUNT> V_ACCOUNT { get; set; }
 
+    public virtual DbSet<ContactProductRole> ContactProductRole { get; set; }
+
 
     public virtual int pr_Contact_Delete(Nullable<decimal> id)
     {
@@ -593,6 +595,23 @@ public partial class CrmEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Account_Update", idParameter, accountNameParameter, diaChiParameter, sdt01Parameter, sdt02Parameter, idAccountTypeParameter);
+    }
+
+
+    public virtual int pr_Contact_Update_Image(Nullable<decimal> id, string img)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        var imgParameter = img != null ?
+            new ObjectParameter("Img", img) :
+            new ObjectParameter("Img", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contact_Update_Image", idParameter, imgParameter);
     }
 
 }

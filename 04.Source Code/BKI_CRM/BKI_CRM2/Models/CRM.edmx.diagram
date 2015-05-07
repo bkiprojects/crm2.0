@@ -65,6 +65,9 @@
         <AssociationConnector Association="CrmModel.FK_Quote_Contract" />
         <EntityTypeShape EntityType="CrmModel.V_TASK" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="CrmModel.V_ACCOUNT" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CrmModel.ContactProductRole" Width="1.5" PointX="7.5" PointY="5.125" />
+        <AssociationConnector Association="CrmModel.FK_ContactProductRole_Contact" />
+        <AssociationConnector Association="CrmModel.FK_ContactProductRole_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

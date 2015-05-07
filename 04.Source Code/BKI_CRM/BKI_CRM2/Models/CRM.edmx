@@ -65,6 +65,16 @@
           <Property Name="IdLoaiKhachHang" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdTrangThaiHienTai" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="ContactProductRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdContact" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdProduct" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsPrimary" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
         <EntityType Name="ContactState">
           <Key>
             <PropertyRef Name="Id" />
@@ -353,6 +363,30 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             </Principal>
             <Dependent Role="Contact">
               <PropertyRef Name="IdLoaiKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactProductRole_Contact">
+          <End Role="Contact" Type="Self.Contact" Multiplicity="0..1" />
+          <End Role="ContactProductRole" Type="Self.ContactProductRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactProductRole">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactProductRole_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ContactProductRole" Type="Self.ContactProductRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactProductRole">
+              <PropertyRef Name="IdProduct" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -778,6 +812,10 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="IdLoaiKhachHang" Type="numeric" Mode="In" />
           <Parameter Name="IdTrangThaiHienTai" Type="numeric" Mode="In" />
         </Function>
+        <Function Name="pr_Contact_Update_Image" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+          <Parameter Name="Img" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="pr_Contract_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="numeric" Mode="In" />
         </Function>
@@ -836,6 +874,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactProductRole" EntityType="Self.ContactProductRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactState" EntityType="Self.ContactState" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactStateChange" EntityType="Self.ContactStateChange" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactStateProcess" EntityType="Self.ContactStateProcess" Schema="dbo" store:Type="Tables" />
@@ -908,6 +947,14 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <AssociationSet Name="FK_Contact_TuDien" Association="Self.FK_Contact_TuDien">
             <End Role="TuDien" EntitySet="TuDien" />
             <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactProductRole_Contact" Association="Self.FK_ContactProductRole_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="ContactProductRole" EntitySet="ContactProductRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactProductRole_Product" Association="Self.FK_ContactProductRole_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ContactProductRole" EntitySet="ContactProductRole" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactState_Company" Association="Self.FK_ContactState_Company">
             <End Role="Company" EntitySet="Company" />
@@ -1095,6 +1142,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Property Name="IdTrangThaiHienTai" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="TuDien" Relationship="CrmModel.FK_Contact_TuDien" FromRole="Contact" ToRole="TuDien" />
           <NavigationProperty Name="ContactState" Relationship="CrmModel.FK_Contact_ContactState" FromRole="Contact" ToRole="ContactState" />
+          <NavigationProperty Name="ContactProductRole" Relationship="CrmModel.FK_ContactProductRole_Contact" FromRole="Contact" ToRole="ContactProductRole" />
         </EntityType>
         <EntityType Name="ContactStateChange">
           <Key>
@@ -1171,6 +1219,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Property Name="GiaBan" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdLoaiProduct" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="TuDien" Relationship="Self.FK_Product_TuDien" FromRole="Product" ToRole="TuDien" />
+          <NavigationProperty Name="ContactProductRole" Relationship="CrmModel.FK_ContactProductRole_Product" FromRole="Product" ToRole="ContactProductRole" />
         </EntityType>
         <EntityType Name="Quote">
           <Key>
@@ -1800,6 +1849,19 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="Sdt02" Mode="In" Type="String" />
             <Parameter Name="IdAccountType" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="ContactProductRole" EntityType="CrmModel.ContactProductRole" />
+          <AssociationSet Name="FK_ContactProductRole_Contact" Association="CrmModel.FK_ContactProductRole_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="ContactProductRole" EntitySet="ContactProductRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactProductRole_Product" Association="CrmModel.FK_ContactProductRole_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ContactProductRole" EntitySet="ContactProductRole" />
+          </AssociationSet>
+          <FunctionImport Name="pr_Contact_Update_Image">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+            <Parameter Name="Img" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2114,6 +2176,42 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Property Name="IdAccountType" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="TenTuDien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ContactProductRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdContact" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdProduct" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsPrimary" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Contact" Relationship="CrmModel.FK_ContactProductRole_Contact" FromRole="ContactProductRole" ToRole="Contact" />
+          <NavigationProperty Name="Product" Relationship="CrmModel.FK_ContactProductRole_Product" FromRole="ContactProductRole" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_ContactProductRole_Contact">
+          <End Type="CrmModel.Contact" Role="Contact" Multiplicity="0..1" />
+          <End Type="CrmModel.ContactProductRole" Role="ContactProductRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactProductRole">
+              <PropertyRef Name="IdContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactProductRole_Product">
+          <End Type="CrmModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="CrmModel.ContactProductRole" Role="ContactProductRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactProductRole">
+              <PropertyRef Name="IdProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2430,6 +2528,18 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <FunctionImportMapping FunctionImportName="pr_Account_Delete" FunctionName="CrmModel.Store.pr_Account_Delete" />
           <FunctionImportMapping FunctionImportName="pr_Account_Insert" FunctionName="CrmModel.Store.pr_Account_Insert" />
           <FunctionImportMapping FunctionImportName="pr_Account_Update" FunctionName="CrmModel.Store.pr_Account_Update" />
+          <EntitySetMapping Name="ContactProductRole">
+            <EntityTypeMapping TypeName="CrmModel.ContactProductRole">
+              <MappingFragment StoreEntitySet="ContactProductRole">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pr_Contact_Update_Image" FunctionName="CrmModel.Store.pr_Contact_Update_Image" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

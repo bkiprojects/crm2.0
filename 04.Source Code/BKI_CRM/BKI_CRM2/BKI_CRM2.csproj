@@ -219,6 +219,9 @@
     <Compile Include="Models\Contact.cs">
       <DependentUpon>CRM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactProductRole.cs">
+      <DependentUpon>CRM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ContactState.cs">
       <DependentUpon>CRM.tt</DependentUpon>
     </Compile>
@@ -460,6 +463,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

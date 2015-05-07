@@ -31,6 +31,8 @@ public partial class Contact
 
         this.UserContactRole = new HashSet<UserContactRole>();
 
+        this.ContactProductRole = new HashSet<ContactProductRole>();
+
     }
 
 
@@ -85,6 +87,8 @@ public partial class Contact
     public virtual TuDien TuDien { get; set; }
 
     public virtual ContactState ContactState { get; set; }
+
+    public virtual ICollection<ContactProductRole> ContactProductRole { get; set; }
 
 }
 

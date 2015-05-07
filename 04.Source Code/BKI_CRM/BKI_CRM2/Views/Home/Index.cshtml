@@ -152,7 +152,8 @@
                                 <label class=" padding">Ảnh cá nhân</label>
                             </td>
                             <td rowspan="4">
-                                <img src="http://media.ngoisao.vn/resize_580x1100/news/2012/10/6/67/taeheejpg1349493486.jpg" alt="Ảnh" style="width:120px; height:160px;" id="anh">
+                                <img src="http://media.ngoisao.vn/resize_580x1100/news/2012/10/6/67/taeheejpg1349493486.jpg" alt="Ảnh" style="max-width:200px; height:160px;" id="anh">
+                                <input type="file" onchange="upanh($('#thay_doi').attr('name'));" value="Upload" id="image" />
                             </td>
                             <td>
                                 <label class="width100px ">Nơi ở hiện nay</label>
@@ -373,6 +374,29 @@
         $("#account").select2();
         $('.mytable').dataTable();
     });
+    function upanh(id) {
+        var data = new FormData();
+        var files = $("#image").get(0).files;
+        if (files.length > 0) {
+            data.append("HelpSectionImages", files[0])
+            var temp = id == null ? "-1" : id.toString();
+            data.append(temp, temp);
+        }
+        $.ajax({
+            url: "/Contact/GetFileRequest",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (response) {
+                anh.src = response;
+            },
+            error: function () {
+                alert('Không upload được ảnh!');
+            }
+
+        });
+    }
     function thuchiensua(id_kh) {
         var hoten = $('#hoten').val().trim();
         var masothue = $('#masothue').val().trim();
