@@ -22,6 +22,7 @@ namespace BKI_CRM2.Controllers
             CrmEntities v_model = new CrmEntities();
             List<List<Contact>> v_dm_kh = new List<List<Contact>>();
             List<TuDien> v_tu_dien = new List<TuDien>();
+            List<Account> v_account = new List<Account>();
             List<ContactState> state = v_model.ContactState.OrderBy(x => x.Order).ToList<ContactState>();
             for (int i = 0; i < state.Count; i++)
             {
@@ -34,6 +35,8 @@ namespace BKI_CRM2.Controllers
             ViewBag.v_dm_kh = v_dm_kh;
             ViewBag.v_tu_dien = v_tu_dien;
             ViewBag.state = state;
+            v_account = v_model.Account.ToList<Account>();
+            ViewBag.v_account = v_account;
             return View();
         }
     }

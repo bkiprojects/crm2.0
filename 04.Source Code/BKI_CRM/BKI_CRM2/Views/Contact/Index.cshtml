@@ -4,6 +4,7 @@
     var dm_khach_hang = ViewBag.v_dm_kh as List<List<BKI_CRM2.Models.Contact>>;
     var tu_dien = ViewBag.v_tu_dien as List<BKI_CRM2.Models.TuDien>;
     var state = ViewBag.state as List<BKI_CRM2.Models.ContactState>;
+    var account = ViewBag.v_account as List<BKI_CRM2.Models.Account>;
 }
 <style>
     .mau {
@@ -266,6 +267,20 @@
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Tổ chức</td>
+                            <td>
+                                <select id="account">
+                                    @if (account != null)
+                                    {
+                                        foreach (var item in account)
+                                        {
+                                            <option value="@item.Id">@item.AccountName</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -354,10 +369,9 @@
             placeholder: "Chọn loại khách hàng",
             allowClear: true
         });
-
+        $("#account").select2();
         $('.mytable').dataTable();
     });
-
     function thuchiensua(id_kh) {
         var hoten = $('#hoten').val().trim();
         var masothue = $('#masothue').val().trim();
@@ -415,7 +429,7 @@
     }
     function clear() {
         $('#thongtinlienhe').find('input').val('');
-        $('#loaikhachhang,#gioitinh').select2('data', null);
+        $('#loaikhachhang,#gioitinh,#account').select2('data', null);
         $('#thuc_hien').select2({
             placeholder: 'Thực hiện',
             allowClear: true
@@ -455,6 +469,7 @@
                     stk.value = get.sotaikhoan.trim();
                     w.value = get.website.trim();
                     loaikhachhang.value = get.idloaikhachhang;
+                    account.value = get.idaccount == -1 ? null : get.idaccount;
                     $("#gioitinh").select2({
                         placeholder: "Chọn giới tính",
                         allowClear: true
@@ -463,6 +478,7 @@
                         placeholder: "Chọn loại khách hàng",
                         allowClear: true
                     });
+                    $("#account").select2();
                 }
                 $('#thay_doi').modal('show');
             }

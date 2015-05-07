@@ -25,6 +25,7 @@ namespace BKI_CRM2.Controllers
             CrmEntities v_model = new CrmEntities();
             List<List<Contact>> v_dm_kh = new List<List<Contact>>();
             List<TuDien> v_tu_dien = new List<TuDien>();
+            List<Account> v_account = new List<Account>();
             List<ContactState> state = v_model.ContactState.OrderBy(x => x.Order).ToList<ContactState>();
             for (int i = 0; i < state.Count; i++)
             {
@@ -37,6 +38,8 @@ namespace BKI_CRM2.Controllers
             ViewBag.v_dm_kh = v_dm_kh;
             ViewBag.v_tu_dien = v_tu_dien;
             ViewBag.state = state;
+            v_account = v_model.Account.ToList<Account>();
+            ViewBag.v_account = v_account;
             return PartialView();
         }
         [HttpGet]
@@ -45,8 +48,9 @@ namespace BKI_CRM2.Controllers
             if (IdContact != null && !IdContact.Equals(""))
             {
                 CrmEntities v_model = new CrmEntities();
-                decimal v_id = Convert.ToDecimal(IdContact);
+                decimal v_id = Convert.ToDecimal(IdContact), v_ac = -1;
                 var v_contact = v_model.Contact.FirstOrDefault(x => x.Id == v_id);
+                var v_acrole = v_model.AccountContactRole.FirstOrDefault(x => x.IdContact == v_id);
                 string v_bday = "", v_expire = "";
                 if (v_contact != null)
                 {
@@ -58,6 +62,10 @@ namespace BKI_CRM2.Controllers
                     {
                         v_expire = ((DateTime)v_contact.HanKhachHang).ToString("yyyy-MM-dd");
                     }
+                }
+                if (v_acrole != null)
+                {
+                    v_ac = (decimal)v_acrole.IdAccount;
                 }
                 return Json(new {
                     ho = v_contact.Ho,
@@ -76,7 +84,8 @@ namespace BKI_CRM2.Controllers
                     email = v_contact.Email,
                     hankhachhang = v_expire,
                     idloaikhachhang = v_contact.IdLoaiKhachHang,
-                    idtrangthaihientai = v_contact.IdTrangThaiHienTai
+                    idtrangthaihientai = v_contact.IdTrangThaiHienTai,
+                    idaccount = v_ac
                 }, JsonRequestBehavior.AllowGet);
             }
             else return Json(true,JsonRequestBehavior.AllowGet);

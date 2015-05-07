@@ -1782,7 +1782,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <EntitySet Name="V_TASK" EntityType="CrmModel.V_TASK" />
           <EntitySet Name="V_ACCOUNT" EntityType="CrmModel.V_ACCOUNT" />
           <FunctionImport Name="pr_Account_Delete">
-            <Parameter Name="Id" Mode="In" Type="Decimal" />
+          <Parameter Name="Id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="pr_Account_Insert">
             <Parameter Name="AccountName" Mode="In" Type="String" />
