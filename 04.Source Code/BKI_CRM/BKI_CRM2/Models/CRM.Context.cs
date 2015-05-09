@@ -309,7 +309,7 @@ public partial class CrmEntities : DbContext
     }
 
 
-    public virtual int pr_Contract_Insert(Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser, ObjectParameter id, Nullable<decimal> idContact, Nullable<bool> isContactPrimary)
+    public virtual int pr_Contract_Insert(Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser, ObjectParameter id)
     {
 
         var ngayBatDauParameter = ngayBatDau.HasValue ?
@@ -347,17 +347,7 @@ public partial class CrmEntities : DbContext
             new ObjectParameter("IdUser", typeof(decimal));
 
 
-        var idContactParameter = idContact.HasValue ?
-            new ObjectParameter("IdContact", idContact) :
-            new ObjectParameter("IdContact", typeof(decimal));
-
-
-        var isContactPrimaryParameter = isContactPrimary.HasValue ?
-            new ObjectParameter("IsContactPrimary", isContactPrimary) :
-            new ObjectParameter("IsContactPrimary", typeof(bool));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contract_Insert", ngayBatDauParameter, ngayKetThucParameter, soHopDongParameter, noiDungParameter, idAccountParameter, idLoaiContractParameter, idUserParameter, id, idContactParameter, isContactPrimaryParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contract_Insert", ngayBatDauParameter, ngayKetThucParameter, soHopDongParameter, noiDungParameter, idAccountParameter, idLoaiContractParameter, idUserParameter, id);
     }
 
 

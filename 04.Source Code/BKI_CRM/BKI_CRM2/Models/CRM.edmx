@@ -856,8 +856,6 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="IdLoaiContract" Type="numeric" Mode="In" />
           <Parameter Name="IdUser" Type="numeric" Mode="In" />
           <Parameter Name="Id" Type="numeric" Mode="InOut" />
-          <Parameter Name="IdContact" Type="numeric" Mode="In" />
-          <Parameter Name="IsContactPrimary" Type="bit" Mode="In" />
         </Function>
         <Function Name="pr_Contract_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="numeric" Mode="In" />
@@ -1850,8 +1848,6 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="IdLoaiContract" Mode="In" Type="Decimal" />
             <Parameter Name="IdUser" Mode="In" Type="Decimal" />
             <Parameter Name="Id" Mode="InOut" Type="Decimal" />
-            <Parameter Name="IdContact" Mode="In" Type="Decimal" />
-            <Parameter Name="IsContactPrimary" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="pr_Contract_Update">
             <Parameter Name="Id" Mode="In" Type="Decimal" />
