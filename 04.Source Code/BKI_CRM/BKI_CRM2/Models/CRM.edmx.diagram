@@ -68,6 +68,7 @@
         <EntityTypeShape EntityType="CrmModel.ContactProductRole" Width="1.5" PointX="7.5" PointY="5.125" />
         <AssociationConnector Association="CrmModel.FK_ContactProductRole_Contact" />
         <AssociationConnector Association="CrmModel.FK_ContactProductRole_Product" />
+        <EntityTypeShape EntityType="CrmModel.V_CONTRACT" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

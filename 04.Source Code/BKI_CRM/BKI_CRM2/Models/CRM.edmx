@@ -270,6 +270,23 @@ warning 6002: The table/view 'Crm.dbo.V_ACCOUNT' does not have a primary key def
           <Property Name="TenTuDien" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Crm.dbo.V_CONTRACT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_CONTRACT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NgayBatDau" Type="datetime" />
+          <Property Name="NgayKetThuc" Type="datetime" />
+          <Property Name="SoHopDong" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+          <Property Name="IdAccount" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdLoaiContract" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdUser" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Ho" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_TASK">
           <Key>
@@ -901,6 +918,20 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
     [V_ACCOUNT].[IdAccountType] AS [IdAccountType], 
     [V_ACCOUNT].[TenTuDien] AS [TenTuDien]
     FROM [dbo].[V_ACCOUNT] AS [V_ACCOUNT]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_CONTRACT" EntityType="Self.V_CONTRACT" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_CONTRACT].[Id] AS [Id], 
+    [V_CONTRACT].[NgayBatDau] AS [NgayBatDau], 
+    [V_CONTRACT].[NgayKetThuc] AS [NgayKetThuc], 
+    [V_CONTRACT].[SoHopDong] AS [SoHopDong], 
+    [V_CONTRACT].[NoiDung] AS [NoiDung], 
+    [V_CONTRACT].[IdAccount] AS [IdAccount], 
+    [V_CONTRACT].[IdLoaiContract] AS [IdLoaiContract], 
+    [V_CONTRACT].[IdUser] AS [IdUser], 
+    [V_CONTRACT].[Ho] AS [Ho], 
+    [V_CONTRACT].[Ten] AS [Ten]
+    FROM [dbo].[V_CONTRACT] AS [V_CONTRACT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_TASK" EntityType="Self.V_TASK" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1862,6 +1893,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="Id" Mode="In" Type="Decimal" />
             <Parameter Name="Img" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="V_CONTRACT" EntityType="CrmModel.V_CONTRACT" />
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2212,6 +2244,21 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_CONTRACT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+          <Property Name="SoHopDong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IdAccount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdLoaiContract" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdUser" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Ho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2540,6 +2587,22 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="pr_Contact_Update_Image" FunctionName="CrmModel.Store.pr_Contact_Update_Image" />
+          <EntitySetMapping Name="V_CONTRACT">
+            <EntityTypeMapping TypeName="CrmModel.V_CONTRACT">
+              <MappingFragment StoreEntitySet="V_CONTRACT">
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Ho" ColumnName="Ho" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdLoaiContract" ColumnName="IdLoaiContract" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="SoHopDong" ColumnName="SoHopDong" />
+                <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+                <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

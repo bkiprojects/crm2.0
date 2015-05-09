@@ -83,6 +83,8 @@ public partial class CrmEntities : DbContext
 
     public virtual DbSet<ContactProductRole> ContactProductRole { get; set; }
 
+    public virtual DbSet<V_CONTRACT> V_CONTRACT { get; set; }
+
 
     public virtual int pr_Contact_Delete(Nullable<decimal> id)
     {
