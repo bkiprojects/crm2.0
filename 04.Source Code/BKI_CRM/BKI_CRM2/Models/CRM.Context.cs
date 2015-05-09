@@ -646,6 +646,33 @@ public partial class CrmEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contact_Update_Image", idParameter, imgParameter);
     }
 
+
+    public virtual int pr_ContractContactRole_Insert(Nullable<decimal> idContact, Nullable<decimal> idContract, Nullable<bool> isDeleted, Nullable<bool> isPrimary, ObjectParameter id)
+    {
+
+        var idContactParameter = idContact.HasValue ?
+            new ObjectParameter("IdContact", idContact) :
+            new ObjectParameter("IdContact", typeof(decimal));
+
+
+        var idContractParameter = idContract.HasValue ?
+            new ObjectParameter("IdContract", idContract) :
+            new ObjectParameter("IdContract", typeof(decimal));
+
+
+        var isDeletedParameter = isDeleted.HasValue ?
+            new ObjectParameter("IsDeleted", isDeleted) :
+            new ObjectParameter("IsDeleted", typeof(bool));
+
+
+        var isPrimaryParameter = isPrimary.HasValue ?
+            new ObjectParameter("IsPrimary", isPrimary) :
+            new ObjectParameter("IsPrimary", typeof(bool));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_ContractContactRole_Insert", idContactParameter, idContractParameter, isDeletedParameter, isPrimaryParameter, id);
+    }
+
 }
 
 }

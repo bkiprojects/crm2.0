@@ -871,6 +871,13 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="IdContact" Type="numeric" Mode="In" />
           <Parameter Name="IsContactPrimary" Type="bit" Mode="In" />
         </Function>
+        <Function Name="pr_ContractContactRole_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdContact" Type="numeric" Mode="In" />
+          <Parameter Name="IdContract" Type="numeric" Mode="In" />
+          <Parameter Name="IsDeleted" Type="bit" Mode="In" />
+          <Parameter Name="IsPrimary" Type="bit" Mode="In" />
+          <Parameter Name="Id" Type="numeric" Mode="InOut" />
+        </Function>
         <Function Name="pr_Task_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="numeric" Mode="In" />
         </Function>
@@ -1922,6 +1929,13 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="Img" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="V_CONTRACT" EntityType="CrmModel.V_CONTRACT" />
+          <FunctionImport Name="pr_ContractContactRole_Insert">
+            <Parameter Name="IdContact" Mode="In" Type="Decimal" />
+            <Parameter Name="IdContract" Mode="In" Type="Decimal" />
+            <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+            <Parameter Name="IsPrimary" Mode="In" Type="Boolean" />
+            <Parameter Name="Id" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2643,6 +2657,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pr_ContractContactRole_Insert" FunctionName="CrmModel.Store.pr_ContractContactRole_Insert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
