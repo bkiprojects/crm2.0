@@ -351,7 +351,7 @@ public partial class CrmEntities : DbContext
     }
 
 
-    public virtual int pr_Contract_Update(Nullable<decimal> id, Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser, Nullable<decimal> idContact, Nullable<bool> isContactPrimary)
+    public virtual int pr_Contract_Update(Nullable<decimal> id, Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser)
     {
 
         var idParameter = id.HasValue ?
@@ -394,17 +394,7 @@ public partial class CrmEntities : DbContext
             new ObjectParameter("IdUser", typeof(decimal));
 
 
-        var idContactParameter = idContact.HasValue ?
-            new ObjectParameter("IdContact", idContact) :
-            new ObjectParameter("IdContact", typeof(decimal));
-
-
-        var isContactPrimaryParameter = isContactPrimary.HasValue ?
-            new ObjectParameter("IsContactPrimary", isContactPrimary) :
-            new ObjectParameter("IsContactPrimary", typeof(bool));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contract_Update", idParameter, ngayBatDauParameter, ngayKetThucParameter, soHopDongParameter, noiDungParameter, idAccountParameter, idLoaiContractParameter, idUserParameter, idContactParameter, isContactPrimaryParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contract_Update", idParameter, ngayBatDauParameter, ngayKetThucParameter, soHopDongParameter, noiDungParameter, idAccountParameter, idLoaiContractParameter, idUserParameter);
     }
 
 
@@ -661,6 +651,38 @@ public partial class CrmEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_ContractContactRole_Insert", idContactParameter, idContractParameter, isDeletedParameter, isPrimaryParameter, id);
+    }
+
+
+    public virtual int pr_ContractContactRole_Update(Nullable<decimal> id, Nullable<decimal> idContact, Nullable<decimal> idContract, Nullable<bool> isDeleted, Nullable<bool> isPrimary)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        var idContactParameter = idContact.HasValue ?
+            new ObjectParameter("IdContact", idContact) :
+            new ObjectParameter("IdContact", typeof(decimal));
+
+
+        var idContractParameter = idContract.HasValue ?
+            new ObjectParameter("IdContract", idContract) :
+            new ObjectParameter("IdContract", typeof(decimal));
+
+
+        var isDeletedParameter = isDeleted.HasValue ?
+            new ObjectParameter("IsDeleted", isDeleted) :
+            new ObjectParameter("IsDeleted", typeof(bool));
+
+
+        var isPrimaryParameter = isPrimary.HasValue ?
+            new ObjectParameter("IsPrimary", isPrimary) :
+            new ObjectParameter("IsPrimary", typeof(bool));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_ContractContactRole_Update", idParameter, idContactParameter, idContractParameter, isDeletedParameter, isPrimaryParameter);
     }
 
 }
