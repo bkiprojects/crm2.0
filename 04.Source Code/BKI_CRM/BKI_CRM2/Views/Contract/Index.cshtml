@@ -1,5 +1,5 @@
 ﻿@{
-    var hop_dong = ViewBag.v_hd as List<BKI_CRM2.Models.V_CONTRACT>;
+    var hop_dong = ViewBag.v_hd as List<BKI_CRM2.Models.Contract>;
     var account = ViewBag.v_ac as List<BKI_CRM2.Models.Account>;
 }
 <style>
@@ -207,7 +207,9 @@
         $('#HopDong').find('input').val('');
         $('#noidung').val('');
         $('#account').val(null);
-        $('#account').select2();
+        $('#contact').val(null);
+        $('#contact_chinh').val(null);
+        $('#account,#contact,#contact_chinh').select2();
     }
 
     function sua(id_hd) {
@@ -219,23 +221,22 @@
             error: function () {
                 alert('Lấy thông tin thất bại!');
             },
-            success: function (get) {
-                var str = "";
-                for (i = 0; i < get.ids.length; i++)
-                    str += "<option value='" + get.ids[i] + "'>" + get.names[i] + "</option>";
-                $('#account').html(str);
-                 str = "";
-                for (i = 0; i < get.idct.length; i++)
-                    str += "<option value='" + get.idct[i] + "'>" + get.namect[i] + "</option>";
-                $('#contact').html(str);
-                
+            success: function (get) { 
                 if (get.ngay_bat_dau != undefined) {
+                    var str = "";
+                    for (i = 0; i < get.ids.length; i++)
+                        str += "<option value='" + get.ids[i] + "'>" + get.names[i] + "</option>";
+                    $('#account').html(str);
+                    str = "";
+                    for (i = 0; i < get.idct.length; i++)
+                        str += "<option value='" + get.idct[i] + "'>" + get.namect[i] + "</option>";
+                    $('#contact').html(str);
                     ngaybatdau.value = get.ngay_bat_dau.trim();
                     ngayketthuc.value = get.ngay_ket_thuc.trim();
                     sohopdong.value = get.so_hop_dong.trim();
                     noidung.value = get.noi_dung.trim();
                     account.value = get.account;
-                    contact.value = get.idct_chon;
+                    $('#contact').val(get.idct_chon);
                     khachhangthaydoi();
                     contact_chinh.value = get.v_contact_chinh;
                 }
