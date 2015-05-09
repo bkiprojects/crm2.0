@@ -1,12 +1,14 @@
 ﻿@{
-    var hop_dong = ViewBag.v_hd as List<BKI_CRM2.Models.Contract>;
+    var hop_dong = ViewBag.v_hd as List<BKI_CRM2.Models.V_CONTRACT>;
     var account = ViewBag.v_ac as List<BKI_CRM2.Models.Account>;
 }
 <style>
     .mau {
         width: 100px;
     }
-
+    #s2id_contact {
+    width:320px !important;
+    }
     .marginleft {
         margin-left: 300px;
     }
@@ -47,7 +49,6 @@
                 <th>Ngày kết thúc</th>
                 <th>Số hợp đồng</th>
                 <th>Nội dung</th>
-                <th>Tổ chức</th>
                 <th>Sửa</th>
                 <th>Xóa</th>
             </tr>
@@ -60,12 +61,6 @@
                     <td>@item.NgayKetThuc</td>
                     <td>@item.SoHopDong</td>
                     <td>@item.NoiDung</td>
-                    <td>
-                        @if (account.Count(x => x.Id == item.IdAccount) > 0)
-                        { 
-                            @account.Where(x => x.Id == item.IdAccount).First().AccountName;
-                        }
-                    </td>
                     <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                     <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                 </tr>
@@ -123,6 +118,22 @@
                                 </td>
                                 <td>
                                     <select id="account"></select>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Khách hàng</label>
+                                </td>
+                                <td>
+                                    <select id="contact" multiple="multiple" onchange="khachhangthaydoi();"></select>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <label style="line-height: 33px;">Khách hàng chính</label>
+                                </td>
+                                <td>
+                                    <select id="contact_chinh" ></select>
                                 </td>
                             </tr>
                         </table>
@@ -213,14 +224,24 @@
                 for (i = 0; i < get.ids.length; i++)
                     str += "<option value='" + get.ids[i] + "'>" + get.names[i] + "</option>";
                 $('#account').html(str);
+                 str = "";
+                for (i = 0; i < get.idct.length; i++)
+                    str += "<option value='" + get.idct[i] + "'>" + get.namect[i] + "</option>";
+                $('#contact').html(str);
+                
                 if (get.ngay_bat_dau != undefined) {
                     ngaybatdau.value = get.ngay_bat_dau.trim();
                     ngayketthuc.value = get.ngay_ket_thuc.trim();
                     sohopdong.value = get.so_hop_dong.trim();
                     noidung.value = get.noi_dung.trim();
                     account.value = get.account;
+                    contact.value = get.idct_chon;
+                    khachhangthaydoi();
+                    contact_chinh.value = get.v_contact_chinh;
                 }
-                $('#account').select2();
+                $('#account, #contact, #contact_chinh').select2();
+                
+
                 $('#thay_doi').modal('show');
 
             }
@@ -228,6 +249,15 @@
         $('#thay_doi').modal('show');
     }
 
+    function khachhangthaydoi() {
+        var khachhang = $('#contact').val();
+        var str = "";
+        for (i = 0; i < khachhang.length; i++) {
+            str += "<option value='" + khachhang[i] + "'>" + $('#contact').find('option[value='+khachhang[i]+']').html()+ "</option>";
+            $('#contact_chinh').html(str);
+        }
+        $('#contact_chinh').select2();
+    }
 
     function thuchiensua(id_hd) {
         var ngaybatdau = $('#ngaybatdau').val().trim();
@@ -235,6 +265,9 @@
         var sohopdong = $('#sohopdong').val().trim();
         var noidung = $('#noidung').val().trim();
         var account = $('#account').val();
+        var contact = $('#contact').val();
+        var contact_chinh = $('#contact_chinh').val();
+        contact = contact.join(',');
         $.ajax({
             url: "/Contract/Update",
             type: "POST",
@@ -246,7 +279,9 @@
                 noiDung: noidung,
                 idAccount: account,
                 idLoaiContract: null,
-                idUser: null
+                idUser: null,
+                idContact: contact,
+                idContactChinh: contact_chinh
             },
             error: function () {
                 alert("Có lỗi");
