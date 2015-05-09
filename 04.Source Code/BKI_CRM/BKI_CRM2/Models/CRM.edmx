@@ -875,7 +875,6 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="Id" Type="numeric" Mode="InOut" />
         </Function>
         <Function Name="pr_ContractContactRole_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="numeric" Mode="In" />
           <Parameter Name="IdContact" Type="numeric" Mode="In" />
           <Parameter Name="IdContract" Type="numeric" Mode="In" />
           <Parameter Name="IsDeleted" Type="bit" Mode="In" />
@@ -1936,7 +1935,6 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="Id" Mode="InOut" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="pr_ContractContactRole_Update">
-            <Parameter Name="Id" Mode="In" Type="Decimal" />
             <Parameter Name="IdContact" Mode="In" Type="Decimal" />
             <Parameter Name="IdContract" Mode="In" Type="Decimal" />
             <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />

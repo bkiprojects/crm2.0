@@ -654,13 +654,8 @@ public partial class CrmEntities : DbContext
     }
 
 
-    public virtual int pr_ContractContactRole_Update(Nullable<decimal> id, Nullable<decimal> idContact, Nullable<decimal> idContract, Nullable<bool> isDeleted, Nullable<bool> isPrimary)
+    public virtual int pr_ContractContactRole_Update(Nullable<decimal> idContact, Nullable<decimal> idContract, Nullable<bool> isDeleted, Nullable<bool> isPrimary)
     {
-
-        var idParameter = id.HasValue ?
-            new ObjectParameter("Id", id) :
-            new ObjectParameter("Id", typeof(decimal));
-
 
         var idContactParameter = idContact.HasValue ?
             new ObjectParameter("IdContact", idContact) :
@@ -682,7 +677,7 @@ public partial class CrmEntities : DbContext
             new ObjectParameter("IsPrimary", typeof(bool));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_ContractContactRole_Update", idParameter, idContactParameter, idContractParameter, isDeletedParameter, isPrimaryParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_ContractContactRole_Update", idContactParameter, idContractParameter, isDeletedParameter, isPrimaryParameter);
     }
 
 }

@@ -24,10 +24,10 @@ namespace BKI_CRM2.Controllers
             CrmEntities v_model = new CrmEntities();
             List<V_CONTRACT> v_hd = new List<V_CONTRACT>();
             List<Account> v_ac = new List<Account>();
-           
-            v_hd = v_model.V_CONTRACT.Where(x => x.Id > 0 && x.IsDeleted==false).ToList<V_CONTRACT>();
+
+            v_hd = v_model.V_CONTRACT.Where(x => x.Id > 0 && x.IsDeleted == false).ToList<V_CONTRACT>();
             v_ac = v_model.Account.ToList<Account>();
-         
+
             ViewBag.v_hd = v_hd;
             ViewBag.v_ac = v_ac;
             return PartialView();
@@ -43,7 +43,7 @@ namespace BKI_CRM2.Controllers
         [HttpGet]
         public JsonResult Select(string IdContract)
         {
-            decimal? v_contact_chinh = null ;
+            decimal? v_contact_chinh = null;
             CrmEntities v_model = new CrmEntities();
             List<Account> v_ac = new List<Account>();
             List<Contact> v_contact = new List<Contact>();
@@ -76,7 +76,7 @@ namespace BKI_CRM2.Controllers
                 }
             }
 
-           
+
 
             if (IdContract != null && !IdContract.Equals(""))
             {
@@ -101,14 +101,14 @@ namespace BKI_CRM2.Controllers
                     so_hop_dong = v_contract.SoHopDong,
                     noi_dung = v_contract.NoiDung,
                     account = v_contract.IdAccount,
-                    ho= v_contract.Ho,
-                    ten= v_contract.Ten,
+                    ho = v_contract.Ho,
+                    ten = v_contract.Ten,
                     ids = ids,
                     names = names,
-                    idct= idct,
-                    namect= namect,
-                    idct_chon= idct_chon,
-                    v_contact_chinh= v_contact_chinh
+                    idct = idct,
+                    namect = namect,
+                    idct_chon = idct_chon,
+                    v_contact_chinh = v_contact_chinh
 
                 }, JsonRequestBehavior.AllowGet);
             }
@@ -120,21 +120,22 @@ namespace BKI_CRM2.Controllers
             if (idContact != null)
             {
                 string[] IdContact = idContact.Split(',');
-                 v_id = new decimal[IdContact.Length];
+                v_id = new decimal[IdContact.Length];
                 for (int i = 0; i < v_id.Length; i++)
                 {
                     v_id[i] = Convert.ToDecimal(IdContact[i]);
                 }
             }
-           
-              
-            
+
+
+
             if (id != null)
             {
                 CrmEntities v_model = new CrmEntities();
+                v_model.pr_Contract_Update(id, ngayBatDau, ngayKetThuc, soHopDong, noiDung, idAccount, idLoaiContract, idUser);
                 for (int i = 0; i < v_id.Length; i++)
                 {
-                    v_model.pr_Contract_Update(id, ngayBatDau, ngayKetThuc, soHopDong, noiDung, idAccount, idLoaiContract, idUser, v_id[i], v_id[i] == idContactChinh);
+                    v_model.pr_ContractContactRole_Update(v_id[i],id,false,v_id[i]==idContactChinh);
                 }
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
@@ -145,13 +146,13 @@ namespace BKI_CRM2.Controllers
             var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
             var id1 = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
             CrmEntities v_model = new CrmEntities();
-            decimal v_index= v_model.pr_Contract_Insert(ngayBatDau, ngayKetThuc, soHopDong, noiDung, idAccount, idLoaiContract, idUser, id);
+            decimal v_index = v_model.pr_Contract_Insert(ngayBatDau, ngayKetThuc, soHopDong, noiDung, idAccount, idLoaiContract, idUser, id);
 
             for (int i = 0; i < idContact.Length; i++)
             {
-                v_model.pr_ContractContactRole_Insert(idContact[i],v_index,false,(idContact[i]==idContactChinh),id1);
+                v_model.pr_ContractContactRole_Insert(idContact[i], v_index, false, (idContact[i] == idContactChinh), id1);
             }
-            
+
             return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
