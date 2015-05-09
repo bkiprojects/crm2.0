@@ -75,7 +75,7 @@
                     <td>@item.DuKienHoanThanh</td>
                     <td>@item.TrangThai</td>
                     <td></td>
-                    <td>@(item.HoNhanVien+ item.TenNhanVien)</td>
+                    <td>@(item.HoNhanVien+" "+ item.TenNhanVien)</td>
                     <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                     <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                 </tr>

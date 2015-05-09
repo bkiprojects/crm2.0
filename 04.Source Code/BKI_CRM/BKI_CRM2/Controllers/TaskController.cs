@@ -60,7 +60,7 @@ namespace BKI_CRM2.Controllers
             List<decimal> iduser = new List<decimal>(); List<string> names = new List<string>();
             for (int i = 0; i < v_us.Count; i++)
             {
-                iduser.Add(v_us[i].Id); names.Add(v_us[i].HoNhanVien+" " + v_us[i].TenNhanVien);
+                iduser.Add(v_us[i].Id); names.Add(v_us[i].HoNhanVien+ " " + v_us[i].TenNhanVien);
             }
 
             List<TuDien> v_priority = new List<TuDien>();
