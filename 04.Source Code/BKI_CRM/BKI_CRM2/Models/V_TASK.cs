@@ -38,7 +38,9 @@ public partial class V_TASK
 
     public string TenCongViec { get; set; }
 
-    public string AccountName { get; set; }
+    public string HoNhanVien { get; set; }
+
+    public string TenNhanVien { get; set; }
 
     public string TenTuDien { get; set; }
 
