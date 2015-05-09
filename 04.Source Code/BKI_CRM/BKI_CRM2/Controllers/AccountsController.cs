@@ -71,6 +71,7 @@ namespace BKI_CRM2.Controllers
                    dia_chi= v_ac.DiaChi,
                    phone_1= v_ac.Sdt01,
                    phone_2= v_ac.Sdt02,
+                   phan_loai_cong_ty= v_ac.IdAccountType,
                    ids,
                    names
                 }, JsonRequestBehavior.AllowGet);
