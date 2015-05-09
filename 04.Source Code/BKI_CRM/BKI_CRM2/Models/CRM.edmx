@@ -293,6 +293,7 @@ warning 6002: The table/view 'Crm.dbo.V_CONTRACT' does not have a primary key de
           <Property Name="IdUser" Type="numeric" Precision="18" Scale="0" />
           <Property Name="Ho" Type="nvarchar" MaxLength="50" />
           <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -855,6 +856,8 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="IdLoaiContract" Type="numeric" Mode="In" />
           <Parameter Name="IdUser" Type="numeric" Mode="In" />
           <Parameter Name="Id" Type="numeric" Mode="InOut" />
+          <Parameter Name="IdContact" Type="numeric" Mode="In" />
+          <Parameter Name="IsContactPrimary" Type="bit" Mode="In" />
         </Function>
         <Function Name="pr_Contract_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="numeric" Mode="In" />
@@ -865,6 +868,8 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="IdAccount" Type="numeric" Mode="In" />
           <Parameter Name="IdLoaiContract" Type="numeric" Mode="In" />
           <Parameter Name="IdUser" Type="numeric" Mode="In" />
+          <Parameter Name="IdContact" Type="numeric" Mode="In" />
+          <Parameter Name="IsContactPrimary" Type="bit" Mode="In" />
         </Function>
         <Function Name="pr_Task_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="numeric" Mode="In" />
@@ -940,7 +945,8 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
     [V_CONTRACT].[IdLoaiContract] AS [IdLoaiContract], 
     [V_CONTRACT].[IdUser] AS [IdUser], 
     [V_CONTRACT].[Ho] AS [Ho], 
-    [V_CONTRACT].[Ten] AS [Ten]
+    [V_CONTRACT].[Ten] AS [Ten], 
+    [V_CONTRACT].[IsDeleted] AS [IsDeleted]
     FROM [dbo].[V_CONTRACT] AS [V_CONTRACT]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_TASK" EntityType="Self.V_TASK" store:Type="Views" store:Schema="dbo">
@@ -1837,6 +1843,8 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="IdLoaiContract" Mode="In" Type="Decimal" />
             <Parameter Name="IdUser" Mode="In" Type="Decimal" />
             <Parameter Name="Id" Mode="InOut" Type="Decimal" />
+            <Parameter Name="IdContact" Mode="In" Type="Decimal" />
+            <Parameter Name="IsContactPrimary" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="pr_Contract_Update">
             <Parameter Name="Id" Mode="In" Type="Decimal" />
@@ -1847,6 +1855,8 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="IdAccount" Mode="In" Type="Decimal" />
             <Parameter Name="IdLoaiContract" Mode="In" Type="Decimal" />
             <Parameter Name="IdUser" Mode="In" Type="Decimal" />
+            <Parameter Name="IdContact" Mode="In" Type="Decimal" />
+            <Parameter Name="IsContactPrimary" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="pr_Task_Delete">
           <Parameter Name="Id" Mode="In" Type="Decimal" />
@@ -2278,6 +2288,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Property Name="IdUser" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Ho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2618,6 +2629,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <EntitySetMapping Name="V_CONTRACT">
             <EntityTypeMapping TypeName="CrmModel.V_CONTRACT">
               <MappingFragment StoreEntitySet="V_CONTRACT">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="Ho" ColumnName="Ho" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />

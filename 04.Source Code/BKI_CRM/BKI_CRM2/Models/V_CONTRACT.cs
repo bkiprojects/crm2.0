@@ -38,6 +38,8 @@ public partial class V_CONTRACT
 
     public string Ten { get; set; }
 
+    public Nullable<bool> IsDeleted { get; set; }
+
 }
 
 }
