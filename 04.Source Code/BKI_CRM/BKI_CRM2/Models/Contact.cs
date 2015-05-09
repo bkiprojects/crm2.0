@@ -72,6 +72,8 @@ public partial class Contact
 
     public Nullable<decimal> IdTrangThaiHienTai { get; set; }
 
+    public Nullable<bool> IsDeleted { get; set; }
+
 
 
     public virtual ICollection<AccountContactRole> AccountContactRole { get; set; }

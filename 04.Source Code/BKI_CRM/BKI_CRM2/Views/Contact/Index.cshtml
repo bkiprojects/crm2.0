@@ -272,6 +272,7 @@
                             <td>Tổ chức</td>
                             <td>
                                 <select id="account">
+                                    <option></option>
                                     @if (account != null)
                                     {
                                         foreach (var item in account)
@@ -400,7 +401,7 @@
     function thuchiensua(id_kh) {
         var hoten = $('#hoten').val().trim();
         var masothue = $('#masothue').val().trim();
-        var idloaikhachhang = $('#loaikhachhang').val().trim();
+        var idloaikhachhang = $('#loaikhachhang').val();
         var sdt01 = $('#sdt').val().trim();
         var sdt02 = $('#sdt2').val().trim();
         var email = $('#email').val().trim();
@@ -413,7 +414,8 @@
         var facebook = $('#fb').val().trim();
         var skype = $('#skype').val().trim();
         var image = $('#anh').attr('src').trim();
-        var path = $('#anh').attr('name').trim();
+        var path = $('#anh').attr('name');
+        var account = $('#account').val();
         $.ajax({
             url: "/Contact/Update",
             type: "POST",
@@ -435,7 +437,8 @@
                 hanKhachHang: hankhachhang,
                 idLoaiKhachHang: idloaikhachhang,
                 idTrangThaiHienTai: null,
-                path: path
+                path: path,
+                idAccount: account
             },
             error: function () {
                 alert("Có lỗi");
@@ -505,7 +508,10 @@
                         placeholder: "Chọn loại khách hàng",
                         allowClear: true
                     });
-                    $("#account").select2();
+                    $("#account").select2({
+                        placeholder: "Chọn tổ chức",
+                        allowClear: true
+                    });
                 }
                 $('#thay_doi').modal('show');
             }

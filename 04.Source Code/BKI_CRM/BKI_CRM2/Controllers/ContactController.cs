@@ -45,10 +45,10 @@ namespace BKI_CRM2.Controllers
         [HttpGet]
         public JsonResult Select(string IdContact)
         {
-            if (IdContact != null && !IdContact.Equals(""))
+            if (!String.IsNullOrEmpty(IdContact))
             {
                 CrmEntities v_model = new CrmEntities();
-                decimal v_id = Convert.ToDecimal(IdContact), v_ac = -1;
+                decimal? v_id = Convert.ToDecimal(IdContact), v_ac = -1;
                 var v_contact = v_model.Contact.FirstOrDefault(x => x.Id == v_id);
                 var v_acrole = v_model.AccountContactRole.FirstOrDefault(x => x.IdContact == v_id);
                 string v_bday = "", v_expire = "";
@@ -65,7 +65,7 @@ namespace BKI_CRM2.Controllers
                 }
                 if (v_acrole != null)
                 {
-                    v_ac = (decimal)v_acrole.IdAccount;
+                    v_ac = v_acrole.IdAccount;
                 }
                 return Json(new {
                     ho = v_contact.Ho,
@@ -96,7 +96,7 @@ namespace BKI_CRM2.Controllers
             return Json(affected, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Update(Nullable<decimal> id, string hoten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, string path) {
+        public ActionResult Update(Nullable<decimal> id, string hoten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai,Nullable<decimal> idAccount, string path) {
             string ho = "", ten = "";
             if (!string.IsNullOrEmpty(hoten))
             {
@@ -108,24 +108,24 @@ namespace BKI_CRM2.Controllers
             {
                 CrmEntities v_model = new CrmEntities();
                 idTrangThaiHienTai = v_model.Contact.FirstOrDefault(x => x.Id == id).IdTrangThaiHienTai;
-                if(!String.IsNullOrEmpty(image)){
+                if(!String.IsNullOrEmpty(path)){
                     FileInfo file = new FileInfo(path); image = "../Images/profile/" + id + file.Extension;
                     FileInfo check = new FileInfo(file.Directory.FullName + "\\" + id + file.Extension);
                     if (check.Exists) check.Delete();
                     file.MoveTo(file.Directory.FullName + "\\" + id + file.Extension);
                 }
-                int affected = v_model.pr_Contact_Update(id, ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai);
+                int affected = v_model.pr_Contact_Update(id, ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, idAccount);
                 return Json(affected, JsonRequestBehavior.AllowGet);
             }
-            else return Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, path);
+            else return Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, idAccount, path);
         }
 
-        public ActionResult Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, string path){
+        public ActionResult Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai,Nullable<decimal> idAccount, string path){
             var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
             CrmEntities v_model = new CrmEntities();
             idTrangThaiHienTai = v_model.ContactState.OrderBy(x => x.Order).First().Id;
-            decimal idcur = v_model.pr_Contact_Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, id);
-            if (!String.IsNullOrEmpty(image))
+            decimal idcur = v_model.pr_Contact_Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, id, idAccount);
+            if (!String.IsNullOrEmpty(path))
             {
                 FileInfo file = new FileInfo(path); image = "../Images/profile/" + idcur + file.Extension;
                 FileInfo check = new FileInfo(file.Directory.FullName + "\\" + idcur + file.Extension);

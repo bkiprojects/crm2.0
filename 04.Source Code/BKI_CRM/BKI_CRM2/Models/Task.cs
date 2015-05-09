@@ -40,6 +40,8 @@ public partial class Task
 
     public string TenCongViec { get; set; }
 
+    public Nullable<bool> IsDeleted { get; set; }
+
 
 
     public virtual Contact Contact { get; set; }

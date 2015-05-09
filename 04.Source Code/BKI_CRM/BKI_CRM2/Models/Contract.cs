@@ -46,6 +46,8 @@ public partial class Contract
 
     public Nullable<decimal> IdUser { get; set; }
 
+    public Nullable<bool> IsDeleted { get; set; }
+
 
 
     public virtual Account Account { get; set; }

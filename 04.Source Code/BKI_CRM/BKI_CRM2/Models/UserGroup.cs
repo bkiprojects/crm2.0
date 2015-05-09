@@ -34,6 +34,8 @@ public partial class UserGroup
 
     public Nullable<decimal> IdCompany { get; set; }
 
+    public Nullable<bool> IsDeleted { get; set; }
+
 
 
     public virtual ICollection<Action> Action { get; set; }

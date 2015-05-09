@@ -28,6 +28,8 @@ public partial class Order
 
     public Nullable<decimal> IdLoaiOrder { get; set; }
 
+    public Nullable<bool> IsDeleted { get; set; }
+
 
 
     public virtual TuDien TuDien { get; set; }

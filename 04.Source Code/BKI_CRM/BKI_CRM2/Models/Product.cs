@@ -36,6 +36,8 @@ public partial class Product
 
     public Nullable<decimal> IdLoaiProduct { get; set; }
 
+    public Nullable<bool> IsDeleted { get; set; }
+
 
 
     public virtual TuDien TuDien { get; set; }

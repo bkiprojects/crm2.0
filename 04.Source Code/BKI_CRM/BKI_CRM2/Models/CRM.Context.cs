@@ -98,7 +98,7 @@ public partial class CrmEntities : DbContext
     }
 
 
-    public virtual int pr_Contact_Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, ObjectParameter id)
+    public virtual int pr_Contact_Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, ObjectParameter id, Nullable<decimal> idAccount)
     {
 
         var hoParameter = ho != null ?
@@ -186,11 +186,16 @@ public partial class CrmEntities : DbContext
             new ObjectParameter("IdTrangThaiHienTai", typeof(decimal));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contact_Insert", hoParameter, tenParameter, diaChiParameter, gioiTinhParameter, imageParameter, facebookParameter, skypeParameter, ngaySinhParameter, sdt01Parameter, sdt02Parameter, maSoThueParameter, soTaiKhoanParameter, websiteParameter, emailParameter, hanKhachHangParameter, idLoaiKhachHangParameter, idTrangThaiHienTaiParameter, id);
+        var idAccountParameter = idAccount.HasValue ?
+            new ObjectParameter("IdAccount", idAccount) :
+            new ObjectParameter("IdAccount", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contact_Insert", hoParameter, tenParameter, diaChiParameter, gioiTinhParameter, imageParameter, facebookParameter, skypeParameter, ngaySinhParameter, sdt01Parameter, sdt02Parameter, maSoThueParameter, soTaiKhoanParameter, websiteParameter, emailParameter, hanKhachHangParameter, idLoaiKhachHangParameter, idTrangThaiHienTaiParameter, id, idAccountParameter);
     }
 
 
-    public virtual int pr_Contact_Update(Nullable<decimal> id, string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai)
+    public virtual int pr_Contact_Update(Nullable<decimal> id, string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, Nullable<decimal> idAccount)
     {
 
         var idParameter = id.HasValue ?
@@ -283,7 +288,12 @@ public partial class CrmEntities : DbContext
             new ObjectParameter("IdTrangThaiHienTai", typeof(decimal));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contact_Update", idParameter, hoParameter, tenParameter, diaChiParameter, gioiTinhParameter, imageParameter, facebookParameter, skypeParameter, ngaySinhParameter, sdt01Parameter, sdt02Parameter, maSoThueParameter, soTaiKhoanParameter, websiteParameter, emailParameter, hanKhachHangParameter, idLoaiKhachHangParameter, idTrangThaiHienTaiParameter);
+        var idAccountParameter = idAccount.HasValue ?
+            new ObjectParameter("IdAccount", idAccount) :
+            new ObjectParameter("IdAccount", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_Contact_Update", idParameter, hoParameter, tenParameter, diaChiParameter, gioiTinhParameter, imageParameter, facebookParameter, skypeParameter, ngaySinhParameter, sdt01Parameter, sdt02Parameter, maSoThueParameter, soTaiKhoanParameter, websiteParameter, emailParameter, hanKhachHangParameter, idLoaiKhachHangParameter, idTrangThaiHienTaiParameter, idAccountParameter);
     }
 
 

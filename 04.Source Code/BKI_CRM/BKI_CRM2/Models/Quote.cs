@@ -30,6 +30,8 @@ public partial class Quote
 
     public Nullable<decimal> IdLoaiQuote { get; set; }
 
+    public Nullable<bool> IsDeleted { get; set; }
+
 
 
     public virtual TuDien TuDien { get; set; }
