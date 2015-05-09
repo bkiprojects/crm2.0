@@ -96,7 +96,7 @@ namespace BKI_CRM2.Controllers
             return Json(affected, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Update(Nullable<decimal> id, string hoten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai) {
+        public ActionResult Update(Nullable<decimal> id, string hoten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, string path) {
             string ho = "", ten = "";
             if (!string.IsNullOrEmpty(hoten))
             {
@@ -108,20 +108,31 @@ namespace BKI_CRM2.Controllers
             {
                 CrmEntities v_model = new CrmEntities();
                 idTrangThaiHienTai = v_model.Contact.FirstOrDefault(x => x.Id == id).IdTrangThaiHienTai;
+                if(!String.IsNullOrEmpty(image)){
+                    FileInfo file = new FileInfo(path); image = "../Images/profile/" + id + file.Extension;
+                    FileInfo check = new FileInfo(file.Directory.FullName + "\\" + id + file.Extension);
+                    if (check.Exists) check.Delete();
+                    file.MoveTo(file.Directory.FullName + "\\" + id + file.Extension);
+                }
                 int affected = v_model.pr_Contact_Update(id, ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai);
                 return Json(affected, JsonRequestBehavior.AllowGet);
             }
-            else return Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai);
+            else return Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, path);
         }
 
-        public ActionResult Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai){
+        public ActionResult Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, string path){
             var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
             CrmEntities v_model = new CrmEntities();
             idTrangThaiHienTai = v_model.ContactState.OrderBy(x => x.Order).First().Id;
             decimal idcur = v_model.pr_Contact_Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, id);
-            FileInfo file = new FileInfo(image);
-            file.MoveTo(file.Directory.FullName + "\\" + idcur + file.Extension);
-            v_model.pr_Contact_Update_Image(idcur, "../Images/profile/" + idcur + file.Extension);
+            if (!String.IsNullOrEmpty(image))
+            {
+                FileInfo file = new FileInfo(path); image = "../Images/profile/" + idcur + file.Extension;
+                FileInfo check = new FileInfo(file.Directory.FullName + "\\" + idcur + file.Extension);
+                if (check.Exists) check.Delete();
+                file.MoveTo(file.Directory.FullName + "\\" + idcur + file.Extension);
+                v_model.pr_Contact_Update_Image(idcur, "../Images/profile/" + idcur + file.Extension);
+            }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetState(decimal IdContact)
@@ -159,7 +170,6 @@ namespace BKI_CRM2.Controllers
             if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
             {
                 pic = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
-                IdContact= Convert.ToDecimal(System.Web.HttpContext.Current.Request.Form.AllKeys[0]);
             }
             return UploadImg(pic, IdContact);
         }
@@ -168,7 +178,7 @@ namespace BKI_CRM2.Controllers
             string pic = IdContact + "." + name[name.Length - 1];
             string path = System.IO.Path.Combine(Server.MapPath("~/Images/profile"), pic);
             file.SaveAs(path);
-            return "../Images/profile/" + pic;
+            return "../Images/profile/" + pic + "%" + path;
         }
     }
 }

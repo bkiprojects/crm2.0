@@ -152,7 +152,7 @@
                                 <label class=" padding">Ảnh cá nhân</label>
                             </td>
                             <td rowspan="4">
-                                <img src="http://media.ngoisao.vn/resize_580x1100/news/2012/10/6/67/taeheejpg1349493486.jpg" alt="Ảnh" style="max-width:200px; height:160px;" id="anh">
+                                <img src="" alt="Ảnh" style="max-width:200px; height:160px;" id="anh">
                                 <input type="file" onchange="upanh($('#thay_doi').attr('name'));" value="Upload" id="image" />
                             </td>
                             <td>
@@ -336,7 +336,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="thuchienchuyen($('#switch').attr('name'))">Đồng ý</button>
+                <button type="button" class="btn btn-primary" onclick="thuchienchuyen($('#switch').attr('name'));">Đồng ý</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
             </div>
         </div><!-- /.modal-content -->
@@ -379,8 +379,6 @@
         var files = $("#image").get(0).files;
         if (files.length > 0) {
             data.append("HelpSectionImages", files[0])
-            var temp = id == null ? "-1" : id.toString();
-            data.append(temp, temp);
         }
         $.ajax({
             url: "/Contact/GetFileRequest",
@@ -389,7 +387,10 @@
             contentType: false,
             data: data,
             success: function (response) {
-                anh.src = response;
+                d = new Date();
+                var t = response.split('%');
+                anh.src = t[0] + "?" + d.getTime();
+                anh.name = t[1];
             },
             error: function () {
                 alert('Không upload được ảnh!');
@@ -413,6 +414,7 @@
         var facebook = $('#fb').val().trim();
         var skype = $('#skype').val().trim();
         var image = $('#anh').attr('src').trim();
+        var path = $('#anh').attr('name').trim();
         $.ajax({
             url: "/Contact/Update",
             type: "POST",
@@ -433,7 +435,8 @@
                 email: email,
                 hanKhachHang: hankhachhang,
                 idLoaiKhachHang: idloaikhachhang,
-                idTrangThaiHienTai: null
+                idTrangThaiHienTai: null,
+                path: path
             },
             error: function () {
                 alert("Có lỗi");
@@ -572,12 +575,11 @@
                 success: function (data) {
                     if (data == true) {
                         alert('Thành công!');
-                        $('#switch').modal('hide');
                         $.ajax({
                             url: "/Contact/Index",
                             type: "Get",
                             success: function (view) {
-                                $('#thay_doi').one('hidden.bs.modal', function () {
+                                $('#switch').one('hidden.bs.modal', function () {
                                     $('#body').html(view);
                                 }).modal('hide');
                             }
