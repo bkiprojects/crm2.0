@@ -1,0 +1,414 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var dm_nguoi_dung = ViewBag.v_user as List<List<BKI_CRM2.Models.User>>;
+    var state = ViewBag.state as List<BKI_CRM2.Models.UserGroup>;
+
+}
+<style>
+    .mau {
+        width: 100px;
+    }
+
+    .marginleft {
+        margin-left: 300px;
+    }
+
+    .width220px {
+        width: 220px;
+    }
+
+    .height_input {
+        height: 34px !important;
+    }
+
+    .width100px {
+        width: 100px;
+    }
+</style>
+<div class="title">
+    <h2>DANH MỤC NGƯỜI DÙNG</h2>
+</div>
+
+<div style="margin: 20px 0px 30px 30px;">
+    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;" onclick="sua(null);">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm người dùng
+    </button>
+
+    <select id="thuc_hien" style="margin-left:200px;">
+        <option></option>
+        <option value="xuat_excel">Xuất Excel</option>
+        <option value="in">In</option>
+    </select>
+</div>
+<div style="margin-bottom:50px;">
+    <ul class="nav nav-tabs">
+        @if (state != null && state.Count > 0)
+        {
+            <li class="active"><a data-toggle="tab" href="#@state[0].Id">@state[0].GroupName</a></li>
+            foreach (var item in state.Skip(1))
+            {
+                <li><a data-toggle="tab" href="#@item.Id">@item.GroupName</a></li>
+            }
+        }
+    </ul>
+    <div class="tab-content">
+
+
+        @if (dm_nguoi_dung != null && dm_nguoi_dung.Count > 0)
+        {
+            <div class="tab-pane fade in active" id="@state[0].Id">
+                <table class="mytable">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Họ và đệm</th>
+                            <th>Tên</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Sửa</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ctn">
+                        @if (dm_nguoi_dung[0].Count > 0)
+                        {
+                            foreach (var item in dm_nguoi_dung[0])
+                            {
+                                <tr id="@item.Id" @*name="@item.IdLoaiKhachHang"*@>
+                                    <td class="c"><input type="checkbox" /></td>
+                                    <td class="ho">@item.HoNhanVien</td>
+                                    <td class="ten">@item.TenNhanVien</td>
+                                    <td class="sdt">@item.Sdt01</td>
+                                    <td class="email">@item.Email</td>
+                                    <td class="username">@item.UserName</td>
+                                    <td class="password">@item.Password</td>
+                                    <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                                    <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            for (int i = 1; i < dm_nguoi_dung.Count; i++)
+            {
+                <div class="tab-pane fade" id="@state[i].Id">
+                    <table class="mytable">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Họ và đệm</th>
+                                <th>Tên</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Chuyển trạng thái</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ctn">
+                            @if (dm_nguoi_dung[i].Count > 0)
+                            {
+                                foreach (var item in dm_nguoi_dung[i])
+                                {
+                                   <tr id="@item.Id" @*name="@item.IdLoaiKhachHang"*@>
+                                    <td class="c"><input type="checkbox" /></td>
+                                    <td class="ho">@item.HoNhanVien</td>
+                                    <td class="ten">@item.TenNhanVien</td>
+                                    <td class="sdt">@item.Sdt01</td>
+                                    <td class="email">@item.Email</td>
+                                    <td class="username">@item.UserName</td>
+                                    <td class="password">@item.Password</td>
+                                    <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                                    <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+    </div>
+</div>
+<!-- Modal sửa -->
+<div class="modal fade" id="thay_doi">
+    <div class="modal-dialog modal-lg" id="CongViec">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title title">NỘI DUNG CÔNG VIỆC</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; ">
+                        <tr>
+                            <td>
+                                <label style="line-height: 33px;"> Độ quan trọng</label>
+                            </td>
+
+                            <td>
+                                <select id="doquantrong"></select>
+                            </td>
+                            <td>
+                                <label style="line-height: 33px;"> Bắt đầu tại ngày</label>
+                            </td>
+                            <td>
+                                <input type="date" class="form-control width220px" style="height:34px !important;" id="batdautaingay" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="line-height: 33px;">Tên công việc</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Tên công việc" class="form-control width220px height_input " style="height:34px !important;" id="tencongviec">
+                            </td>
+                            <td>
+                                <label style="line-height: 33px;"> Dự kiến hoàn thành</label>
+                            </td>
+                            <td>
+                                <input type="date" class="form-control width220px" style="height:34px !important;" id="dukienhoanthanh" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="line-height: 33px;">Làm việc với</label>
+                            </td>
+                            <td>
+                                <select id="lamviecvoi"></select>
+                            </td>
+                            <td>
+                                <label style="line-height: 33px;">Trạng thái hiện tại</label>
+                            </td>
+                            <td>
+                                <select id="trangthaihientai">
+                                    <option></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">
+                                <label style="line-height: 33px;">Nội dung</label>
+                            </td>
+                            <td rowspan="2">
+                                <textarea rows="3" id="noidung" style="width:220px;font-size:14px;" placeholder="Nhập nội dung công việc" class="form-control"></textarea>
+                            </td>
+                            <td>
+                                <label style="line-height: 33px;">Loại công việc</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Loại công việc" class="form-control width220px height_input " style="height:34px !important;" id="loaicongviec">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="line-height: 33px;">Nhân viên thực hiện</label>
+                            </td>
+                            <td>
+                                <select id="nhanvienthuchien"></select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" id="clear">Xóa trắng</button>
+                <button type="button" class="btn btn-primary" onclick="thuchiensua($('#thay_doi').attr('name'));">Lưu lại</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--Modal xóa-->
+<div class="modal fade" id="xoa">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">XÁC NHẬN</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa dòng dữ liệu này không?</p>
+                <div id="giatri" style="display:none;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="xoa($('#giatri').html())">Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    $(document).ready(function () {
+        $("#thuc_hien").select2({
+            placeholder: "Thực hiện",
+            allowClear: true
+        });
+        $('.mytable').dataTable();
+
+
+        $("#doquantrong").select2({
+            placeholder: " Độ quan trọng",
+            allowClear: true
+        });
+
+        $("#lamviecvoi").select2({
+            placeholder: "Tên Khách hàng",
+            allowClear: true
+        });
+
+        $("#trangthaihientai").select2({
+            placeholder: "Trạng thái hiện tại",
+            allowClear: true
+        });
+
+        $("#nhanvienthuchien").select2({
+            placeholder: "Tên Nhân viên",
+            allowClear: true
+        });
+
+        $('#clear').click(function () {
+            clear();
+        });
+
+        $('#thay_doi').on('hidden.bs.modal', function () {
+            clear();
+        });
+
+    });
+
+    function clear() {
+        $('#CongViec').find('input').val('');
+        $('#doquantrong').val(null);
+        $('#lamviecvoi').val(null);
+        $('#trangthaihientai').val(null);
+        $('#nhanvienthuchien').val(null);
+        $('#noidung').val('');
+        $('#doquantrong').select2();
+        $('#lamviecvoi').select2();
+        $('#trangthaihientai').select2();
+        $('#nhanvienthuchien').select2();
+
+    }
+
+    function hienxoa(id_cv) {
+        giatri.innerHTML = id_cv;
+        $('#xoa').modal('show');
+    }
+
+    function xoa(id_cv) {
+        $.ajax({
+            url: "/Task/Delete",
+            type: "POST",
+            data: { id_cv: id_cv },
+            dataType: "json",
+            error: function () {
+                alert("Xóa thất bại!");
+                $('#xoa').modal('hide');
+            },
+            success: function (data) {
+                alert('Xóa thành công!');
+                $('#' + id_cv).remove();
+                $('#xoa').modal('hide');
+            }
+        });
+    }
+
+    function sua(id_cv) {
+        $('#thay_doi').attr('name', id_cv);
+        $.ajax({
+            url: "/Task/Select",
+            type: "GET",
+            data: { IdTask: id_cv },
+            error: function () {
+                alert('Lấy thông tin thất bại!');
+            },
+            success: function (get) {
+                var str = "";
+                for (i = 0; i < get.iduser.length; i++)
+                    str += "<option value='" + get.iduser[i] + "'>" + get.names[i] + "</option>";
+                $('#nhanvienthuchien').html(str);
+
+                var str1 = "";
+                for (i = 0; i < get.idpriority.length; i++)
+                    str1 += "<option value='" + get.idpriority[i] + "'>" + get.namepriority[i] + "</option>";
+                $('#doquantrong').html(str1);
+
+                var str2 = "";
+                for (i = 0; i < get.idstatus.length; i++)
+                    str2 += "<option value='" + get.idstatus[i] + "'>" + get.namestatus[i] + "</option>";
+                $('#trangthaihientai').html(str2);
+
+                var str3 = "";
+                for (i = 0; i < get.idcontact.length; i++)
+                    str3 += "<option value='" + get.idcontact[i] + "'>" + get.namecontact[i] + "</option>";
+                $('#lamviecvoi').html(str3);
+
+
+                if (get.tai_ngay != undefined) {
+                    batdautaingay.value = get.tai_ngay.trim();
+                    tencongviec.value = get.ten_cv;
+                    doquantrong.value = get.do_quan_trong;
+                    lamviecvoi.value = get.khach_hang;
+                    nhanvienthuchien.value = get.nhan_vien;
+                    trangthaihientai.value = get.trang_thai;
+                    dukienhoanthanh.value = get.du_kien_hoan_thanh;
+                    noidung.value = get.noi_dung;
+                }
+                $('#nhanvienthuchien').select2();
+                $('#doquantrong').select2();
+                $('#trangthaihientai').select2();
+                $('#lamviecvoi').select2();
+                $('#thay_doi').modal('show');
+
+            }
+        });
+        $('#thay_doi').modal('show');
+    }
+
+    function thuchiensua(id_cv) {
+        var taiNgay = $('#batdautaingay').val().trim();
+        var duKienHoanThanh = $('#dukienhoanthanh').val().trim();
+        var tenCongViec = $('#tencongviec').val().trim();
+        var noiDung = $('#noidung').val().trim();
+        var lamViecVoi = $('#lamviecvoi').val().trim();
+        var nhanVienThucHien = $('#nhanvienthuchien').val().trim();
+        var trangThaiHienTai = $('#trangthaihientai').val().trim();
+        var doQuanTrong = $('#doquantrong').val().trim();
+        $.ajax({
+            url: "/Task/Update",
+            type: "POST",
+            data: {
+                id: id_cv,
+                taiNgay: taiNgay,
+                duKienHoanThanh: duKienHoanThanh,
+                tenCongViec: tenCongViec,
+                noiDung: noiDung,
+                lamViecVoi: lamViecVoi,
+                nhanVienThucHien: nhanVienThucHien,
+                trangThaiHienTai: trangThaiHienTai,
+                doQuanTrong: doQuanTrong,
+                idAccount: null,
+                idAction: null
+            },
+            error: function () {
+                alert("Có lỗi");
+            },
+            success: function (data) {
+                alert("Thành công!");
+                $.ajax({
+                    url: "/Task/Index",
+                    type: "Get",
+                    success: function (view) {
+                        $('#thay_doi').one('hidden.bs.modal', function () {
+                            $('#body').html(view);
+                        }).modal('hide');
+                    }
+                });
+            }
+        });
+    }
+</script>

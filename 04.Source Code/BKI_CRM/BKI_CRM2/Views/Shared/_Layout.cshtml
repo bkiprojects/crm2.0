@@ -65,6 +65,16 @@
                     }
                 });
             });
+
+            $('#users').click(function () {
+                $.ajax({
+                    url: "/User/Index",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -123,6 +133,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#" id="bc">Import Excel</a></li>
                                 <li><a href="#">Phân contact cho nhân viên</a></li>
+                                <li><a href="#" id="users">Người dùng</a></li>
                             </ul>
                         </li>
                     </ul>
