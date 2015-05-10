@@ -680,6 +680,167 @@ public partial class CrmEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_ContractContactRole_Update", idContactParameter, idContractParameter, isDeletedParameter, isPrimaryParameter);
     }
 
+
+    public virtual int pr_User_Delete(Nullable<decimal> id)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_User_Delete", idParameter);
+    }
+
+
+    public virtual int pr_User_Insert(Nullable<decimal> idUserGroup, string userName, string password, Nullable<decimal> idParentUser, Nullable<decimal> idCompany, string hoNhanVien, string tenNhanVien, string sdt01, string sdt02, string image, string email, Nullable<bool> isActive, Nullable<decimal> idLoaiUser, ObjectParameter id)
+    {
+
+        var idUserGroupParameter = idUserGroup.HasValue ?
+            new ObjectParameter("IdUserGroup", idUserGroup) :
+            new ObjectParameter("IdUserGroup", typeof(decimal));
+
+
+        var userNameParameter = userName != null ?
+            new ObjectParameter("UserName", userName) :
+            new ObjectParameter("UserName", typeof(string));
+
+
+        var passwordParameter = password != null ?
+            new ObjectParameter("Password", password) :
+            new ObjectParameter("Password", typeof(string));
+
+
+        var idParentUserParameter = idParentUser.HasValue ?
+            new ObjectParameter("IdParentUser", idParentUser) :
+            new ObjectParameter("IdParentUser", typeof(decimal));
+
+
+        var idCompanyParameter = idCompany.HasValue ?
+            new ObjectParameter("IdCompany", idCompany) :
+            new ObjectParameter("IdCompany", typeof(decimal));
+
+
+        var hoNhanVienParameter = hoNhanVien != null ?
+            new ObjectParameter("HoNhanVien", hoNhanVien) :
+            new ObjectParameter("HoNhanVien", typeof(string));
+
+
+        var tenNhanVienParameter = tenNhanVien != null ?
+            new ObjectParameter("TenNhanVien", tenNhanVien) :
+            new ObjectParameter("TenNhanVien", typeof(string));
+
+
+        var sdt01Parameter = sdt01 != null ?
+            new ObjectParameter("Sdt01", sdt01) :
+            new ObjectParameter("Sdt01", typeof(string));
+
+
+        var sdt02Parameter = sdt02 != null ?
+            new ObjectParameter("Sdt02", sdt02) :
+            new ObjectParameter("Sdt02", typeof(string));
+
+
+        var imageParameter = image != null ?
+            new ObjectParameter("Image", image) :
+            new ObjectParameter("Image", typeof(string));
+
+
+        var emailParameter = email != null ?
+            new ObjectParameter("Email", email) :
+            new ObjectParameter("Email", typeof(string));
+
+
+        var isActiveParameter = isActive.HasValue ?
+            new ObjectParameter("IsActive", isActive) :
+            new ObjectParameter("IsActive", typeof(bool));
+
+
+        var idLoaiUserParameter = idLoaiUser.HasValue ?
+            new ObjectParameter("IdLoaiUser", idLoaiUser) :
+            new ObjectParameter("IdLoaiUser", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_User_Insert", idUserGroupParameter, userNameParameter, passwordParameter, idParentUserParameter, idCompanyParameter, hoNhanVienParameter, tenNhanVienParameter, sdt01Parameter, sdt02Parameter, imageParameter, emailParameter, isActiveParameter, idLoaiUserParameter, id);
+    }
+
+
+    public virtual int pr_User_Update(Nullable<decimal> id, Nullable<decimal> idUserGroup, string userName, string password, Nullable<decimal> idParentUser, Nullable<decimal> idCompany, string hoNhanVien, string tenNhanVien, string sdt01, string sdt02, string image, string email, Nullable<bool> isActive, Nullable<decimal> idLoaiUser)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        var idUserGroupParameter = idUserGroup.HasValue ?
+            new ObjectParameter("IdUserGroup", idUserGroup) :
+            new ObjectParameter("IdUserGroup", typeof(decimal));
+
+
+        var userNameParameter = userName != null ?
+            new ObjectParameter("UserName", userName) :
+            new ObjectParameter("UserName", typeof(string));
+
+
+        var passwordParameter = password != null ?
+            new ObjectParameter("Password", password) :
+            new ObjectParameter("Password", typeof(string));
+
+
+        var idParentUserParameter = idParentUser.HasValue ?
+            new ObjectParameter("IdParentUser", idParentUser) :
+            new ObjectParameter("IdParentUser", typeof(decimal));
+
+
+        var idCompanyParameter = idCompany.HasValue ?
+            new ObjectParameter("IdCompany", idCompany) :
+            new ObjectParameter("IdCompany", typeof(decimal));
+
+
+        var hoNhanVienParameter = hoNhanVien != null ?
+            new ObjectParameter("HoNhanVien", hoNhanVien) :
+            new ObjectParameter("HoNhanVien", typeof(string));
+
+
+        var tenNhanVienParameter = tenNhanVien != null ?
+            new ObjectParameter("TenNhanVien", tenNhanVien) :
+            new ObjectParameter("TenNhanVien", typeof(string));
+
+
+        var sdt01Parameter = sdt01 != null ?
+            new ObjectParameter("Sdt01", sdt01) :
+            new ObjectParameter("Sdt01", typeof(string));
+
+
+        var sdt02Parameter = sdt02 != null ?
+            new ObjectParameter("Sdt02", sdt02) :
+            new ObjectParameter("Sdt02", typeof(string));
+
+
+        var imageParameter = image != null ?
+            new ObjectParameter("Image", image) :
+            new ObjectParameter("Image", typeof(string));
+
+
+        var emailParameter = email != null ?
+            new ObjectParameter("Email", email) :
+            new ObjectParameter("Email", typeof(string));
+
+
+        var isActiveParameter = isActive.HasValue ?
+            new ObjectParameter("IsActive", isActive) :
+            new ObjectParameter("IsActive", typeof(bool));
+
+
+        var idLoaiUserParameter = idLoaiUser.HasValue ?
+            new ObjectParameter("IdLoaiUser", idLoaiUser) :
+            new ObjectParameter("IdLoaiUser", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_User_Update", idParameter, idUserGroupParameter, userNameParameter, passwordParameter, idParentUserParameter, idCompanyParameter, hoNhanVienParameter, tenNhanVienParameter, sdt01Parameter, sdt02Parameter, imageParameter, emailParameter, isActiveParameter, idLoaiUserParameter);
+    }
+
 }
 
 }

@@ -38,10 +38,6 @@ public partial class V_TASK
 
     public string TenCongViec { get; set; }
 
-    public string HoNhanVien { get; set; }
-
-    public string TenNhanVien { get; set; }
-
     public string TenTuDien { get; set; }
 
     public string Ho { get; set; }
@@ -55,6 +51,10 @@ public partial class V_TASK
     public string MucUuTien { get; set; }
 
     public Nullable<decimal> IdPriority { get; set; }
+
+    public string HoNhanVien { get; set; }
+
+    public string TenNhanVien { get; set; }
 
 }
 
