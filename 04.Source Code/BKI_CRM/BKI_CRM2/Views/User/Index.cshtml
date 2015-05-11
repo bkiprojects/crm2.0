@@ -30,7 +30,7 @@
 </div>
 
 <div style="margin: 20px 0px 30px 30px;">
-    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;" onclick="sua(null);">
+    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;" data-toggle="modal" data-target="#thay_doi">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm người dùng
     </button>
 
@@ -136,82 +136,83 @@
 </div>
 <!-- Modal sửa -->
 <div class="modal fade" id="thay_doi">
-    <div class="modal-dialog modal-lg" id="CongViec">
+    <div class="modal-dialog modal-lg" id="thongtinlienhe">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title title">NỘI DUNG CÔNG VIỆC</h3>
+                <h3 class="modal-title title">THÔNG TIN NGƯỜI DÙNG</h3>
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; ">
+                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:85%; ">
                         <tr>
-                            <td>
-                                <label style="line-height: 33px;"> Độ quan trọng</label>
+                            <td rowspan="4">
+                                <label class=" padding"  style="line-height: 36px;">Ảnh cá nhân</label>
                             </td>
-
-                            <td>
-                                <select id="doquantrong"></select>
-                            </td>
-                            <td>
-                                <label style="line-height: 33px;"> Bắt đầu tại ngày</label>
+                            <td rowspan="4">
+                                <img src="" alt="Ảnh" style="max-width:200px; height:160px;" id="anh">
+                                <input type="file" onchange="upanh($('#thay_doi').attr('name'));" value="Upload" id="image" />
                             </td>
                             <td>
-                                <input type="date" class="form-control width220px" style="height:34px !important;" id="batdautaingay" />
+                                <label class="width100px " style="line-height: 36px;">Username</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Username" class="form-control width220px height_input " style="height:34px !important;" id="username" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label style="line-height: 33px;">Tên công việc</label>
+                                <label class="width100px left padding"  style="line-height: 36px;">Nhập Password</label>
                             </td>
                             <td>
-                                <input type="text" placeholder="Nhập Tên công việc" class="form-control width220px height_input " style="height:34px !important;" id="tencongviec">
-                            </td>
-                            <td>
-                                <label style="line-height: 33px;"> Dự kiến hoàn thành</label>
-                            </td>
-                            <td>
-                                <input type="date" class="form-control width220px" style="height:34px !important;" id="dukienhoanthanh" />
+                                <input type="text" placeholder="Nhập password" class="form-control width220px height_input " style="height:34px !important;" id="password" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label style="line-height: 33px;">Làm việc với</label>
+                                <label class="width100px left padding"  style="line-height: 36px;">Điện thoại</label>
                             </td>
                             <td>
-                                <select id="lamviecvoi"></select>
-                            </td>
-                            <td>
-                                <label style="line-height: 33px;">Trạng thái hiện tại</label>
-                            </td>
-                            <td>
-                                <select id="trangthaihientai">
-                                    <option></option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2">
-                                <label style="line-height: 33px;">Nội dung</label>
-                            </td>
-                            <td rowspan="2">
-                                <textarea rows="3" id="noidung" style="width:220px;font-size:14px;" placeholder="Nhập nội dung công việc" class="form-control"></textarea>
-                            </td>
-                            <td>
-                                <label style="line-height: 33px;">Loại công việc</label>
-                            </td>
-                            <td>
-                                <input type="text" placeholder="Nhập Loại công việc" class="form-control width220px height_input " style="height:34px !important;" id="loaicongviec">
+                                <input type="tel" placeholder="Nhập số điện thoại" class="form-control width220px height_input " style="height:34px !important;" id="sdt" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label style="line-height: 33px;">Nhân viên thực hiện</label>
+                                <label class="padding"  style="line-height: 36px;">ĐT nhà riêng</label>
                             </td>
                             <td>
-                                <select id="nhanvienthuchien"></select>
+                                <input type="tel" placeholder="Nhập số ĐT nhà riêng" class="form-control width220px height_input " style="height:34px !important;" id="sdt2" />
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <label class="width100px left padding"  style="line-height: 36px;">Họ và đệm</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Họ và đệm" class="form-control width220px height_input " style="height:34px !important;" id="hodem" />
+                            </td>
+                            <td>
+                                <label class="padding"  style="line-height: 36px;">Email</label>
+                            </td>
+                            <td>
+                                <input type="email" placeholder="Nhập địa chỉ Email" class="form-control width220px height_input " style="height:34px !important;" id="email" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="width100px left padding"  style="line-height: 36px;">Tên</label>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nhập Tên người dùng" class="form-control width220px height_input " style="height:34px !important;" id="ten" />
+                            </td>
+                            <td>
+                               
+                            </td>
+                            <td>
+                              
+                            </td>
+                        </tr>
+                       
                     </table>
                 </div>
             </div>
@@ -244,154 +245,101 @@
 </div><!-- /.modal -->
 <script>
     $(document).ready(function () {
+        $('#clear').click(function () {
+            clear();
+        });
+        $('#thay_doi').on('hidden.bs.modal', function () {
+            clear();
+        });
+        $('#switch').on('hidden.bs.modal', function () {
+            clearflag();
+        });
         $("#thuc_hien").select2({
             placeholder: "Thực hiện",
             allowClear: true
         });
-
-        $("#doquantrong").select2({
-            placeholder: " Độ quan trọng",
+        $("#loc_khach_hang").select2({
+            placeholder: "Lọc khách hàng",
             allowClear: true
         });
 
-        $("#lamviecvoi").select2({
-            placeholder: "Tên Khách hàng",
+        $("#gioitinh").select2({
+            placeholder: "Chọn giới tính",
             allowClear: true
         });
 
-        $("#trangthaihientai").select2({
-            placeholder: "Trạng thái hiện tại",
+        $("#loaikhachhang").select2({
+            placeholder: "Chọn loại khách hàng",
             allowClear: true
         });
-
-        $("#nhanvienthuchien").select2({
-            placeholder: "Tên Nhân viên",
-            allowClear: true
-        });
-
-        $('#clear').click(function () {
-            clear();
-        });
-
-        $('#thay_doi').on('hidden.bs.modal', function () {
-            clear();
-        });
+        $("#account").select2();
         $('.mytable').dataTable();
     });
-
-    function clear() {
-        $('#CongViec').find('input').val('');
-        $('#doquantrong').val(null);
-        $('#lamviecvoi').val(null);
-        $('#trangthaihientai').val(null);
-        $('#nhanvienthuchien').val(null);
-        $('#noidung').val('');
-        $('#doquantrong').select2();
-        $('#lamviecvoi').select2();
-        $('#trangthaihientai').select2();
-        $('#nhanvienthuchien').select2();
-
-    }
-
-    function hienxoa(id_cv) {
-        giatri.innerHTML = id_cv;
-        $('#xoa').modal('show');
-    }
-
-    function xoa(id_cv) {
+    function upanh(id) {
+        var data = new FormData();
+        var files = $("#image").get(0).files;
+        if (files.length > 0) {
+            data.append("HelpSectionImages", files[0])
+        }
         $.ajax({
-            url: "/User/Delete",
+            url: "/Contact/GetFileRequest",
             type: "POST",
-            data: { id_cv: id_cv },
-            dataType: "json",
-            error: function () {
-                alert("Xóa thất bại!");
-                $('#xoa').modal('hide');
+            processData: false,
+            contentType: false,
+            data: data,
+            success: function (response) {
+                d = new Date();
+                var t = response.split('%');
+                anh.src = t[0] + "?" + d.getTime();
+                anh.name = t[1];
             },
-            success: function (data) {
-                alert('Xóa thành công!');
-                $('#' + id_cv).remove();
-                $('#xoa').modal('hide');
+            error: function () {
+                alert('Không upload được ảnh!');
             }
+
         });
     }
-
-    function sua(id_cv) {
-        $('#thay_doi').attr('name', id_cv);
+    function thuchiensua(id_kh) {
+        var hoten = $('#hoten').val().trim();
+        var masothue = $('#masothue').val().trim();
+        var idloaikhachhang = $('#loaikhachhang').val();
+        var sdt01 = $('#sdt').val().trim();
+        var sdt02 = $('#sdt2').val().trim();
+        var email = $('#email').val().trim();
+        var diachi = $('#diachi').val().trim();
+        var hankhachhang = $('#hankh').val().trim();
+        var gioitinh = $('#gioitinh').val().trim();
+        var ngaysinh = $('#ngaysinh').val().trim();
+        var sotaikhoan = $('#stk').val().trim();
+        var website = $('#w').val().trim();
+        var facebook = $('#fb').val().trim();
+        var skype = $('#skype').val().trim();
+        var image = $('#anh').attr('src').trim();
+        var path = $('#anh').attr('name');
+        var account = $('#account').val();
         $.ajax({
-            url: "/User/Select",
-            type: "GET",
-            data: { IdTask: id_cv },
-            error: function () {
-                alert('Lấy thông tin thất bại!');
-            },
-            success: function (get) {
-                var str = "";
-                for (i = 0; i < get.iduser.length; i++)
-                    str += "<option value='" + get.iduser[i] + "'>" + get.names[i] + "</option>";
-                $('#nhanvienthuchien').html(str);
-
-                var str1 = "";
-                for (i = 0; i < get.idpriority.length; i++)
-                    str1 += "<option value='" + get.idpriority[i] + "'>" + get.namepriority[i] + "</option>";
-                $('#doquantrong').html(str1);
-
-                var str2 = "";
-                for (i = 0; i < get.idstatus.length; i++)
-                    str2 += "<option value='" + get.idstatus[i] + "'>" + get.namestatus[i] + "</option>";
-                $('#trangthaihientai').html(str2);
-
-                var str3 = "";
-                for (i = 0; i < get.idcontact.length; i++)
-                    str3 += "<option value='" + get.idcontact[i] + "'>" + get.namecontact[i] + "</option>";
-                $('#lamviecvoi').html(str3);
-
-
-                if (get.tai_ngay != undefined) {
-                    batdautaingay.value = get.tai_ngay.trim();
-                    tencongviec.value = get.ten_cv;
-                    doquantrong.value = get.do_quan_trong;
-                    lamviecvoi.value = get.khach_hang;
-                    nhanvienthuchien.value = get.nhan_vien;
-                    trangthaihientai.value = get.trang_thai;
-                    dukienhoanthanh.value = get.du_kien_hoan_thanh;
-                    noidung.value = get.noi_dung;
-                }
-                $('#nhanvienthuchien').select2();
-                $('#doquantrong').select2();
-                $('#trangthaihientai').select2();
-                $('#lamviecvoi').select2();
-                $('#thay_doi').modal('show');
-
-            }
-        });
-        $('#thay_doi').modal('show');
-    }
-
-    function thuchiensua(id_cv) {
-        var taiNgay = $('#batdautaingay').val().trim();
-        var duKienHoanThanh = $('#dukienhoanthanh').val().trim();
-        var tenCongViec = $('#tencongviec').val().trim();
-        var noiDung = $('#noidung').val().trim();
-        var lamViecVoi = $('#lamviecvoi').val().trim();
-        var nhanVienThucHien = $('#nhanvienthuchien').val().trim();
-        var trangThaiHienTai = $('#trangthaihientai').val().trim();
-        var doQuanTrong = $('#doquantrong').val().trim();
-        $.ajax({
-            url: "/User/Update",
+            url: "/Contact/Update",
             type: "POST",
             data: {
-                id: id_cv,
-                taiNgay: taiNgay,
-                duKienHoanThanh: duKienHoanThanh,
-                tenCongViec: tenCongViec,
-                noiDung: noiDung,
-                lamViecVoi: lamViecVoi,
-                nhanVienThucHien: nhanVienThucHien,
-                trangThaiHienTai: trangThaiHienTai,
-                doQuanTrong: doQuanTrong,
-                idAccount: null,
-                idAction: null
+                id: id_kh,
+                hoten: hoten,
+                diaChi: diachi,
+                gioiTinh: (gioitinh == "nam" ? true : false),
+                image: image,
+                facebook: facebook,
+                skype: skype,
+                ngaySinh: ngaysinh,
+                sdt01: sdt01,
+                sdt02: sdt02,
+                maSoThue: masothue,
+                soTaiKhoan: sotaikhoan,
+                website: website,
+                email: email,
+                hanKhachHang: hankhachhang,
+                idLoaiKhachHang: idloaikhachhang,
+                idTrangThaiHienTai: null,
+                path: path,
+                idAccount: account
             },
             error: function () {
                 alert("Có lỗi");
@@ -399,7 +347,7 @@
             success: function (data) {
                 alert("Thành công!");
                 $.ajax({
-                    url: "/User/Index",
+                    url: "/Contact/Index",
                     type: "Get",
                     success: function (view) {
                         $('#thay_doi').one('hidden.bs.modal', function () {
@@ -409,5 +357,150 @@
                 });
             }
         });
+    }
+    function clear() {
+        $('#thongtinlienhe').find('input').val('');
+        $('#loaikhachhang,#gioitinh,#account').select2('data', null);
+        $('#thuc_hien').select2({
+            placeholder: 'Thực hiện',
+            allowClear: true
+        });
+        $('#loc_khach_hang').select2({
+            placeholder: 'Lọc khách hàng',
+            allowClear: true
+        });
+    }
+    function clearflag() {
+        $('#par').html("<select id='trangthaichuyen'></select>");
+        $('#switch').modal('hide');
+    }
+    function sua(id_kh) {
+        $('#thay_doi').attr('name', id_kh);
+        $.ajax({
+            url: "/Contact/Select",
+            type: "GET",
+            data: { IdContact: id_kh },
+            error: function () {
+                alert('Lấy thông tin thất bại!');
+            },
+            success: function (get) {
+                if (get != undefined && get != true) {
+                    hoten.value = get.ho.trim() + ' ' + get.ten.trim();
+                    email.value = get.email.trim();
+                    sdt.value = get.sdt01.trim();
+                    sdt2.value = get.sdt02.trim();
+                    diachi.value = get.diachi.trim();
+                    hankh.value = get.hankhachhang.trim();
+                    masothue.value = get.masothue.trim();
+                    fb.value = get.facebook.trim();
+                    skype.value = get.skype.trim();
+                    gioitinh.value = get.gioitinh ? "nam" : "nu";
+                    ngaysinh.value = get.ngaysinh.trim();
+                    anh.src = get.image.trim();
+                    stk.value = get.sotaikhoan.trim();
+                    w.value = get.website.trim();
+                    loaikhachhang.value = get.idloaikhachhang;
+                    account.value = get.idaccount == -1 ? null : get.idaccount;
+                    $("#gioitinh").select2({
+                        placeholder: "Chọn giới tính",
+                        allowClear: true
+                    });
+                    $("#loaikhachhang").select2({
+                        placeholder: "Chọn loại khách hàng",
+                        allowClear: true
+                    });
+                    $("#account").select2({
+                        placeholder: "Chọn tổ chức",
+                        allowClear: true
+                    });
+                }
+                $('#thay_doi').modal('show');
+            }
+        });
+    }
+    function xoa(id_kh) {
+        $.ajax({
+            url: "/Contact/Delete",
+            type: "POST",
+            data: { id_kh: id_kh },
+            dataType: "json",
+            error: function () {
+                alert("Xóa thất bại!");
+                $('#xoa').modal('hide');
+            },
+            success: function (data) {
+                alert('Xóa thành công!');
+                $('#' + id_kh).remove();
+                $('#xoa').modal('hide');
+            }
+        });
+    }
+    function hienxoa(id_kh) {
+        giatri.innerHTML = id_kh;
+        $('#xoa').modal('show');
+    }
+    function chuyen(id_kh) {
+        $('#switch').attr('name', id_kh);
+        $.ajax({
+            url: "/Contact/GetState",
+            type: "GET",
+            data: { IdContact: id_kh },
+            error: function () {
+                alert('Lấy thông tin thất bại!');
+            },
+            success: function (data) {
+                $('#trangthaihientai').html(data.state);
+                var str = "";
+                if (data.states.length > 0) {
+                    for (i = 0; i < data.states.length; i++) {
+                        str += "<option value='" + data.states[i] + "'>" + data.states_name[i] + "</option>";
+                    }
+
+                    $('#trangthaichuyen').html(str);
+                    $('#trangthaichuyen').select2();
+                }
+                else $('#par').html("<strong>Không thể chuyển</strong>");
+                $('#switch').modal('show');
+            }
+        });
+    }
+    function thuchienchuyen(id_kh) {
+        if ($('#par').find('strong').html() != undefined) {
+            alert('Trạng thái không đổi');
+            $('#switch').modal('hide');
+        }
+        else {
+            var state = $('#trangthaichuyen').val();
+            $.ajax({
+                url: "/Contact/SwitchState",
+                type: "POST",
+                data: { IdContact: id_kh, IdTrangThai: state },
+                error: function () {
+                    alert('Có lỗi');
+                },
+                success: function (data) {
+                    if (data == true) {
+                        alert('Thành công!');
+                        $.ajax({
+                            url: "/Contact/Index",
+                            type: "Get",
+                            success: function (view) {
+                                $('#switch').one('hidden.bs.modal', function () {
+                                    $('#body').html(view);
+                                }).modal('hide');
+                            }
+                        });
+                    }
+                    else { alert('Có lỗi'); $('#switch').modal('hide'); }
+                }
+            });
+        }
+    }
+    function filter(id) {
+        if (id == null || id == "" || id == undefined) $('tr').show();
+        else {
+            $(".ctn").find('tr').hide();
+            $(".ctn").find("tr[name='" + id + "']").show();
+        }
     }
 </script>
