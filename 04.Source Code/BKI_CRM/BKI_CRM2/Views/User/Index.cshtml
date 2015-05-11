@@ -76,7 +76,7 @@
                         {
                             foreach (var item in dm_nguoi_dung[0])
                             {
-                                <tr id="@item.Id" @*name="@item.IdLoaiKhachHang"*@>
+                                <tr id="@item.Id">
                                     <td class="c"><input type="checkbox" /></td>
                                     <td class="ho">@item.HoNhanVien</td>
                                     <td class="ten">@item.TenNhanVien</td>
@@ -103,7 +103,8 @@
                                 <th>Tên</th>
                                 <th>Số điện thoại</th>
                                 <th>Email</th>
-                                <th>Chuyển trạng thái</th>
+                                <th>Username</th>
+                                <th>Password</th>
                                 <th>Sửa</th>
                                 <th>Xóa</th>
                             </tr>
@@ -113,17 +114,17 @@
                             {
                                 foreach (var item in dm_nguoi_dung[i])
                                 {
-                                   <tr id="@item.Id" @*name="@item.IdLoaiKhachHang"*@>
-                                    <td class="c"><input type="checkbox" /></td>
-                                    <td class="ho">@item.HoNhanVien</td>
-                                    <td class="ten">@item.TenNhanVien</td>
-                                    <td class="sdt">@item.Sdt01</td>
-                                    <td class="email">@item.Email</td>
-                                    <td class="username">@item.UserName</td>
-                                    <td class="password">@item.Password</td>
-                                    <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
-                                    <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
-                                </tr>
+                                    <tr id="@item.Id">
+                                        <td class="c"><input type="checkbox" /></td>
+                                        <td class="ho">@item.HoNhanVien</td>
+                                        <td class="ten">@item.TenNhanVien</td>
+                                        <td class="sdt">@item.Sdt01</td>
+                                        <td class="email">@item.Email</td>
+                                        <td class="username">@item.UserName</td>
+                                        <td class="password">@item.Password</td>
+                                        <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                                        <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
+                                    </tr>
                                 }
                             }
                         </tbody>
@@ -247,8 +248,6 @@
             placeholder: "Thực hiện",
             allowClear: true
         });
-        $('.mytable').dataTable();
-
 
         $("#doquantrong").select2({
             placeholder: " Độ quan trọng",
@@ -277,7 +276,7 @@
         $('#thay_doi').on('hidden.bs.modal', function () {
             clear();
         });
-
+        $('.mytable').dataTable();
     });
 
     function clear() {
@@ -301,7 +300,7 @@
 
     function xoa(id_cv) {
         $.ajax({
-            url: "/Task/Delete",
+            url: "/User/Delete",
             type: "POST",
             data: { id_cv: id_cv },
             dataType: "json",
@@ -320,7 +319,7 @@
     function sua(id_cv) {
         $('#thay_doi').attr('name', id_cv);
         $.ajax({
-            url: "/Task/Select",
+            url: "/User/Select",
             type: "GET",
             data: { IdTask: id_cv },
             error: function () {
@@ -379,7 +378,7 @@
         var trangThaiHienTai = $('#trangthaihientai').val().trim();
         var doQuanTrong = $('#doquantrong').val().trim();
         $.ajax({
-            url: "/Task/Update",
+            url: "/User/Update",
             type: "POST",
             data: {
                 id: id_cv,
@@ -400,7 +399,7 @@
             success: function (data) {
                 alert("Thành công!");
                 $.ajax({
-                    url: "/Task/Index",
+                    url: "/User/Index",
                     type: "Get",
                     success: function (view) {
                         $('#thay_doi').one('hidden.bs.modal', function () {
