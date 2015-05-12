@@ -363,7 +363,7 @@
                 username: username,
                 password:password,
                 image: image,
-                nhanviencaptren: nhanviencaptren,
+                nhanviencaptren:nhanviencaptren,
                 sdt01: sdt01,
                 sdt02: sdt02,
                 email: email,
@@ -380,7 +380,7 @@
             success: function (data) {
                 alert("Thành công!");
                 $.ajax({
-                    url: "/Contact/Index",
+                    url: "/User/Index",
                     type: "Get",
                     success: function (view) {
                         $('#thay_doi').one('hidden.bs.modal', function () {
