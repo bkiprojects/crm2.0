@@ -2,6 +2,7 @@
     ViewBag.Title = "Index";
     var dm_nguoi_dung = ViewBag.v_user as List<List<BKI_CRM2.Models.User>>;
     var state = ViewBag.state as List<BKI_CRM2.Models.UserGroup>;
+    var idus = ViewBag.idus;
 
 }
 <style>
@@ -136,7 +137,7 @@
 </div>
 <!-- Modal sửa -->
 <div class="modal fade" id="thay_doi">
-    <div class="modal-dialog modal-lg" id="thongtinlienhe">
+    <div class="modal-dialog modal-lg" id="thongtinnguoidung">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -212,6 +213,16 @@
                                 <select id="nhanviencaptren"></select>
                             </td>
                         </tr>
+                           <tr>
+                          <td>
+                                <label class="width100px left padding"  style="line-height: 36px;">Chăm sóc</label>
+                            </td>
+                            <td>
+                                <button type="button"  class="btn btn-primary width220px"  id="btn_danh_sach_khach_hang"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true" ></span>Danh sách chi tiết khách hàng</button>
+                            </td>
+                            
+                          
+                        </tr>
                        
                     </table>
                 </div>
@@ -224,6 +235,39 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div class="modal fade" id="danh_sach_contact">
+    <div class="modal-dialog " >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="dong"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title title">Danh sách khách hàng</h3>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:50% ">
+                        <tr>
+                           <td >
+                                <label class=" padding"  style="line-height: 36px;">Họ tên khách hàng</label>
+                            </td>
+                            <td >
+                              <label class=" padding"  style="line-height: 36px;">Thông tin</label>
+                            </td>
+                         </tr> 
+                      
+                      <tr>
+                           <td>Ngọc</td>
+                          <td> <a href="#" >Chi tiết</a></td>
+                        </tr>
+                       
+                    </table>
+                </div>
+            </div>
+            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <!--Modal xóa-->
 <div class="modal fade" id="xoa">
     <div class="modal-dialog">
@@ -263,6 +307,17 @@
         });
       
         $('.mytable').dataTable();
+    });
+    $('#btn_danh_sach_khach_hang').click(function () {
+        $('#danh_sach_contact').modal('show');
+        $('#thay_doi').css("display","none");
+
+    });
+
+    $('#dong').click(function () {
+        $('#thay_doi').show();
+        
+
     });
     function upanh(id) {
         var data = new FormData();
@@ -348,7 +403,7 @@
         });
     }
     function clear() {
-        $('#thongtinlienhe').find('input').val('');
+        $('#thongtinnguoidung').find('input').val('');
         $('#loaikhachhang,#gioitinh,#account').select2('data', null);
         $('#thuc_hien').select2({
             placeholder: 'Thực hiện',

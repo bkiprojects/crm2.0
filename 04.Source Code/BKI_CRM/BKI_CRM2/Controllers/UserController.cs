@@ -28,11 +28,15 @@ namespace BKI_CRM2.Controllers
                 decimal temp = state[i].Id;
                 v_user.Add(v_model.User.Where(x => x.IdUserGroup == temp).ToList<User>());
             }
-            //decimal loaitd = -1; var temp2 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "ContactType");
-            //if (temp2 != null) loaitd = temp2.Id;
-            //v_tu_dien = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd).ToList<TuDien>();
+            List<User> v_us = new List<User>();
+            v_us = v_model.User.ToList<User>();
+            List<decimal> idus = new List<decimal>(); 
+            for (int i = 0; i < v_us.Count; i++)
+            {
+                idus.Add(v_us[i].Id); 
+            }
             ViewBag.v_user = v_user;
-            //ViewBag.v_tu_dien = v_tu_dien;
+            ViewBag.idus = idus;
             ViewBag.state = state;
             //v_account = v_model.Account.ToList<Account>();
             //ViewBag.v_account = v_account;
@@ -61,8 +65,17 @@ namespace BKI_CRM2.Controllers
                 {
                     idus.Add(v_us[i].Id); nameus.Add(v_us[i].HoNhanVien + " " + v_us[i].TenNhanVien);
                 }
-               // var v_acrole = v_model.AccountContactRole.FirstOrDefault(x => x.IdUser == v_id);
-
+               
+                //List<UserContactRole> v_us_ct = new List<UserContactRole>();
+                //v_us_ct = v_model.UserContactRole.ToList<UserContactRole>();
+                //List<decimal?> idus_ct = new List<decimal?>();
+                //List<string> nameus_ct = new List<string>();
+                //for (int i = 0; i < v_us_ct.Count; i++)
+                //{
+                //    idus_ct.Add(v_us_ct[i].IdContact);
+                //    var v_ct = v_model.Contact.Where(x=>x.Id==v_us_ct[i].IdContact).FirstOrDefault();
+                //    nameus_ct.Add(v_ct.Ho+" "+ v_ct.Ten);
+                //}
              
                
                 return Json(new
@@ -78,6 +91,8 @@ namespace BKI_CRM2.Controllers
                     email = v_user.Email,
                     idus,
                     nameus
+                    //idus_ct= idus_ct,
+                    //nameus_ct= nameus_ct
                    
                    
                 }, JsonRequestBehavior.AllowGet);
