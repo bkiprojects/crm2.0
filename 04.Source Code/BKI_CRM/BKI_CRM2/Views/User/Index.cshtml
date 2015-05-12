@@ -323,7 +323,7 @@
             data.append("HelpSectionImages", files[0])
         }
         $.ajax({
-            url: "/Contact/GetFileRequest",
+            url: "/User/GetFileRequest",
             type: "POST",
             processData: false,
             contentType: false,
@@ -341,46 +341,38 @@
         });
     }
     function thuchiensua(id_user) {
-        var hoten = $('#hoten').val().trim();
-        var masothue = $('#masothue').val().trim();
-        var idloaikhachhang = $('#loaikhachhang').val();
+        var hodem = $('#hodem').val().trim();
+        var ten = $('#ten').val().trim();
+      
         var sdt01 = $('#sdt').val().trim();
         var sdt02 = $('#sdt2').val().trim();
         var email = $('#email').val().trim();
-        var diachi = $('#diachi').val().trim();
-        var hankhachhang = $('#hankh').val().trim();
-        var gioitinh = $('#gioitinh').val().trim();
-        var ngaysinh = $('#ngaysinh').val().trim();
-        var sotaikhoan = $('#stk').val().trim();
-        var website = $('#w').val().trim();
-        var facebook = $('#fb').val().trim();
-        var skype = $('#skype').val().trim();
+        var nhanviencaptren = $('#nhanviencaptren').val();
+        var username = $('#username').val().trim;
+        var password = $('#password').val().trim();
         var image = $('#anh').attr('src').trim();
         var path = $('#anh').attr('name');
-        var account = $('#account').val();
+       
         $.ajax({
-            url: "/Contact/Update",
+            url: "/User/Update",
             type: "POST",
             data: {
                 id: id_user,
-                hoten: hoten,
-                diaChi: diachi,
-                gioiTinh: (gioitinh == "nam" ? true : false),
+                hodem: hodem,
+                ten: ten,
+                username: username,
+                password:password,
                 image: image,
-                facebook: facebook,
-                skype: skype,
-                ngaySinh: ngaysinh,
+               nhaviencaptren: nhanviencaptren,
                 sdt01: sdt01,
                 sdt02: sdt02,
-                maSoThue: masothue,
-                soTaiKhoan: sotaikhoan,
-                website: website,
                 email: email,
-                hanKhachHang: hankhachhang,
-                idLoaiKhachHang: idloaikhachhang,
-                idTrangThaiHienTai: null,
                 path: path,
-                idAccount: account
+                isactive: true,
+                idcompany: null,
+                idloaiuser: null,
+                idusergroup:null
+                
             },
             error: function () {
                 alert("Có lỗi");

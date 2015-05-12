@@ -135,6 +135,48 @@ namespace BKI_CRM2.Controllers
             else return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Update(Nullable<decimal> id, string hodem, string ten, string username, string password, string image,Nullable<decimal> nhanviencaptren, string sdt01, string sdt02, string email, string path, Nullable<Boolean> isactive, Nullable<decimal> idcompany, Nullable<decimal> idloaiuser, Nullable<decimal> idusergroup)
+        {
+           
+            if (id != null)
+            {
+                CrmEntities v_model = new CrmEntities();
+                idusergroup = v_model.User.FirstOrDefault(x => x.Id == id).IdUserGroup;
+                if (!String.IsNullOrEmpty(path))
+                {
+                    FileInfo file = new FileInfo(path); image = "../Images/profile/" + id + file.Extension;
+                    FileInfo check = new FileInfo(file.Directory.FullName + "\\" + id + file.Extension);
+                    if (check.Exists) check.Delete();
+                    file.MoveTo(file.Directory.FullName + "\\" + id + file.Extension);
+                }
+                int affected = v_model.pr_User_Update(id, idusergroup, username, password, nhanviencaptren, idcompany, hodem, ten, sdt01, sdt02, image, email, isactive, idloaiuser);
+                return Json(affected, JsonRequestBehavior.AllowGet);
+            }
+            else return Insert(idusergroup, username, password, nhanviencaptren, idcompany, hodem, ten, sdt01, sdt02, image, email, isactive, idloaiuser, path);
+        }
+
+        public ActionResult Insert(Nullable<decimal> idusergroup, string username, string password, Nullable<decimal> nhanviencaptren, Nullable<decimal> idcompany, string hodem, string ten, string sdt01, string sdt02, string image, string email, Nullable<Boolean> isactive, Nullable<decimal> idloaiuser, string path)
+        {
+            var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
+            CrmEntities v_model = new CrmEntities();
+            decimal idcur = v_model.pr_User_Insert(idusergroup, username, password, nhanviencaptren, idcompany, hodem, ten, sdt01, sdt02, image, email, isactive, idloaiuser, id);
+            if (!String.IsNullOrEmpty(path))
+            {
+                FileInfo file = new FileInfo(path); image = "../Images/profile/" + idcur + file.Extension;
+                FileInfo check = new FileInfo(file.Directory.FullName + "\\" + idcur + file.Extension);
+                if (check.Exists) check.Delete();
+                file.MoveTo(file.Directory.FullName + "\\" + idcur + file.Extension);
+                v_model.pr_Contact_Update_Image(idcur, "../Images/profile/" + idcur + file.Extension);
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Delete(decimal id_kh)
+        {
+            CrmEntities v_model = new CrmEntities();
+            int affected = v_model.pr_User_Delete(id_kh);
+            return Json(affected, JsonRequestBehavior.AllowGet);
+        }
 
         public string GetFileRequest()
         {
