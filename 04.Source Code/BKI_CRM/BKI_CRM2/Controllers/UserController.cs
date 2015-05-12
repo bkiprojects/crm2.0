@@ -46,9 +46,17 @@ namespace BKI_CRM2.Controllers
         [HttpGet]
         public JsonResult Select(string IdUser)
         {
+            CrmEntities v_model = new CrmEntities();
+              List<User> v_us = new List<User>();
+                v_us = v_model.User.ToList<User>();
+                List<decimal> idus = new List<decimal>(); List<string> nameus = new List<string>();
+                for (int i = 0; i < v_us.Count; i++)
+                {
+                    idus.Add(v_us[i].Id); nameus.Add(v_us[i].HoNhanVien + " " + v_us[i].TenNhanVien);
+                }
             if (!String.IsNullOrEmpty(IdUser))
             {
-                CrmEntities v_model = new CrmEntities();
+               
                 decimal? v_id = Convert.ToDecimal(IdUser);
                 var v_user = v_model.User.FirstOrDefault(x => x.Id == v_id);
                 var v_id_nhan_vien_cap_tren = v_user.IdParentUser;
@@ -58,13 +66,7 @@ namespace BKI_CRM2.Controllers
                 {
                     nhanviencaptren = v_nhan_vien_cap_tren.HoNhanVien + " " + v_nhan_vien_cap_tren.TenNhanVien;
                 }
-                List<User> v_us = new List<User>();
-                v_us = v_model.User.ToList<User>();
-                List<decimal> idus = new List<decimal>(); List<string> nameus = new List<string>();
-                for (int i = 0; i < v_us.Count; i++)
-                {
-                    idus.Add(v_us[i].Id); nameus.Add(v_us[i].HoNhanVien + " " + v_us[i].TenNhanVien);
-                }
+              
                
                 //List<UserContactRole> v_us_ct = new List<UserContactRole>();
                 //v_us_ct = v_model.UserContactRole.ToList<UserContactRole>();
@@ -89,15 +91,15 @@ namespace BKI_CRM2.Controllers
                     sdt01 = v_user.Sdt01,
                     sdt02 = v_user.Sdt02,
                     email = v_user.Email,
-                    idus,
-                    nameus
+                    idus= idus,
+                    nameus=nameus
                     //idus_ct= idus_ct,
                     //nameus_ct= nameus_ct
                    
                    
                 }, JsonRequestBehavior.AllowGet);
             }
-            else return Json(true, JsonRequestBehavior.AllowGet);
+            else return Json(new { idus=idus, nameus= nameus}, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

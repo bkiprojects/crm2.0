@@ -31,7 +31,7 @@
 </div>
 
 <div style="margin: 20px 0px 30px 30px;">
-    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;" data-toggle="modal" data-target="#thay_doi">
+    <button type="button" class="btn btn-primary " aria-hidden="true" style="margin-left:300px;" onclick="sua(null)" id="them">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm người dùng
     </button>
 
@@ -85,7 +85,7 @@
                                     <td class="email">@item.Email</td>
                                     <td class="username">@item.UserName</td>
                                     <td class="password">@item.Password</td>
-                                    <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                                    <td><button type="button" class="btn btn-default btn_sua" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                                     <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                                 </tr>
                             }
@@ -123,7 +123,7 @@
                                         <td class="email">@item.Email</td>
                                         <td class="username">@item.UserName</td>
                                         <td class="password">@item.Password</td>
-                                        <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                                        <td><button type="button" class="btn btn-default btn_sua" onclick="sua('@item.Id')" ><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                                         <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                                     </tr>
                                 }
@@ -145,7 +145,7 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; ">
+                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; " id="table_thong_tin_nguoi_dung">
                         <tr>
                             <td rowspan="4">
                                 <label class=" padding"  style="line-height: 36px;">Ảnh cá nhân</label>
@@ -213,7 +213,7 @@
                                 <select id="nhanviencaptren"></select>
                             </td>
                         </tr>
-                           <tr>
+                           <tr id="ChamSoc">
                           <td>
                                 <label class="width100px left padding"  style="line-height: 36px;">Chăm sóc</label>
                             </td>
@@ -411,10 +411,15 @@
             allowClear: true
         });
     }
-    function clearflag() {
-        $('#par').html("<select id='trangthaichuyen'></select>");
-        $('#switch').modal('hide');
-    }
+
+    $('#them').click(function () {
+        $('#table_thong_tin_nguoi_dung tr#ChamSoc').hide();
+    })
+   
+    $('.btn_sua').click(function () {
+        $('#table_thong_tin_nguoi_dung tr#ChamSoc').show();
+    })
+
     function sua(id_user) {
         $('#thay_doi').attr('name', id_user);
         IdUser_modal_thay_doi.innerHTML = id_user;
@@ -432,7 +437,7 @@
                 $('#nhanviencaptren').html(str);
 
 
-                if (get != undefined && get != true) {
+                if (get != undefined && get.hodem != null) {
                     hodem.value = get.hodem.trim();
                     ten.value = get.ten.trim();
                     email.value = get.email;
