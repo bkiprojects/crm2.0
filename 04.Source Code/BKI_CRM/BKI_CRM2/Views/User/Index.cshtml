@@ -225,6 +225,7 @@
                         </tr>
                        
                     </table>
+                    <div id="IdUser_modal_thay_doi" style="display:none;"></div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -240,12 +241,12 @@
     <div class="modal-dialog " >
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="dong"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_dong"><span aria-hidden="true">&times;</span></button>
                 <h3 class="modal-title title">Danh sách khách hàng</h3>
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:50% ">
+                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:50% " id="table_danh_sach_khach_hang">
                         <tr>
                            <td >
                                 <label class=" padding"  style="line-height: 36px;">Họ tên khách hàng</label>
@@ -254,13 +255,9 @@
                               <label class=" padding"  style="line-height: 36px;">Thông tin</label>
                             </td>
                          </tr> 
-                      
-                      <tr>
-                           <td>Ngọc</td>
-                          <td> <a href="#" >Chi tiết</a></td>
-                        </tr>
-                       
+                                  
                     </table>
+                     <div id="IdUser_modal_danh_sach_contact" style="display:none;"></div>
                 </div>
             </div>
             
@@ -309,12 +306,12 @@
         $('.mytable').dataTable();
     });
     $('#btn_danh_sach_khach_hang').click(function () {
+        layDanhSachKhachHang($('#IdUser_modal_thay_doi').html());
         $('#danh_sach_contact').modal('show');
-        $('#thay_doi').css("display","none");
-
+        $('#thay_doi').css("display", "none");
     });
 
-    $('#dong').click(function () {
+    $('#btn_dong').click(function () {
         $('#thay_doi').show();
         
 
@@ -420,6 +417,7 @@
     }
     function sua(id_user) {
         $('#thay_doi').attr('name', id_user);
+        IdUser_modal_thay_doi.innerHTML = id_user;
         $.ajax({
             url: "/User/Select",
             type: "GET",
@@ -450,6 +448,39 @@
             }
         });
     }
+
+    function layDanhSachKhachHang(id_user) {
+        $('#thay_doi').attr('name', id_user);
+       
+        $.ajax({
+            url: "/User/SelectListContact",
+            type: "GET",
+            data: { IdUser: id_user },
+            error: function () {
+                alert('Lấy thông tin thất bại!');
+            },
+            success: function (get) {
+                if (get != undefined && get != true) {
+                    $("#table_danh_sach_khach_hang tr").remove();
+                    var str = "";
+                    str += "<tr>"
+                          + " <td >"
+                            + "    <label class=' padding'  style='line-height: 36px;'>Họ tên khách hàng</label>"
+                           + " </td>"
+                           + " <td >"
+                            + "  <label class=' padding'  style='line-height: 36px;'>Thông tin</label>"
+                           + " </td>"
+                        + " </tr> ";
+                    for (i = 0; i < get.idus_ct.length; i++) {
+                        str += "<tr id='" + get.idus_ct[i] + "'><td>" + get.nameus_ct[i] + "</td><td><a>Chi tiết</a></td></tr>";
+                    }
+                    $('#table_danh_sach_khach_hang').append(str);
+                }
+              
+            }
+        });
+    }
+
     function xoa(id_user) {
         $.ajax({
             url: "/Contact/Delete",
@@ -471,68 +502,5 @@
         giatri.innerHTML = id_user;
         $('#xoa').modal('show');
     }
-    function chuyen(id_user) {
-        $('#switch').attr('name', id_user);
-        $.ajax({
-            url: "/Contact/GetState",
-            type: "GET",
-            data: { IdContact: id_user },
-            error: function () {
-                alert('Lấy thông tin thất bại!');
-            },
-            success: function (data) {
-                $('#trangthaihientai').html(data.state);
-                var str = "";
-                if (data.states.length > 0) {
-                    for (i = 0; i < data.states.length; i++) {
-                        str += "<option value='" + data.states[i] + "'>" + data.states_name[i] + "</option>";
-                    }
-
-                    $('#trangthaichuyen').html(str);
-                    $('#trangthaichuyen').select2();
-                }
-                else $('#par').html("<strong>Không thể chuyển</strong>");
-                $('#switch').modal('show');
-            }
-        });
-    }
-    function thuchienchuyen(id_user) {
-        if ($('#par').find('strong').html() != undefined) {
-            alert('Trạng thái không đổi');
-            $('#switch').modal('hide');
-        }
-        else {
-            var state = $('#trangthaichuyen').val();
-            $.ajax({
-                url: "/Contact/SwitchState",
-                type: "POST",
-                data: { IdContact: id_user, IdTrangThai: state },
-                error: function () {
-                    alert('Có lỗi');
-                },
-                success: function (data) {
-                    if (data == true) {
-                        alert('Thành công!');
-                        $.ajax({
-                            url: "/Contact/Index",
-                            type: "Get",
-                            success: function (view) {
-                                $('#switch').one('hidden.bs.modal', function () {
-                                    $('#body').html(view);
-                                }).modal('hide');
-                            }
-                        });
-                    }
-                    else { alert('Có lỗi'); $('#switch').modal('hide'); }
-                }
-            });
-        }
-    }
-    function filter(id) {
-        if (id == null || id == "" || id == undefined) $('tr').show();
-        else {
-            $(".ctn").find('tr').hide();
-            $(".ctn").find("tr[name='" + id + "']").show();
-        }
-    }
+   
 </script>

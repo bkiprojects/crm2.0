@@ -100,6 +100,40 @@ namespace BKI_CRM2.Controllers
             else return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult SelectListContact(string IdUser)
+        {
+            if (!String.IsNullOrEmpty(IdUser))
+            {
+                CrmEntities v_model = new CrmEntities();
+                decimal? v_id = Convert.ToDecimal(IdUser);
+                List<UserContactRole> v_us_ct = new List<UserContactRole>();
+                v_us_ct = v_model.UserContactRole.Where(x=>x.IdUser==v_id).ToList<UserContactRole>();
+                List<decimal?> idus_ct = new List<decimal?>();
+                List<string> nameus_ct = new List<string>();
+                if (v_us_ct.Count > 0)
+                {
+                   
+                    for (int i = 0; i < v_us_ct.Count; i++)
+                    {
+                         var index=v_us_ct[i].IdContact;
+                        idus_ct.Add(index);
+
+                        var v_ct = v_model.Contact.Where(x => x.Id == index).First();
+                        nameus_ct.Add(v_ct.Ho + " " + v_ct.Ten);
+                    }
+                }
+
+                return Json(new
+                {
+                    idus_ct= idus_ct,
+                    nameus_ct= nameus_ct
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+
         public string GetFileRequest()
         {
             HttpPostedFile pic = null; decimal IdUser = -1;
