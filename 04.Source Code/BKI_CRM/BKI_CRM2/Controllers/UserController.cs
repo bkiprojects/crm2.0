@@ -39,5 +39,69 @@ namespace BKI_CRM2.Controllers
             return PartialView();
         }
 
+        [HttpGet]
+        public JsonResult Select(string IdUser)
+        {
+            if (!String.IsNullOrEmpty(IdUser))
+            {
+                CrmEntities v_model = new CrmEntities();
+                decimal? v_id = Convert.ToDecimal(IdUser);
+                var v_user = v_model.User.FirstOrDefault(x => x.Id == v_id);
+                var v_id_nhan_vien_cap_tren = v_user.IdParentUser;
+                var v_nhan_vien_cap_tren = v_model.User.FirstOrDefault(x => x.Id == v_id_nhan_vien_cap_tren);
+                string nhanviencaptren = "";
+                if (v_nhan_vien_cap_tren != null)
+                {
+                    nhanviencaptren = v_nhan_vien_cap_tren.HoNhanVien + " " + v_nhan_vien_cap_tren.TenNhanVien;
+                }
+                List<User> v_us = new List<User>();
+                v_us = v_model.User.ToList<User>();
+                List<decimal> idus = new List<decimal>(); List<string> nameus = new List<string>();
+                for (int i = 0; i < v_us.Count; i++)
+                {
+                    idus.Add(v_us[i].Id); nameus.Add(v_us[i].HoNhanVien + " " + v_us[i].TenNhanVien);
+                }
+               // var v_acrole = v_model.AccountContactRole.FirstOrDefault(x => x.IdUser == v_id);
+
+             
+               
+                return Json(new
+                {
+                    hodem = v_user.HoNhanVien,
+                    ten = v_user.TenNhanVien,
+                    image = v_user.Image,
+                   username= v_user.UserName,
+                   password= v_user.Password,
+                   nhanviencaptren= v_user.IdParentUser,
+                    sdt01 = v_user.Sdt01,
+                    sdt02 = v_user.Sdt02,
+                    email = v_user.Email,
+                    idus,
+                    nameus
+                   
+                   
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public string GetFileRequest()
+        {
+            HttpPostedFile pic = null; decimal IdUser = -1;
+            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                pic = System.Web.HttpContext.Current.Request.Files["HelpSectionImages"];
+            }
+            return UploadImg(pic, IdUser);
+        }
+        public string UploadImg(HttpPostedFile file, decimal IdUser)
+        {
+            string[] name = System.IO.Path.GetFileName(file.FileName).Split('.');
+            string pic = IdUser + "." + name[name.Length - 1];
+            string path = System.IO.Path.Combine(Server.MapPath("~/Images/profile"), pic);
+            file.SaveAs(path);
+            return "../Images/profile/" + pic + "%" + path;
+        }
+
     }
 }
