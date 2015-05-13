@@ -87,6 +87,7 @@ namespace BKI_CRM2.Controllers
                     image = v_user.Image,
                    username= v_user.UserName,
                    password= v_user.Password,
+                   idusergroup= v_user.IdUserGroup,
                    nhanviencaptren= v_user.IdParentUser,
                     sdt01 = v_user.Sdt01,
                     sdt02 = v_user.Sdt02,

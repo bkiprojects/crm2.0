@@ -213,6 +213,19 @@
                                 <select id="nhanviencaptren"></select>
                             </td>
                         </tr>
+                        <tr>
+                              <td>
+                                <label class="width100px left padding"  style="line-height: 36px;">Vai trò</label>
+                            </td>
+                               <td>
+                                   <select id="vaitro">
+                                       @foreach (var item in state)
+                                       {
+                                           <option value="@item.Id">@item.GroupName</option>
+                                       }
+                                   </select>
+                               </td>
+                        </tr>
                            <tr id="ChamSoc">
                           <td>
                                 <label class="width100px left padding"  style="line-height: 36px;">Chăm sóc</label>
@@ -220,7 +233,7 @@
                             <td>
                                 <button type="button"  class="btn btn-primary width220px"  id="btn_danh_sach_khach_hang"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true" ></span>Danh sách chi tiết khách hàng</button>
                             </td>
-                            
+                           
                           
                         </tr>
                        
@@ -298,6 +311,11 @@
             allowClear: true
         });
 
+        $("#vaitro").select2({
+            placeholder: "Phân quyền người dùng",
+            allowClear: true
+        });
+
         $("#nhanviencaptren").select2({
             placeholder: "Tên Nhân viên",
             allowClear: true
@@ -350,6 +368,7 @@
         var nhanviencaptren = $('#nhanviencaptren').val();
         var username = $('#username').val().trim();
         var password = $('#password').val().trim();
+        var idusergroup = $('#vaitro').val();
         var image = $('#anh').attr('src').trim();
         var path = $('#anh').attr('name');
        
@@ -371,7 +390,7 @@
                 isactive: true,
                 idcompany: null,
                 idloaiuser: null,
-                idusergroup:null
+                idusergroup:idusergroup
                 
             },
             error: function () {
@@ -393,19 +412,21 @@
     }
     function clear() {
         $('#thongtinnguoidung').find('input').val('');
-        $('#loaikhachhang,#gioitinh,#account').select2('data', null);
-        $('#thuc_hien').select2({
-            placeholder: 'Thực hiện',
+        $('#vaitro, #nhanviencaptren').val(null);
+      
+        $("#nhanviencaptren").select2({
+            placeholder: "Tên Nhân viên",
             allowClear: true
         });
-        $('#loc_khach_hang').select2({
-            placeholder: 'Lọc khách hàng',
+        $("#vaitro").select2({
+            placeholder: "Phân quyền người dùng",
             allowClear: true
         });
     }
 
     $('#them').click(function () {
         $('#table_thong_tin_nguoi_dung tr#ChamSoc').hide();
+
     })
    
     $('.btn_sua').click(function () {
@@ -427,8 +448,7 @@
                 for (i = 0; i < get.idus.length; i++)
                     str += "<option value='" + get.idus[i] + "'>" + get.nameus[i] + "</option>";
                 $('#nhanviencaptren').html(str);
-
-
+                clear();
                 if (get != undefined && get.hodem != null) {
                     hodem.value = get.hodem.trim();
                     ten.value = get.ten.trim();
@@ -436,11 +456,21 @@
                     sdt.value = get.sdt01;
                     sdt2.value = get.sdt02;
                     nhanviencaptren.value = get.nhanviencaptren;
+                    vaitro.value = get.idusergroup;
                     username.value = get.username;
                     password.value = get.password;
                     anh.src = get.image;
+                    $("#vaitro").select2({
+                        placeholder: "Phân quyền người dùng",
+                        allowClear: true
+                    });
+
+                    $("#nhanviencaptren").select2({
+                        placeholder: "Tên Nhân viên",
+                        allowClear: true
+                    });
                 }
-                $('#nhanviencaptren').select2();
+             
                 $('#thay_doi').modal('show');
             }
         });
