@@ -35,6 +35,28 @@ namespace BKI_CRM2.Controllers
             {
                 idus.Add(v_us[i].Id); 
             }
+
+            List<UserContactRole> v_us_ct = new List<UserContactRole>();
+            v_us_ct = v_model.UserContactRole.ToList<UserContactRole>();
+            List<decimal?> idus_ct = new List<decimal?>();
+            List<string> nameus_ct = new List<string>();
+            for (int i = 0; i < v_us_ct.Count; i++)
+            {
+                idus_ct.Add(v_us_ct[i].IdContact);
+               
+            }
+            var itemIds = idus_ct.ToArray();
+            var otherObjects = v_model.Contact.Where(x => !itemIds.Contains(x.Id)).ToList<Contact>();
+            List<decimal?> otherId = new List<decimal?>();
+            for (int i = 0; i < otherObjects.Count; i++)
+            {
+                var index = otherObjects[i].Id;
+                otherId.Add(index);
+                var v_ct = v_model.Contact.Where(x => x.Id == index).First();
+                nameus_ct.Add(v_ct.Ho + " " + v_ct.Ten);
+            }
+               
+
             ViewBag.v_user = v_user;
             ViewBag.idus = idus;
             ViewBag.state = state;
@@ -66,20 +88,9 @@ namespace BKI_CRM2.Controllers
                 {
                     nhanviencaptren = v_nhan_vien_cap_tren.HoNhanVien + " " + v_nhan_vien_cap_tren.TenNhanVien;
                 }
+
               
-               
-                //List<UserContactRole> v_us_ct = new List<UserContactRole>();
-                //v_us_ct = v_model.UserContactRole.ToList<UserContactRole>();
-                //List<decimal?> idus_ct = new List<decimal?>();
-                //List<string> nameus_ct = new List<string>();
-                //for (int i = 0; i < v_us_ct.Count; i++)
-                //{
-                //    idus_ct.Add(v_us_ct[i].IdContact);
-                //    var v_ct = v_model.Contact.Where(x=>x.Id==v_us_ct[i].IdContact).FirstOrDefault();
-                //    nameus_ct.Add(v_ct.Ho+" "+ v_ct.Ten);
-                //}
              
-               
                 return Json(new
                 {
                     hodem = v_user.HoNhanVien,
