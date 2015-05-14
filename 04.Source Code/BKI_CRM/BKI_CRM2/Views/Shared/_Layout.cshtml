@@ -18,6 +18,7 @@
     <script>
         $(document).ready(function () {
             $('#home,#dmkh').click(function () {
+                $('#body').html("<div class='title'><img src='../Images/380.gif' style='margin:auto'></div>");
                 $.ajax({
                     url: "/Contact/Index",
                     type: "Get",
@@ -28,6 +29,7 @@
             });
 
             $('#hd').click(function () {
+                $('#body').html("<div class='title'><img src='../Images/380.gif' style='margin:auto'></div>");
                 $.ajax({
                     url: "/Contract/Index",
                     type: "Get",
@@ -38,6 +40,7 @@
             });
 
             $('#cv').click(function () {
+                $('#body').html("<div class='title'><img src='../Images/380.gif' style='margin:auto'></div>");
                 $.ajax({
                     url: "/Task/Index",
                     type: "Get",
@@ -48,6 +51,7 @@
             });
 
             $('#ct').click(function () {
+                $('#body').html("<div class='title'><img src='../Images/380.gif' style='margin:auto'></div>");
                 $.ajax({
                     url: "/Accounts/Index",
                     type: "Get",
@@ -57,6 +61,7 @@
                 });
             });
             $('#bc').click(function () {
+                $('#body').html("<div class='title'><img src='../Images/380.gif' style='margin:auto'></div>");
                 $.ajax({
                     url: "/Home/importExcel",
                     type: "Get",
@@ -67,6 +72,7 @@
             });
 
             $('#users').click(function () {
+                $('#body').html("<div class='title'><img src='../Images/380.gif' style='margin:auto'></div>");
                 $.ajax({
                     url: "/User/Index",
                     type: "Get",

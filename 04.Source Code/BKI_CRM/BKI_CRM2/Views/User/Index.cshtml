@@ -123,7 +123,7 @@
                                         <td class="email">@item.Email</td>
                                         <td class="username">@item.UserName</td>
                                         <td class="password">@item.Password</td>
-                                        <td><button type="button" class="btn btn-default btn_sua" onclick="sua('@item.Id')" ><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
+                                        <td><button type="button" class="btn btn-default btn_sua" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                                         <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                                     </tr>
                                 }
@@ -148,7 +148,7 @@
                     <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; " id="table_thong_tin_nguoi_dung">
                         <tr>
                             <td rowspan="4">
-                                <label class=" padding"  style="line-height: 36px;">Ảnh cá nhân</label>
+                                <label class=" padding" style="line-height: 36px;">Ảnh cá nhân</label>
                             </td>
                             <td rowspan="4">
                                 <img src="" alt="Ảnh" style="max-width:200px; height:160px;" id="anh">
@@ -163,7 +163,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="width100px left padding"  style="line-height: 36px;">Nhập Password</label>
+                                <label class="width100px left padding" style="line-height: 36px;">Nhập Password</label>
                             </td>
                             <td>
                                 <input type="text" placeholder="Nhập password" class="form-control width220px height_input " style="height:34px !important;" id="password" />
@@ -171,7 +171,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="width100px left padding"  style="line-height: 36px;">Điện thoại</label>
+                                <label class="width100px left padding" style="line-height: 36px;">Điện thoại</label>
                             </td>
                             <td>
                                 <input type="tel" placeholder="Nhập số điện thoại" class="form-control width220px height_input " style="height:34px !important;" id="sdt" />
@@ -179,7 +179,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="padding"  style="line-height: 36px;">ĐT nhà riêng</label>
+                                <label class="padding" style="line-height: 36px;">ĐT nhà riêng</label>
                             </td>
                             <td>
                                 <input type="tel" placeholder="Nhập số ĐT nhà riêng" class="form-control width220px height_input " style="height:34px !important;" id="sdt2" />
@@ -187,13 +187,13 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="width100px left padding"  style="line-height: 36px;">Họ và đệm</label>
+                                <label class="width100px left padding" style="line-height: 36px;">Họ và đệm</label>
                             </td>
                             <td>
                                 <input type="text" placeholder="Nhập Họ và đệm" class="form-control width220px height_input " style="height:34px !important;" id="hodem" />
                             </td>
                             <td>
-                                <label class="padding"  style="line-height: 36px;">Email</label>
+                                <label class="padding" style="line-height: 36px;">Email</label>
                             </td>
                             <td>
                                 <input type="email" placeholder="Nhập địa chỉ Email" class="form-control width220px height_input " style="height:34px !important;" id="email" />
@@ -201,42 +201,42 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="width100px left padding"  style="line-height: 36px;">Tên</label>
+                                <label class="width100px left padding" style="line-height: 36px;">Tên</label>
                             </td>
                             <td>
                                 <input type="text" placeholder="Nhập Tên người dùng" class="form-control width220px height_input " style="height:34px !important;" id="ten" />
                             </td>
                             <td>
-                                <label class="width100px left padding"  style="line-height: 36px;">Họ tên Cấp trên</label>
+                                <label class="width100px left padding" style="line-height: 36px;">Họ tên Cấp trên</label>
                             </td>
-                              <td>
+                            <td>
                                 <select id="nhanviencaptren"></select>
                             </td>
                         </tr>
                         <tr>
-                              <td>
-                                <label class="width100px left padding"  style="line-height: 36px;">Vai trò</label>
-                            </td>
-                               <td>
-                                   <select id="vaitro">
-                                       @foreach (var item in state)
-                                       {
-                                           <option value="@item.Id">@item.GroupName</option>
-                                       }
-                                   </select>
-                               </td>
-                        </tr>
-                           <tr id="ChamSoc">
-                          <td>
-                                <label class="width100px left padding"  style="line-height: 36px;">Chăm sóc</label>
+                            <td>
+                                <label class="width100px left padding" style="line-height: 36px;">Vai trò</label>
                             </td>
                             <td>
-                                <button type="button"  class="btn btn-primary width220px"  id="btn_danh_sach_khach_hang"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true" ></span>Danh sách chi tiết khách hàng</button>
+                                <select id="vaitro">
+                                    @foreach (var item in state)
+                                    {
+                                        <option value="@item.Id">@item.GroupName</option>
+                                    }
+                                </select>
                             </td>
-                           
-                          
                         </tr>
-                       
+                        <tr id="ChamSoc">
+                            <td>
+                                <label class="width100px left padding" style="line-height: 36px;">Chăm sóc</label>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary width220px" id="btn_danh_sach_khach_hang"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span>Danh sách chi tiết khách hàng</button>
+                            </td>
+
+
+                        </tr>
+
                     </table>
                     <div id="IdUser_modal_thay_doi" style="display:none;"></div>
                 </div>
@@ -251,7 +251,7 @@
 </div><!-- /.modal -->
 
 <div class="modal fade" id="danh_sach_contact">
-    <div class="modal-dialog " >
+    <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_dong"><span aria-hidden="true">&times;</span></button>
@@ -261,23 +261,22 @@
                 <div class="container">
                     <table class="table table-condensed table-font-size " style="margin-top:20px;width:50% " id="table_danh_sach_khach_hang">
                         <tr>
-                           <td >
-                                <label class=" padding"  style="line-height: 36px;">Họ tên khách hàng</label>
+                            <td>
+                                <label class=" padding" style="line-height: 36px;">Họ tên khách hàng</label>
                             </td>
-                            <td >
-                              <label class=" padding"  style="line-height: 36px;">Thông tin</label>
+                            <td>
+                                <label class=" padding" style="line-height: 36px;">Thông tin</label>
                             </td>
-                         </tr> 
-                                  
+                        </tr>
+
                     </table>
-                     <div id="IdUser_modal_danh_sach_contact" style="display:none;"></div>
+                    <div id="IdUser_modal_danh_sach_contact" style="display:none;"></div>
                 </div>
             </div>
-            
+
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 <!--Modal xóa-->
 <div class="modal fade" id="xoa">
     <div class="modal-dialog">
@@ -305,7 +304,7 @@
         $('#thay_doi').on('hidden.bs.modal', function () {
             clear();
         });
-       
+
         $("#thuc_hien").select2({
             placeholder: "Thực hiện",
             allowClear: true
@@ -320,7 +319,7 @@
             placeholder: "Tên Nhân viên",
             allowClear: true
         });
-      
+
         $('.mytable').dataTable();
     });
     $('#btn_danh_sach_khach_hang').click(function () {
@@ -331,7 +330,7 @@
 
     $('#btn_dong').click(function () {
         $('#thay_doi').show();
-        
+
 
     });
     function upanh(id) {
@@ -361,7 +360,7 @@
     function thuchiensua(id_user) {
         var hodem = $('#hodem').val().trim();
         var ten = $('#ten').val().trim();
-      
+
         var sdt01 = $('#sdt').val().trim();
         var sdt02 = $('#sdt2').val().trim();
         var email = $('#email').val().trim();
@@ -371,7 +370,7 @@
         var idusergroup = $('#vaitro').val();
         var image = $('#anh').attr('src').trim();
         var path = $('#anh').attr('name');
-       
+
         $.ajax({
             url: "/User/Update",
             type: "POST",
@@ -380,9 +379,9 @@
                 hodem: hodem,
                 ten: ten,
                 username: username,
-                password:password,
+                password: password,
                 image: image,
-                nhanviencaptren:nhanviencaptren,
+                nhanviencaptren: nhanviencaptren,
                 sdt01: sdt01,
                 sdt02: sdt02,
                 email: email,
@@ -390,8 +389,8 @@
                 isactive: true,
                 idcompany: null,
                 idloaiuser: null,
-                idusergroup:idusergroup
-                
+                idusergroup: idusergroup
+
             },
             error: function () {
                 alert("Có lỗi");
@@ -413,7 +412,7 @@
     function clear() {
         $('#thongtinnguoidung').find('input').val('');
         $('#vaitro, #nhanviencaptren').val(null);
-      
+
         $("#nhanviencaptren").select2({
             placeholder: "Tên Nhân viên",
             allowClear: true
@@ -428,7 +427,7 @@
         $('#table_thong_tin_nguoi_dung tr#ChamSoc').hide();
 
     })
-   
+
     $('.btn_sua').click(function () {
         $('#table_thong_tin_nguoi_dung tr#ChamSoc').show();
     })
@@ -470,7 +469,7 @@
                         allowClear: true
                     });
                 }
-             
+
                 $('#thay_doi').modal('show');
             }
         });
@@ -478,7 +477,7 @@
 
     function layDanhSachKhachHang(id_user) {
         $('#thay_doi').attr('name', id_user);
-       
+
         $.ajax({
             url: "/User/SelectListContact",
             type: "GET",
@@ -503,7 +502,7 @@
                     }
                     $('#table_danh_sach_khach_hang').append(str);
                 }
-              
+
             }
         });
     }
@@ -529,5 +528,5 @@
         giatri.innerHTML = id_user;
         $('#xoa').modal('show');
     }
-   
+
 </script>

@@ -369,6 +369,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CRM.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\380.GIF" />
     <Content Include="Models\CRM.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CRM.edmx</DependentUpon>

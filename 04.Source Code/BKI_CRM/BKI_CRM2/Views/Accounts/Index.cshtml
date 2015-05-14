@@ -172,7 +172,6 @@
             clear();
         });
     });
-
     function hienxoa(id_ac) {
         giatri.innerHTML = id_ac;
         $('#xoa').modal('show');
@@ -254,6 +253,7 @@
             },
             success: function (data) {
                 alert("Thành công!");
+                
                 $.ajax({
                     url: "/Accounts/Index",
                     type: "Get",
