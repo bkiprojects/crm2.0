@@ -5,6 +5,10 @@
     var tu_dien = ViewBag.v_tu_dien as List<BKI_CRM2.Models.TuDien>;
     var state = ViewBag.state as List<BKI_CRM2.Models.ContactState>;
     var account = ViewBag.v_account as List<BKI_CRM2.Models.Account>;
+    var idus = ViewBag.idus;
+    var nameus = ViewBag.nameus;
+    var idct = ViewBag.idct;
+    var namect = ViewBag.namect;
 }
 <style>
     .mau {
@@ -136,6 +140,7 @@
                     </table>
                 </div>
             }
+           <input type="button" id="phankhachhang" value="Phân khách hàng" />
         }
     </div>
 </div>
@@ -345,6 +350,47 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div class="modal fade" id="role">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title title">PHÂN KHÁCH HÀNG</h3>
+            </div>
+            <div class="modal-body">
+                <div >
+                    <div style="float:left;width:200px;line-height: 33px"><label>Tên nhân viên được phân</label></div>
+               <div ><select id="userrole">
+                   @for (int i = 0; i < @idus.Count; i++)
+                   {
+                       <option value="@idus[i]">@nameus[i]</option>
+                   }
+               </select>
+                   </div>
+                    </div>
+                <hr />
+                <div>
+                <div >
+                    <label style="float:left;width:200px;line-height: 33px">Danh sách khách hàng</label>
+                </div>
+                <div>
+                <select multiple="multiple" id="khachhangdaphan" >
+                     @for (int i = 0; i < @idct.Count; i++)
+                   {
+                       <option value="@idct[i]">@namect[i]</option>
+                   }
+                </select>
+                 </div>
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="thuchienchuyen($('#switch').attr('name'));">Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
     $(document).ready(function () {
         $('#clear').click(function () {
@@ -375,10 +421,42 @@
             allowClear: true
         });
 
+        $("#userrole").select2({
+            placeholder: "Chọn tên nhân viên",
+            allowClear: true
+        });
+
+        $("#khachhangdaphan").select2({
+            placeholder: "Chọn tên khách hàng",
+            allowClear: true
+        });
+
         $('.selectall').click(function (e) {
             var table = $(e.target).closest('table');
             $('td input:checkbox', table).prop('checked', this.checked);
         });
+
+        $('#phankhachhang').click(function () {
+            var values = $('input:checkbox:checked.tick').map(function () {
+                return this.value;
+            }).get();
+           // values.join(',');
+            
+            $('#khachhangdaphan').val(values);
+            $('#khachhangdaphan').select2();
+            
+          //  $.each(values.split(","), function (i, e) {
+             //   $("#khachhangdaphan option[value='" + e + "']").prop("selected", true);
+          //  });
+            $('#role').modal('show');
+           
+        });
+      
+       // $('#phankhachhang').click(function () {
+         //   $('input:checkbox.tick').each(function () {
+         //       var sThisVal = (this.checked ? $(this).val() : "");
+         //   });
+        //})
 
         //$('.selecctall').click(function (event) {  //on click 
          //   var a; 
@@ -389,7 +467,7 @@
          //       });
         //    } else {
         //        $('table[name=' + a + '] tick').each(function () { //loop through each checkbox
-                    this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+        //            this.checked = false; //deselect all checkboxes with class "checkbox1"                       
        //         });
        //     }
      //   });
@@ -443,7 +521,7 @@
             url: "/Contact/Update",
             type: "POST",
             data: {
-                id: id_kh,
+                id: id_k,
                 hoten: hoten,
                 diaChi: diachi,
                 gioiTinh: (gioitinh == "nam" ? true : false),
