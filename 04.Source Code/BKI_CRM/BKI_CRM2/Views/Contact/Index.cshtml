@@ -385,7 +385,7 @@
                  </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="thuchienchuyen($('#switch').attr('name'));">Đồng ý</button>
+                <button type="button" class="btn btn-primary" onclick="phankhachhangchonhanvien()">Đồng ý</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
             </div>
         </div><!-- /.modal-content -->
@@ -475,6 +475,45 @@
         $("#account").select2();
         $('.mytable').dataTable();
     });
+
+    function phankhachhangchonhanvien() {
+        if (($('#userrole').val() == null) || ($('#khachhangdaphan').val() == null)) {
+            alert('Bạn phải điền đầy đủ thông tin');
+        }
+        else {
+            var nhanvien = $('#userrole').val();
+            var khachhang = $('#khachhangdaphan').val();
+            khachhang = khachhang.join(',');
+            $.ajax({
+                url: "/Contact/UpdateUserRole",
+                type: "POST",
+                data: {
+                    nhanvien: nhanvien,
+                    khachhang: khachhang
+                },
+                error: function () {
+                    alert("Có lỗi");
+                },
+                success: function (data) {
+                    alert("Thành công!");
+                    $.ajax({
+                        url: "/Contact/Index",
+                        type: "Get",
+                        success: function (view) {
+                            $('#thay_doi').one('hidden.bs.modal', function () {
+                                $('#body').html(view);
+                            }).modal('hide');
+                        }
+                    });
+                }
+
+
+            });
+        }
+    }
+    
+    
+
     function upanh(id) {
         var data = new FormData();
         var files = $("#image").get(0).files;

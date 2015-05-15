@@ -123,8 +123,6 @@ namespace BKI_CRM2.Controllers
                 }
             }
 
-
-
             if (id != null)
             {
                 CrmEntities v_model = new CrmEntities();

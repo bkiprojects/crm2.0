@@ -200,5 +200,16 @@ namespace BKI_CRM2.Controllers
             file.SaveAs(path);
             return "../Images/profile/" + pic + "%" + path;
         }
+
+        public JsonResult UpdateUserRole(Nullable<decimal> nhanvien, string khachhang) {
+            decimal[] v_id = new decimal[0];
+            string[] IdContact = khachhang.Split(',');
+            v_id = new decimal[IdContact.Length];
+            for (int i = 0; i < v_id.Length; i++)
+            {
+                v_id[i] = Convert.ToDecimal(IdContact[i]);
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }
