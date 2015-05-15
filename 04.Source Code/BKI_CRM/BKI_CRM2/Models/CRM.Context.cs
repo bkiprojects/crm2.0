@@ -841,6 +841,75 @@ public partial class CrmEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_User_Update", idParameter, idUserGroupParameter, userNameParameter, passwordParameter, idParentUserParameter, idCompanyParameter, hoNhanVienParameter, tenNhanVienParameter, sdt01Parameter, sdt02Parameter, imageParameter, emailParameter, isActiveParameter, idLoaiUserParameter);
     }
 
+
+    public virtual int pr_UserContactRole_Insert(Nullable<decimal> idUser, Nullable<decimal> idContact, Nullable<System.DateTime> ngayCapQuyen, Nullable<bool> isActive, string ghiChu, ObjectParameter id)
+    {
+
+        var idUserParameter = idUser.HasValue ?
+            new ObjectParameter("IdUser", idUser) :
+            new ObjectParameter("IdUser", typeof(decimal));
+
+
+        var idContactParameter = idContact.HasValue ?
+            new ObjectParameter("IdContact", idContact) :
+            new ObjectParameter("IdContact", typeof(decimal));
+
+
+        var ngayCapQuyenParameter = ngayCapQuyen.HasValue ?
+            new ObjectParameter("NgayCapQuyen", ngayCapQuyen) :
+            new ObjectParameter("NgayCapQuyen", typeof(System.DateTime));
+
+
+        var isActiveParameter = isActive.HasValue ?
+            new ObjectParameter("IsActive", isActive) :
+            new ObjectParameter("IsActive", typeof(bool));
+
+
+        var ghiChuParameter = ghiChu != null ?
+            new ObjectParameter("GhiChu", ghiChu) :
+            new ObjectParameter("GhiChu", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_UserContactRole_Insert", idUserParameter, idContactParameter, ngayCapQuyenParameter, isActiveParameter, ghiChuParameter, id);
+    }
+
+
+    public virtual int pr_UserContactRole_Update(Nullable<decimal> id, Nullable<decimal> idUser, Nullable<decimal> idContact, Nullable<System.DateTime> ngayCapQuyen, Nullable<bool> isActive, string ghiChu)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        var idUserParameter = idUser.HasValue ?
+            new ObjectParameter("IdUser", idUser) :
+            new ObjectParameter("IdUser", typeof(decimal));
+
+
+        var idContactParameter = idContact.HasValue ?
+            new ObjectParameter("IdContact", idContact) :
+            new ObjectParameter("IdContact", typeof(decimal));
+
+
+        var ngayCapQuyenParameter = ngayCapQuyen.HasValue ?
+            new ObjectParameter("NgayCapQuyen", ngayCapQuyen) :
+            new ObjectParameter("NgayCapQuyen", typeof(System.DateTime));
+
+
+        var isActiveParameter = isActive.HasValue ?
+            new ObjectParameter("IsActive", isActive) :
+            new ObjectParameter("IsActive", typeof(bool));
+
+
+        var ghiChuParameter = ghiChu != null ?
+            new ObjectParameter("GhiChu", ghiChu) :
+            new ObjectParameter("GhiChu", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_UserContactRole_Update", idParameter, idUserParameter, idContactParameter, ngayCapQuyenParameter, isActiveParameter, ghiChuParameter);
+    }
+
 }
 
 }
