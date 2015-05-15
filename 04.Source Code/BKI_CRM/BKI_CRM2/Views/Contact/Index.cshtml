@@ -140,7 +140,7 @@
                     </table>
                 </div>
             }
-           <input type="button" id="phankhachhang" value="Phân khách hàng" />
+           <input type="button" class="btn btn-primary" id="phankhachhang" value="Phân khách hàng" />
         }
     </div>
 </div>
@@ -362,6 +362,7 @@
                 <div >
                     <div style="float:left;width:200px;line-height: 33px"><label>Tên nhân viên được phân</label></div>
                <div ><select id="userrole">
+                   <option></option>
                    @for (int i = 0; i < @idus.Count; i++)
                    {
                        <option value="@idus[i]">@nameus[i]</option>
@@ -489,7 +490,8 @@
                 type: "POST",
                 data: {
                     nhanvien: nhanvien,
-                    khachhang: khachhang
+                    khachhang: khachhang,
+                    ghichu: null
                 },
                 error: function () {
                     alert("Có lỗi");
@@ -500,9 +502,15 @@
                         url: "/Contact/Index",
                         type: "Get",
                         success: function (view) {
-                            $('#thay_doi').one('hidden.bs.modal', function () {
+                            $('#role').one('hidden.bs.modal', function () {
                                 $('#body').html(view);
                             }).modal('hide');
+                            $('#userrole').val(null);
+                            $('#userrole').select2();
+                            $('#khachhangdaphan').val(null);
+                            $('input:checkbox').removeAttr('checked');
+                            $('#khachhangdaphan').select2();
+
                         }
                     });
                 }

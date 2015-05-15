@@ -54,45 +54,46 @@ namespace BKI_CRM2.Controllers
         [HttpGet]
         public JsonResult Select(string IdTask)
         {
+            CrmEntities v_model = new CrmEntities();
+            List<User> v_us = new List<User>();
+            v_us = v_model.User.ToList<User>();
+            List<decimal> iduser = new List<decimal>(); List<string> names = new List<string>();
+            for (int i = 0; i < v_us.Count; i++)
+            {
+                iduser.Add(v_us[i].Id); names.Add(v_us[i].HoNhanVien + " " + v_us[i].TenNhanVien);
+            }
+
+            List<TuDien> v_priority = new List<TuDien>();
+            var temp1 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "PriorityType");
+            decimal loaitd = -1; if (temp1 != null) loaitd = temp1.Id;
+            v_priority = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd).ToList<TuDien>();
+            List<decimal> idpriority = new List<decimal>(); List<string> namepriority = new List<string>();
+            for (int i = 0; i < v_priority.Count; i++)
+            {
+                idpriority.Add(v_priority[i].Id); namepriority.Add(v_priority[i].TenTuDien);
+            }
+
+            List<TuDien> v_status = new List<TuDien>();
+            var temp2 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "StatusType");
+            decimal loaitd1 = -1; if (temp2 != null) loaitd1 = temp2.Id;
+            v_status = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd1).ToList<TuDien>();
+            List<decimal> idstatus = new List<decimal>(); List<string> namestatus = new List<string>();
+            for (int i = 0; i < v_status.Count; i++)
+            {
+                idstatus.Add(v_status[i].Id); namestatus.Add(v_status[i].TenTuDien);
+            }
+
+            List<Contact> v_ct = new List<Contact>();
+            v_ct = v_model.Contact.ToList<Contact>();
+            List<decimal> idcontact = new List<decimal>(); List<string> namecontact = new List<string>();
+            for (int i = 0; i < v_ct.Count; i++)
+            {
+                idcontact.Add(v_ct[i].Id); namecontact.Add(v_ct[i].Ho + " " + v_ct[i].Ten);
+            }
           
             if (IdTask != null && !IdTask.Equals(""))
             {
-                CrmEntities v_model = new CrmEntities();
-                List<User> v_us = new List<User>();
-                v_us = v_model.User.ToList<User>();
-                List<decimal> iduser = new List<decimal>(); List<string> names = new List<string>();
-                for (int i = 0; i < v_us.Count; i++)
-                {
-                    iduser.Add(v_us[i].Id); names.Add(v_us[i].HoNhanVien + " " + v_us[i].TenNhanVien);
-                }
-
-                List<TuDien> v_priority = new List<TuDien>();
-                var temp1 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "PriorityType");
-                decimal loaitd = -1; if (temp1 != null) loaitd = temp1.Id;
-                v_priority = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd).ToList<TuDien>();
-                List<decimal> idpriority = new List<decimal>(); List<string> namepriority = new List<string>();
-                for (int i = 0; i < v_priority.Count; i++)
-                {
-                    idpriority.Add(v_priority[i].Id); namepriority.Add(v_priority[i].TenTuDien);
-                }
-
-                List<TuDien> v_status = new List<TuDien>();
-                var temp2 = v_model.LoaiTuDien.FirstOrDefault(x => x.MaLoaiTuDien == "StatusType");
-                decimal loaitd1 = -1; if (temp2 != null) loaitd1 = temp2.Id;
-                v_status = v_model.TuDien.Where(x => x.IdLoaiTuDien == loaitd1).ToList<TuDien>();
-                List<decimal> idstatus = new List<decimal>(); List<string> namestatus = new List<string>();
-                for (int i = 0; i < v_status.Count; i++)
-                {
-                    idstatus.Add(v_status[i].Id); namestatus.Add(v_status[i].TenTuDien);
-                }
-
-                List<Contact> v_ct = new List<Contact>();
-                v_ct = v_model.Contact.ToList<Contact>();
-                List<decimal> idcontact = new List<decimal>(); List<string> namecontact = new List<string>();
-                for (int i = 0; i < v_ct.Count; i++)
-                {
-                    idcontact.Add(v_ct[i].Id); namecontact.Add(v_ct[i].Ho + " " + v_ct[i].Ten);
-                }
+               
                 decimal v_id = Convert.ToDecimal(IdTask);
                 var v_task = v_model.V_TASK.Where(x => x.Id == v_id).First();
                 string v_ngay_bat_dau = "", v_ngay_ket_thuc = "";
@@ -128,7 +129,17 @@ namespace BKI_CRM2.Controllers
                     }, JsonRequestBehavior.AllowGet);
                 
             }
-            else return Json(true, JsonRequestBehavior.AllowGet);
+            else return Json(new
+            {
+                iduser = iduser,
+                names = names,
+                idpriority = idpriority,
+                namepriority = namepriority,
+                idstatus = idstatus,
+                namestatus = namestatus,
+                idcontact = idcontact,
+                namecontact = namecontact
+            }, JsonRequestBehavior.AllowGet);
         }
       
         public JsonResult Update(Nullable<decimal> id, Nullable<System.DateTime> taiNgay, Nullable<System.DateTime> duKienHoanThanh, string tenCongViec, string noiDung, Nullable<decimal> lamViecVoi, Nullable<decimal> nhanVienThucHien, Nullable<decimal> trangThaiHienTai, Nullable<decimal> doQuanTrong, Nullable<decimal> idAccount, Nullable<decimal> idLoaiAction)

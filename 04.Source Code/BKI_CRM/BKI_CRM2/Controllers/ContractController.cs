@@ -43,31 +43,35 @@ namespace BKI_CRM2.Controllers
         [HttpGet]
         public JsonResult Select(string IdContract)
         {
+            CrmEntities v_model = new CrmEntities();
+            List<Account> v_ac = new List<Account>();
+            v_ac = v_model.Account.ToList<Account>();
+            List<decimal> ids = new List<decimal>(); List<string> names = new List<string>();
+            for (int i = 0; i < v_ac.Count; i++)
+            {
+                ids.Add(v_ac[i].Id); names.Add(v_ac[i].AccountName);
+            }
+
+            List<Contact> v_contact = new List<Contact>();
+            v_contact = v_model.Contact.ToList<Contact>();
+            List<decimal?> idct = new List<decimal?>(); List<string> namect = new List<string>();
+            for (int i = 0; i < v_contact.Count; i++)
+            {
+                decimal? index = v_contact[i].Id;
+                idct.Add(index);
+
+                namect.Add(v_contact[i].Ho + " " + v_contact[i].Ten);
+            }
+
             if (IdContract != null && !IdContract.Equals(""))
             {
                 decimal id = Convert.ToDecimal(IdContract);
                 decimal? v_contact_chinh = null;
-                CrmEntities v_model = new CrmEntities();
-                List<Account> v_ac = new List<Account>();
-                List<Contact> v_contact = new List<Contact>();
+               
+               
                 List<ContractContactRole> v_ct = new List<ContractContactRole>();
-                v_ac = v_model.Account.ToList<Account>();
-                List<decimal> ids = new List<decimal>(); List<string> names = new List<string>();
-                for (int i = 0; i < v_ac.Count; i++)
-                {
-                    ids.Add(v_ac[i].Id); names.Add(v_ac[i].AccountName);
-                }
-
-                v_contact = v_model.Contact.ToList<Contact>();
-                v_ct = v_model.ContractContactRole.Where(x => x.IdContract == id && x.IsDeleted==false).ToList<ContractContactRole>();
-                List<decimal?> idct = new List<decimal?>(); List<string> namect = new List<string>();
-                for (int i = 0; i < v_contact.Count; i++)
-                {
-                    decimal? index = v_contact[i].Id;
-                    idct.Add(index);
-
-                    namect.Add(v_contact[i].Ho + " " + v_contact[i].Ten);
-                }
+              
+                v_ct = v_model.ContractContactRole.Where(x => x.IdContract == id && x.IsDeleted==false).ToList<ContractContactRole>();              
                 List<decimal?> idct_chon = new List<decimal?>();
                 for (int i = 0; i < v_ct.Count; i++)
                 {
@@ -108,7 +112,7 @@ namespace BKI_CRM2.Controllers
 
                 }, JsonRequestBehavior.AllowGet);
             }
-            else return Json(true, JsonRequestBehavior.AllowGet);
+            else return Json(new { ids= ids, names=names,idct=idct,namect=namect}, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Update(Nullable<decimal> id, Nullable<System.DateTime> ngayBatDau, Nullable<System.DateTime> ngayKetThuc, string soHopDong, string noiDung, Nullable<decimal> idAccount, Nullable<decimal> idLoaiContract, Nullable<decimal> idUser, string idContact, decimal? idContactChinh)
         {

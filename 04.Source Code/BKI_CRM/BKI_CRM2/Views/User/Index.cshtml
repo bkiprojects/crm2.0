@@ -210,7 +210,9 @@
                                 <label class="width100px left padding" style="line-height: 36px;">Họ tên Cấp trên</label>
                             </td>
                             <td>
-                                <select id="nhanviencaptren"></select>
+                                <select id="nhanviencaptren">
+                                    <option></option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -219,6 +221,7 @@
                             </td>
                             <td>
                                 <select id="vaitro">
+                                    <option></option>
                                     @foreach (var item in state)
                                     {
                                         <option value="@item.Id">@item.GroupName</option>
@@ -417,6 +420,7 @@
             placeholder: "Tên Nhân viên",
             allowClear: true
         });
+        $('#anh').attr('src', '');
         $("#vaitro").select2({
             placeholder: "Phân quyền người dùng",
             allowClear: true
@@ -443,7 +447,7 @@
                 alert('Lấy thông tin thất bại!');
             },
             success: function (get) {
-                var str = "";
+                var str = "<option></option>";
                 for (i = 0; i < get.idus.length; i++)
                     str += "<option value='" + get.idus[i] + "'>" + get.nameus[i] + "</option>";
                 $('#nhanviencaptren').html(str);

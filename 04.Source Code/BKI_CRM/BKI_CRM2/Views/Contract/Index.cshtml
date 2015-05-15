@@ -133,7 +133,9 @@
                                     <label style="line-height: 33px;">Khách hàng chính</label>
                                 </td>
                                 <td>
-                                    <select id="contact_chinh" ></select>
+                                    <select id="contact_chinh" >
+                                        <option></option>
+                                    </select>
                                 </td>
                             </tr>
                         </table>
@@ -172,6 +174,11 @@
     $(document).ready(function () {
         $("#thuc_hien").select2({
             placeholder: "Thực hiện",
+            allowClear: true
+        });
+
+        $("#contact_chinh").select2({
+            placeholder: "Nhập tên khách hàng chính",
             allowClear: true
         });
 
@@ -221,16 +228,16 @@
             error: function () {
                 alert('Lấy thông tin thất bại!');
             },
-            success: function (get) { 
+            success: function (get) {
+                var str = "";
+                for (i = 0; i < get.ids.length; i++)
+                    str += "<option value='" + get.ids[i] + "'>" + get.names[i] + "</option>";
+                $('#account').html(str);
+                str = "";
+                for (i = 0; i < get.idct.length; i++)
+                    str += "<option value='" + get.idct[i] + "'>" + get.namect[i] + "</option>";
+                $('#contact').html(str);
                 if (get.ngay_bat_dau != undefined) {
-                    var str = "";
-                    for (i = 0; i < get.ids.length; i++)
-                        str += "<option value='" + get.ids[i] + "'>" + get.names[i] + "</option>";
-                    $('#account').html(str);
-                    str = "";
-                    for (i = 0; i < get.idct.length; i++)
-                        str += "<option value='" + get.idct[i] + "'>" + get.namect[i] + "</option>";
-                    $('#contact').html(str);
                     ngaybatdau.value = get.ngay_bat_dau.trim();
                     ngayketthuc.value = get.ngay_ket_thuc.trim();
                     sohopdong.value = get.so_hop_dong.trim();
@@ -252,12 +259,16 @@
 
     function khachhangthaydoi() {
         var khachhang = $('#contact').val();
-        var str = "";
+        var str = "<option></option>";
         for (i = 0; i < khachhang.length; i++) {
             str += "<option value='" + khachhang[i] + "'>" + $('#contact').find('option[value='+khachhang[i]+']').html()+ "</option>";
             $('#contact_chinh').html(str);
         }
-        $('#contact_chinh').select2();
+        $("#contact_chinh").select2({
+            placeholder: "Nhập tên khách hàng chính",
+            allowClear: true
+        });
+
     }
 
     function thuchiensua(id_hd) {

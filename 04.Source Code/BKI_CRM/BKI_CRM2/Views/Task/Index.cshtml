@@ -102,7 +102,9 @@
                             </td>
 
                             <td>
-                                <select id="doquantrong"></select>
+                                <select id="doquantrong">
+                                    <option></option>
+                                </select>
                             </td>
                             <td>
                                 <label style="line-height: 33px;"> Bắt đầu tại ngày</label>
@@ -130,7 +132,9 @@
                                 <label style="line-height: 33px;">Làm việc với</label>
                             </td>
                             <td>
-                                <select id="lamviecvoi"></select>
+                                <select id="lamviecvoi">
+                                    <option></option>
+                                </select>
                             </td>
                             <td>
                                 <label style="line-height: 33px;">Trạng thái hiện tại</label>
@@ -160,7 +164,9 @@
                                 <label style="line-height: 33px;">Nhân viên thực hiện</label>
                             </td>
                             <td>
-                                <select id="nhanvienthuchien"></select>
+                                <select id="nhanvienthuchien">
+                                    <option></option>
+                                </select>
                             </td>
                         </tr>
                     </table>
@@ -279,26 +285,26 @@
                 alert('Lấy thông tin thất bại!');
             },
             success: function (get) {
-                var str = "";
+                var str = "<option></option>";
                 for (i = 0; i < get.iduser.length; i++)
                     str += "<option value='" + get.iduser[i] + "'>" + get.names[i] + "</option>";
                 $('#nhanvienthuchien').html(str);
 
-                var str1 = "";
+                var str1 = "<option></option>";
                 for (i = 0; i < get.idpriority.length; i++)
                     str1 += "<option value='" + get.idpriority[i] + "'>" + get.namepriority[i] + "</option>";
                 $('#doquantrong').html(str1);
 
-                var str2 = "";
+                var str2 = "<option></option>";
                 for (i = 0; i < get.idstatus.length; i++)
                     str2 += "<option value='" + get.idstatus[i] + "'>" + get.namestatus[i] + "</option>";
                 $('#trangthaihientai').html(str2);
 
-                var str3 = "";
+                var str3 = "<option></option>";
                 for (i = 0; i < get.idcontact.length; i++)
                     str3 += "<option value='" + get.idcontact[i] + "'>" + get.namecontact[i] + "</option>";
                 $('#lamviecvoi').html(str3);
-
+               
 
                 if (get.tai_ngay != undefined) {
                     batdautaingay.value = get.tai_ngay.trim();
@@ -310,10 +316,26 @@
                     dukienhoanthanh.value = get.du_kien_hoan_thanh;
                     noidung.value = get.noi_dung;
                 }
-                $('#nhanvienthuchien').select2();
-                $('#doquantrong').select2();
-                $('#trangthaihientai').select2();
-                $('#lamviecvoi').select2();
+                $("#doquantrong").select2({
+                    placeholder: " Độ quan trọng",
+                    allowClear: true
+                });
+
+                $("#lamviecvoi").select2({
+                    placeholder: "Tên Khách hàng",
+                    allowClear: true
+                });
+
+                $("#trangthaihientai").select2({
+                    placeholder: "Trạng thái hiện tại",
+                    allowClear: true
+                });
+
+                $("#nhanvienthuchien").select2({
+                    placeholder: "Tên Nhân viên",
+                    allowClear: true
+                });
+
                 $('#thay_doi').modal('show');
 
             }

@@ -201,13 +201,18 @@ namespace BKI_CRM2.Controllers
             return "../Images/profile/" + pic + "%" + path;
         }
 
-        public JsonResult UpdateUserRole(Nullable<decimal> nhanvien, string khachhang) {
+        public JsonResult UpdateUserRole(Nullable<decimal> nhanvien, string khachhang, string ghichu) {
+            CrmEntities v_model = new CrmEntities();
             decimal[] v_id = new decimal[0];
             string[] IdContact = khachhang.Split(',');
             v_id = new decimal[IdContact.Length];
             for (int i = 0; i < v_id.Length; i++)
             {
                 v_id[i] = Convert.ToDecimal(IdContact[i]);
+            }
+            for (int i = 0; i < v_id.Length; i++)
+            {
+              //  v_model.pr_User
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
