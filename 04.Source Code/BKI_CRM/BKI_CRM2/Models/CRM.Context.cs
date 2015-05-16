@@ -874,13 +874,8 @@ public partial class CrmEntities : DbContext
     }
 
 
-    public virtual int pr_UserContactRole_Update(Nullable<decimal> id, Nullable<decimal> idUser, Nullable<decimal> idContact, Nullable<System.DateTime> ngayCapQuyen, Nullable<bool> isActive, string ghiChu)
+    public virtual int pr_UserContactRole_Update(Nullable<decimal> idUser, Nullable<decimal> idContact, Nullable<System.DateTime> ngayCapQuyen, Nullable<bool> isActive, string ghiChu)
     {
-
-        var idParameter = id.HasValue ?
-            new ObjectParameter("Id", id) :
-            new ObjectParameter("Id", typeof(decimal));
-
 
         var idUserParameter = idUser.HasValue ?
             new ObjectParameter("IdUser", idUser) :
@@ -907,7 +902,7 @@ public partial class CrmEntities : DbContext
             new ObjectParameter("GhiChu", typeof(string));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_UserContactRole_Update", idParameter, idUserParameter, idContactParameter, ngayCapQuyenParameter, isActiveParameter, ghiChuParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_UserContactRole_Update", idUserParameter, idContactParameter, ngayCapQuyenParameter, isActiveParameter, ghiChuParameter);
     }
 
 }
