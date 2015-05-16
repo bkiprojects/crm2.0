@@ -6,6 +6,10 @@
     var tu_dien = ViewBag.v_tu_dien as List<BKI_CRM2.Models.TuDien>;
     var state = ViewBag.state as List<BKI_CRM2.Models.ContactState>;
     var account = ViewBag.v_account as List<BKI_CRM2.Models.Account>;
+    var idus = ViewBag.idus;
+    var nameus = ViewBag.nameus;
+    var idct = ViewBag.idct;
+    var namect = ViewBag.namect;
 }
 <style>
     .mau {
@@ -63,11 +67,12 @@
 
         @if (dm_khach_hang != null && dm_khach_hang.Count > 0)
         {
+
             <div class="tab-pane fade in active" id="@state[0].Id">
-                <table class="mytable">
+                <table class="mytable" name="@("table"+state[0].Id)">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th><input type="checkbox" class="selectall" id="@("table"+state[0].Id)" /></th>
                             <th>Họ và đệm</th>
                             <th>Tên</th>
                             <th>Số điện thoại</th>
@@ -83,7 +88,7 @@
                             foreach (var item in dm_khach_hang[0])
                             {
                                 <tr id="@item.Id" name="@item.IdLoaiKhachHang">
-                                    <td class="c"><input type="checkbox" /></td>
+                                    <td class="c"><input type="checkbox" class="tick" value="@item.Id" /></td>
                                     <td class="ho">@item.Ho</td>
                                     <td class="ten">@item.Ten</td>
                                     <td class="sdt">@item.Sdt01</td>
@@ -96,14 +101,16 @@
                         }
                     </tbody>
                 </table>
+
+
             </div>
             for (int i = 1; i < dm_khach_hang.Count; i++)
             {
                 <div class="tab-pane fade" id="@state[i].Id">
-                    <table class="mytable">
+                    <table class="mytable" name="@("table"+state[i].Id)">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th><input type="checkbox" class="selectall" id="@("table"+state[i].Id)" /></th>
                                 <th>Họ và đệm</th>
                                 <th>Tên</th>
                                 <th>Số điện thoại</th>
@@ -119,7 +126,7 @@
                                 foreach (var item in dm_khach_hang[i])
                                 {
                                     <tr id="@item.Id" name="@item.IdLoaiKhachHang">
-                                        <td class="c"><input type="checkbox" /></td>
+                                        <td class="c"><input type="checkbox" class="tick" value="@item.Id" /></td>
                                         <td class="ho">@item.Ho</td>
                                         <td class="ten">@item.Ten</td>
                                         <td class="sdt">@item.Sdt01</td>
@@ -134,6 +141,7 @@
                     </table>
                 </div>
             }
+            <input type="button" class="btn btn-primary" id="phankhachhang" value="Phân khách hàng" />
         }
     </div>
 </div>
@@ -343,6 +351,49 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div class="modal fade" id="role">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title title">PHÂN KHÁCH HÀNG</h3>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div style="float:left;width:200px;line-height: 33px"><label>Tên nhân viên được phân</label></div>
+                    <div>
+                        <select id="userrole">
+                            <option></option>
+                            @for (int i = 0; i < @idus.Count; i++)
+                            {
+                                <option value="@idus[i]">@nameus[i]</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <hr />
+                <div>
+                    <div>
+                        <label style="float:left;width:200px;line-height: 33px">Danh sách khách hàng</label>
+                    </div>
+                    <div>
+                        <select multiple="multiple" id="khachhangdaphan">
+                            @for (int i = 0; i < @idct.Count; i++)
+                            {
+                                <option value="@idct[i]">@namect[i]</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="phankhachhangchonhanvien()">Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
     $(document).ready(function () {
         $('#clear').click(function () {
@@ -372,9 +423,107 @@
             placeholder: "Chọn loại khách hàng",
             allowClear: true
         });
+
+        $("#userrole").select2({
+            placeholder: "Chọn tên nhân viên",
+            allowClear: true
+        });
+
+        $("#khachhangdaphan").select2({
+            placeholder: "Chọn tên khách hàng",
+            allowClear: true
+        });
+
+        $('.selectall').click(function (e) {
+            var table = $(e.target).closest('table');
+            $('td input:checkbox', table).prop('checked', this.checked);
+        });
+
+        $('#phankhachhang').click(function () {
+            var values = $('input:checkbox:checked.tick').map(function () {
+                return this.value;
+            }).get();
+            // values.join(',');
+
+            $('#khachhangdaphan').val(values);
+            $('#khachhangdaphan').select2();
+
+            //  $.each(values.split(","), function (i, e) {
+            //   $("#khachhangdaphan option[value='" + e + "']").prop("selected", true);
+            //  });
+            $('#role').modal('show');
+
+        });
+
+        // $('#phankhachhang').click(function () {
+        //   $('input:checkbox.tick').each(function () {
+        //       var sThisVal = (this.checked ? $(this).val() : "");
+        //   });
+        //})
+
+        //$('.selecctall').click(function (event) {  //on click
+        //   var a;
+        //  a= $(this).attr('id');
+        //  if (this.checked) { // check select status
+        //    $('table[name='+a+'] tick').each(function () { //loop through each checkbox
+        //          this.checked = true;  //select all checkboxes with class "checkbox1"
+        //       });
+        //    } else {
+        //        $('table[name=' + a + '] tick').each(function () { //loop through each checkbox
+        //            this.checked = false; //deselect all checkboxes with class "checkbox1"
+        //         });
+        //     }
+        //   });
+
         $("#account").select2();
         $('.mytable').dataTable();
     });
+
+    function phankhachhangchonhanvien() {
+        if (($('#userrole').val() == null) || ($('#khachhangdaphan').val() == null)) {
+            alert('Bạn phải điền đầy đủ thông tin');
+        }
+        else {
+            var nhanvien = $('#userrole').val();
+            var khachhang = $('#khachhangdaphan').val();
+            khachhang = khachhang.join(',');
+            $.ajax({
+                url: "/Contact/UpdateUserRole",
+                type: "POST",
+                data: {
+                    nhanvien: nhanvien,
+                    khachhang: khachhang,
+                    ghichu: null
+                },
+                error: function () {
+                    alert("Có lỗi");
+                },
+                success: function (data) {
+                    alert("Thành công!");
+                    $.ajax({
+                        url: "/Contact/Index",
+                        type: "Get",
+                        success: function (view) {
+                            $('#role').one('hidden.bs.modal', function () {
+                                $('#body').html(view);
+                            }).modal('hide');
+                            $('#userrole').val(null);
+                            $('#userrole').select2();
+                            $('#khachhangdaphan').val(null);
+                            $('input:checkbox').removeAttr('checked');
+                            $('#khachhangdaphan').select2();
+
+                        }
+                    });
+                }
+
+
+            });
+        }
+    }
+
+
+
     function upanh(id) {
         var data = new FormData();
         var files = $("#image").get(0).files;

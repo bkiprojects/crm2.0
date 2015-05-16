@@ -24,6 +24,22 @@ namespace BKI_CRM2.Controllers
             List<TuDien> v_tu_dien = new List<TuDien>();
             List<Account> v_account = new List<Account>();
             List<ContactState> state = v_model.ContactState.OrderBy(x => x.Order).ToList<ContactState>();
+
+            List<User> v_us = new List<User>();
+            v_us = v_model.User.ToList<User>();
+            List<decimal> idus = new List<decimal>(); List<string> nameus = new List<string>();
+            for (int i = 0; i < v_us.Count; i++)
+            {
+                idus.Add(v_us[i].Id); nameus.Add(v_us[i].HoNhanVien + " " + v_us[i].TenNhanVien);
+            }
+            List<Contact> v_ct = new List<Contact>();
+            v_ct = v_model.Contact.ToList<Contact>();
+            List<decimal> idct = new List<decimal>(); List<string> namect = new List<string>();
+            for (int i = 0; i < v_ct.Count; i++)
+            {
+                idct.Add(v_ct[i].Id); namect.Add(v_ct[i].Ho + " " + v_ct[i].Ten);
+            }
+
             for (int i = 0; i < state.Count; i++)
             {
                 decimal temp = state[i].Id;
@@ -37,6 +53,10 @@ namespace BKI_CRM2.Controllers
             ViewBag.state = state;
             v_account = v_model.Account.ToList<Account>();
             ViewBag.v_account = v_account;
+            ViewBag.idus = idus;
+            ViewBag.nameus = nameus;
+            ViewBag.idct = idct;
+            ViewBag.namect = namect;
             return View();
         }
     }
