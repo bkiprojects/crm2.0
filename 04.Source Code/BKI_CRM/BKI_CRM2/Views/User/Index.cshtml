@@ -451,7 +451,7 @@
                 for (i = 0; i < get.idus.length; i++)
                     str += "<option value='" + get.idus[i] + "'>" + get.nameus[i] + "</option>";
                 $('#nhanviencaptren').html(str);
-                clear();
+                
                 if (get != undefined && get.hodem != null) {
                     hodem.value = get.hodem.trim();
                     ten.value = get.ten.trim();
@@ -472,6 +472,7 @@
                         placeholder: "Tên Nhân viên",
                         allowClear: true
                     });
+                 //   $('#sdt').attr('placeholder', 'Nhập số điện thoại cá nhân');
                 }
 
                 $('#thay_doi').modal('show');

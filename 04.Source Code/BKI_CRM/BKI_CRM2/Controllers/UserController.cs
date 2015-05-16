@@ -122,7 +122,7 @@ namespace BKI_CRM2.Controllers
                 CrmEntities v_model = new CrmEntities();
                 decimal? v_id = Convert.ToDecimal(IdUser);
                 List<UserContactRole> v_us_ct = new List<UserContactRole>();
-                v_us_ct = v_model.UserContactRole.Where(x=>x.IdUser==v_id).ToList<UserContactRole>();
+                v_us_ct = v_model.UserContactRole.Where(x=>x.IdUser==v_id && x.IsActive==true).ToList<UserContactRole>();
                 List<decimal?> idus_ct = new List<decimal?>();
                 List<string> nameus_ct = new List<string>();
                 if (v_us_ct.Count > 0)
