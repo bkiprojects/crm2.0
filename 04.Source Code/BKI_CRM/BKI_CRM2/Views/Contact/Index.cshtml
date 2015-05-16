@@ -397,8 +397,8 @@
                  </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="phankhachhangchonhanvien('ngoc')">Bỏ phân khách hàng</button>
                 <button type="button" class="btn btn-primary" onclick="phankhachhangchonhanvien('')">Đồng ý</button>
+                <button type="button" class="btn btn-warning" onclick="phankhachhangchonhanvien('ngoc')">Bỏ phân khách hàng</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
             </div>
         </div><!-- /.modal-content -->
@@ -471,6 +471,7 @@
         var options = $("#danh_sach_us_ct>option").map(function () { return $(this).val(); });
         for (i = 0; i < options.length; i++) {
             $('#' + options[i]).css('background', '#CCFFFF');
+            $('#' + options[i]).prop('title','Khách hàng này đã được phân cho nhân viên chăm sóc');
         }
       
         $("#account").select2();
@@ -482,7 +483,9 @@
             alert('Bạn phải điền đầy đủ thông tin');
         }
         else {
+           
             var nhanvien = $('#userrole').val();
+            if (ip_str_ten.length > 0) nhanvien = "";
             var khachhang = $('#khachhangdaphan').val();
             khachhang = khachhang.join(',');
             $.ajax({
