@@ -9,6 +9,7 @@
     var nameus = ViewBag.nameus;
     var idct = ViewBag.idct;
     var namect = ViewBag.namect;
+    var v_us_ct = ViewBag.v_us_ct;
 }
 <style>
     .mau {
@@ -141,6 +142,14 @@
                 </div>
             }
            <input type="button" class="btn btn-primary" id="phankhachhang" value="Phân khách hàng" />
+            <div style="display:none;">
+                <select  id= "danh_sach_us_ct">
+                    @foreach (var item in v_us_ct)
+                    {
+                        <option value="@item"></option>
+                    }
+                </select>
+            </div>
         }
     </div>
 </div>
@@ -361,14 +370,15 @@
             <div class="modal-body">
                 <div >
                     <div style="float:left;width:200px;line-height: 33px"><label>Tên nhân viên được phân</label></div>
-               <div ><select id="userrole">
-                   <option></option>
-                   @for (int i = 0; i < @idus.Count; i++)
-                   {
-                       <option value="@idus[i]">@nameus[i]</option>
-                   }
-               </select>
-                   </div>
+                     <div>
+                         <select id="userrole">
+                             <option></option>
+                             @for (int i = 0; i < @idus.Count; i++)
+                             {
+                                 <option value="@idus[i]">@nameus[i]</option>
+                             }
+                         </select>
+                     </div>
                     </div>
                 <hr />
                 <div>
@@ -377,6 +387,7 @@
                 </div>
                 <div>
                 <select multiple="multiple" id="khachhangdaphan" >
+                    <option></option>
                      @for (int i = 0; i < @idct.Count; i++)
                    {
                        <option value="@idct[i]">@namect[i]</option>
@@ -386,12 +397,14 @@
                  </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="phankhachhangchonhanvien()">Đồng ý</button>
+                <button type="button" class="btn btn-primary" onclick="phankhachhangchonhanvien('ngoc')">Bỏ phân khách hàng</button>
+                <button type="button" class="btn btn-primary" onclick="phankhachhangchonhanvien('')">Đồng ý</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
 <script>
     $(document).ready(function () {
         $('#clear').click(function () {
@@ -435,50 +448,37 @@
         $('.selectall').click(function (e) {
             var table = $(e.target).closest('table');
             $('td input:checkbox', table).prop('checked', this.checked);
-        });
+        }).attr('title','Chọn tất cả khách hàng trong bảng để phân cho nhân viên chăm sóc').css('width','20px');
+
+        $('.tick').attr('title', 'Chọn khách hàng này để phân cho nhân viên chăm sóc').css('width', '15px');
 
         $('#phankhachhang').click(function () {
             var values = $('input:checkbox:checked.tick').map(function () {
                 return this.value;
             }).get();
-           // values.join(',');
+          //  var v_id = [];
+          //  for (i = 0; i < options.length; i++) {
+          //      v_id.push(options[i]);
+           // }
+            // values.join(',')
             
             $('#khachhangdaphan').val(values);
             $('#khachhangdaphan').select2();
-            
-          //  $.each(values.split(","), function (i, e) {
-             //   $("#khachhangdaphan option[value='" + e + "']").prop("selected", true);
-          //  });
             $('#role').modal('show');
            
         });
       
-       // $('#phankhachhang').click(function () {
-         //   $('input:checkbox.tick').each(function () {
-         //       var sThisVal = (this.checked ? $(this).val() : "");
-         //   });
-        //})
-
-        //$('.selecctall').click(function (event) {  //on click 
-         //   var a; 
-          //  a= $(this).attr('id');
-          //  if (this.checked) { // check select status
-            //    $('table[name='+a+'] tick').each(function () { //loop through each checkbox
-          //          this.checked = true;  //select all checkboxes with class "checkbox1"               
-         //       });
-        //    } else {
-        //        $('table[name=' + a + '] tick').each(function () { //loop through each checkbox
-        //            this.checked = false; //deselect all checkboxes with class "checkbox1"                       
-       //         });
-       //     }
-     //   });
-
+        var options = $("#danh_sach_us_ct>option").map(function () { return $(this).val(); });
+        for (i = 0; i < options.length; i++) {
+            $('#' + options[i]).css('background', '#CCFFFF');
+        }
+      
         $("#account").select2();
         $('.mytable').dataTable();
     });
 
-    function phankhachhangchonhanvien() {
-        if (($('#userrole').val() == null) || ($('#khachhangdaphan').val() == null)) {
+    function phankhachhangchonhanvien(ip_str_ten) {
+        if (($('#userrole').val()+ip_str_ten == "") || ($('#khachhangdaphan').val() == null)) {
             alert('Bạn phải điền đầy đủ thông tin');
         }
         else {
@@ -505,11 +505,11 @@
                             $('#role').one('hidden.bs.modal', function () {
                                 $('#body').html(view);
                             }).modal('hide');
-                            $('#userrole').val(null);
-                            $('#userrole').select2();
-                            $('#khachhangdaphan').val(null);
-                            $('input:checkbox').removeAttr('checked');
-                            $('#khachhangdaphan').select2();
+                          //  $('#userrole').val(null);
+                          //  $('#userrole').select2();
+                          //  $('#khachhangdaphan').val(null);
+                          //  $('input:checkbox').removeAttr('checked');
+                          //  $('#khachhangdaphan').select2();
 
                         }
                     });
@@ -519,8 +519,6 @@
             });
         }
     }
-    
-    
 
     function upanh(id) {
         var data = new FormData();
@@ -568,7 +566,7 @@
             url: "/Contact/Update",
             type: "POST",
             data: {
-                id: id_kh,
+                id: id_k,
                 hoten: hoten,
                 diaChi: diachi,
                 gioiTinh: (gioitinh == "nam" ? true : false),

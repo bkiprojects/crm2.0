@@ -25,6 +25,9 @@ namespace BKI_CRM2.Controllers
             List<Account> v_account = new List<Account>();
             List<ContactState> state = v_model.ContactState.OrderBy(x => x.Order).ToList<ContactState>();
 
+            //  List<UserContactRole> v_us_ct = new List<UserContactRole>();
+            var v_us_ct = v_model.UserContactRole.Where(o => o.IsActive == true).Select(o => o.IdContact).Distinct().ToList();
+
             List<User> v_us = new List<User>();
             v_us = v_model.User.ToList<User>();
             List<decimal> idus = new List<decimal>(); List<string> nameus = new List<string>();
@@ -57,6 +60,7 @@ namespace BKI_CRM2.Controllers
             ViewBag.nameus = nameus;
             ViewBag.idct = idct;
             ViewBag.namect = namect;
+            ViewBag.v_us_ct = v_us_ct;
             return View();
         }
     }

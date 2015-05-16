@@ -28,6 +28,9 @@ namespace BKI_CRM2.Controllers
             List<Account> v_account = new List<Account>();
             List<ContactState> state = v_model.ContactState.OrderBy(x => x.Order).ToList<ContactState>();
 
+          //  List<UserContactRole> v_us_ct = new List<UserContactRole>();
+            var v_us_ct = v_model.UserContactRole.Where(o => o.IsActive == true).Select(o => o.IdContact).Distinct().ToList();
+
             List<User> v_us = new List<User>();
             v_us = v_model.User.ToList<User>();
             List<decimal> idus = new List<decimal>(); List<string> nameus = new List<string>();
@@ -60,6 +63,7 @@ namespace BKI_CRM2.Controllers
             ViewBag.nameus = nameus;
             ViewBag.idct = idct;
             ViewBag.namect = namect;
+            ViewBag.v_us_ct = v_us_ct;
             return PartialView();
         }
         [HttpGet]
@@ -203,6 +207,7 @@ namespace BKI_CRM2.Controllers
 
         public JsonResult UpdateUserRole(Nullable<decimal> nhanvien, string khachhang, string ghichu) {
             CrmEntities v_model = new CrmEntities();
+            DateTime myDateTime = DateTime.Now;
             decimal[] v_id = new decimal[0];
             string[] IdContact = khachhang.Split(',');
             v_id = new decimal[IdContact.Length];
@@ -212,7 +217,7 @@ namespace BKI_CRM2.Controllers
             }
             for (int i = 0; i < v_id.Length; i++)
             {
-              //  v_model.pr_User
+                v_model.pr_UserContactRole_Update(nhanvien, v_id[i], myDateTime, true, ghichu);
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
