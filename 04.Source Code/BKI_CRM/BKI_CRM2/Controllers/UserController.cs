@@ -174,11 +174,11 @@ namespace BKI_CRM2.Controllers
             decimal idcur = v_model.pr_User_Insert(idusergroup, username, password, nhanviencaptren, idcompany, hodem, ten, sdt01, sdt02, image, email, isactive, idloaiuser, id);
             if (!String.IsNullOrEmpty(path))
             {
-                FileInfo file = new FileInfo(path); image = "../Images/profile/" + idcur + file.Extension;
+                FileInfo file = new FileInfo(path); image = "../Images/user/" + idcur + file.Extension;
                 FileInfo check = new FileInfo(file.Directory.FullName + "\\" + idcur + file.Extension);
                 if (check.Exists) check.Delete();
                 file.MoveTo(file.Directory.FullName + "\\" + idcur + file.Extension);
-                v_model.pr_Contact_Update_Image(idcur, "../Images/profile/" + idcur + file.Extension);
+                v_model.pr_User_Update_Image(idcur, "../Images/user/" + idcur + file.Extension);
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -203,7 +203,7 @@ namespace BKI_CRM2.Controllers
         {
             string[] name = System.IO.Path.GetFileName(file.FileName).Split('.');
             string pic = IdUser + "." + name[name.Length - 1];
-            string path = System.IO.Path.Combine(Server.MapPath("~/Images/profile"), pic);
+            string path = System.IO.Path.Combine(Server.MapPath("~/Images/user"), pic);
             file.SaveAs(path);
             return "../Images/profile/" + pic + "%" + path;
         }

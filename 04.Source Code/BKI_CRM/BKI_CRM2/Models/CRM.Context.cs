@@ -905,6 +905,23 @@ public partial class CrmEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_UserContactRole_Update", idUserParameter, idContactParameter, ngayCapQuyenParameter, isActiveParameter, ghiChuParameter);
     }
 
+
+    public virtual int pr_User_Update_Image(Nullable<decimal> id, string img)
+    {
+
+        var idParameter = id.HasValue ?
+            new ObjectParameter("Id", id) :
+            new ObjectParameter("Id", typeof(decimal));
+
+
+        var imgParameter = img != null ?
+            new ObjectParameter("Img", img) :
+            new ObjectParameter("Img", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_User_Update_Image", idParameter, imgParameter);
+    }
+
 }
 
 }

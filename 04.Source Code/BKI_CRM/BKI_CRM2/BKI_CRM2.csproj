@@ -470,6 +470,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\profile\" />
+    <Folder Include="Images\user\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

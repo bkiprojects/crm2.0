@@ -946,6 +946,10 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="IsActive" Type="bit" Mode="In" />
           <Parameter Name="IdLoaiUser" Type="numeric" Mode="In" />
         </Function>
+        <Function Name="pr_User_Update_Image" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="numeric" Mode="In" />
+          <Parameter Name="Img" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="pr_UserContactRole_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdUser" Type="numeric" Mode="In" />
           <Parameter Name="IdContact" Type="numeric" Mode="In" />
@@ -2044,6 +2048,10 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="IsActive" Mode="In" Type="Boolean" />
             <Parameter Name="GhiChu" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="pr_User_Update_Image">
+            <Parameter Name="Id" Mode="In" Type="Decimal" />
+            <Parameter Name="Img" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2775,6 +2783,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <FunctionImportMapping FunctionImportName="pr_User_Update" FunctionName="CrmModel.Store.pr_User_Update" />
           <FunctionImportMapping FunctionImportName="pr_UserContactRole_Insert" FunctionName="CrmModel.Store.pr_UserContactRole_Insert" />
           <FunctionImportMapping FunctionImportName="pr_UserContactRole_Update" FunctionName="CrmModel.Store.pr_UserContactRole_Update" />
+          <FunctionImportMapping FunctionImportName="pr_User_Update_Image" FunctionName="CrmModel.Store.pr_User_Update_Image" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
