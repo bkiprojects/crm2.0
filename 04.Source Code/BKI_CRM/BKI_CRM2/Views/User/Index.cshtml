@@ -322,7 +322,13 @@
             placeholder: "Tên Nhân viên",
             allowClear: true
         });
-
+        $('#danh_sach_contact').bind('hidden.bs.modal', function () {
+            $('body').css('overflow', 'hidden');
+            $('#thay_doi').show().css('overflow', 'auto');
+        });
+        $('#thay_doi').bind('hidden.bs.modal', function () {
+            $('body').css('overflow', 'auto');
+        });
         $('.mytable').dataTable();
     });
     $('#btn_danh_sach_khach_hang').click(function () {
@@ -331,11 +337,6 @@
         $('#thay_doi').css("display", "none");
     });
 
-    $('#btn_dong').click(function () {
-        $('#thay_doi').show().css('overflow', 'auto');
-
-
-    });
     function upanh(id) {
         var data = new FormData();
         var files = $("#image").get(0).files;
@@ -451,7 +452,7 @@
                 for (i = 0; i < get.idus.length; i++)
                     str += "<option value='" + get.idus[i] + "'>" + get.nameus[i] + "</option>";
                 $('#nhanviencaptren').html(str);
-                
+
                 if (get != undefined && get.hodem != null) {
                     hodem.value = get.hodem.trim();
                     ten.value = get.ten.trim();
@@ -472,7 +473,7 @@
                         placeholder: "Tên Nhân viên",
                         allowClear: true
                     });
-                 //   $('#sdt').attr('placeholder', 'Nhập số điện thoại cá nhân');
+                    //   $('#sdt').attr('placeholder', 'Nhập số điện thoại cá nhân');
                 }
 
                 $('#thay_doi').modal('show');
@@ -514,7 +515,7 @@
 
     function xoa(id_user) {
         $.ajax({
-            url: "/Contact/Delete",
+            url: "/User/Delete",
             type: "POST",
             data: { id_user: id_user },
             dataType: "json",
@@ -524,7 +525,7 @@
             },
             success: function (data) {
                 alert('Xóa thành công!');
-                $('#' + id_user).remove();
+                $('tr#' + id_user).remove();
                 $('#xoa').modal('hide');
             }
         });

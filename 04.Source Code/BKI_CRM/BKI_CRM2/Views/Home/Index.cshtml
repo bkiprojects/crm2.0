@@ -679,7 +679,7 @@
             },
             success: function (data) {
                 alert('Xóa thành công!');
-                $('#' + id_kh).remove();
+                $('tr#' + id_kh).remove();
                 $('#xoa').modal('hide');
             }
         });

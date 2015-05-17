@@ -156,7 +156,7 @@ namespace BKI_CRM2.Controllers
                 idusergroup = v_model.User.FirstOrDefault(x => x.Id == id).IdUserGroup;
                 if (!String.IsNullOrEmpty(path))
                 {
-                    FileInfo file = new FileInfo(path); image = "../Images/profile/" + id + file.Extension;
+                    FileInfo file = new FileInfo(path); image = "../Images/user/" + id + file.Extension;
                     FileInfo check = new FileInfo(file.Directory.FullName + "\\" + id + file.Extension);
                     if (check.Exists) check.Delete();
                     file.MoveTo(file.Directory.FullName + "\\" + id + file.Extension);
@@ -183,10 +183,10 @@ namespace BKI_CRM2.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Delete(decimal id_kh)
+        public ActionResult Delete(decimal id_user)
         {
             CrmEntities v_model = new CrmEntities();
-            int affected = v_model.pr_User_Delete(id_kh);
+            int affected = v_model.pr_User_Delete(id_user);
             return Json(affected, JsonRequestBehavior.AllowGet);
         }
 
@@ -205,7 +205,7 @@ namespace BKI_CRM2.Controllers
             string pic = IdUser + "." + name[name.Length - 1];
             string path = System.IO.Path.Combine(Server.MapPath("~/Images/user"), pic);
             file.SaveAs(path);
-            return "../Images/profile/" + pic + "%" + path;
+            return "../Images/user/" + pic + "%" + path;
         }
 
     }
