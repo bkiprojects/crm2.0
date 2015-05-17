@@ -391,6 +391,7 @@
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\clndr.min.js" />
     <Content Include="Scripts\ie-emulation-modes-warning.js" />
     <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -466,6 +467,7 @@
     <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Contact\Birthday.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

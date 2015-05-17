@@ -15,6 +15,7 @@
     <script src="../Scripts/bootstrap.min.js"></script>
     <script src="../Scripts/select2.js"></script>
     <script src="../Scripts/jquery.dataTables.min.js"></script>
+    <script src="../Scripts/clndr.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#home,#dmkh').click(function () {
@@ -32,6 +33,16 @@
                 $('#body').html("<div class='title'><img src='../Images/380.gif' style='margin:auto'></div>");
                 $.ajax({
                     url: "/Contract/Index",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
+            $('#tksnkh').click(function () {
+                $('#body').html("<div class='title'><img src='../Images/380.gif' style='margin:auto'></div>");
+                $.ajax({
+                    url: "/Contact/Birthday",
                     type: "Get",
                     success: function (view) {
                         $('#body').html(view);

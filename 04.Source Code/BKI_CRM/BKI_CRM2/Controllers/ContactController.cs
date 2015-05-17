@@ -221,5 +221,8 @@ namespace BKI_CRM2.Controllers
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Birthday() {
+            return PartialView();
+        }
     }
 }
