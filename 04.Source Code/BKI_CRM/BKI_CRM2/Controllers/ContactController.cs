@@ -12,7 +12,6 @@ using BKI_CRM2.Controllers;
 using System.Net.Mail;
 using System.Text;
 
-
 namespace BKI_CRM2.Controllers
 {
     public class ContactController : Controller
@@ -28,7 +27,7 @@ namespace BKI_CRM2.Controllers
             List<Account> v_account = new List<Account>();
             List<ContactState> state = v_model.ContactState.OrderBy(x => x.Order).ToList<ContactState>();
 
-          //  List<UserContactRole> v_us_ct = new List<UserContactRole>();
+            //  List<UserContactRole> v_us_ct = new List<UserContactRole>();
             var v_us_ct = v_model.UserContactRole.Where(o => o.IsActive == true).Select(o => o.IdContact).Distinct().ToList();
 
             List<User> v_us = new List<User>();
@@ -91,7 +90,8 @@ namespace BKI_CRM2.Controllers
                 {
                     v_ac = v_acrole.IdAccount;
                 }
-                return Json(new {
+                return Json(new
+                {
                     ho = v_contact.Ho,
                     ten = v_contact.Ten,
                     diachi = v_contact.DiaChi,
@@ -112,19 +112,21 @@ namespace BKI_CRM2.Controllers
                     idaccount = v_ac
                 }, JsonRequestBehavior.AllowGet);
             }
-            else return Json(true,JsonRequestBehavior.AllowGet);
+            else return Json(true, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Delete(decimal id_kh) {
+        public ActionResult Delete(decimal id_kh)
+        {
             CrmEntities v_model = new CrmEntities();
             int affected = v_model.pr_Contact_Delete(id_kh);
             return Json(affected, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Update(Nullable<decimal> id, string hoten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai,Nullable<decimal> idAccount, string path) {
+        public ActionResult Update(Nullable<decimal> id, string hoten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, Nullable<decimal> idAccount, string path)
+        {
             string ho = "", ten = "";
             if (!string.IsNullOrEmpty(hoten))
             {
-                string[] temp = hoten.Split(new char[]{' '},System.StringSplitOptions.RemoveEmptyEntries);
+                string[] temp = hoten.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
                 ten = temp[temp.Length - 1];
                 for (int i = 0; i < temp.Length - 1; i++) ho += temp[i] + " ";
             }
@@ -132,7 +134,8 @@ namespace BKI_CRM2.Controllers
             {
                 CrmEntities v_model = new CrmEntities();
                 idTrangThaiHienTai = v_model.Contact.FirstOrDefault(x => x.Id == id).IdTrangThaiHienTai;
-                if(!String.IsNullOrEmpty(path)){
+                if (!String.IsNullOrEmpty(path))
+                {
                     FileInfo file = new FileInfo(path); image = "../Images/profile/" + id + file.Extension;
                     FileInfo check = new FileInfo(file.Directory.FullName + "\\" + id + file.Extension);
                     if (check.Exists) check.Delete();
@@ -144,7 +147,8 @@ namespace BKI_CRM2.Controllers
             else return Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, idAccount, path);
         }
 
-        public ActionResult Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai,Nullable<decimal> idAccount, string path){
+        public ActionResult Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, Nullable<decimal> idAccount, string path)
+        {
             var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
             CrmEntities v_model = new CrmEntities();
             idTrangThaiHienTai = v_model.ContactState.OrderBy(x => x.Order).First().Id;
@@ -180,7 +184,7 @@ namespace BKI_CRM2.Controllers
             try
             {
                 CrmEntities v_model = new CrmEntities();
-                v_model.Database.ExecuteSqlCommand("update [Contact] set [IdTrangThaiHienTai]="+IdTrangThai+" where [Id]="+IdContact);
+                v_model.Database.ExecuteSqlCommand("update [Contact] set [IdTrangThaiHienTai]=" + IdTrangThai + " where [Id]=" + IdContact);
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -197,7 +201,8 @@ namespace BKI_CRM2.Controllers
             }
             return UploadImg(pic, IdContact);
         }
-        public string UploadImg(HttpPostedFile file,decimal IdContact){
+        public string UploadImg(HttpPostedFile file, decimal IdContact)
+        {
             string[] name = System.IO.Path.GetFileName(file.FileName).Split('.');
             string pic = IdContact + "." + name[name.Length - 1];
             string path = System.IO.Path.Combine(Server.MapPath("~/Images/profile"), pic);
@@ -205,7 +210,8 @@ namespace BKI_CRM2.Controllers
             return "../Images/profile/" + pic + "%" + path;
         }
 
-        public JsonResult UpdateUserRole(Nullable<decimal> nhanvien, string khachhang, string ghichu) {
+        public JsonResult UpdateUserRole(Nullable<decimal> nhanvien, string khachhang, string ghichu)
+        {
             CrmEntities v_model = new CrmEntities();
             DateTime myDateTime = DateTime.Now;
             decimal[] v_id = new decimal[0];
@@ -221,8 +227,33 @@ namespace BKI_CRM2.Controllers
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Birthday() {
+        public ActionResult Birthday()
+        {
             return PartialView();
+        }
+        public string getBD()
+        {
+            CrmEntities v_model = new CrmEntities();
+            List<Contact> v_contact = new List<Contact>();
+            v_contact = v_model.Contact.Where(x => x.NgaySinh != null).ToList<Contact>();
+            string v_event = "["; int i;
+            string year = DateTime.Now.Year.ToString();
+            for (i = 0; i < v_contact.Count - 1; i++)
+            {
+                string bday = year + "-" + ((DateTime)v_contact[i].NgaySinh).ToString("MM-dd HH:mm:ss");
+                string nbday = DateTime.ParseExact(bday, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddDays(1).ToString("yyyy-MM-dd HH:mm:ss");
+                v_event += "{\"id\":\"" + v_contact[i].Id + "\","
+                    + "\"title\":\"" + "Sinh nhật khách hàng " + v_contact[i].Ho + " " + v_contact[i].Ten + "\","
+                    + "\"start\":\"" + bday + "\","
+                    + "\"end\":\"" + nbday + "\"},";
+            }
+            string bdays = year + "-" + ((DateTime)v_contact[i].NgaySinh).ToString("MM-dd HH:mm:ss");
+            string nbdays = DateTime.ParseExact(bdays, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddDays(1).ToString("yyyy-MM-dd HH:mm:ss");
+            v_event += "{\"id\":\"" + v_contact[i].Id + "\","
+                    + "\"title\":\"" + "Sinh nhật khách hàng " + v_contact[i].Ho + " " + v_contact[i].Ten + "\","
+                    + "\"start\":\"" + bdays + "\","
+                    + "\"end\":\"" + nbdays + "\"}]";
+            return v_event;
         }
     }
 }

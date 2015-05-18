@@ -4,11 +4,12 @@
 <div id="calendar" class="title">
 </div>
 <script>
-	$(document).ready(function()
-		{
-	    $('#calendar').fullCalendar();
-			
-		});
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
 
-	</script>
+            events: '@Url.Content("/Contact/getBD")'
+        });
+        $('#body').height(620);
+    });
 
+</script>
