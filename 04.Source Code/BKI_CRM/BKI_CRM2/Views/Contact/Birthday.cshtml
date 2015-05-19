@@ -1,4 +1,7 @@
-﻿<div class="title">
+﻿<style>
+    .hover-end{padding:0;margin:0;font-size:75%;text-align:center;position:absolute;bottom:0;width:100%;opacity:.8}
+</style>
+<div class="title">
     <h2>SINH NHẬT KHÁCH HÀNG</h2>
 </div>
 <div id="calendar" class="title">
@@ -7,7 +10,18 @@
     $(document).ready(function () {
         $('#calendar').fullCalendar({
 
-            events: '@Url.Content("/Contact/getBD")'
+            events: '@Url.Content("/Contact/getBD")',
+            eventClick: function (calEvent, jsEvent, view) {
+                var date = new Date(calEvent.start);
+                alert('Sinh nhật ' + calEvent.title + ' ' + date.toLocaleDateString());
+            },
+            eventMouseover: function (event, jsEvent, view) {
+                var date = new Date(event.start);
+                $('.fc-event-inner', this).append('<div id=\"' + event.id + '\" class=\"hover-end\">Sinh nhật ' + event.title + ' ' + date.toLocaleDateString() + '</div>');
+            },
+            eventMouseout: function(event, jsEvent, view) {
+                $('#'+event.id).remove();
+            }
         });
         $('#body').height(620);
     });

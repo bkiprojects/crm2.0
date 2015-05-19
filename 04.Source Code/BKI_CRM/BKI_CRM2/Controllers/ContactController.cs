@@ -243,14 +243,14 @@ namespace BKI_CRM2.Controllers
                 string bday = year + "-" + ((DateTime)v_contact[i].NgaySinh).ToString("MM-dd HH:mm:ss");
                 string nbday = DateTime.ParseExact(bday, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddDays(1).ToString("yyyy-MM-dd HH:mm:ss");
                 v_event += "{\"id\":\"" + v_contact[i].Id + "\","
-                    + "\"title\":\"" + "Sinh nhật khách hàng " + v_contact[i].Ho + " " + v_contact[i].Ten + "\","
+                    + "\"title\":\"" + v_contact[i].Ho + " " + v_contact[i].Ten + "\","
                     + "\"start\":\"" + bday + "\","
                     + "\"end\":\"" + nbday + "\"},";
             }
             string bdays = year + "-" + ((DateTime)v_contact[i].NgaySinh).ToString("MM-dd HH:mm:ss");
             string nbdays = DateTime.ParseExact(bdays, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddDays(1).ToString("yyyy-MM-dd HH:mm:ss");
             v_event += "{\"id\":\"" + v_contact[i].Id + "\","
-                    + "\"title\":\"" + "Sinh nhật khách hàng " + v_contact[i].Ho + " " + v_contact[i].Ten + "\","
+                    + "\"title\":\"" + v_contact[i].Ho + " " + v_contact[i].Ten + "\","
                     + "\"start\":\"" + bdays + "\","
                     + "\"end\":\"" + nbdays + "\"}]";
             return v_event;
