@@ -198,6 +198,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SendMailerController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Models\LoaiTuDien.cs">
       <DependentUpon>CRM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MailModel.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>CRM.tt</DependentUpon>
     </Compile>
@@ -471,6 +473,7 @@
     <Content Include="Views\Accounts\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Contact\Birthday.cshtml" />
+    <Content Include="Views\SendMailer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

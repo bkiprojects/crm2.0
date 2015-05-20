@@ -96,6 +96,17 @@
                     }
                 });
             });
+
+            $('#ge').click(function () {
+                $('#body').html("<div class='title'><img src='../Images/380.gif' style='margin:auto'></div>");
+                $.ajax({
+                    url: "/SendMailer/Index",
+                    type: "Get",
+                    success: function (view) {
+                        $('#body').html(view);
+                    }
+                });
+            });
         });
     </script>
 </head>

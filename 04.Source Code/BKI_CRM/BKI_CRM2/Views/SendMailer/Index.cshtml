@@ -1,0 +1,42 @@
+﻿@model BKI_CRM2.Models.MailModel
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        if ('@ViewBag.Message' == 'Sent') {
+            alert('Mail has been sent successfully');
+        }
+    });
+</script>
+
+<h2>Index</h2>
+<legend>Send Email </legend>
+
+
+
+@using (@Html.BeginForm("Index", "SendMailer", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" })) { @Html.ValidationSummary()
+     <input type="submit" value="Send" /> 
+<table>
+	<tbody>
+		<tr>
+			<td>To:</td>
+			<td>@Html.TextBoxFor(m => m.To)</td>
+		</tr>
+		<tr>
+			<td>Subject:</td>
+			<td>@Html.TextBoxFor(m => m.Subject)</td>
+		</tr>
+		<tr>
+			<td>Attachment</td>
+			<td><input name="fileUploader" type="file" /></td>
+		</tr>
+		<tr>
+			<td>Body:</td>
+			<td>@Html.TextAreaFor(m => m.Body)</td>
+		</tr>
+	</tbody>
+</table>
+}
+
