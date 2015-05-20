@@ -13,7 +13,7 @@ namespace BKI_CRM2.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -41,12 +41,12 @@ namespace BKI_CRM2.Controllers
                     smtp.Port = 587;
                     smtp.Send(mail);
                     ViewBag.Message = "Sent";
-                    return View("Index", objModelMail);
+                    return PartialView("Index", objModelMail);
                 }
             }
             else
             {
-                return View();
+                return PartialView();
             }
         }
     }
