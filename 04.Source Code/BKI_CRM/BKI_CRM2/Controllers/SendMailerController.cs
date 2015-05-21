@@ -17,10 +17,12 @@ namespace BKI_CRM2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(BKI_CRM2.Models.MailModel objModelMail, HttpPostedFileBase fileUploader)
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(BKI_CRM2.Models.MailModel objModelMail/*, HttpPostedFileBase fileUploader*/)
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFile fileUploader = (HttpPostedFile)Session["EmailAttachment"];
                 string from = "buihongnhungxinh@gmail.com"; //example:- sourabh9303@gmail.com
                 using (MailMessage mail = new MailMessage(from, objModelMail.To))
                 {
@@ -46,8 +48,18 @@ namespace BKI_CRM2.Controllers
             }
             else
             {
+                ViewBag.Message = "Not Sent";
                 return PartialView();
             }
+        }
+        public void GetFileRequest()
+        {
+            HttpPostedFile pic = null; decimal IdContact = -1;
+            if (System.Web.HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                pic = System.Web.HttpContext.Current.Request.Files["Attachments"];
+            }
+            Session["EmailAttachment"] = pic;
         }
     }
 }
