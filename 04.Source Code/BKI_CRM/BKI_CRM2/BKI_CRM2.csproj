@@ -474,6 +474,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Contact\Birthday.cshtml" />
     <Content Include="Views\SendMailer\Index.cshtml" />
+    <Content Include="Views\SendMailer\Index1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

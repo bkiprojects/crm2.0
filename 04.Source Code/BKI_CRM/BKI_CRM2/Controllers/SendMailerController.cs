@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Data.Objects;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using BKI_CRM2.Models;
+using System.IO;
+using OpenXMLExcel.SLExcelUtility;
+using BKI_CRM2.Controllers;
+using System.Net.Mail;
+using System.Text;
+using System.Net;
 
 namespace BKI_CRM2.Controllers
 {
@@ -14,6 +20,54 @@ namespace BKI_CRM2.Controllers
         public ActionResult Index()
         {
             return PartialView();
+        }
+        public ActionResult Index1(string values)
+        {
+            if (values != "")
+            {
+                CrmEntities v_model = new CrmEntities();
+                decimal[] v_id = new decimal[0];
+                string[] IdContact = values.Split(',');
+                v_id = new decimal[IdContact.Length];
+                for (int i = 0; i < v_id.Length; i++)
+                {
+                    v_id[i] = Convert.ToDecimal(IdContact[i]);
+                }
+
+                List<Contact> v_ct = new List<Contact>();
+                v_ct = v_model.Contact.ToList<Contact>();
+                //  List<decimal> idct = new List<decimal>(); List<string> namect = new List<string>();
+                List<SelectListItem> listSelectListItems = new List<SelectListItem>();
+                for (int i = 0; i < v_ct.Count; i++)
+                {
+                    Boolean bl=false;
+                    for (int j = 0; j < v_id.Length; j++)
+                    {
+                        if (v_ct[i].Id == v_id[j])
+                        {
+                            bl = true;
+                        }
+                    }
+                    SelectListItem selectList = new SelectListItem()
+                    {
+                        Text = v_ct[i].Ho + " " + v_ct[i].Ten,
+                        Value = v_ct[i].Id.ToString(),
+                       Selected = bl,
+                    };
+                    listSelectListItems.Add(selectList);
+                    //  idct.Add(v_ct[i].Id); namect.Add(v_ct[i].Ho + " " + v_ct[i].Ten);
+                }
+                ViewBag.listSelectListItems = listSelectListItems;
+
+                BKI_CRM2.Models.MailModel citiesViewModel = new BKI_CRM2.Models.MailModel()
+                {
+                    To = listSelectListItems,
+                };
+                //return PartialView(citiesViewModel);
+                // return Json(true, JsonRequestBehavior.AllowGet);
+                return PartialView(citiesViewModel);
+            }
+            else return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -24,7 +78,7 @@ namespace BKI_CRM2.Controllers
             {
                 HttpPostedFile fileUploader = (HttpPostedFile)Session["EmailAttachment"];
                 string from = "buihongnhungxinh@gmail.com"; //example:- sourabh9303@gmail.com
-                using (MailMessage mail = new MailMessage(from, objModelMail.To))
+                using (MailMessage mail = new MailMessage(from, objModelMail.To.First().Text))
                 {
                     mail.Subject = objModelMail.Subject;
                     mail.Body = objModelMail.Body;

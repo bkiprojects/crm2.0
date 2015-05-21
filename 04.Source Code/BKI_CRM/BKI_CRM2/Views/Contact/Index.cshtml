@@ -142,6 +142,7 @@
                 </div>
             }
            <input type="button" class="btn btn-primary" id="phankhachhang" value="Phân khách hàng" />
+             <input type="button" class="btn btn-primary" id="guiemail" value="Gửi email" style="margin-left:50px;"/>
             <div style="display:none;">
                 <select  id= "danh_sach_us_ct">
                     @foreach (var item in v_us_ct)
@@ -389,7 +390,7 @@
                 <select multiple="multiple" id="khachhangdaphan" >
                     <option></option>
                      @for (int i = 0; i < @idct.Count; i++)
-                   {
+                     {
                        <option value="@idct[i]">@namect[i]</option>
                    }
                 </select>
@@ -456,16 +457,41 @@
             var values = $('input:checkbox:checked.tick').map(function () {
                 return this.value;
             }).get();
-          //  var v_id = [];
-          //  for (i = 0; i < options.length; i++) {
-          //      v_id.push(options[i]);
-           // }
-            // values.join(',')
-            
             $('#khachhangdaphan').val(values);
             $('#khachhangdaphan').select2();
             $('#role').modal('show');
            
+        });
+
+        $('#guiemail').click(function () {
+            var values = $('input:checkbox:checked.tick').map(function () {
+                return this.value;
+            }).get();
+            values = values.join(',');
+            $.ajax({
+                url: "/SendMailer/Index1",
+                type: "POST",
+                data: {
+                    values: values,
+                },
+                error: function () {
+                    alert("Có lỗi");
+                },
+                success: function (data) {
+                    alert("Thành công!");
+                   
+                            $('#body').html(data);
+                            //  $('#userrole').val(null);
+                            //  $('#userrole').select2();
+                            //  $('#khachhangdaphan').val(null);
+                            //  $('input:checkbox').removeAttr('checked');
+                            //  $('#khachhangdaphan').select2();
+
+                      
+                }
+
+
+            });
         });
       
         var options = $("#danh_sach_us_ct>option").map(function () { return $(this).val(); });
