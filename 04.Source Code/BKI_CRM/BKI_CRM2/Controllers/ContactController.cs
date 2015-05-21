@@ -11,6 +11,7 @@ using OpenXMLExcel.SLExcelUtility;
 using BKI_CRM2.Controllers;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BKI_CRM2.Controllers
 {
@@ -123,6 +124,10 @@ namespace BKI_CRM2.Controllers
 
         public ActionResult Update(Nullable<decimal> id, string hoten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, Nullable<decimal> idAccount, string path)
         {
+            if(!String.IsNullOrEmpty(email)){
+                Regex rgx = new Regex(".+\\@.+\\..+");
+                if (!rgx.IsMatch(email)) return new HttpStatusCodeResult(400, "Email sai!");
+            }
             string ho = "", ten = "";
             if (!string.IsNullOrEmpty(hoten))
             {

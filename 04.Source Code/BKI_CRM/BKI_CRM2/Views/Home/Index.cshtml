@@ -497,8 +497,8 @@
                     khachhang: khachhang,
                     ghichu: null
                 },
-                error: function () {
-                    alert("Có lỗi");
+                error: function (data) {
+                    alert("Có lỗi" + data.statusText);
                 },
                 success: function (data) {
                     alert("Thành công!");
@@ -570,7 +570,7 @@
             url: "/Contact/Update",
             type: "POST",
             data: {
-                id: id_k,
+                id: id_kh,
                 hoten: hoten,
                 diaChi: diachi,
                 gioiTinh: (gioitinh == "nam" ? true : false),
@@ -590,8 +590,8 @@
                 path: path,
                 idAccount: account
             },
-            error: function () {
-                alert("Có lỗi");
+            error: function (data) {
+                alert("Có lỗi: " + data.statusText);
             },
             success: function (data) {
                 alert("Thành công!");
