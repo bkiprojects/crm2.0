@@ -122,14 +122,19 @@ namespace BKI_CRM2.Controllers
                 HttpPostedFile fileUploader = (HttpPostedFile)Session["EmailAttachment"];
                 string from = "buihongnhungxinh@gmail.com"; //example:- sourabh9303@gmail.com
                 List<string> list = objModelMail.SelectedContact.ToList();
+                List<string> danh_sach_email = new List<string>();
                 decimal[] v_id= new decimal[list.Count];
                 for (int i = 0; i < v_id.Length; i++)
                 {
                     v_id[i] = Convert.ToDecimal(list[i]);
                     var index= v_id[i];
                     var email = v_model.Contact.Where(x => x.Id == index).First().Email;
-                    using (MailMessage mail = new MailMessage(from, email))
+                    danh_sach_email.Add(email);
+                }
+                    using (MailMessage mail = new MailMessage())
                     {
+                        MailAddress from1= new MailAddress("buihongnhungxinh@gmail.com");
+                        mail.From = from1;
                         mail.Subject = objModelMail.Subject;
                         mail.Body = objModelMail.Body;
                         if (fileUploader != null)
@@ -137,6 +142,11 @@ namespace BKI_CRM2.Controllers
                             string fileName = Path.GetFileName(fileUploader.FileName);
                             mail.Attachments.Add(new Attachment(fileUploader.InputStream, fileName));
                         }
+                        foreach (var item in danh_sach_email)
+                        {
+                            mail.To.Add(item);
+                        }
+                        
                         mail.IsBodyHtml = false;
                         SmtpClient smtp = new SmtpClient();
                         smtp.Host = "smtp.gmail.com";
@@ -148,7 +158,7 @@ namespace BKI_CRM2.Controllers
                         smtp.Send(mail);
                        
                     }
-                }
+                //}
                 ViewBag.Message = "Sent";
                 return PartialView("Index", objModelMail);
             }
