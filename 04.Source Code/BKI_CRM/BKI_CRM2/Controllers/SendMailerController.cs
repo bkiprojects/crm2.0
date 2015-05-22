@@ -81,8 +81,8 @@ namespace BKI_CRM2.Controllers
             {
                 HttpPostedFile fileUploader = (HttpPostedFile)Session["EmailAttachment"];
                 string from = "buihongnhungxinh@gmail.com"; //example:- sourabh9303@gmail.com
-                List<string> list= objModelMail.SelectedContact.ToList();
-                using (MailMessage mail = new MailMessage(from, list[0]))
+              
+                using (MailMessage mail = new MailMessage(from, objModelMail.txt_To))
                 {
                     mail.Subject = objModelMail.Subject;
                     mail.Body = objModelMail.Body;
@@ -151,12 +151,11 @@ namespace BKI_CRM2.Controllers
                 }
                 ViewBag.Message = "Sent";
                 return PartialView("Index", objModelMail);
-               
             }
             else
             {
                 ViewBag.Message = "No address";
-                return PartialView("Index1");
+                return PartialView("Index", objModelMail);
             }
         }
         public void GetFileRequest()

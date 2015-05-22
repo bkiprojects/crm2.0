@@ -18,7 +18,7 @@
                 @*<td>@Html.TextBoxFor(m => m.To, new { @class = "form-control" })</td>*@
                  <td>
                     @* @Html.ListBox(, ViewBag.Skills as MultiSelectList,new { @class = "chzn-select", data_placeholder = "Choose a Country..." } )*@
-                     @Html.ListBoxFor(model => model.SelectedContact, Model.To, new { @class = "chzn-select", Multiple = "multiple", id="khachhang" })
+                     @Html.ListBoxFor(model => model.SelectedContact, Model.To, new { @class = "chzn-select", Multiple = "multiple", id="khachhang",@style="width:100%" })
                  </td>
              </tr>
             <tr>

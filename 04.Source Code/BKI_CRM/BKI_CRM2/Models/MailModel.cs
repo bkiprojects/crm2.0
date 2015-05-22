@@ -14,6 +14,10 @@ namespace BKI_CRM2.Models
         //[DataType(DataType.EmailAddress)]
         //[RegularExpression(".+\\@.+\\..+", ErrorMessage = "Email không hợp lệ!")]
         public IEnumerable<SelectListItem> To { get; set; }
+        [Required(ErrorMessage = "Nhập email để gửi đến")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Email không hợp lệ!")]
+        public string txt_To { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
     }

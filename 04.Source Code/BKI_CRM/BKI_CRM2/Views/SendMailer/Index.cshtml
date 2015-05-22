@@ -10,6 +10,9 @@
         else if ('@ViewBag.Message' == 'Not Sent') {
             alert('Có lỗi!');
         }
+        else if ('@ViewBag.Message' == 'No address') {
+            alert('Không có địa chỉ email nào được chọn!');
+        }
     });
     function upfile() {
         var data = new FormData();
@@ -47,7 +50,7 @@
         <tbody>
             <tr>
                 <td>To:</td>
-                <td>@Html.TextBoxFor(m => m.To, new { @class = "form-control" })</td>
+                <td>@Html.TextBoxFor(m => m.txt_To, new { @class = "form-control" })</td>
             </tr>
             <tr>
                 <td>Subject:</td>
