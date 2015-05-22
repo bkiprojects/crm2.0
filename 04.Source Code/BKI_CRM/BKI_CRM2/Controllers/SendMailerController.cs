@@ -50,10 +50,13 @@ namespace BKI_CRM2.Controllers
                     }
                     SelectListItem selectList = new SelectListItem()
                     {
-                        Text = v_ct[i].Ho + " " + v_ct[i].Ten,
+                       // Text = v_ct[i].Ho + " " + v_ct[i].Ten,
+                       Text= v_ct[i].Email,
                         Value = v_ct[i].Id.ToString(),
                        Selected = bl,
                     };
+                    //nếu có email thì add vào list, không thì ... chưa xử lí
+                    if( selectList.Text!="")
                     listSelectListItems.Add(selectList);
                     //  idct.Add(v_ct[i].Id); namect.Add(v_ct[i].Ho + " " + v_ct[i].Ten);
                 }
@@ -78,7 +81,8 @@ namespace BKI_CRM2.Controllers
             {
                 HttpPostedFile fileUploader = (HttpPostedFile)Session["EmailAttachment"];
                 string from = "buihongnhungxinh@gmail.com"; //example:- sourabh9303@gmail.com
-                using (MailMessage mail = new MailMessage(from, objModelMail.To.First().Text))
+                List<string> list= objModelMail.SelectedContact.ToList();
+                using (MailMessage mail = new MailMessage(from, list[0]))
                 {
                     mail.Subject = objModelMail.Subject;
                     mail.Body = objModelMail.Body;
@@ -104,6 +108,55 @@ namespace BKI_CRM2.Controllers
             {
                 ViewBag.Message = "Not Sent";
                 return PartialView();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index2(BKI_CRM2.Models.MailModel objModelMail/*, HttpPostedFileBase fileUploader*/)
+        {
+
+            if (objModelMail.SelectedContact != null)
+            {
+            CrmEntities v_model = new CrmEntities();
+                HttpPostedFile fileUploader = (HttpPostedFile)Session["EmailAttachment"];
+                string from = "buihongnhungxinh@gmail.com"; //example:- sourabh9303@gmail.com
+                List<string> list = objModelMail.SelectedContact.ToList();
+                decimal[] v_id= new decimal[list.Count];
+                for (int i = 0; i < v_id.Length; i++)
+                {
+                    v_id[i] = Convert.ToDecimal(list[i]);
+                    var index= v_id[i];
+                    var email = v_model.Contact.Where(x => x.Id == index).First().Email;
+                    using (MailMessage mail = new MailMessage(from, email))
+                    {
+                        mail.Subject = objModelMail.Subject;
+                        mail.Body = objModelMail.Body;
+                        if (fileUploader != null)
+                        {
+                            string fileName = Path.GetFileName(fileUploader.FileName);
+                            mail.Attachments.Add(new Attachment(fileUploader.InputStream, fileName));
+                        }
+                        mail.IsBodyHtml = false;
+                        SmtpClient smtp = new SmtpClient();
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.EnableSsl = true;
+                        NetworkCredential networkCredential = new NetworkCredential(from, "buihongnhung");
+                        smtp.UseDefaultCredentials = true;
+                        smtp.Credentials = networkCredential;
+                        smtp.Port = 587;
+                        smtp.Send(mail);
+                       
+                    }
+                }
+                ViewBag.Message = "Sent";
+                return PartialView("Index", objModelMail);
+               
+            }
+            else
+            {
+                ViewBag.Message = "No address";
+                return PartialView("Index1");
             }
         }
         public void GetFileRequest()
