@@ -1,6 +1,6 @@
 .main{
 	width:1250px;
-	height:650px;
+	height:auto;
 	margin:0px auto;
 	border-top:none;
 }
@@ -183,7 +183,7 @@
 	margin-top: 8px;
 }
 
-.modal-body input{
+.modal-Fb input{
 	margin-bottom: 5px;
 	height:25px !important;
 }

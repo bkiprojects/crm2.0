@@ -55,43 +55,7 @@ namespace BKI_CRM2.Controllers
             {
                  return PartialView();
             }    
-        }//[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Index(BKI_CRM2.Models.MailModel objModelMail/*, HttpPostedFileBase fileUploader*/)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        HttpPostedFile fileUploader = (HttpPostedFile)Session["EmailAttachment"];
-        //        string from = "buihongnhungxinh@gmail.com"; //example:- sourabh9303@gmail.com
-              
-        //        using (MailMessage mail = new MailMessage(from, objModelMail.txt_To))
-        //        {
-        //            mail.Subject = objModelMail.Subject;
-        //            mail.Body = objModelMail.Body;
-        //            if (fileUploader != null)
-        //            {
-        //                string fileName = Path.GetFileName(fileUploader.FileName);
-        //                mail.Attachments.Add(new Attachment(fileUploader.InputStream, fileName));
-        //            }
-        //            mail.IsBodyHtml = false;
-        //            SmtpClient smtp = new SmtpClient();
-        //            smtp.Host = "smtp.gmail.com";
-        //            smtp.EnableSsl = true;
-        //            NetworkCredential networkCredential = new NetworkCredential(from, "buihongnhung");
-        //            smtp.UseDefaultCredentials = true;
-        //            smtp.Credentials = networkCredential;
-        //            smtp.Port = 587;
-        //            smtp.Send(mail);
-        //            ViewBag.Message = "Sent";
-        //            return PartialView("Index", objModelMail);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = "Not Sent";
-        //        return PartialView();
-        //    }
-        //}
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

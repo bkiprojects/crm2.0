@@ -4,7 +4,9 @@
 <div class="title">
     <h2>SINH NHẬT KHÁCH HÀNG</h2>
 </div>
+<div id="me_calendar">
 <div id="calendar" class="title" style="margin-bottom:30px;"> </div>
+</div>
  
 <script>
     $(document).ready(function () {
@@ -22,9 +24,18 @@
             eventMouseout: function(event, jsEvent, view) {
                 $('#'+event.id).remove();
             }
+            
         });
-        $('.fc-toolbar').css('position', 'relative');
-        $('.footer').css('position', 'absolute').css('margin-top','50px');
+$('.fc-button-prev>span').click(function ()
+            {
+                $('body').height($('.title').height()+ $('#calendar').height()+ $('.fc-view-container').height() + 140);
+                $('#me_calendar').height($('.title').height() + $('#calendar').height() + $('.fc-view-container').height() + 40);
+});
+$('.fc-button-next>span').click(function () {
+    $('body').height($('.title').height() + $('#calendar').height() + $('.fc-view-container').height() + 140);
+    $('#me_calendar').height($('.title').height() + $('#calendar').height() + $('.fc-view-container').height() + 40);
+});
+
        // $('#body').height(620);
     });
 
