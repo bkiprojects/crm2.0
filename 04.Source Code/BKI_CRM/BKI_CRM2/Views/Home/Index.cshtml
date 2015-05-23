@@ -143,6 +143,7 @@
                 </div>
             }
            <input type="button" class="btn btn-primary" id="phankhachhang" value="Phân khách hàng" />
+             <input type="button" class="btn btn-primary" id="guiemail" value="Gửi email" style="margin-left:50px;width:150px;"/>
             <div style="display:none;">
                 <select  id= "danh_sach_us_ct">
                     @foreach (var item in v_us_ct)
@@ -390,7 +391,7 @@
                 <select multiple="multiple" id="khachhangdaphan" >
                     <option></option>
                      @for (int i = 0; i < @idct.Count; i++)
-                   {
+                     {
                        <option value="@idct[i]">@namect[i]</option>
                    }
                 </select>
@@ -449,24 +450,43 @@
         $('.selectall').click(function (e) {
             var table = $(e.target).closest('table');
             $('td input:checkbox', table).prop('checked', this.checked);
-        }).attr('title', 'Chọn tất cả khách hàng trong bảng để phân cho nhân viên chăm sóc').css('width', '20px');
+        }).attr('title', 'Chọn tất cả khách hàng trong bảng để phân cho nhân viên chăm sóc hoặc để gửi email cho họ.').css('width', '20px');
 
-        $('.tick').attr('title', 'Chọn khách hàng này để phân cho nhân viên chăm sóc').css('width', '15px');
+        $('.tick').attr('title', 'Chọn khách hàng này để phân cho nhân viên chăm sóc hoặc để gửi email cho người này.').css('width', '15px');
 
         $('#phankhachhang').click(function () {
             var values = $('input:checkbox:checked.tick').map(function () {
                 return this.value;
             }).get();
-            //  var v_id = [];
-            //  for (i = 0; i < options.length; i++) {
-            //      v_id.push(options[i]);
-            // }
-            // values.join(',')
-
             $('#khachhangdaphan').val(values);
             $('#khachhangdaphan').select2();
             $('#role').modal('show');
 
+        });
+
+        $('#guiemail').click(function () {
+            var values = $('input:checkbox:checked.tick').map(function () {
+                return this.value;
+            }).get();
+            if (values != "") {
+                values = values.join(',');
+                $.ajax({
+                    url: "/SendMailer/Index",
+                    type: "Post",
+                    data: {
+                        values: values,
+                    },
+                    error: function () {
+                        alert("Có lỗi");
+                    },
+                    success: function (data) {
+                        $('#body').html(data);
+                    }
+                });
+            }
+            else {
+                alert('Bạn phải chọn khách hàng để có thể gửi email!');
+            }
         });
 
         var options = $("#danh_sach_us_ct>option").map(function () { return $(this).val(); });
@@ -497,8 +517,8 @@
                     khachhang: khachhang,
                     ghichu: null
                 },
-                error: function (data) {
-                    alert("Có lỗi" + data.statusText);
+                error: function () {
+                    alert("Có lỗi");
                 },
                 success: function (data) {
                     alert("Thành công!");
@@ -679,7 +699,7 @@
             },
             success: function (data) {
                 alert('Xóa thành công!');
-                $('tr#' + id_kh).remove();
+                $('#' + id_kh).remove();
                 $('#xoa').modal('hide');
             }
         });

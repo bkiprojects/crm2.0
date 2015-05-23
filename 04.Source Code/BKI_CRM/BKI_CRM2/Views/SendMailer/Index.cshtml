@@ -7,12 +7,16 @@
         if ('@ViewBag.Message' == 'Sent') {
             alert('Gửi mail thành công!');
         }
-        else if ('@ViewBag.Message' == 'Not Sent') {
-            alert('Có lỗi!');
-        }
         else if ('@ViewBag.Message' == 'No address') {
             alert('Không có địa chỉ email nào được chọn!');
         }
+        else if ('@ViewBag.Message' == 'Wrong address') {
+            alert('Địa chỉ nhập không đúng!');
+        }
+        $('#form_email').on('submit', function () {
+            $('#nut_anh').html("<img src='../Images/380.gif' style='margin:auto;height:100px;'>");
+        })
+
     });
     function upfile() {
         var data = new FormData();
@@ -38,19 +42,25 @@
         });
     }
 </script>
+<style>
+    #form_email 
+    {
+        margin:0px auto;
+    }
 
+</style>
 <div class="title">
-    <h2>GỬI EMAIL</h2>
+    <h2>SOẠN VÀ GỬI EMAIL</h2>
 </div>
-@using (@Ajax.BeginForm("Index", "SendMailer", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "body" }, new { @id = "form1" }))
+@using (@Ajax.BeginForm("Sending", "SendMailer", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "body" }, new { @id = "form_email" }))
 {
     @Html.AntiForgeryToken()
     <font color="red">@Html.ValidationSummary()</font>
-    <table class="table">
+    <table class="table" style="margin:30px auto" >
         <tbody>
             <tr>
                 <td>To:</td>
-                <td>@Html.TextBoxFor(m => m.txt_To, new { @class = "form-control" })</td>
+                <td>@Html.TextBoxFor(m => m.To, new { @class = "form-control", id="khachhang" })</td>
             </tr>
             <tr>
                 <td>Subject:</td>
@@ -62,10 +72,12 @@
             </tr>
             <tr>
                 <td>Body:</td>
-                <td>@Html.TextAreaFor(m => m.Body, new { @class = "form-control", @style="height:150px"})</td>
+                <td>@Html.TextAreaFor(m => m.Body, new { @class = "form-control", @style="height:250px"})</td>
             </tr>
         </tbody>
     </table>
-    <button type="submit" class="btn btn-primary" style="width:100px;"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp Gửi</button>
+    <div id="nut_anh">
+    <button type="submit" class="btn btn-primary" style="width:100px;margin-bottom:30px;" id="guiemail"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp Gửi</button>
+    </div>
 }
 

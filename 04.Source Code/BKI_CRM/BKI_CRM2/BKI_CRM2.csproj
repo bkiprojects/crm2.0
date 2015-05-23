@@ -466,7 +466,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Contract\Index.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
@@ -474,7 +476,6 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Contact\Birthday.cshtml" />
     <Content Include="Views\SendMailer\Index.cshtml" />
-    <Content Include="Views\SendMailer\Index1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

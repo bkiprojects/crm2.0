@@ -4,8 +4,8 @@
 <div class="title">
     <h2>SINH NHẬT KHÁCH HÀNG</h2>
 </div>
-<div id="calendar" class="title">
-</div>
+<div id="calendar" class="title" style="margin-bottom:30px;"> </div>
+ 
 <script>
     $(document).ready(function () {
         $('#calendar').fullCalendar({
@@ -23,6 +23,8 @@
                 $('#'+event.id).remove();
             }
         });
+        $('.fc-toolbar').css('position', 'relative');
+        $('.footer').css('position', 'absolute').css('margin-top','50px');
        // $('#body').height(620);
     });
 

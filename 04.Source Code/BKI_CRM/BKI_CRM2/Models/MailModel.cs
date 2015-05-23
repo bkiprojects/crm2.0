@@ -9,15 +9,13 @@ namespace BKI_CRM2.Models
 {
     public class MailModel
     {
-        public IEnumerable<string> SelectedContact { get; set; }
-        //[Required(ErrorMessage = "Nhập email để gửi đến")]
+   
+        [Required(ErrorMessage = "Nhập email để gửi đến")]
         //[DataType(DataType.EmailAddress)]
         //[RegularExpression(".+\\@.+\\..+", ErrorMessage = "Email không hợp lệ!")]
-        public IEnumerable<SelectListItem> To { get; set; }
-        [Required(ErrorMessage = "Nhập email để gửi đến")]
-        [DataType(DataType.EmailAddress)]
-        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Email không hợp lệ!")]
-        public string txt_To { get; set; }
+        public string To { get; set; }
+       
+     //   public string txt_To { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
     }
