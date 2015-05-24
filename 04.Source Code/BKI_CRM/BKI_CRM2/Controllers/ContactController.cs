@@ -189,7 +189,10 @@ namespace BKI_CRM2.Controllers
             try
             {
                 CrmEntities v_model = new CrmEntities();
+                var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
                 v_model.Database.ExecuteSqlCommand("update [Contact] set [IdTrangThaiHienTai]=" + IdTrangThai + " where [Id]=" + IdContact);
+               // var current = v_model.ContactState.FirstOrDefault(x => x.TenTrangThai == currentstate).Id;
+                v_model.pr_ContactStateChange_Insert(IdContact, IdTrangThai, DateTime.Now, null, true, true,true, (decimal)(Session["IdUser"]), id);
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -197,6 +200,31 @@ namespace BKI_CRM2.Controllers
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public JsonResult GetHistory(decimal IdContact)
+        {
+            CrmEntities v_model = new CrmEntities();
+            //decimal cstate = (decimal)v_model.Contact.FirstOrDefault(x => x.Id == IdContact).IdTrangThaiHienTai;
+            //var astate = v_model.ContactStateProcess.Where(x => x.IdTrangThaiTruoc == cstate && x.IdTrangThaiSau != null).ToList<ContactStateProcess>();
+            //string state = v_model.ContactState.FirstOrDefault(x => x.Id == cstate).TenTrangThai;
+            var lst_contact_change = v_model.ContactStateChange.Where(x => x.IdContact == IdContact).ToList<ContactStateChange>();
+            List<string> date = new List<string>();
+            List<string> states_name = new List<string>();
+            if (lst_contact_change.Count > 0)
+            {
+                for (int i = 0; i < lst_contact_change.Count; i++)
+                {
+                   // decimal temp = (decimal)astate[i].IdTrangThaiSau;
+                    
+                    date.Add(((DateTime)(lst_contact_change[i].NgayChuyenTrangThai)).ToString("yyyy-MM-dd"));
+                    decimal? index= lst_contact_change[i].IdContactSate;
+                    var v_state_name= v_model.ContactState.FirstOrDefault(x=>x.Id==index).TenTrangThai;
+                    states_name.Add(v_state_name);
+                }
+            }
+            return Json(new { date = date, states_name = states_name}, JsonRequestBehavior.AllowGet);
+        }
+
         public string GetFileRequest()
         {
             HttpPostedFile pic = null; decimal IdContact = -1;

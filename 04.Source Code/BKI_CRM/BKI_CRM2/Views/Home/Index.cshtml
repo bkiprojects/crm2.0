@@ -79,6 +79,7 @@
                             <th>Số điện thoại</th>
                             <th>Email</th>
                             <th>Chuyển trạng thái</th>
+                            <th>Lịch sử chuyển </th>
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
@@ -95,6 +96,7 @@
                                     <td class="sdt">@item.Sdt01</td>
                                     <td class="email">@item.Email</td>
                                     <td><button type="button" class="btn btn-default" onclick="chuyen('@item.Id')"><span class="glyphicon glyphicon-sort switch" aria-hidden="true"></span></button></td>
+                                    <td><button type="button" class="btn btn-primary" onclick="lichsuchuyenchuyen('@item.Id')"><span class="glyphicon glyphicon-flag " aria-hidden="true"></span></button></td>
                                     <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                                     <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                                 </tr>
@@ -117,6 +119,7 @@
                                 <th>Số điện thoại</th>
                                 <th>Email</th>
                                 <th>Chuyển trạng thái</th>
+                                <th>Lịch sử chuyển </th>
                                 <th>Sửa</th>
                                 <th>Xóa</th>
                             </tr>
@@ -133,6 +136,7 @@
                                         <td class="sdt">@item.Sdt01</td>
                                         <td class="email">@item.Email</td>
                                         <td><button type="button" class="btn btn-default" onclick="chuyen('@item.Id')"><span class="glyphicon glyphicon-sort switch" aria-hidden="true"></span></button></td>
+                                        <td><button type="button" class="btn btn-primary" onclick="lichsuchuyen('@item.Id')"><span class="glyphicon glyphicon-flag " aria-hidden="true"></span></button></td>
                                         <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                                         <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                                     </tr>
@@ -356,6 +360,25 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="thuchienchuyen($('#switch').attr('name'));">Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="lich_su">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title title">Lịch sử chuyển trạng thái</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-hover" id="table_history">
+                </table>
+            </div>
+            <div class="modal-footer">
+               @*<button type="button" class="btn btn-primary" onclick="thuchienchuyen($('#history').attr('name'));">Đồng ý</button>*@
                 <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
             </div>
         </div><!-- /.modal-content -->
@@ -764,6 +787,41 @@
                 }
             });
         }
+    }
+
+    function lichsuchuyen(id_kh) {
+      //  $('#history').attr('name', id_kh);
+        $.ajax({
+            url: "/Contact/GetHistory",
+            type: "GET",
+            data: { IdContact: id_kh },
+            error: function () {
+                alert('Lấy thông tin thất bại!');
+            },
+            success: function (data) {
+                if (data != undefined && data != true) {
+                    var str = " <thead><th>Ngày</th><th>Sự kiện</th></thead><tbody>";
+                    // str += "<tr>"
+                    //     + " <td >"
+                    //        + "    <label class=' padding'  style='line-height: 36px;'>Họ tên khách hàng</label>"
+                    //      + " </td>"
+                    //       + " <td >"
+                    //        + "  <label class=' padding'  style='line-height: 36px;'>Thông tin</label>"
+                    //       + " </td>"
+                    //    + " </tr> ";
+                    for (i = 0; i < data.date.length; i++) {
+                        str += "<tr><td>" + data.date[i] + "</td><td>" + data.states_name[i] + "</td></tr>";
+                    }
+                    str+="</tbody>";
+                    $('#table_history').html(str);
+                     $('#lich_su').modal('show');
+                    
+                }
+                else {
+                    alert('Không có dữ liệu!');
+                }
+            }
+        });
     }
     function filter(id) {
         if (id == null || id == "" || id == undefined) $('tr').show();

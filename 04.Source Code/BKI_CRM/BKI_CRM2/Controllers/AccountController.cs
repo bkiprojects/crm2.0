@@ -53,7 +53,7 @@ namespace BKI_CRM2.Controllers
             {
                 if (v_ht_user.Password.Trim() == model.Password.Trim() && v_ht_user.IsActive == true)
                 {
-                    Session["IdUser"] = v_ht_user.Id.ToString();
+                    Session["IdUser"] = v_ht_user.Id;
                     Session["UserName"] = v_ht_user.UserName;
                     Session["DisplayName"] = v_ht_user.HoNhanVien + " " + v_ht_user.TenNhanVien;
                     Session["IdCompany"] = v_ht_user.IdCompany.ToString();
