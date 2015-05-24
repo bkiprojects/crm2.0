@@ -846,6 +846,17 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <Parameter Name="Id" Type="numeric" Mode="In" />
           <Parameter Name="Img" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="pr_ContactStateChange_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdContact" Type="numeric" Mode="In" />
+          <Parameter Name="IdContactSate" Type="numeric" Mode="In" />
+          <Parameter Name="NgayChuyenTrangThai" Type="datetime" Mode="In" />
+          <Parameter Name="GhiChu" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsValid" Type="bit" Mode="In" />
+          <Parameter Name="IsDangChamSoc" Type="bit" Mode="In" />
+          <Parameter Name="IsTrangThaiHienTai" Type="bit" Mode="In" />
+          <Parameter Name="IdNguoiChuyenTrangThai" Type="numeric" Mode="In" />
+          <Parameter Name="Id" Type="numeric" Mode="InOut" />
+        </Function>
         <Function Name="pr_Contract_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="numeric" Mode="In" />
         </Function>
@@ -2052,6 +2063,17 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
             <Parameter Name="Id" Mode="In" Type="Decimal" />
             <Parameter Name="Img" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="pr_ContactStateChange_Insert">
+            <Parameter Name="IdContact" Mode="In" Type="Decimal" />
+            <Parameter Name="IdContactSate" Mode="In" Type="Decimal" />
+            <Parameter Name="NgayChuyenTrangThai" Mode="In" Type="DateTime" />
+            <Parameter Name="GhiChu" Mode="In" Type="String" />
+            <Parameter Name="IsValid" Mode="In" Type="Boolean" />
+            <Parameter Name="IsDangChamSoc" Mode="In" Type="Boolean" />
+            <Parameter Name="IsTrangThaiHienTai" Mode="In" Type="Boolean" />
+            <Parameter Name="IdNguoiChuyenTrangThai" Mode="In" Type="Decimal" />
+            <Parameter Name="Id" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2784,6 +2806,7 @@ warning 6002: The table/view 'Crm.dbo.V_TASK' does not have a primary key define
           <FunctionImportMapping FunctionImportName="pr_UserContactRole_Insert" FunctionName="CrmModel.Store.pr_UserContactRole_Insert" />
           <FunctionImportMapping FunctionImportName="pr_UserContactRole_Update" FunctionName="CrmModel.Store.pr_UserContactRole_Update" />
           <FunctionImportMapping FunctionImportName="pr_User_Update_Image" FunctionName="CrmModel.Store.pr_User_Update_Image" />
+          <FunctionImportMapping FunctionImportName="pr_ContactStateChange_Insert" FunctionName="CrmModel.Store.pr_ContactStateChange_Insert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -922,6 +922,53 @@ public partial class CrmEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_User_Update_Image", idParameter, imgParameter);
     }
 
+
+    public virtual int pr_ContactStateChange_Insert(Nullable<decimal> idContact, Nullable<decimal> idContactSate, Nullable<System.DateTime> ngayChuyenTrangThai, string ghiChu, Nullable<bool> isValid, Nullable<bool> isDangChamSoc, Nullable<bool> isTrangThaiHienTai, Nullable<decimal> idNguoiChuyenTrangThai, ObjectParameter id)
+    {
+
+        var idContactParameter = idContact.HasValue ?
+            new ObjectParameter("IdContact", idContact) :
+            new ObjectParameter("IdContact", typeof(decimal));
+
+
+        var idContactSateParameter = idContactSate.HasValue ?
+            new ObjectParameter("IdContactSate", idContactSate) :
+            new ObjectParameter("IdContactSate", typeof(decimal));
+
+
+        var ngayChuyenTrangThaiParameter = ngayChuyenTrangThai.HasValue ?
+            new ObjectParameter("NgayChuyenTrangThai", ngayChuyenTrangThai) :
+            new ObjectParameter("NgayChuyenTrangThai", typeof(System.DateTime));
+
+
+        var ghiChuParameter = ghiChu != null ?
+            new ObjectParameter("GhiChu", ghiChu) :
+            new ObjectParameter("GhiChu", typeof(string));
+
+
+        var isValidParameter = isValid.HasValue ?
+            new ObjectParameter("IsValid", isValid) :
+            new ObjectParameter("IsValid", typeof(bool));
+
+
+        var isDangChamSocParameter = isDangChamSoc.HasValue ?
+            new ObjectParameter("IsDangChamSoc", isDangChamSoc) :
+            new ObjectParameter("IsDangChamSoc", typeof(bool));
+
+
+        var isTrangThaiHienTaiParameter = isTrangThaiHienTai.HasValue ?
+            new ObjectParameter("IsTrangThaiHienTai", isTrangThaiHienTai) :
+            new ObjectParameter("IsTrangThaiHienTai", typeof(bool));
+
+
+        var idNguoiChuyenTrangThaiParameter = idNguoiChuyenTrangThai.HasValue ?
+            new ObjectParameter("IdNguoiChuyenTrangThai", idNguoiChuyenTrangThai) :
+            new ObjectParameter("IdNguoiChuyenTrangThai", typeof(decimal));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pr_ContactStateChange_Insert", idContactParameter, idContactSateParameter, ngayChuyenTrangThaiParameter, ghiChuParameter, isValidParameter, isDangChamSocParameter, isTrangThaiHienTaiParameter, idNguoiChuyenTrangThaiParameter, id);
+    }
+
 }
 
 }
