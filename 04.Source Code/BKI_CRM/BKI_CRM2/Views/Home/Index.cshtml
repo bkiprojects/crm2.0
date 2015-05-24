@@ -96,7 +96,7 @@
                                     <td class="sdt">@item.Sdt01</td>
                                     <td class="email">@item.Email</td>
                                     <td><button type="button" class="btn btn-default" onclick="chuyen('@item.Id')"><span class="glyphicon glyphicon-sort switch" aria-hidden="true"></span></button></td>
-                                    <td><button type="button" class="btn btn-primary" onclick="lichsuchuyenchuyen('@item.Id')"><span class="glyphicon glyphicon-flag " aria-hidden="true"></span></button></td>
+                                    <td><button type="button" class="btn btn-primary" onclick="lichsuchuyen('@item.Id')"><span class="glyphicon glyphicon-flag " aria-hidden="true"></span></button></td>
                                     <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
                                     <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
                                 </tr>
@@ -800,7 +800,7 @@
             },
             success: function (data) {
                 if (data != undefined && data != true) {
-                    var str = " <thead><th>Ngày</th><th>Sự kiện</th></thead><tbody>";
+                    var str = " <thead><th>Mốc thời gian</th><th>Sự kiện</th></thead><tbody>";
                     // str += "<tr>"
                     //     + " <td >"
                     //        + "    <label class=' padding'  style='line-height: 36px;'>Họ tên khách hàng</label>"
@@ -810,7 +810,7 @@
                     //       + " </td>"
                     //    + " </tr> ";
                     for (i = 0; i < data.date.length; i++) {
-                        str += "<tr><td>" + data.date[i] + "</td><td>" + data.states_name[i] + "</td></tr>";
+                        str += "<tr><td>" + data.date[i] + "</td><td>Chuyển lên: <b>" + data.states_name[i] + "</b></td></tr>";
                     }
                     str+="</tbody>";
                     $('#table_history').html(str);

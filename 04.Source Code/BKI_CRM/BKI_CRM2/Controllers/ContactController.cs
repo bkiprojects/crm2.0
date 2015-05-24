@@ -155,6 +155,7 @@ namespace BKI_CRM2.Controllers
         public ActionResult Insert(string ho, string ten, string diaChi, Nullable<bool> gioiTinh, string image, string facebook, string skype, Nullable<System.DateTime> ngaySinh, string sdt01, string sdt02, string maSoThue, string soTaiKhoan, string website, string email, Nullable<System.DateTime> hanKhachHang, Nullable<decimal> idLoaiKhachHang, Nullable<decimal> idTrangThaiHienTai, Nullable<decimal> idAccount, string path)
         {
             var id = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
+            var id1 = new System.Data.Entity.Core.Objects.ObjectParameter("Id", typeof(decimal));
             CrmEntities v_model = new CrmEntities();
             idTrangThaiHienTai = v_model.ContactState.OrderBy(x => x.Order).First().Id;
             decimal idcur = v_model.pr_Contact_Insert(ho, ten, diaChi, gioiTinh, image, facebook, skype, ngaySinh, sdt01, sdt02, maSoThue, soTaiKhoan, website, email, hanKhachHang, idLoaiKhachHang, idTrangThaiHienTai, id, idAccount);
@@ -166,6 +167,8 @@ namespace BKI_CRM2.Controllers
                 file.MoveTo(file.Directory.FullName + "\\" + idcur + file.Extension);
                 v_model.pr_Contact_Update_Image(idcur, "../Images/profile/" + idcur + file.Extension);
             }
+            decimal v_id = v_model.Contact.OrderByDescending(s => s.Id).FirstOrDefault().Id;
+            v_model.pr_ContactStateChange_Insert(v_id, 3, DateTime.Now, null, true, true, true, (decimal)(Session["IdUser"]),id1);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetState(decimal IdContact)
