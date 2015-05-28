@@ -57,8 +57,8 @@
             @foreach (var item in hop_dong)
             {
                 <tr id="@item.Id">
-                    <td>@item.NgayBatDau</td>
-                    <td>@item.NgayKetThuc</td>
+                    <td>@(((DateTime)item.NgayBatDau).ToString("dd-MM-yyyy"))</td>
+                    <td>@(((DateTime)item.NgayKetThuc).ToString("dd-MM-yyyy"))</td>
                     <td>@item.SoHopDong</td>
                     <td>@item.NoiDung</td>
                     <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>

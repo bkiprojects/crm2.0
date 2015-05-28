@@ -205,6 +205,7 @@ namespace BKI_CRM2.Controllers
         }
 
         public JsonResult GetHistory(decimal IdContact)
+        
         {
             CrmEntities v_model = new CrmEntities();
             //decimal cstate = (decimal)v_model.Contact.FirstOrDefault(x => x.Id == IdContact).IdTrangThaiHienTai;

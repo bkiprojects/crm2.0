@@ -28,806 +28,129 @@
     .height_input {
         height: 34px !important;
     }
+    .height {
+      height:300px;
+      border:1px dashed #333399;
+    }
+
 </style>
+<div class="container-fluid" style="margin-left:30px;">
 <div class="title">
-    <h2>QUẢN LÝ KHÁCH HÀNG</h2>
+    <h2>Báo cáo trong tháng</h2>
 </div>
-<div style="margin: 20px 0px 30px 0px;">
-    <select id="thuc_hien" style="margin-left:100px;">
-        <option></option>
-        <option value="xuat_excel">Xuất Excel</option>
-        <option value="in">In</option>
-    </select>
-    <button type="button" class="btn btn-primary marginleft" aria-hidden="true" onclick="sua(null);">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Thêm khách hàng
-    </button>
-    <select id="loc_khach_hang" style="float:right;margin-right:100px;" onchange="filter(this.value);">
-        <option></option>
-        @if (tu_dien != null && tu_dien.Count > 0)
-        {
-            foreach (var item in tu_dien)
-            {
-                <option value="@item.Id">@item.TenTuDien</option>
-            }
-        }
-    </select>
+
+<div class="row" style="margin-top:30px;">
+
+    <div class="col-xs-12 col-md-5 height">
+      <div class="title">
+         <h3>Khách hàng mới</h3>
+        </div>
+      <div>
+           <table class=" mytable display" id="mytable2">
+                <thead>
+                    <tr>
+                        <th>Họ và tên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+      </div>
+  </div>
+
+  <div class="col-xs-12 col-md-1"></div>
+
+  <div class="col-xs-6 col-md-5 height">
+      <div class="title">
+         <h3>Khách hàng sắp hết hạn</h3>
+        </div>
+       <div>
+           <table class="mytable display" id="mytable1">
+                <thead>
+                    <tr>
+                        <th>Họ và tên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+      </div>
+  </div>
 </div>
-<div style="margin-bottom:50px;">
-    <ul class="nav nav-tabs">
-        @if (state != null && state.Count > 0)
-        {
-            <li class="active"><a data-toggle="tab" href="#@state[0].Id">@state[0].TenTrangThai</a></li>
-            foreach (var item in state.Skip(1))
-            {
-                <li><a data-toggle="tab" href="#@item.Id">@item.TenTrangThai</a></li>
-            }
-        }
-    </ul>
-    <div class="tab-content">
-
-
-        @if (dm_khach_hang != null && dm_khach_hang.Count > 0)
-        {
-       
-            <div class="tab-pane fade in active" id="@state[0].Id">
-                <table class="mytable" name="@("table"+state[0].Id)">
-                    <thead>
+ <div class="row"  style="margin-top:30px;margin-bottom:30px;">
+        <div class="col-xs-12 col-md-3 height">
+            <div class="title">
+                <h3>Hợp đồng mới</h3>
+            </div> 
+        <div>
+           <table class="mytable">
+                        <thead>
                         <tr>
-                            <th><input type="checkbox" class="selectall" id="@("table"+state[0].Id)"/></th>
-                            <th>Họ và đệm</th>
-                            <th>Tên</th>
-                            <th>Số điện thoại</th>
-                            <th>Email</th>
-                            <th>Chuyển trạng thái</th>
-                            <th>Lịch sử chuyển </th>
-                            <th>Sửa</th>
-                            <th>Xóa</th>
+                            <th>Số hợp đồng</th>
+                            <th>Nội dung</th>
                         </tr>
                     </thead>
-                    <tbody class="ctn">
-                        @if (dm_khach_hang[0].Count > 0)
-                        {
-                            foreach (var item in dm_khach_hang[0])
-                            {
-                                <tr id="@item.Id" name="@item.IdLoaiKhachHang">
-                                    <td class="c"><input type="checkbox" class="tick" value="@item.Id" /></td>
-                                    <td class="ho">@item.Ho</td>
-                                    <td class="ten">@item.Ten</td>
-                                    <td class="sdt">@item.Sdt01</td>
-                                    <td class="email">@item.Email</td>
-                                    <td><button type="button" class="btn btn-default" onclick="chuyen('@item.Id')"><span class="glyphicon glyphicon-sort switch" aria-hidden="true"></span></button></td>
-                                    <td><button type="button" class="btn btn-primary" onclick="lichsuchuyen('@item.Id')"><span class="glyphicon glyphicon-flag " aria-hidden="true"></span></button></td>
-                                    <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
-                                    <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
-                                </tr>
-                            }
-                        }
+                    <tbody>
                     </tbody>
-                </table>
-               
+            </table>
+         </div>
+        </div>
 
-            </div>
-            for (int i = 1; i < dm_khach_hang.Count; i++)
-            {
-                <div class="tab-pane fade" id="@state[i].Id">
-                    <table class="mytable" name="@("table"+state[i].Id)">
-                        <thead>
+        <div class="col-xs-12 col-md-1"> </div>
+
+        <div class="col-xs-6 col-md-3 height">
+             <div class="title">
+                 <h3>Hợp đồng sắp hết hạn</h3>
+             </div>
+              <div>
+                   <table class=" mytable">
+                            <thead>
                             <tr>
-                                <th><input type="checkbox" class="selectall" id="@("table"+state[i].Id)"/></th>
-                                <th>Họ và đệm</th>
-                                <th>Tên</th>
-                                <th>Số điện thoại</th>
-                                <th>Email</th>
-                                <th>Chuyển trạng thái</th>
-                                <th>Lịch sử chuyển </th>
-                                <th>Sửa</th>
-                                <th>Xóa</th>
+                                <th>Số hợp đồng</th>
+                                <th>Nội dung</th>
                             </tr>
                         </thead>
-                        <tbody class="ctn">
-                            @if (dm_khach_hang[i].Count > 0)
-                            {
-                                foreach (var item in dm_khach_hang[i])
-                                {
-                                    <tr id="@item.Id" name="@item.IdLoaiKhachHang">
-                                        <td class="c"><input type="checkbox" class="tick" value="@item.Id" /></td>
-                                        <td class="ho">@item.Ho</td>
-                                        <td class="ten">@item.Ten</td>
-                                        <td class="sdt">@item.Sdt01</td>
-                                        <td class="email">@item.Email</td>
-                                        <td><button type="button" class="btn btn-default" onclick="chuyen('@item.Id')"><span class="glyphicon glyphicon-sort switch" aria-hidden="true"></span></button></td>
-                                        <td><button type="button" class="btn btn-primary" onclick="lichsuchuyen('@item.Id')"><span class="glyphicon glyphicon-flag " aria-hidden="true"></span></button></td>
-                                        <td><button type="button" class="btn btn-default" onclick="sua('@item.Id')"><span class="glyphicon glyphicon-pencil edit" aria-hidden="true"></span></button></td>
-                                        <td><button type="button" class="btn btn-default" onclick="hienxoa('@item.Id')"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></button></td>
-                                    </tr>
-                                }
-                            }
+                        <tbody>
                         </tbody>
                     </table>
-                </div>
-            }
-           <input type="button" class="btn btn-primary" id="phankhachhang" value="Phân khách hàng" />
-             <input type="button" class="btn btn-primary" id="guiemail" value="Gửi email" style="margin-left:50px;width:150px;"/>
-            <div style="display:none;">
-                <select  id= "danh_sach_us_ct">
-                    @foreach (var item in v_us_ct)
-                    {
-                        <option value="@item"></option>
-                    }
-                </select>
-            </div>
-        }
-    </div>
-</div>
-<div class="modal fade" id="thay_doi">
-    <div class="modal-dialog modal-lg" id="thongtinlienhe">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title title">THÔNG TIN LIÊN HỆ</h3>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <table class="table table-condensed table-font-size " style="margin-top:20px;width:75%; ">
-                        <tr>
-                            <td rowspan="4">
-                                <label class=" padding">Ảnh cá nhân</label>
-                            </td>
-                            <td rowspan="4">
-                                <img src="" alt="Ảnh" style="max-width:200px; height:160px;" id="anh">
-                                <input type="file" onchange="upanh($('#thay_doi').attr('name'));" value="Upload" id="image" />
-                            </td>
-                            <td>
-                                <label class="width100px ">Nơi ở hiện nay</label>
-                            </td>
-                            <td>
-                                <input type="email" placeholder="Nhập địa chỉ nơi ở hiện nay" class="form-control width220px height_input " style="height:34px !important;" id="diachi" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="width100px left padding">Hạn khách hàng</label>
-                            </td>
-                            <td>
-                                <input type="date" placeholder="Nhập hạn khách hàng" class="form-control width220px height_input " style="height:34px !important;" id="hankh" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="width100px left padding">Điện thoại</label>
-                            </td>
-                            <td>
-                                <input type="tel" placeholder="Nhập số điện thoại" class="form-control width220px height_input " style="height:34px !important;" id="sdt" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="padding">ĐT nhà riêng</label>
-                            </td>
-                            <td>
-                                <input type="tel" placeholder="Nhập số ĐT nhà riêng" class="form-control width220px height_input " style="height:34px !important;" id="sdt2" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="width100px left padding">Họ và tên</label>
-                            </td>
-                            <td>
-                                <input type="text" placeholder="Nhập Họ và tên" class="form-control width220px height_input " style="height:34px !important;" id="hoten" />
-                            </td>
-                            <td>
-                                <label class="padding">Email</label>
-                            </td>
-                            <td>
-                                <input type="email" placeholder="Nhập địa chỉ Email" class="form-control width220px height_input " style="height:34px !important;" id="email" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="width100px left padding">Mã số thuế</label>
-                            </td>
-                            <td>
-                                <input type="text" placeholder="Nhập Mã số thuế" class="form-control width220px height_input " style="height:34px !important;" id="masothue" />
-                            </td>
-                            <td>
-                                <label class="width100px left padding">Facebook</label>
-                            </td>
-                            <td>
-                                <input type="email" placeholder="Nhập địa chỉ Facebook " class="form-control width220px height_input " style="height:34px !important;" id="fb" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="width100px left padding">Số tài khoản</label>
-                            </td>
-                            <td>
-                                <input type="text" placeholder="Nhập Số tài khoản" class="form-control width220px height_input " style="height:34px !important;" id="stk" />
-                            </td>
-                            <td>
-                                <label class="width100px left padding">Website</label>
-                            </td>
-                            <td>
-                                <input type="text" placeholder="Nhập Website" class="form-control width220px height_input " style="height:34px !important;" id="w" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="width100px left padding">Ngày sinh</label>
-                            </td>
-                            <td>
-                                <input type="date" class="form-control width220px" style="height:34px !important;" id="ngaysinh" />
-                            </td>
-                            <td>
-                                <label class="width100px left padding ">Skype</label>
-                            </td>
-                            <td>
-                                <input type="text" placeholder="Nhập địa chỉ Skype" class="form-control width220px height_input " id="skype" style="height:34px !important;" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="width100px ">Giới tính</label>
-                            </td>
-                            <td>
-                                <select id="gioitinh" class="js-example-basic-single ">
-                                    <option></option>
-                                    <option value="nam">Nam</option>
-                                    <option value="nu">Nữ</option>
-                                </select>
-                            </td>
-                            <td>
-                                <label class="width100px left padding" style="width:103px;" id="loaikh">Loại khách hàng</label>
-                            </td>
-                            <td>
-                                <select id="loaikhachhang" class="js-example-basic-single ">
-                                    <option></option>
-                                    @if (tu_dien != null)
-                                    {
-                                        foreach (var item in tu_dien)
-                                        {
-                                            <option value="@item.Id">@item.TenTuDien</option>
-                                        }
-                                    }
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tổ chức</td>
-                            <td>
-                                <select id="account">
-                                    <option></option>
-                                    @if (account != null)
-                                    {
-                                        foreach (var item in account)
-                                        {
-                                            <option value="@item.Id">@item.AccountName</option>
-                                        }
-                                    }
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" id="clear">Xóa trắng</button>
-                <button type="button" class="btn btn-primary" onclick="thuchiensua($('#thay_doi').attr('name'));">Lưu lại</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div class="modal fade" id="xoa">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title title">XÁC NHẬN</h3>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xóa dòng dữ liệu này không?</p>
-                <div id="giatri" style="display:none;"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="xoa($('#giatri').html())">Đồng ý</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div class="modal fade" id="switch">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title title">CHUYỂN TRẠNG THÁI</h3>
-            </div>
-            <div class="modal-body">
-                <table class="table">
+             </div>
+        </div>
+
+         <div class="col-xs-12 col-md-1"></div>
+
+        <div class="col-xs-6 col-md-3 height">
+             <div class="title">
+                 <h3>Công việc </h3>
+             </div>
+              <div>
+                   <table class="mytable">
                     <thead>
-                        <tr>
-                            <th>Trạng thái hiện tại</th>
-                            <th id="trangthaihientai"></th>
-                        </tr>
-                    </thead>
                     <tr>
-                        <td>Chuyển sang trạng thái</td>
-                        <td id="par">
-                            <select id="trangthaichuyen"></select>
-                        </td>
+
+                        <th>Nội dung</th>
+                        <th>Dự kiến hoàn thành</th>
+                        <th>Nhân viên thực hiện</th>
                     </tr>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="thuchienchuyen($('#switch').attr('name'));">Đồng ý</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+                </thead>
+                <tbody>
+                </tbody>
+                    </table>
+              </div>
+        </div>
 
-<div class="modal fade" id="lich_su">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title title">Lịch sử chuyển trạng thái</h3>
-            </div>
-            <div class="modal-body">
-                <table class="table table-striped table-bordered table-hover" id="table_history">
-                </table>
-            </div>
-            <div class="modal-footer">
-               @*<button type="button" class="btn btn-primary" onclick="thuchienchuyen($('#history').attr('name'));">Đồng ý</button>*@
-                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<div class="modal fade" id="role">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title title">PHÂN KHÁCH HÀNG CHO NHÂN VIÊN</h3>
-            </div>
-            <div class="modal-body">
-                <div >
-                    <div style="float:left;width:200px;line-height: 33px"><label>Tên nhân viên được phân</label></div>
-                     <div>
-                         <select id="userrole">
-                             <option></option>
-                             @for (int i = 0; i < @idus.Count; i++)
-                             {
-                                 <option value="@idus[i]">@nameus[i]</option>
-                             }
-                         </select>
-                     </div>
-                    </div>
-                <hr />
-                <div>
-                <div >
-                    <label style="float:left;width:200px;line-height: 33px">Danh sách khách hàng</label>
-                </div>
-                <div>
-                <select multiple="multiple" id="khachhangdaphan" >
-                    <option></option>
-                     @for (int i = 0; i < @idct.Count; i++)
-                     {
-                       <option value="@idct[i]">@namect[i]</option>
-                   }
-                </select>
-                 </div>
-                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="phankhachhangchonhanvien('')">Đồng ý</button>
-                <button type="button" class="btn btn-warning" onclick="phankhachhangchonhanvien('ngoc')">Dừng chăm sóc khách hàng</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Đóng</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
+  </div>
+</div>
 <script>
     $(document).ready(function () {
-        $('#clear').click(function () {
-            clear();
+        $('table').dataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+            "paging": false
         });
-        $('#thay_doi').on('hidden.bs.modal', function () {
-            clear();
-        });
-        $('#switch').on('hidden.bs.modal', function () {
-            clearflag();
-        });
-        $("#thuc_hien").select2({
-            placeholder: "Thực hiện",
-            allowClear: true
-        });
-        $("#loc_khach_hang").select2({
-            placeholder: "Lọc khách hàng",
-            allowClear: true
-        });
-
-        $("#gioitinh").select2({
-            placeholder: "Chọn giới tính",
-            allowClear: true
-        });
-
-        $("#loaikhachhang").select2({
-            placeholder: "Chọn loại khách hàng",
-            allowClear: true
-        });
-
-        $("#userrole").select2({
-            placeholder: "Chọn tên nhân viên",
-            allowClear: true
-        });
-
-        $("#khachhangdaphan").select2({
-            placeholder: "Chọn tên khách hàng",
-            allowClear: true
-        });
-
-        $('.selectall').click(function (e) {
-            var table = $(e.target).closest('table');
-            $('td input:checkbox', table).prop('checked', this.checked);
-        }).attr('title', 'Chọn tất cả khách hàng trong bảng để phân cho nhân viên chăm sóc hoặc để gửi email cho họ.').css('width', '20px');
-
-        $('.tick').attr('title', 'Chọn khách hàng này để phân cho nhân viên chăm sóc hoặc để gửi email cho người này.').css('width', '15px');
-
-        $('#phankhachhang').click(function () {
-            var values = $('input:checkbox:checked.tick').map(function () {
-                return this.value;
-            }).get();
-            $('#khachhangdaphan').val(values);
-            $('#khachhangdaphan').select2();
-            $('#role').modal('show');
-
-        });
-
-        $('#guiemail').click(function () {
-            var values = $('input:checkbox:checked.tick').map(function () {
-                return this.value;
-            }).get();
-            if (values != "") {
-                values = values.join(',');
-                $.ajax({
-                    url: "/SendMailer/Index",
-                    type: "Post",
-                    data: {
-                        values: values,
-                    },
-                    error: function () {
-                        alert("Có lỗi");
-                    },
-                    success: function (data) {
-                        $('#body').html(data);
-                    }
-                });
-            }
-            else {
-                alert('Bạn phải chọn khách hàng để có thể gửi email!');
-            }
-        });
-
-        var options = $("#danh_sach_us_ct>option").map(function () { return $(this).val(); });
-        for (i = 0; i < options.length; i++) {
-            $('#' + options[i]).css('background', '#CCFFFF');
-            $('#' + options[i]).prop('title', 'Khách hàng này đã được phân cho nhân viên chăm sóc');
-        }
-
-        $("#account").select2();
-        $('.mytable').dataTable();
+       
     });
-
-    function phankhachhangchonhanvien(ip_str_ten) {
-        if (($('#userrole').val() + ip_str_ten == "") || ($('#khachhangdaphan').val() == null)) {
-            alert('Bạn phải điền đầy đủ thông tin');
-        }
-        else {
-
-            var nhanvien = $('#userrole').val();
-            if (ip_str_ten.length > 0) nhanvien = "";
-            var khachhang = $('#khachhangdaphan').val();
-            khachhang = khachhang.join(',');
-            $.ajax({
-                url: "/Contact/UpdateUserRole",
-                type: "POST",
-                data: {
-                    nhanvien: nhanvien,
-                    khachhang: khachhang,
-                    ghichu: null
-                },
-                error: function () {
-                    alert("Có lỗi");
-                },
-                success: function (data) {
-                    alert("Thành công!");
-                    $.ajax({
-                        url: "/Contact/Index",
-                        type: "Get",
-                        success: function (view) {
-                            $('#role').one('hidden.bs.modal', function () {
-                                $('#body').html(view);
-                            }).modal('hide');
-                            //  $('#userrole').val(null);
-                            //  $('#userrole').select2();
-                            //  $('#khachhangdaphan').val(null);
-                            //  $('input:checkbox').removeAttr('checked');
-                            //  $('#khachhangdaphan').select2();
-
-                        }
-                    });
-                }
-
-
-            });
-        }
-    }
-
-    function upanh(id) {
-        var data = new FormData();
-        var files = $("#image").get(0).files;
-        if (files.length > 0) {
-            data.append("HelpSectionImages", files[0])
-        }
-        $.ajax({
-            url: "/Contact/GetFileRequest",
-            type: "POST",
-            processData: false,
-            contentType: false,
-            data: data,
-            success: function (response) {
-                d = new Date();
-                var t = response.split('%');
-                anh.src = t[0] + "?" + d.getTime();
-                anh.name = t[1];
-            },
-            error: function () {
-                alert('Không upload được ảnh!');
-            }
-
-        });
-    }
-    function thuchiensua(id_kh) {
-        var hoten = $('#hoten').val().trim();
-        var masothue = $('#masothue').val().trim();
-        var idloaikhachhang = $('#loaikhachhang').val();
-        var sdt01 = $('#sdt').val().trim();
-        var sdt02 = $('#sdt2').val().trim();
-        var email = $('#email').val().trim();
-        var diachi = $('#diachi').val().trim();
-        var hankhachhang = $('#hankh').val().trim();
-        var gioitinh = $('#gioitinh').val().trim();
-        var ngaysinh = $('#ngaysinh').val().trim();
-        var sotaikhoan = $('#stk').val().trim();
-        var website = $('#w').val().trim();
-        var facebook = $('#fb').val().trim();
-        var skype = $('#skype').val().trim();
-        var image = $('#anh').attr('src').trim();
-        var path = $('#anh').attr('name');
-        var account = $('#account').val();
-        $.ajax({
-            url: "/Contact/Update",
-            type: "POST",
-            data: {
-                id: id_kh,
-                hoten: hoten,
-                diaChi: diachi,
-                gioiTinh: (gioitinh == "nam" ? true : false),
-                image: image,
-                facebook: facebook,
-                skype: skype,
-                ngaySinh: ngaysinh,
-                sdt01: sdt01,
-                sdt02: sdt02,
-                maSoThue: masothue,
-                soTaiKhoan: sotaikhoan,
-                website: website,
-                email: email,
-                hanKhachHang: hankhachhang,
-                idLoaiKhachHang: idloaikhachhang,
-                idTrangThaiHienTai: null,
-                path: path,
-                idAccount: account
-            },
-            error: function (data) {
-                alert("Có lỗi: " + data.statusText);
-            },
-            success: function (data) {
-                alert("Thành công!");
-                $.ajax({
-                    url: "/Contact/Index",
-                    type: "Get",
-                    success: function (view) {
-                        $('#thay_doi').one('hidden.bs.modal', function () {
-                            $('#body').html(view);
-                        }).modal('hide');
-                    }
-                });
-            }
-        });
-    }
-    function clear() {
-        $('#thongtinlienhe').find('input').val('');
-        $('#loaikhachhang,#gioitinh,#account').select2('data', null);
-        $('#thuc_hien').select2({
-            placeholder: 'Thực hiện',
-            allowClear: true
-        });
-        $('#loc_khach_hang').select2({
-            placeholder: 'Lọc khách hàng',
-            allowClear: true
-        });
-    }
-    function clearflag() {
-        $('#par').html("<select id='trangthaichuyen'></select>");
-        $('#switch').modal('hide');
-    }
-    function sua(id_kh) {
-        $('#thay_doi').attr('name', id_kh);
-        $.ajax({
-            url: "/Contact/Select",
-            type: "GET",
-            data: { IdContact: id_kh },
-            error: function () {
-                alert('Lấy thông tin thất bại!');
-            },
-            success: function (get) {
-                if (get != undefined && get != true) {
-                    hoten.value = get.ho.trim() + ' ' + get.ten.trim();
-                    email.value = get.email.trim();
-                    sdt.value = get.sdt01.trim();
-                    sdt2.value = get.sdt02.trim();
-                    diachi.value = get.diachi.trim();
-                    hankh.value = get.hankhachhang.trim();
-                    masothue.value = get.masothue.trim();
-                    fb.value = get.facebook.trim();
-                    skype.value = get.skype.trim();
-                    gioitinh.value = get.gioitinh ? "nam" : "nu";
-                    ngaysinh.value = get.ngaysinh.trim();
-                    anh.src = get.image.trim();
-                    stk.value = get.sotaikhoan.trim();
-                    w.value = get.website.trim();
-                    loaikhachhang.value = get.idloaikhachhang;
-                    account.value = get.idaccount == -1 ? null : get.idaccount;
-                    $("#gioitinh").select2({
-                        placeholder: "Chọn giới tính",
-                        allowClear: true
-                    });
-                    $("#loaikhachhang").select2({
-                        placeholder: "Chọn loại khách hàng",
-                        allowClear: true
-                    });
-                    $("#account").select2({
-                        placeholder: "Chọn tổ chức",
-                        allowClear: true
-                    });
-                }
-                $('#thay_doi').modal('show');
-            }
-        });
-    }
-    function xoa(id_kh) {
-        $.ajax({
-            url: "/Contact/Delete",
-            type: "POST",
-            data: { id_kh: id_kh },
-            dataType: "json",
-            error: function () {
-                alert("Xóa thất bại!");
-                $('#xoa').modal('hide');
-            },
-            success: function (data) {
-                alert('Xóa thành công!');
-                $('#' + id_kh).remove();
-                $('#xoa').modal('hide');
-            }
-        });
-    }
-    function hienxoa(id_kh) {
-        giatri.innerHTML = id_kh;
-        $('#xoa').modal('show');
-    }
-    function chuyen(id_kh) {
-        $('#switch').attr('name', id_kh);
-        $.ajax({
-            url: "/Contact/GetState",
-            type: "GET",
-            data: { IdContact: id_kh },
-            error: function () {
-                alert('Lấy thông tin thất bại!');
-            },
-            success: function (data) {
-                $('#trangthaihientai').html(data.state);
-                var str = "";
-                if (data.states.length > 0) {
-                    for (i = 0; i < data.states.length; i++) {
-                        str += "<option value='" + data.states[i] + "'>" + data.states_name[i] + "</option>";
-                    }
-
-                    $('#trangthaichuyen').html(str);
-                    $('#trangthaichuyen').select2();
-                }
-                else $('#par').html("<strong>Không thể chuyển</strong>");
-                $('#switch').modal('show');
-            }
-        });
-    }
-    function thuchienchuyen(id_kh) {
-        if ($('#par').find('strong').html() != undefined) {
-            alert('Trạng thái không đổi');
-            $('#switch').modal('hide');
-        }
-        else {
-            var state = $('#trangthaichuyen').val();
-            $.ajax({
-                url: "/Contact/SwitchState",
-                type: "POST",
-                data: { IdContact: id_kh, IdTrangThai: state },
-                error: function () {
-                    alert('Có lỗi');
-                },
-                success: function (data) {
-                    if (data == true) {
-                        alert('Thành công!');
-                        $.ajax({
-                            url: "/Contact/Index",
-                            type: "Get",
-                            success: function (view) {
-                                $('#switch').one('hidden.bs.modal', function () {
-                                    $('#body').html(view);
-                                }).modal('hide');
-                            }
-                        });
-                    }
-                    else { alert('Có lỗi'); $('#switch').modal('hide'); }
-                }
-            });
-        }
-    }
-
-    function lichsuchuyen(id_kh) {
-      //  $('#history').attr('name', id_kh);
-        $.ajax({
-            url: "/Contact/GetHistory",
-            type: "GET",
-            data: { IdContact: id_kh },
-            error: function () {
-                alert('Lấy thông tin thất bại!');
-            },
-            success: function (data) {
-                if (data != undefined && data != true) {
-                    var str = " <thead><th>Mốc thời gian</th><th>Sự kiện</th></thead><tbody>";
-                    // str += "<tr>"
-                    //     + " <td >"
-                    //        + "    <label class=' padding'  style='line-height: 36px;'>Họ tên khách hàng</label>"
-                    //      + " </td>"
-                    //       + " <td >"
-                    //        + "  <label class=' padding'  style='line-height: 36px;'>Thông tin</label>"
-                    //       + " </td>"
-                    //    + " </tr> ";
-                    for (i = 0; i < data.date.length; i++) {
-                        str += "<tr><td>" + data.date[i] + "</td><td>Chuyển lên: <b>" + data.states_name[i] + "</b></td></tr>";
-                    }
-                    str+="</tbody>";
-                    $('#table_history').html(str);
-                     $('#lich_su').modal('show');
-                    
-                }
-                else {
-                    alert('Không có dữ liệu!');
-                }
-            }
-        });
-    }
-    function filter(id) {
-        if (id == null || id == "" || id == undefined) $('tr').show();
-        else {
-            $(".ctn").find('tr').hide();
-            $(".ctn").find("tr[name='" + id + "']").show();
-        }
-    }
 </script>
