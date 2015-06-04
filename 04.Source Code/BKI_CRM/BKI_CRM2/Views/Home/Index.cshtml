@@ -29,7 +29,7 @@
         height: 34px !important;
     }
     .height {
-      height:300px;
+      height:600px;
       border:1px dashed #333399;
     }
 
@@ -46,7 +46,7 @@
          <h3>Khách hàng mới</h3>
         </div>
       <div>
-           <table class=" mytable display" id="mytable2">
+           <table class=" mytable display" id="mytable1">
                 <thead>
                     <tr>
                         <th>Họ và tên</th>
@@ -67,7 +67,7 @@
          <h3>Khách hàng sắp hết hạn</h3>
         </div>
        <div>
-           <table class="mytable display" id="mytable1">
+           <table class="mytable display" id="mytable2">
                 <thead>
                     <tr>
                         <th>Họ và tên</th>
@@ -87,7 +87,7 @@
                 <h3>Hợp đồng mới</h3>
             </div> 
         <div>
-           <table class="mytable">
+           <table class="mytable" id="mytable3">
                         <thead>
                         <tr>
                             <th>Số hợp đồng</th>
@@ -107,7 +107,7 @@
                  <h3>Hợp đồng sắp hết hạn</h3>
              </div>
               <div>
-                   <table class=" mytable">
+                   <table class=" mytable" id="mytable4">
                             <thead>
                             <tr>
                                 <th>Số hợp đồng</th>
@@ -127,7 +127,7 @@
                  <h3>Công việc </h3>
              </div>
               <div>
-                   <table class="mytable">
+                   <table class="mytable" id="mytable5">
                     <thead>
                     <tr>
 
@@ -146,11 +146,23 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('table').dataTable({
-            "scrollY": "200px",
-            "scrollCollapse": true,
-            "paging": false
-        });
+
+        $('#mytable1').dataTable();
        
+
+      
+       
+
     });
+    $('#mytable1').dataTable({
+        "scrollY": "200px",
+        "scrollCollapse": true,
+        "paging": false
+    });
+   
+
+   
+    
+   
+   
 </script>
